@@ -1,0 +1,18 @@
+<view class="root">
+  <view class="search">
+    <input type="text" placeholder="搜索" />
+  </view>
+
+  <view class="notification">
+    <view>申请与通知</view>
+    <view class="badge">4</view>
+  </view>
+
+  <view wx:for="{{list}}" wx:key="{{index}}" class="friend">
+    <view class="avatar">
+      <image mode="scaleToFill" src="{{item.avatar}}"></image>
+    </view>
+    <view class="nickname">{{item.nickname}}</view>
+  </view>
+</view>
+<view class="plus">+</view>

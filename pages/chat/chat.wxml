@@ -1,0 +1,28 @@
+<view class="list">
+  <view class="item opposite">
+    <view class="avatar">
+      <image mode="scaleToFill" src="" />
+    </view>
+    <view class="content">
+      <text>{{content}}</text>
+    </view>
+  </view>
+  <view class="item mine">
+    <view class="avatar">
+      <image mode="scaleToFill" src="" />
+    </view>
+    <view class="content">
+      <text>{{content}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="operation" style="align-items: {{align}}" >
+  <textarea  auto-height fixed cursor-spacing="40"/>
+  <view class="button">
+    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
+  </view>
+  <view class="button">
+    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" />
+  </view>
+</view>

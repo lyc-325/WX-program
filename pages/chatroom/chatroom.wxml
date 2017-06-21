@@ -1,0 +1,11 @@
+<view class="list">
+  <view wx:for="{{list}}" wx:key="index" class="item">
+    <view class="cover">
+      <image mode="scaleToFill" src="{{item.cover}}"></image>
+    </view>
+    <view class="info">
+      <view class="title">{{item.title}}</view>
+      <view class="members">{{item.members}}</view>
+    </view>
+  </view>
+</view>

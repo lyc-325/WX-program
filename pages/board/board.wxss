@@ -1,0 +1,66 @@
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.list > .item {
+  position: relative;
+  border-top: 2rpx solid #eee;
+  height: 200rpx;
+  display: flex;
+}
+
+.list > .item:first-child {
+  border-top: none;
+}
+
+.list > .item:last-child {
+  border-bottom: 2rpx solid #eee;
+}
+
+.list > .item .cover {
+  width: 160rpx;
+  height: 160rpx;
+  padding: 20rpx;
+}
+
+.list > .item .cover image {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.list > .item .info {
+  width: 500rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.list > .item .info .title {
+  width: 100%;
+  font-size: 30rpx;
+}
+
+.list > .item .info .content {
+  font-size: 23rpx;
+  line-height: 30rpx;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: dimgray;
+}
+
+.list > .item .info .footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25rpx;
+  color: darkgray;
+}
+
+.list > .item .info .footer {
+  display: flex;
+}
