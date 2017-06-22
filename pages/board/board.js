@@ -31,5 +31,10 @@ Page({
     }],
     navs: ['金融', '哲学', '体育', '政治', '金融', '哲学', '体育', '政治', '金融', '哲学', '体育', '政治'],
     currentNav: 1
+  },
+  toBoardDetail() {
+    wx.navigateTo({
+      url: '../board_detail/board_detail',
+    })
   }
 })

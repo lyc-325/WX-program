@@ -3,7 +3,7 @@
     {{item}}
   </view>
 </view>
-<view class="list">
+<view class="list" bindtap="toBoardDetail">
   <view wx:for="{{list}}" wx:key="{{index}}" class="item">
     <view class="cover">
       <image mode="scaleToFill" src="{{item.cover}}" />
