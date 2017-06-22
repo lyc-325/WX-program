@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="avatar">
+    <image src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" mode="scaleToFill" />
+  </view>
+
+  <view class="info">
+    <view class="item">
+      <view class="label">昵称</view>
+      <view class="value">老哥</view>
+    </view>
+    <view class="item">
+      <view class="label">性别</view>
+      <view class="value">男</view>
+    </view>
+    <view class="item">
+      <view class="label">微信号</view>
+      <view class="value">WooSure</view>      
+    </view>
+    <view class="item">
+      <view class="label">公司</view>
+      <view class="value">腾讯科技</view>
+    </view>
+  </view>
+
+  <view class="add">添加</view>
+</view>

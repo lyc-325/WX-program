@@ -41,3 +41,67 @@
   width: 50rpx;
   height: 50rpx;
 }
+
+.list {
+  padding: 50rpx;
+}
+
+.list > .item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.list > .item .avatar {
+  padding: 5px;
+  margin: 0 10px;
+}
+
+.list > .item .avatar image{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.list > .item .content {
+  padding: 20rpx;
+  position: relative;
+  border-radius: 5px;
+  font-size: 30rpx;  
+  margin-top: 10px;
+  max-width: 350rpx;
+  display: flex;
+}
+
+
+.list > .item.mine {
+  flex-direction: row-reverse;
+}
+
+.list > .item.mine .content{
+  background-color: #51C332;
+}
+
+.list > .item.mine .content::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -10px;
+    border-top: 5px solid transparent;
+    border-left: 10px solid #51C332;
+    border-bottom: 5px solid transparent;
+}
+
+.list > .item.opposite .content{
+  background-color: antiquewhite;
+}
+
+.list > .item.opposite .content::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -10px;
+    border-top: 5px solid transparent;
+    border-right: 10px solid antiquewhite;
+    border-bottom: 5px solid transparent;
+}

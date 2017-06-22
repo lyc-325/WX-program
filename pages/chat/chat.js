@@ -3,13 +3,8 @@ Page({
     align: 'flex-end'
   },
   onLoad(option) {
-    console.log('option', option);
-  },
-  onReady() {
-    wx.getSystemInfo({
-      success(obj) {
-        console.log(obj);
-      }
+    wx.setNavigationBarTitle({
+      title: option.nickname,
     })
   },
   chooseImage() {
@@ -18,5 +13,8 @@ Page({
         console.log(res);
       },
     })
+  },
+  send() {
+
   }
 })

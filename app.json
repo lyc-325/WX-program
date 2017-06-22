@@ -5,7 +5,9 @@
     "pages/board/board",
     "pages/friend/friend",
     "pages/mine/mine",
-    "pages/chat/chat"
+    "pages/chat/chat",
+    "pages/friend_info/friend_info",
+    "pages/notification/notification"
   ],
   "tabBar": {
     "color": "#707070",
@@ -21,7 +23,7 @@
       },
       {
         "pagePath": "pages/board/board",
-        "iconPath": "static/icons/board.png",        
+        "iconPath": "static/icons/board.png",
         "selectedIconPath": "static/icons/board_selected.png",
         "text": "留言板"
       },
