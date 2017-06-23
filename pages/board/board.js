@@ -36,5 +36,10 @@ Page({
     wx.navigateTo({
       url: '../board_detail/board_detail',
     })
+  },
+  toBoardPublish() {
+    wx.navigateTo({
+      url: '../board_publish/board_publish',
+    })
   }
 })

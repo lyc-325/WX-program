@@ -21,3 +21,4 @@
     </view>
   </view>
 </view>
+<view bindtap="toBoardPublish" class="publish">发布</view>
