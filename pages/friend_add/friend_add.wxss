@@ -1,15 +1,43 @@
-/* friend_validate.wxss *//* friend_add.wxss */
+/* friend_add.wxss */
 .container {
   padding-top: 20rpx;
 }
-.friend {
+.searchBar {
+  width: 720rpx;
   display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+.search {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 24rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
+
+input{
+  width: 550rpx;
+  text-align: center;
+  background: white;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+  border: 1px solid #eee;
+}
+.list {
+  display: flex;
+  margin-top: 20rpx;
   width: 96%;
   height: 200rpx;
   align-items: center;
+  border: 1px solid #eee;
   justify-content: space-around;
 }
-
 .avatar image {
   width: 120rpx;
   height: 120rpx;
@@ -35,24 +63,6 @@
   background-color: #1eb571;
   color: white;
   font-size: 32rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
-}
-.area {
-  width: 94%;
-  border: 1rpx #eee solid;
-  border-radius: 10rpx;
-  margin-bottom: 20rpx;
-}
-.send {
-  width: 180rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  border-radius: 20rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
-  font-size: 36rpx;
   font-weight: 700;
   box-shadow: 1px 1px 5px #ccc;
 }

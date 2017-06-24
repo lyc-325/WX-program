@@ -15,4 +15,4 @@
     <view class="nickname">{{item.nickname}}</view>
   </view>
 </view>
-<view class="plus">+</view>
+<view bindtap="toFriendAdd" class="plus">+</view>

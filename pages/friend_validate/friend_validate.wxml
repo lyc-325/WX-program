@@ -1,2 +1,24 @@
 <!--friend_validate.wxml-->
-<text>friend_validate.wxml</text>
+<view class="container">
+<view class="friend">
+  <view class="avatar">
+    <image src="{{avatar}}" mode="scaleToFill" />
+  </view>
+  <view class="info">
+    <view class="item">
+      <view class="label">昵称</view>
+      <view class="value">{{ nickname }}</view>
+    </view>
+    <view class="item">
+      <view class="label">微信号</view>
+      <view class="value">{{ wexin }}</view>
+    </view>
+  </view>
+  </view>
+  <form>
+    <view class="area">
+      <textarea placeholder="验证信息" auto-focus/>
+  </view>
+  <view class="send">发送</view>
+  </form>
+</view>

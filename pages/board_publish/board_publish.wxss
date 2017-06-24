@@ -5,7 +5,7 @@
   width: 100%;
 }
 .item {
-  border: 2rpx #ccc solid;
+  border: 1rpx #ccc solid;
   border-radius: 10rpx;
   margin-bottom: 20rpx;
 }

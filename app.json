@@ -12,7 +12,8 @@
     "pages/board_publish/board_publish",
     "pages/friend_validate/friend_validate",
     "pages/room/room",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/friend_add/friend_add"
   ],
   "tabBar": {
     "color": "#707070",

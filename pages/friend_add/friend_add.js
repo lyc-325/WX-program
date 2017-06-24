@@ -1,19 +1,11 @@
-// pages/friend/friend.js
+// friend_add.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [{
-      id: 1,
-      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-      nickname: '小张'
-    }, {
-      id: 2,
-      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-      nickname: '安德烈舍甫琴科'
-    }]
+    friends: []
   },
 
   /**
@@ -71,10 +63,24 @@ Page({
   onShareAppMessage: function () {
   
   },
-  
-  toFriendAdd () {
+  search (e) {
+    let friends = [
+      {
+        id: 1,
+        nickname: 'www',
+        wexin: '1fsdfdf',
+        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400'
+      }
+    ];
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    self = this;
+    self.setData({
+      friends: friends
+    });
+  },
+  toValidate () {
     wx.navigateTo({
-      url: '../friend_add/friend_add'
-    })
+      url: '../friend_validate/friend_validate',
+    });
   }
 })
