@@ -43,3 +43,17 @@
   height: 4rpx;  
   background: #1EB571;  
 }  
+
+.form-error {
+  background-color: red;
+  color: #fff;
+  position: fixed;
+  padding: 10rpx;
+  top:0;
+  width: 100%;
+  text-align: center;
+}
+
+input.error{
+  color: red;
+}

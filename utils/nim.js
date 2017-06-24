@@ -40,13 +40,33 @@ function request(options) {
 }
 
 /**
- * 登录或者创建用户
+ * 创建用户
  * @param options Object
  * @param options.accid String
  * @param options.name String
  * @param options.icon String
+ * @param optiosn.props Object
  */
-function loginOrCreate({accid, name, icon}) {
+function create({accid, name, icon, props}) {
+  return request({
+    api: 'user/create.action',
+    data: {
+      accid,
+      name,
+      icon
+    }
+  });
+}
+
+/**
+ * 创建用户
+ * @param options Object
+ * @param options.accid String
+ * @param options.name String
+ * @param options.icon String
+ * @param optiosn.props Object
+ */
+function login(accid) { 
   return request({
     api: 'user/refreshToken.action',
     data: {
@@ -54,15 +74,6 @@ function loginOrCreate({accid, name, icon}) {
     }
   }).then(({info}) => {
     return info.token;
-  }).catch(error => {
-    return request({
-      api: 'user/create.action',
-      data: {
-        accid,
-        name,
-        icon
-      }
-    });
   });
 }
 
@@ -120,6 +131,7 @@ const _promisify = R.curry(function (func, options) {
 });
 
 module.exports = {
-  loginOrCreate,
+  login,
+  create,
   getInstance
 };

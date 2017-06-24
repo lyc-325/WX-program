@@ -11,7 +11,8 @@
     "pages/board_detail/board_detail",
     "pages/board_publish/board_publish",
     "pages/friend_validate/friend_validate",
-    "pages/room/room"
+    "pages/room/room",
+    "pages/register/register"
   ],
   "tabBar": {
     "color": "#707070",
