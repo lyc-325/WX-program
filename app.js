@@ -1,6 +1,7 @@
 //app.js
 const Promise = require('./utils/wx-pro');
 const config = require('./config').wx;
+const NIM = require('./utils/nim');
 
 App({
   onLaunch: function () {
@@ -9,7 +10,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs);
   },
-  getUserInfo: function () {
+  getUser: function () {
     const {userInfo} = this.globalData;
     if (userInfo) {
       return Promise.resolve({
@@ -28,12 +29,21 @@ App({
           return Promise.all([openid, wx.pro.getUserInfo()]);
         })
         .then(([openid, res]) => {
-          return Object.assign({}, res.userInfo, {openid});
+          this.globalData.userInfo = res.userInfo;
+          return NIM.login(openid);
         })
+        .then(nim => {
+          this.globalData.nim = nim;
+        })
+        .then(() => ({
+          wx: this.globalData.userInfo,
+          nim: this.globalData.nim
+        }))
         .catch(error => console.error('app error', error));
     }
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    nim: null
   }
 });

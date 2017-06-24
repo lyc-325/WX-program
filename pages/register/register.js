@@ -20,25 +20,14 @@ const rules = {
 
 const validate = validator(rules);
 
-// register.js
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     requesting: false,
     userInfo: null,
     formError: null
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
-    app.getUserInfo()
-      .then(userInfo => {
-        this.setData({ userInfo });
-      });
+   console.log(app.globalData);
   },
   bindFocus(e) {
     this.setData({formError: null, formErrorKey: null});
@@ -55,23 +44,34 @@ Page({
         credits: 0
       };
 
-      const { openid, avatarUrl, nickName } = this.userInfo;
 
       this.setData({
         requesting: true
       });
 
-      // 想网易云信登录或者注册用户
-      NIM.create({
+      console.log('create props',{
         accid: openid,
         name: nickname,
         icon: avatarUrl,
         props: props
-      }).then(({token}) => {
-        return NIM.getInstance(openid, token);
-      }).then(nim => {
-        app.globalData.nim = nim;
       });
+
+      app.getUser()
+        .then(user => {
+          const { openid, avatarUrl, nickName } = user.wx;
+          return NIM.create({
+            accid: openid,
+            name: nickname,
+            icon: avatarUrl,
+            props: props
+          });
+        })
+        .then(({token}) => {
+          return NIM.getInstance(openid, token);
+        })
+        .then(nim => {
+          app.globalData.nim = nim;
+        });
     } else {
       this.setData({
         formError: rules[errorKey].prompt,

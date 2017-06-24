@@ -35,21 +35,15 @@ Page({
   onLoad() {
     wx.showLoading();
     // 启动时判断用户是否已经合法注册到网易云
-    app.getUserInfo()
-      .then(({openid}) => {
-        return NIM.login({
-          accid: openid
-        });
-      }).then(({token}) => {
-        return NIM.getInstance(openid, token);
-      }).then(nim => {
-        app.globalData.nim = nim;
-        wx.hideLoading();
-        // this.setData({initiating: false});
-      }).catch(error => {
-        wx.navigateTo({
-          url: '/pages/register/register',
-        });
-      });
+    app.getUser()
+      .then(user => {
+        if (!user.nim) {
+          wx.hideLoading();
+        } else {
+          wx.navigateTo({
+            url: '/pages/register/register',
+          });
+        }
+      })
   }
 })
