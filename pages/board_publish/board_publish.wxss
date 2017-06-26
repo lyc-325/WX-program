@@ -42,6 +42,7 @@
   margin-bottom: 20rpx;
 }
 .image {
+  position: relative;
   display: inline-block;
   width: 375rpx;
   height: 240rpx;
@@ -52,8 +53,8 @@ image {
 }
 .cancel {
   position: absolute;
-  bottom: 50rpx;
-  right: 20rpx;
+  bottom: 10rpx;
+  right: 10rpx;
   width: 40rpx;
   height: 40rpx;
   line-height: 40rpx;

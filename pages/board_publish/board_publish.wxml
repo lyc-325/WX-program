@@ -10,9 +10,8 @@
   <view bindtap="uploadImg" class="upload">上传图片</view>
   <scroll-view scroll-x="true" class="imgBar"  >
     <view class="image" wx:for="{{imgs}}" wx:key="{{index}}">
-      <image mode="scaleToFill" src="{{item}}" >
-       <view class="cancel" data-index="{{index}}" bindtap="cancelUpload">X</view>
-      </image>
+      <image mode="scaleToFill" src="{{item}}" ></image>
+      <view class="cancel" data-index="{{index}}" bindtap="cancelUpload">X</view>
     </view>
   </scroll-view>
   <view form-type="submit" class="publish">发布</view>
