@@ -1,0 +1,97 @@
+<template>
+<view class="root">
+  <view class="container">
+    <view class="head">
+      <view class="value">{{title}}</view>
+    </view>
+
+    <view class="item">
+      <view class="label">发布人</view>
+      <view class="value">{{createdBy}}</view>
+    </view>
+
+    <view class="item">
+      <view class="label">发布时间</view>
+      <view class="value">{{createdAt}}</view>
+    </view>
+
+    <view class="item">
+      <view class="label">浏览量</view>
+      <view class="value">{{read}}</view>
+    </view>
+
+    <scroll-view scroll-x="true" class="imgBar">
+      <view class="image" for="{{imgs}}" key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" />
+      </view>
+    </scroll-view>
+    <view class="area">
+      <view class="label">内容</view>
+      <view class="value">{{content}}</view>
+    </view>
+  </view>
+</view>
+</template>
+
+<style scoped>
+/* board_detail.wxss */
+.container {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+}
+.head {
+  font-size: 48rpx;
+  margin-bottom: 20rpx;
+}
+.item {
+  font-size: 28rpx;
+  display: flex;
+  flex-flow: row;
+  width: 94%;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+.imgBar {
+  white-space: nowrap;
+  display: flex;
+  margin-top: 20rpx;
+}
+.image {
+  display: inline-block;
+  width: 375rpx;
+  height: 240rpx;
+}
+image {
+  width: 100%;
+  height: 100%;
+}
+.area{
+  width: 94%;
+  display: flex;
+  flex-flow: column;
+  margin-top: 20rpx;
+}
+.area > .label {
+  font-size: 36rpx;
+  margin-bottom: 16rpx;
+}
+.area > .value {
+  font-size: 28rpx;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+export default class Board extends wepy.page {
+  config = {
+    navigationBarTitleText: '留言板'
+  }
+
+  data = {
+
+  }
+}
+</script>

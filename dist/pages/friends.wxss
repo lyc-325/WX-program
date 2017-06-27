@@ -1,0 +1,62 @@
+
+.root > view._deba049 {
+  padding: 20rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.search input._deba049{
+  text-align: center;
+  background: white;
+  font-size: 30rpx;
+  border: 1px solid #eee;
+}
+
+.notification._deba049 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  background-color: #eee;
+}
+
+.notification .badge._deba049 {
+  border-radius: 50%;
+  width: 50rpx;
+  height: 50rpx;
+  padding: 5rpx;
+  line-height: 50rpx;
+  color: white;
+  text-align: center;
+  background-color: red;
+}
+
+.friend._deba049 {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.friend .avatar._deba049 {
+  margin-right: 10rpx;
+}
+
+.friend .avatar image._deba049 {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.plus._deba049 {
+  position: fixed;
+  bottom: 10rpx;
+  right: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 50rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}

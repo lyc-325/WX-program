@@ -1,0 +1,123 @@
+<template>
+<view class="container">
+  <form bindsubmit="search">
+    <view class="searchBar">
+      <input name="name" type="text" placeholder="昵称/微信号" comfirm-type="搜索" />
+    </view>
+  </form>
+  <view class="list" for="{{friends}}" key="{{index}}">
+    <view class="avatar">
+      <image src="{{item.avatar}}" mode="scaleToFill" />
+    </view>
+    <view class="info">
+      <view class="item">
+        <view class="label">昵称</view>
+        <view class="value">{{ item.nickname }}</view>
+      </view>
+      <view class="item">
+        <view class="label">微信号</view>
+        <view class="value">{{ item.wexin }}</view>
+      </view>
+    </view>
+    <view @tap="handleSubmit" class="add">添加</view>
+  </view>
+</view>
+</template>
+
+<style scoped>
+.container {
+  padding-top: 20rpx;
+}
+
+.searchBar {
+  width: 720rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.search {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 24rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
+
+input {
+  width: 550rpx;
+  text-align: center;
+  background: white;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+  border: 1px solid #eee;
+}
+
+.list {
+  display: flex;
+  margin-top: 20rpx;
+  width: 96%;
+  height: 200rpx;
+  align-items: center;
+  border: 1px solid #eee;
+  justify-content: space-around;
+}
+
+.avatar image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.info {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.info>.item {
+  margin-top: 10rpx;
+  width: 260rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add {
+  width: 150rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 32rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+export default class Add extends wepy.page {
+  config = {
+    navigationBarTitleText: '添加好友'
+  }
+
+  data = {
+
+  }
+
+  methods = {
+    handleSubmit() {
+      wepy.navigateTo({
+        url: '../apply/apply'
+      })
+    }
+  }
+}
+</script>

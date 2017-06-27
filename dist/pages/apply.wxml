@@ -1,0 +1,24 @@
+
+<view class="container _45a93bc">
+  <view class="friend _45a93bc">
+    <view class="avatar _45a93bc">
+      <image src="{{avatar}}" mode="scaleToFill" class="_45a93bc"/>
+    </view>
+    <view class="info _45a93bc">
+      <view class="item _45a93bc">
+        <view class="label _45a93bc">昵称</view>
+        <view class="value _45a93bc">{{ nickname }}</view>
+      </view>
+      <view class="item _45a93bc">
+        <view class="label _45a93bc">微信号</view>
+        <view class="value _45a93bc">{{ wexin }}</view>
+      </view>
+    </view>
+  </view>
+  <form class="_45a93bc">
+    <view class="area _45a93bc">
+      <textarea placeholder="验证信息" auto-focus class="_45a93bc"/>
+    </view>
+    <view class="send _45a93bc">发送</view>
+  </form>
+</view>

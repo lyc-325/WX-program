@@ -1,0 +1,74 @@
+<template>
+<!--register.wxml-->
+<view class="form-error" wx:if="{{formError}}">{{formError}}</view>
+
+<form bindsubmit="submit">
+  <view class="container">
+    <view class="title">个人信息完善</view>
+    <view class="item">
+      <view class="label">公司</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'company' ? 'error' : ''}}" name="company" bindfocus="bindFocus" />
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="label">手机</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" bindfocus="bindFocus" />
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="label">邮箱</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}}" name="email" bindfocus="bindFocus" />
+      </view>
+    </view>
+
+    <view class="item">
+      <button form-type="submit" loading="{{requesting}}">提交</button>
+    </view>
+  </view>
+</form>
+</template>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .title {
+  text-align: center;
+  font-size: 20px;
+}
+
+.container > .item {
+  padding: 50rpx;
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.container > .item .label {
+  padding: 10rpx;
+}
+
+.container > .item input {
+  border: 1px solid #eee;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+export default class Register extends wepy.page {
+  config = {
+    navigationBarTitleText: '注册'
+  }
+
+  data = {
+
+  }
+}
+</script>

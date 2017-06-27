@@ -1,0 +1,24 @@
+
+<view class="container _dbf2b56">
+  <form bindsubmit="search" class="_dbf2b56">
+    <view class="searchBar _dbf2b56">
+      <input name="name" type="text" placeholder="昵称/微信号" comfirm-type="搜索" class="_dbf2b56"/>
+    </view>
+  </form>
+  <view class="list _dbf2b56" for="{{friends}}" key="{{index}}">
+    <view class="avatar _dbf2b56">
+      <image src="{{item.avatar}}" mode="scaleToFill" class="_dbf2b56"/>
+    </view>
+    <view class="info _dbf2b56">
+      <view class="item _dbf2b56">
+        <view class="label _dbf2b56">昵称</view>
+        <view class="value _dbf2b56">{{ item.nickname }}</view>
+      </view>
+      <view class="item _dbf2b56">
+        <view class="label _dbf2b56">微信号</view>
+        <view class="value _dbf2b56">{{ item.wexin }}</view>
+      </view>
+    </view>
+    <view bindtap="handleSubmit" class="add _dbf2b56">添加</view>
+  </view>
+</view>

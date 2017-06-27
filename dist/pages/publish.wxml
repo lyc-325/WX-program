@@ -1,0 +1,20 @@
+
+<form bindsubmit="bindFormSubmit" class="_57ea6c3">
+  <view class="container _57ea6c3">
+    <view class="item _57ea6c3">
+      <input placeholder="标题" auto-focus class="_57ea6c3"/>
+    </view>
+    <view class="item _57ea6c3">
+      <textarea placeholder="内容" auto-focus class="_57ea6c3"/>
+    </view>
+    <view bindtap="handleUpload" class="upload _57ea6c3">上传图片</view>
+    <scroll-view scroll-x="true" class="imgBar _57ea6c3">
+      <view class="image _57ea6c3" for="{{imgs}}" key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" class="_57ea6c3">
+          <view class="cancel _57ea6c3" data-index="{{index}}" bindtap="handleCancel">X</view>
+        </image>
+      </view>
+    </scroll-view>
+    <view form-type="submit" class="publish _57ea6c3">发布</view>
+  </view>
+</form>

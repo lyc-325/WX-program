@@ -1,0 +1,169 @@
+<template>
+<view scroll-x="true" style="width:100%" class="navbar">
+  <view wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
+    {{item}}
+  </view>
+</view>
+<view class="list">
+  <view wx:for="{{list}}" @tap="handleItemTap" wx:key="index" class="item">
+    <view class="cover">
+      <image mode="scaleToFill" src="{{item.cover}}" />
+    </view>
+    <view class="info">
+      <view class="title">{{item.title}}</view>
+      <view class="content">{{item.content}}</view>
+      <view class="footer">
+        <view class="createdBy">{{item.createdBy}}</view>
+        <view class="createdAt">{{item.createdAt}}</view>
+        <view class="read">
+          {{item.read}} 阅读
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view @tap="handlePublishTap" class="publish">发布</view>
+</template>
+
+<style scoped>
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.list>.item {
+  position: relative;
+  border-top: 2rpx solid #eee;
+  height: 200rpx;
+  display: flex;
+}
+
+.list>.item:first-child {
+  border-top: none;
+}
+
+.list>.item:last-child {
+  border-bottom: 2rpx solid #eee;
+}
+
+.list>.item .cover {
+  width: 160rpx;
+  height: 160rpx;
+  padding: 20rpx;
+}
+
+.list>.item .cover image {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.list>.item .info {
+  width: 500rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.list>.item .info .title {
+  width: 100%;
+  font-size: 30rpx;
+}
+
+.list>.item .info .content {
+  font-size: 23rpx;
+  line-height: 30rpx;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: dimgray;
+}
+
+.list>.item .info .footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25rpx;
+  color: darkgray;
+}
+
+.list>.item .info .footer {
+  display: flex;
+}
+
+.publish {
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+  width: 180rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 36rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
+</style>
+
+<script>
+const list = [{
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '2017年8月江风通讯正式上线',
+  content: '在支持数据库时并且启用了多 tab 同时登录, 那么如果多个 tab 页同时断线重连之后, 只会有一个 tab 页负责存储漫游消息和离线消息, 即只会有一个 tab 页会收到 onroamingmsgs 和 onofflinemsgs 回调, 其它 tab 页在同步完成之后, 需要调用获取本地历史记录来从本地缓存中拉取消息记录',
+  createdBy: '李四',
+  createdAt: '2014-05-06 13:33',
+  read: 200
+}, {
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '2017年8月江风通讯正式上线',
+  content: '在支持数据库时并且启用了多 tab 同时登录, 那么如果多个 tab 页同时断线重连之后, 只会有一个 tab 页负责存储漫游消息和离线消息, 即只会有一个 tab 页会收到 onroamingmsgs 和 onofflinemsgs 回调, 其它 tab 页在同步完成之后, 需要调用获取本地历史记录来从本地缓存中拉取消息记录',
+  createdBy: '李四',
+  createdAt: '2014-05-06 13:33',
+  read: 200
+}, {
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '2017年8月江风通讯正式上线',
+  content: '在支持数据库时并且启用了多 tab 同时登录, 那么如果多个 tab 页同时断线重连之后, 只会有一个 tab 页负责存储漫游消息和离线消息, 即只会有一个 tab 页会收到 onroamingmsgs 和 onofflinemsgs 回调, 其它 tab 页在同步完成之后, 需要调用获取本地历史记录来从本地缓存中拉取消息记录',
+  createdBy: '李四',
+  createdAt: '2014-05-06 13:33',
+  read: 200
+}, {
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '2017年8月江风通讯正式上线',
+  content: '在支持数据库时并且启用了多 tab 同时登录, 那么如果多个 tab 页同时断线重连之后, 只会有一个 tab 页负责存储漫游消息和离线消息, 即只会有一个 tab 页会收到 onroamingmsgs 和 onofflinemsgs 回调, 其它 tab 页在同步完成之后, 需要调用获取本地历史记录来从本地缓存中拉取消息记录',
+  createdBy: '李四',
+  createdAt: '2014-05-06 13:33',
+  read: 200
+}]
+
+import wepy from 'wepy'
+export default class Boards extends wepy.page {
+  config = {
+    navigationBarTitleText: '留言板2'
+  }
+
+  data = {
+    list,
+    navs: ['金融', '哲学', '体育', '政治'],
+    currentNav: 1
+  }
+
+  methods = {
+    handlePublishTap() {
+      wepy.navigateTo({
+        url: '../publish/publish'
+      })
+    },
+    handleItemTap() {
+      wepy.navigateTo({
+        url: '../board/board'
+      })
+    }
+  }
+}
+</script>

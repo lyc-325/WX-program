@@ -1,0 +1,105 @@
+<template>
+<view class="root">
+  <view class="search">
+    <input type="text" placeholder="搜索" />
+  </view>
+
+  <view class="notification">
+    <view>申请与通知</view>
+    <view class="badge">4</view>
+  </view>
+
+  <view wx:for="{{list}}" wx:key="{{index}}" class="friend">
+    <view class="avatar">
+      <image mode="scaleToFill" src="{{item.avatar}}"></image>
+    </view>
+    <view class="nickname">{{item.nickname}}</view>
+  </view>
+</view>
+<view bindtap="toFriendAdd" class="plus">+</view>
+</template>
+
+<style scoped>
+.root > view {
+  padding: 20rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.search input{
+  text-align: center;
+  background: white;
+  font-size: 30rpx;
+  border: 1px solid #eee;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  background-color: #eee;
+}
+
+.notification .badge {
+  border-radius: 50%;
+  width: 50rpx;
+  height: 50rpx;
+  padding: 5rpx;
+  line-height: 50rpx;
+  color: white;
+  text-align: center;
+  background-color: red;
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.friend .avatar {
+  margin-right: 10rpx;
+}
+
+.friend .avatar image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.plus {
+  position: fixed;
+  bottom: 10rpx;
+  right: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 50%;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 50rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+export default class Friends extends wepy.page {
+  config = {
+    navigationBarTitleText: '好友'
+  }
+
+  data = {
+    list: [{
+      id: 1,
+      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
+      nickname: '小张'
+    }, {
+      id: 2,
+      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
+      nickname: '安德烈舍甫琴科'
+    }]
+  }
+}
+</script>

@@ -1,0 +1,25 @@
+
+.container._37e585a {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .title._37e585a {
+  text-align: center;
+  font-size: 20px;
+}
+
+.container > .item._37e585a {
+  padding: 50rpx;
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.container > .item .label._37e585a {
+  padding: 10rpx;
+}
+
+.container > .item input._37e585a {
+  border: 1px solid #eee;
+}

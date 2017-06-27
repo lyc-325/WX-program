@@ -1,0 +1,178 @@
+<template>
+<view class="list">
+  <block wx:for="{{rooms}}" wx:key="id">
+    <view class="item">
+      <view class="cover">
+        <image mode="scaleToFill" src="{{item.cover}}"></image>
+      </view>
+      <view class="info">
+        <view class="title">{{item.title}}</view>
+        <view class="members">{{item.members}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+</template>
+
+<style>
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50rpx;
+  margin-bottom: -20rpx;
+}
+
+.list>.item {
+  display: flex;
+  flex-direction: column;
+  width: 300rpx;
+  height: 350rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 25rpx;
+  border: 1px solid #eee;
+}
+
+.list>.item .cover {
+  width: 100%;
+  height: 300rpx;
+}
+
+.list>.item .cover image {
+  width: 100%;
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.list>.item .info {
+  position: relative;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.list>.item .info .members {
+  position: absolute;
+  right: 0;
+  padding-right: 10rpx;
+}
+
+.list>.item .info .title {
+  position: absolute;
+  left: 0;
+  padding-left: 10rpx;
+}
+</style>
+
+<script>
+const mockRooms = [{
+  id: 0,
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '一起哈皮的聊天室',
+  members: 50
+}, {
+  id: 1,
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '一起哈皮的聊天室3',
+  members: 50
+}, {
+  id: 2,
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '一起哈皮的聊天室4',
+  members: 50
+}, {
+  id: 3,
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '一起哈皮的聊天室5',
+  members: 50
+}, {
+  id: 4,
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '一起哈皮的聊天室6',
+  members: 50
+}, {
+  id: 5,
+  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
+  title: '一起哈皮的聊天室7',
+  members: 50
+}]
+
+import wepy from 'wepy'
+import {
+  wx
+} from '../config'
+import NIM from '../utils/nim'
+import {
+  initUser,
+  initNim
+} from '../actions/common'
+
+import {
+  connect
+} from 'wepy-redux'
+
+const config = wx
+
+@connect({
+  user(state) {
+    return state.common.user
+  },
+  nim(state) {
+    return state.common.nim
+  }
+}, {
+  initUser,
+  initNim
+})
+export default class Chatrooms extends wepy.page {
+  config = {
+    navigationBarTitleText: '聊天室'
+  }
+
+  data = {
+    rooms: []
+  }
+
+  async onLoad() {
+    const { initUser, initNim } = this.methods
+    wepy.showLoading()
+    const { code } = await wepy.login()
+    const { data } = await wepy.request({
+      url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
+    })
+    const { openid } = data
+    const { userInfo } = await wepy.getUserInfo()
+    const user = {
+      ...userInfo,
+      openid
+    }
+    initUser(user)
+    try {
+      const token = await NIM.login(openid)
+      initNim(token)
+      const nim = NIM.getInstance({
+        account: openid,
+        token
+      })
+      setTimeout(() => {
+        this.rooms = mockRooms
+        wepy.hideLoading()
+        // 通过 $apply 强制脏检查
+        this.$apply()
+      }, 2000)
+    } catch (e) {
+      console.error('app error', e)
+      wepy.navigateTo({
+        url: '/pages/register'
+      })
+    }
+  }
+}
+</script>

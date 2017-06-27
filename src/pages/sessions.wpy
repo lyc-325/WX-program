@@ -1,0 +1,227 @@
+<template>
+<view class='navbar'>
+  <view for='{{navs}}' key='unique' data-index='{{index}}' class="item {{currentNav == index ? 'active' : ' '}}">
+    {{item}}
+  </view>
+</view>
+<view class='list'>
+  <view wx:for='{{list}}' wx:key='{{index}}' class='item'>
+    <view bindtap='toChat' @touchstart='handleTouchStart' @touchmove='handleTouchMove' @touchend='handleTouchEnd' data-index='{{index}}' style='{{item.style}}' class='content'>
+      <view class='avatar'>
+        <image mode='scaleToFill' src='{{item.avatar}}' />
+      </view>
+      <view class='info'>
+        <view class='from'>
+          <view class='name'>{{item.from}}</view>
+          <view class='date'>2017-03-08</view>
+        </view>
+        <view class='msg'>
+          {{item.msg}}
+        </view>
+      </view>
+    </view>
+    <view class='buttons'>
+      <view class='del' data-addressid='{{item.address.ID}}' data-id='{{index}}' bindtap='showDeleteModal'>删除</view>
+    </view>
+  </view>
+</view>
+</template>
+
+<style scoped>
+list {
+  width: 100%;
+}
+
+.list>.item {
+  position: relative;
+  border-top: 2rpx solid #eee;
+  height: 140rpx;
+  overflow: hidden;
+}
+
+.list>.item:first-child {
+  border-top: none;
+}
+
+.list>.item:last-child {
+  border-bottom: 2rpx solid #eee;
+}
+
+.list>.item .content {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  display: flex;
+  background-color: #fff;
+  width: 100%;
+  z-index: 5;
+  transition: left 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list>.item .content .avatar {
+  width: 100rpx;
+  height: 100rpx;
+  padding: 20rpx;
+}
+
+.list>.item .content .avatar image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.list>.item .content .info {
+  width: 100%;
+  height: 100rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.list>.item .content .info .from {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.list>.item .content .info .from .name {
+  font-size: 35rpx;
+}
+
+.list>.item .content .info .from .date {
+  font-size: 30rpx;
+  color: darkgrey;
+}
+
+.list>.item .content .info .msg {
+  font-size: 30rpx;
+  color: darkgrey;
+}
+
+.buttons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  height: 100%;
+}
+
+.del {
+  background-color: #e64340;
+  width: 200rpx;
+  text-align: center;
+  line-height: 140rpx;
+  height: 140rpx;
+  z-index: 4;
+  color: #fff;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import R from '../libs/ramda'
+import touch from '../utils/touch'
+
+/**
+ * 获得列表 index
+ * @param evt Event
+ */
+const getIndex = R.compose(
+  R.prop('index'),
+  R.prop('dataset'),
+  R.prop('currentTarget')
+)
+
+// 所有隐藏按钮的宽度
+const BUTTONS_WIDTH = 200
+// 最后一个隐藏按钮的宽度
+const LAST_WIDTH = 200
+
+export default class Sessions extends wepy.page {
+  config = {
+    navigationBarTitleText: '消息'
+  }
+
+  data = {
+    list: [
+      {
+        from: '老张',
+        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
+        msg: '干嘛呢？'
+      },
+      {
+        from: '老赵',
+        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
+        msg: '干嘛呢？'
+      },
+      {
+        from: '老于',
+        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
+        msg: '干嘛呢？'
+      }
+    ],
+    navs: ['好友消息', '系统消息'],
+    currentNav: 0
+  }
+
+  methods = {
+    handleTouchStart(evt) {
+      // 触摸条目时，记录触摸点位置
+      touch.isOnePointTouch(false)(evt) && (this.startX = touch.getClientX(false)(evt))
+    },
+    handleTouchMove(evt) {
+      if (touch.isOnePointTouch(evt)) {
+        const {
+          startX,
+          list
+        } = this
+        const currX = touch.getClientX(false)(evt)
+        const distX = startX - currX
+        // 获得手指触摸的条目，刷新样
+        const index = getIndex(evt)
+        const width = R.cond([
+          [distX => distX <= 0, R.always(0)],
+          [R.T, distX => distX >= LAST_WIDTH ? -BUTTONS_WIDTH : -distX]
+        ])(distX)
+        list[index].style = `left:${width}rpx`
+        this.list = list
+      }
+    },
+    handleTouchEnd(evt) {
+      if (touch.isOnePointTouch(true)(evt)) {
+        const {
+          startX,
+          list
+        } = this
+        const currX = touch.getClientX(true)(evt)
+        const distX = startX - currX
+        const index = getIndex(evt)
+        const width = distX > LAST_WIDTH / 2 ? -BUTTONS_WIDTH : 0
+        list[index].style = `left:${width}rpx`
+        this.list = list
+      }
+    },
+    showDeleteModal(evt) {
+      // 删除消息步骤
+      // 1. 显示删除确认
+      // 2. 进行删除
+      // 3. 重新渲染列表
+      wepy.showModal({
+        title: '警告',
+        content: '确认删除该消息？',
+        success: res => {
+          console.log(res)
+        }
+      })
+    },
+    toChat() {
+      wepy.navigateTo({
+        url: '../chat/chat?id=1&nickname=wepyj'
+      })
+    }
+  }
+}
+</script>
