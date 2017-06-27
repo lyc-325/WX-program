@@ -6,7 +6,7 @@
   width: 720rpx;
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 .search {
   width: 120rpx;
@@ -22,7 +22,7 @@
 }
 
 input{
-  width: 550rpx;
+  width: 96%;
   text-align: center;
   background: white;
   font-size: 30rpx;

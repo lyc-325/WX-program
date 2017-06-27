@@ -2,8 +2,7 @@
 <view class="container">
  <form bindsubmit="search">
   <view class="searchBar">
-      <input name="name" type="text" placeholder="昵称/微信号" />
-      <button formType="submit" class="search"> 搜索</button>
+      <input bindconfirm="search" name="name" type="text" placeholder="昵称" />
   </view>
  </form>
  <view class="list" wx:for="{{friends}}" wx:key="{{index}}">
