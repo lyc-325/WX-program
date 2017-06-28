@@ -34,7 +34,7 @@ function request(options) {
     data,
     method: method || 'POST'
   }).then(data => {
-    return data.statusCode === 200 ? Promise.resolve(data.data) : Promise.reject(data.errMsg)
+    return data.code === 200 ? Promise.resolve(data.info) : Promise.reject(data.desc)
   })
 }
 
