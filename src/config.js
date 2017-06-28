@@ -9,5 +9,9 @@ module.exports = {
     appKey: '4fc2c90bbfc0dc195d0e5d89cc2d6cf2',
     appSecret: 'f5364017ff17',
     server: 'https://api.netease.im/nimserver'
+  },
+  // 江风后台配置
+  jf: {
+    server: 'http://118.89.185.29:8007/api'
   }
 }
