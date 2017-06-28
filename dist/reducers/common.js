@@ -19,19 +19,19 @@ var _reduxActions = require('./../npm/redux-actions/lib/index.js');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _require = require('./../actions/common.js'),
-    INIT_USER = _require.INIT_USER,
-    INIT_NIM = _require.INIT_NIM;
+    SET_USER = _require.SET_USER,
+    SET_NIM = _require.SET_NIM;
 
-exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, (0, _defineProperty3.default)(_handleActions, INIT_USER, function (state, action) {
+exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, (0, _defineProperty3.default)(_handleActions, SET_USER, function (state, action) {
   return (0, _extends3.default)({}, state, {
-    user: action.payload
+    user: (0, _extends3.default)({}, action.payload)
   });
-}), (0, _defineProperty3.default)(_handleActions, INIT_NIM, function (state, action) {
+}), (0, _defineProperty3.default)(_handleActions, SET_NIM, function (state, action) {
   return (0, _extends3.default)({}, state, {
-    nim: action.payload
+    nim: (0, _extends3.default)({}, action.payload)
   });
 }), _handleActions), {
   user: null,
   nim: null
 });
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbW1vbi5qcyJdLCJuYW1lcyI6WyJyZXF1aXJlIiwiSU5JVF9VU0VSIiwiSU5JVF9OSU0iLCJzdGF0ZSIsImFjdGlvbiIsInVzZXIiLCJwYXlsb2FkIiwibmltIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7Ozs7ZUFLSUEsUUFBUSxtQkFBUixDO0lBRkZDLFMsWUFBQUEsUztJQUNBQyxRLFlBQUFBLFE7O2tCQUdhLHFHQUNaRCxTQURZLFlBQ0RFLEtBREMsRUFDTUMsTUFETixFQUNjO0FBQ3pCLG9DQUNLRCxLQURMO0FBRUVFLFVBQU1ELE9BQU9FO0FBRmY7QUFJRCxDQU5ZLGlEQU9aSixRQVBZLFlBT0ZDLEtBUEUsRUFPS0MsTUFQTCxFQU9hO0FBQ3hCLG9DQUNLRCxLQURMO0FBRUVJLFNBQUtILE9BQU9FO0FBRmQ7QUFJRCxDQVpZLG9CQWFaO0FBQ0RELFFBQU0sSUFETDtBQUVERSxPQUFLO0FBRkosQ0FiWSxDIiwiZmlsZSI6ImNvbW1vbi5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGhhbmRsZUFjdGlvbnMgfSBmcm9tICdyZWR1eC1hY3Rpb25zJ1xuXG5jb25zdCB7XG4gIElOSVRfVVNFUixcbiAgSU5JVF9OSU1cbn0gPSByZXF1aXJlKCcuLi9hY3Rpb25zL2NvbW1vbicpXG5cbmV4cG9ydCBkZWZhdWx0IGhhbmRsZUFjdGlvbnMoe1xuICBbSU5JVF9VU0VSXShzdGF0ZSwgYWN0aW9uKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIC4uLnN0YXRlLFxuICAgICAgdXNlcjogYWN0aW9uLnBheWxvYWRcbiAgICB9XG4gIH0sXG4gIFtJTklUX05JTV0oc3RhdGUsIGFjdGlvbikge1xuICAgIHJldHVybiB7XG4gICAgICAuLi5zdGF0ZSxcbiAgICAgIG5pbTogYWN0aW9uLnBheWxvYWRcbiAgICB9XG4gIH1cbn0sIHtcbiAgdXNlcjogbnVsbCxcbiAgbmltOiBudWxsXG59KVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbW1vbi5qcyJdLCJuYW1lcyI6WyJyZXF1aXJlIiwiU0VUX1VTRVIiLCJTRVRfTklNIiwic3RhdGUiLCJhY3Rpb24iLCJ1c2VyIiwicGF5bG9hZCIsIm5pbSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBOzs7O2VBS0lBLFFBQVEsbUJBQVIsQztJQUZGQyxRLFlBQUFBLFE7SUFDQUMsTyxZQUFBQSxPOztrQkFHYSxxR0FDWkQsUUFEWSxZQUNGRSxLQURFLEVBQ0tDLE1BREwsRUFDYTtBQUN4QixvQ0FDS0QsS0FETDtBQUVFRSxxQ0FDS0QsT0FBT0UsT0FEWjtBQUZGO0FBTUQsQ0FSWSxpREFTWkosT0FUWSxZQVNIQyxLQVRHLEVBU0lDLE1BVEosRUFTWTtBQUN2QixvQ0FDS0QsS0FETDtBQUVFSSxvQ0FDS0gsT0FBT0UsT0FEWjtBQUZGO0FBTUQsQ0FoQlksb0JBaUJaO0FBQ0RELFFBQU0sSUFETDtBQUVERSxPQUFLO0FBRkosQ0FqQlksQyIsImZpbGUiOiJjb21tb24uanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBoYW5kbGVBY3Rpb25zIH0gZnJvbSAncmVkdXgtYWN0aW9ucydcblxuY29uc3Qge1xuICBTRVRfVVNFUixcbiAgU0VUX05JTVxufSA9IHJlcXVpcmUoJy4uL2FjdGlvbnMvY29tbW9uJylcblxuZXhwb3J0IGRlZmF1bHQgaGFuZGxlQWN0aW9ucyh7XG4gIFtTRVRfVVNFUl0oc3RhdGUsIGFjdGlvbikge1xuICAgIHJldHVybiB7XG4gICAgICAuLi5zdGF0ZSxcbiAgICAgIHVzZXI6IHtcbiAgICAgICAgLi4uYWN0aW9uLnBheWxvYWRcbiAgICAgIH1cbiAgICB9XG4gIH0sXG4gIFtTRVRfTklNXShzdGF0ZSwgYWN0aW9uKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIC4uLnN0YXRlLFxuICAgICAgbmltOiB7XG4gICAgICAgIC4uLmFjdGlvbi5wYXlsb2FkXG4gICAgICB9XG4gICAgfVxuICB9XG59LCB7XG4gIHVzZXI6IG51bGwsXG4gIG5pbTogbnVsbFxufSlcbiJdfQ==

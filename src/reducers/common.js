@@ -1,21 +1,25 @@
 import { handleActions } from 'redux-actions'
 
 const {
-  INIT_USER,
-  INIT_NIM
+  SET_USER,
+  SET_NIM
 } = require('../actions/common')
 
 export default handleActions({
-  [INIT_USER](state, action) {
+  [SET_USER](state, action) {
     return {
       ...state,
-      user: action.payload
+      user: {
+        ...action.payload
+      }
     }
   },
-  [INIT_NIM](state, action) {
+  [SET_NIM](state, action) {
     return {
       ...state,
-      nim: action.payload
+      nim: {
+        ...action.payload
+      }
     }
   }
 }, {

@@ -110,8 +110,8 @@ import {
 } from '../config'
 import NIM from '../utils/nim'
 import {
-  initUser,
-  initNim
+  setUser,
+  setNim
 } from '../actions/common'
 
 import {
@@ -128,8 +128,8 @@ const config = wx
     return state.common.nim
   }
 }, {
-  initUser,
-  initNim
+  setUser,
+  setNim
 })
 export default class Chatrooms extends wepy.page {
   config = {
@@ -141,7 +141,7 @@ export default class Chatrooms extends wepy.page {
   }
 
   async onLoad() {
-    const { initUser, initNim } = this.methods
+    const { setUser, setNim } = this.methods
     wepy.showLoading()
     const { code } = await wepy.login()
     const { data } = await wepy.request({
@@ -151,14 +151,13 @@ export default class Chatrooms extends wepy.page {
     const { userInfo } = await wepy.getUserInfo()
     const user = {
       ...userInfo,
-      openid
+      accid: openid
     }
-    initUser(user)
+    setUser(user)
+    // 如果用户尚未在 网易云注册 则先注册
     try {
       const token = await NIM.login(openid)
-      initNim(token)
-      const nim = NIM.getInstance({
-        account: openid,
+      setNim({
         token
       })
       setTimeout(() => {

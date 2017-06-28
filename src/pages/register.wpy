@@ -62,13 +62,100 @@
 
 <script>
 import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import NIM from '../utils/nim'
+import api from '../apis/account'
+
+import {
+  setUser,
+  setNim
+} from '../actions/common'
+
+import { validator, validateLength, validateEmail, validatePhone } from '../utils/validator'
+
+// 校验规则配置
+const rules = {
+  company: {
+    prompt: '公司名称在1-20字以内',
+    validate: validateLength(1, 20)
+  },
+  email: {
+    prompt: '邮箱不合法',
+    validate: validateEmail
+  },
+  phone: {
+    prompt: '电话号码不合法',
+    validate: validatePhone
+  }
+}
+
+const validate = validator(rules)
+
+@connect({
+  user(state) {
+    return state.common.user
+  }
+}, {
+  setUser
+})
 export default class Register extends wepy.page {
   config = {
     navigationBarTitleText: '注册'
   }
 
   data = {
+    requesting: false,
+    formError: null
+  }
 
+  methods = {
+    bindFocus(e) {
+      this.formError = null
+      this.formErrorKey = null
+    },
+
+    async submit(e) {
+      const errorKey = validate(e.detail.value)
+      const { company, phone, email } = e.detail.value
+      const { setUser } = this.methods
+      if (!errorKey) {
+        this.requesting = true
+
+        const { accid, nickName, avatarUrl } = this.user
+
+        const infos = {
+          company,
+          phone,
+          email,
+          credits: 0
+        }
+
+        const { token } = await NIM.create({
+          accid,
+          name: nickName,
+          icon: avatarUrl,
+          props: infos
+        })
+
+        const user = await api.createUser(accid, token, infos)
+
+        setUser({
+          ...this.user,
+          ...user
+        })
+        setNim({
+          token
+        })
+
+        wepy.navigateTo({
+          url: 'pages/chatroom'
+        })
+      } else {
+        this.formError = rules[errorKey].prompt
+        this.formErrorKey = errorKey
+        this.requesting = false
+      }
+    }
   }
 }
 </script>

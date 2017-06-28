@@ -1,6 +1,6 @@
-export const INIT_USER = 'COMMON_INIT_USER'
-export const INIT_NIM = 'COMMON_INIT_NIM'
+export const SET_USER = 'COMMON_SET_USER'
+export const SET_NIM = 'COMMON_SET_NIM'
 import { createAction } from 'redux-actions'
 
-export const initUser = createAction(INIT_USER, user => user)
-export const initNim = createAction(INIT_NIM, nim => nim)
+export const setUser = createAction(SET_USER, user => user)
+export const setNim = createAction(SET_NIM, nim => nim)
