@@ -33,7 +33,7 @@ function request(options) {
     header,
     data,
     method: method || 'POST'
-  }).then(data => {
+  }).then(({ data } ) => {
     return data.code === 200 ? Promise.resolve(data.info) : Promise.reject(data.desc)
   })
 }
@@ -71,9 +71,7 @@ function login(accid) {
     data: {
       accid
     }
-  }).then(({info}) => {
-    return info.token
-  })
+  }).then(({token}) => token)
 }
 
 /**
