@@ -1,0 +1,43 @@
+
+<view class="root _212aeff">
+  <view class="base _212aeff">
+    <view class="_212aeff">
+      <view class="avatar _212aeff">
+        <image mode="scaleToFill" src="{{avatar}}" class="_212aeff"/>
+      </view>
+      <view class="nickname _212aeff">{{nickname}}</view>
+    </view>
+    <view class="membership _212aeff">{{membership}}</view>
+  </view>
+  <view class="details _212aeff">
+    <view class="item _212aeff">
+      <view class="label _212aeff">公司</view>
+      <view class="value _212aeff">{{company}}</view>
+    </view>
+
+    <view class="item _212aeff">
+      <view class="label _212aeff">手机号</view>
+      <view class="value _212aeff">{{phone}}</view>
+    </view>
+
+    <view class="item _212aeff">
+      <view class="label _212aeff">邮箱</view>
+      <view class="value _212aeff">{{email}}</view>
+    </view>
+
+    <view class="item _212aeff">
+      <view class="label _212aeff">性别</view>
+      <view class="value _212aeff">{{sex}}</view>
+    </view>
+
+    <view class="item _212aeff">
+      <view class="label _212aeff">QQ</view>
+      <view class="value _212aeff">{{QQ}}</view>
+    </view>
+
+    <view class="item _212aeff">
+      <view class="label _212aeff">积分</view>
+      <view class="value _212aeff">{{credits}}</view>
+    </view>
+  </view>
+</view>

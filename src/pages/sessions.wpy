@@ -228,7 +228,7 @@ export default class Sessions extends wepy.page {
     },
     toChat() {
       wepy.navigateTo({
-        url: '../chat/chat?id=1&nickname=wepyj'
+        url: 'pages/chat?id=1&nickname=wepyj'
       })
     }
   }

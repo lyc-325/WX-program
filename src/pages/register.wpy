@@ -33,7 +33,7 @@
 </form>
 </template>
 
-<style scoped>
+<style>
 .container {
   display: flex;
   flex-direction: column;
@@ -105,7 +105,8 @@ export default class Register extends wepy.page {
 
   data = {
     requesting: false,
-    formError: null
+    formError: null,
+    formErrorKey: null
   }
 
   methods = {

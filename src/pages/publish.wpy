@@ -9,7 +9,7 @@
     </view>
     <view @tap="handleUpload" class="upload">上传图片</view>
     <scroll-view scroll-x="true" class="imgBar">
-      <view class="image" for="{{imgs}}" key="{{index}}">
+      <view class="image" wx:for="{{imgs}}" wx:key="{{index}}">
         <image mode="scaleToFill" src="{{item}}">
           <view class="cancel" data-index="{{index}}" @tap="handleCancel">X</view>
         </image>
@@ -110,10 +110,10 @@ export default class Publish extends wepy.page {
 
   methods = {
     handleUpload () {
-      wepy.chooseImage({
-        success: res => {
-          this.imgs = res.tempFilePaths
-        }
+      let self = this
+      wepy.chooseImage().then(res => {
+        self.imgs = res.tempFilePaths
+        self.$apply()
       })
     },
 

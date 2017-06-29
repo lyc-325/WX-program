@@ -1,0 +1,16 @@
+
+<view class="list _c41e4d2">
+  <view class="item _c41e4d2">
+    <view class="avatar _c41e4d2">
+      <image mode="aspectFit" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_c41e4d2"/>
+    </view>
+    <view class="info _c41e4d2">
+      <view class="_c41e4d2">老张 请求加你为好友</view>
+      <view class="_c41e4d2">验证 我是老张</view>
+    </view>
+    <view class="operation _c41e4d2">
+      <view class="accept _c41e4d2">同意</view>
+      <view class="reject _c41e4d2">拒绝</view>
+    </view>
+  </view>
+</view>
