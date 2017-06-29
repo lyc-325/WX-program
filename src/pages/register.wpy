@@ -64,7 +64,7 @@
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import NIM from '../utils/nim'
-import api from '../apis/account'
+import * as api from '../apis/account'
 
 import {
   setUser,
