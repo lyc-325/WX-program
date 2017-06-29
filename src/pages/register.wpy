@@ -63,6 +63,7 @@
 <script>
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
+import R from '../libs/ramda'
 import NIM from '../utils/nim'
 import * as api from '../apis/account'
 
@@ -122,34 +123,47 @@ export default class Register extends wepy.page {
       if (!errorKey) {
         this.requesting = true
 
-        const { accid, nickName, avatarUrl } = this.user
+        const { accid, nickName, avatarUrl, gender } = this.user
 
         const infos = {
           company,
           phone,
           email,
+          gender,
           credits: 0
         }
-
+        let token
         try {
-          const { token } = await NIM.create({
+          const resp = await NIM.create({
             accid,
             name: nickName,
             icon: avatarUrl,
             props: infos
           })
+          token = resp.token
+        } catch (e) {
+          if (e.code === 414) {
+            const resp = await NIM.login(accid)
+            token = resp.token
+          }
+        }
 
-          const user = await api.createUser(accid, token, infos)
+        try {
+          const password = R.takeLast(5)(accid)
+          const user = await api.createUser(accid, password, infos)
+          const { Token } = user
 
           setUser({
             ...this.user,
-            ...user
+            ...user,
+            jfToken: Token
           })
+
           setNim({
             token
           })
 
-          wepy.switchTab({
+          wepy.reLaunch({
             url: '/pages/chatrooms'
           })
         } catch (e) {

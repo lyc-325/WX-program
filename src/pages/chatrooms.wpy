@@ -105,10 +105,14 @@ const mockRooms = [{
 }]
 
 import wepy from 'wepy'
+import R from '../libs/ramda'
+
 import {
   wx
 } from '../config'
+
 import NIM from '../utils/nim'
+
 import {
   setUser,
   setNim
@@ -117,6 +121,8 @@ import {
 import {
   connect
 } from 'wepy-redux'
+
+import * as api from '../apis/account'
 
 const config = wx
 
@@ -149,17 +155,33 @@ export default class Chatrooms extends wepy.page {
     })
     const { openid } = data
     const { userInfo } = await wepy.getUserInfo()
+
+    const password = R.takeLast(5)(openid)
+
     const user = {
       ...userInfo,
       accid: openid
     }
+
     setUser(user)
     // 如果用户尚未在 网易云注册 则先注册
     try {
-      const token = await NIM.login(openid+'2')
+      const token = await NIM.login(openid)
+      const Token = await api.getToken(openid, password)
+
+      if (!Token) {
+        throw new Error('user not exist')
+      }
+
+      setUser({
+        ...this.user,
+        jfToken: Token
+      })
+
       setNim({
         token
       })
+
       setTimeout(() => {
         this.rooms = mockRooms
         wepy.hideLoading()

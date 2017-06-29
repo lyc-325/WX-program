@@ -20,5 +20,5 @@ export const getToken = function (username, password) {
       password
     },
     method: 'POST'
-  })
+  }).then(({ Token }) => Token)
 }

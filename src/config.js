@@ -6,8 +6,8 @@ module.exports = {
   },
   // 网易云信配置
   nim: {
-    appKey: '4fc2c90bbfc0dc195d0e5d89cc2d6cf2',
-    appSecret: 'f5364017ff17',
+    appKey: 'f1ae99b849c5df091a4e864f0055031f',
+    appSecret: 'bbe69f3eaaab',
     server: 'https://api.netease.im/nimserver'
   },
   // 江风后台配置
