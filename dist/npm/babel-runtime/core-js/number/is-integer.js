@@ -1,1 +1,0 @@
-module.exports = { "default": require('./../../../core-js/library/fn/number/is-integer.js'), __esModule: true };

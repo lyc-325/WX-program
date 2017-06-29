@@ -122,6 +122,7 @@ list {
 
 <script>
 import wepy from 'wepy'
+import { connect } from 'wepy-redux'
 import R from '../libs/ramda'
 import touch from '../utils/touch'
 
@@ -140,6 +141,14 @@ const BUTTONS_WIDTH = 200
 // 最后一个隐藏按钮的宽度
 const LAST_WIDTH = 200
 
+@connect({
+  user(state) {
+    return state.common.user
+  },
+  nim(state) {
+    return state.common.nim
+  }
+})
 export default class Sessions extends wepy.page {
   config = {
     navigationBarTitleText: '消息'
