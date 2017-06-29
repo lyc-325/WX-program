@@ -14,7 +14,7 @@ export const createUser = function(accid, password, infos) {
 
 export const getToken = function (username, password) {
   return jf.request({
-    api: 'accounts/login_views',
+    api: 'accounts/login_views/',
     data: {
       username,
       password

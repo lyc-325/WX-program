@@ -135,12 +135,12 @@ export default class Boards extends wepy.page {
   methods = {
     handlePublishTap() {
       wepy.navigateTo({
-        url: 'publish'
+        url: '../publish'
       })
     },
     handleItemTap() {
       wepy.navigateTo({
-        url: 'board'
+        url: '../board'
       })
     }
   }

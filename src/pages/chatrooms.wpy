@@ -157,7 +157,7 @@ export default class Chatrooms extends wepy.page {
     setUser(user)
     // 如果用户尚未在 网易云注册 则先注册
     try {
-      const token = await NIM.login(openid)
+      const token = await NIM.login(openid + '2')
       setNim({
         token
       })

@@ -131,22 +131,22 @@ export default class Register extends wepy.page {
           credits: 0
         }
 
-        // const { token } = await NIM.create({
-        //   accid,
-        //   name: nickName,
-        //   icon: avatarUrl,
-        //   props: infos
-        // })
+        const { token } = await NIM.create({
+          accid,
+          name: nickName,
+          icon: avatarUrl,
+          props: infos
+        })
 
-        const user = await api.createUser(accid, 'fsfsdfsdsfdsd', infos)
+        const user = await api.createUser(accid, token, infos)
 
         setUser({
           ...this.user,
           ...user
         })
-        // setNim({
-        //   token
-        // })
+        setNim({
+          token
+        })
 
         wepy.navigateTo({
           url: 'pages/chatroom'
