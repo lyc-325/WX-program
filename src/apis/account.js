@@ -2,7 +2,7 @@ import jf from '../utils/jf'
 
 export const createUser = function(accid, password, infos) {
   return jf.request({
-    api: 'accounts/create',
+    api: 'accounts/create/',
     data: {
       accid,
       password,
