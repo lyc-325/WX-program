@@ -1,24 +1,24 @@
 
-<view class="container _45a93bc">
-  <view class="friend _45a93bc">
-    <view class="avatar _45a93bc">
-      <image src="{{avatar}}" mode="scaleToFill" class="_45a93bc"/>
+<view class="container _df46726">
+  <view class="friend _df46726">
+    <view class="avatar _df46726">
+      <image src="{{avatar}}" mode="scaleToFill" class="_df46726"/>
     </view>
-    <view class="info _45a93bc">
-      <view class="item _45a93bc">
-        <view class="label _45a93bc">昵称</view>
-        <view class="value _45a93bc">{{ nickname }}</view>
+    <view class="info _df46726">
+      <view class="item _df46726">
+        <view class="label _df46726">昵称</view>
+        <view class="value _df46726">{{ nickname }}</view>
       </view>
-      <view class="item _45a93bc">
-        <view class="label _45a93bc">微信号</view>
-        <view class="value _45a93bc">{{ wexin }}</view>
+      <view class="item _df46726">
+        <view class="label _df46726">微信号</view>
+        <view class="value _df46726">{{ wexin }}</view>
       </view>
     </view>
   </view>
-  <form class="_45a93bc">
-    <view class="area _45a93bc">
-      <textarea placeholder="验证信息" auto-focus class="_45a93bc"/>
+  <form class="_df46726">
+    <view class="area _df46726">
+      <textarea placeholder="验证信息" auto-focus class="_df46726"/>
     </view>
-    <view class="send _45a93bc">发送</view>
+    <view class="send _df46726">发送</view>
   </form>
 </view>

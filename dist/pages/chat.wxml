@@ -1,38 +1,38 @@
 
-<view class="list _ce2f508">
-  <view class="item opposite _ce2f508">
-    <view class="avatar _ce2f508">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_ce2f508"/>
+<view class="list _df5d8f8">
+  <view class="item opposite _df5d8f8">
+    <view class="avatar _df5d8f8">
+      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_df5d8f8"/>
     </view>
-    <view class="content _ce2f508">
-      <text class="_ce2f508">你在干嘛呢？</text>
+    <view class="content _df5d8f8">
+      <text class="_df5d8f8">你在干嘛呢？</text>
     </view>
   </view>
-  <view class="item mine _ce2f508">
-    <view class="avatar _ce2f508">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_ce2f508"/>
+  <view class="item mine _df5d8f8">
+    <view class="avatar _df5d8f8">
+      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_df5d8f8"/>
     </view>
-    <view class="content _ce2f508">
-      <text class="_ce2f508">你猜猜呢？</text>
+    <view class="content _df5d8f8">
+      <text class="_df5d8f8">你猜猜呢？</text>
     </view>
   </view>
 
-  <view class="item mine _ce2f508">
-    <view class="avatar _ce2f508">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_ce2f508"/>
+  <view class="item mine _df5d8f8">
+    <view class="avatar _df5d8f8">
+      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_df5d8f8"/>
     </view>
-    <view class="content _ce2f508">
-      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp" class="_ce2f508"/>
+    <view class="content _df5d8f8">
+      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp" class="_df5d8f8"/>
     </view>
   </view>
 </view>
 
-<view class="operation _ce2f508">
-  <textarea auto-height fixed="fixed" cursor-spacing="40" class="_ce2f508"/>
-  <view class="button _ce2f508">
-    <image bindtap="handleChooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_ce2f508"/>
+<view class="operation _df5d8f8">
+  <textarea auto-height fixed="fixed" cursor-spacing="40" class="_df5d8f8"/>
+  <view class="button _df5d8f8">
+    <image bindtap="handleChooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_df5d8f8"/>
   </view>
-  <view class="button _ce2f508">
-    <image bindtap="handleSubmit" src="../../static/icons/send.png" mode="scaleToFill" class="_ce2f508"/>
+  <view class="button _df5d8f8">
+    <image bindtap="handleSubmit" src="../../static/icons/send.png" mode="scaleToFill" class="_df5d8f8"/>
   </view>
 </view>

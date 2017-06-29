@@ -118,7 +118,7 @@ export default class Publish extends wepy.page {
     },
 
     handleCancel (e) {
-      this.imgs = this.imgs.splice(e.currentTarget.dataset.index, 1)
+      this.imgs.splice(e.currentTarget.dataset.index, 1)
     }
   }
 }

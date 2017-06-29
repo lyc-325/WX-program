@@ -1,33 +1,33 @@
 
 <!--register.wxml-->
-<view class="form-error _37e585a"  wx:if="{{formError}}">{{formError}}</view>
+<view class="form-error _ef7544f"  wx:if="{{formError}}">{{formError}}</view>
 
-<form bindsubmit="submit" class="_37e585a">
-  <view class="container _37e585a">
-    <view class="title _37e585a">个人信息完善</view>
-    <view class="item _37e585a">
-      <view class="label _37e585a">公司</view>
-      <view class="input _37e585a">
-        <input type="text" class="{{formErrorKey === 'company' ? 'error' : ''}} _37e585a" name="company" bindfocus="bindFocus"/>
+<form bindsubmit="submit" class="_ef7544f">
+  <view class="container _ef7544f">
+    <view class="title _ef7544f">个人信息完善</view>
+    <view class="item _ef7544f">
+      <view class="label _ef7544f">公司</view>
+      <view class="input _ef7544f">
+        <input type="text" class="{{formErrorKey === 'company' ? 'error' : ''}} _ef7544f" name="company" bindfocus="bindFocus"/>
       </view>
     </view>
 
-    <view class="item _37e585a">
-      <view class="label _37e585a">手机</view>
-      <view class="input _37e585a">
-        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}} _37e585a" name="phone" bindfocus="bindFocus"/>
+    <view class="item _ef7544f">
+      <view class="label _ef7544f">手机</view>
+      <view class="input _ef7544f">
+        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}} _ef7544f" name="phone" bindfocus="bindFocus"/>
       </view>
     </view>
 
-    <view class="item _37e585a">
-      <view class="label _37e585a">邮箱</view>
-      <view class="input _37e585a">
-        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}} _37e585a" name="email" bindfocus="bindFocus"/>
+    <view class="item _ef7544f">
+      <view class="label _ef7544f">邮箱</view>
+      <view class="input _ef7544f">
+        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}} _ef7544f" name="email" bindfocus="bindFocus"/>
       </view>
     </view>
 
-    <view class="item _37e585a">
-      <button form-type="submit" loading="{{requesting}}" class="_37e585a">提交</button>
+    <view class="item _ef7544f">
+      <button form-type="submit" loading="{{requesting}}" class="_ef7544f">提交</button>
     </view>
   </view>
 </form>

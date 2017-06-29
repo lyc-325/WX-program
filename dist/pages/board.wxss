@@ -1,15 +1,15 @@
 
 /* board_detail.wxss */
-.container._c64b4cc {
+.container._c2152c4 {
   display: flex;
   flex-flow: column;
   width: 100%;
 }
-.head._c64b4cc {
+.head._c2152c4 {
   font-size: 48rpx;
   margin-bottom: 20rpx;
 }
-.item._c64b4cc {
+.item._c2152c4 {
   font-size: 28rpx;
   display: flex;
   flex-flow: row;
@@ -19,30 +19,30 @@
   justify-content: space-between;
   margin-top: 20rpx;
 }
-.imgBar._c64b4cc {
+.imgBar._c2152c4 {
   white-space: nowrap;
   display: flex;
   margin-top: 20rpx;
 }
-.image._c64b4cc {
+.image._c2152c4 {
   display: inline-block;
   width: 375rpx;
   height: 240rpx;
 }
-image._c64b4cc {
+image._c2152c4 {
   width: 100%;
   height: 100%;
 }
-.area._c64b4cc{
+.area._c2152c4{
   width: 94%;
   display: flex;
   flex-flow: column;
   margin-top: 20rpx;
 }
-.area > .label._c64b4cc {
+.area > .label._c2152c4 {
   font-size: 36rpx;
   margin-bottom: 16rpx;
 }
-.area > .value._c64b4cc {
+.area > .value._c2152c4 {
   font-size: 28rpx;
 }

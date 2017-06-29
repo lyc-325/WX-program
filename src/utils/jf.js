@@ -17,6 +17,19 @@ function request(options) {
   })
 }
 
+function upload(options) {
+  const { api, filePath, name, method } = options
+  return wepy.uploadFile({
+    url: `${config.server}/${api}`,
+    filePath: filePath,
+    name: name,
+    method: method || 'POST'
+  }).then(res => {
+    return res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.errorText)
+  })
+}
+
 module.exports = {
-  request
+  request,
+  upload
 }

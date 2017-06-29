@@ -111,6 +111,10 @@
 </style>
 
 <script>
+import wepy from 'wepy'
+// import api from '../apis/board'
+// import { connect } from 'wepy-redux'
+
 const list = [{
   cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
   title: '2017年8月江风通讯正式上线',
@@ -141,7 +145,6 @@ const list = [{
   read: 200
 }]
 
-import wepy from 'wepy'
 export default class Boards extends wepy.page {
   config = {
     navigationBarTitleText: '留言板2'
@@ -164,6 +167,15 @@ export default class Boards extends wepy.page {
         url: '../board/board'
       })
     }
+  }
+
+  async onLoad() {
+    // const token = await getToken()
+    // const res = await api.boardList(token)
+    // const boards = res.data;
+    // const reses = await api.downloadImages(boards.map(({ cover_img }) => cover_img))
+    // const tempFiles = reses.map(({tempFilePath}) => tempFilePath)
+    // this.list = boards.map(board => ({title, text, creator, author, cover_img}) => ({ title, content: text, createdBy: creator, author: read, cover: cover_img }))
   }
 }
 </script>
