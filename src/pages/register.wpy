@@ -131,26 +131,30 @@ export default class Register extends wepy.page {
           credits: 0
         }
 
-        const { token } = await NIM.create({
-          accid,
-          name: nickName,
-          icon: avatarUrl,
-          props: infos
-        })
+        try {
+          const { token } = await NIM.create({
+            accid,
+            name: nickName,
+            icon: avatarUrl,
+            props: infos
+          })
 
-        const user = await api.createUser(accid, token, infos)
+          const user = await api.createUser(accid, token, infos)
 
-        setUser({
-          ...this.user,
-          ...user
-        })
-        setNim({
-          token
-        })
+          setUser({
+            ...this.user,
+            ...user
+          })
+          setNim({
+            token
+          })
 
-        wepy.navigateTo({
-          url: 'pages/chatroom'
-        })
+          wepy.switchTab({
+            url: '/pages/chatrooms'
+          })
+        } catch (e) {
+          console.error('create user', e)
+        }
       } else {
         this.formError = rules[errorKey].prompt
         this.formErrorKey = errorKey

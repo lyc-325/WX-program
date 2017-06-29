@@ -8,12 +8,13 @@ function request(options) {
   return wepy.request({
     url: `${config.server}/${api}`,
     header: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
     },
     data,
     method: method || 'POST'
-  }).then(res => {
-    return res.status === 200 ? Promise.resolve(res.data) : Promise.reject(res.errorText)
+  }).then(({data}) => {
+    return data.code === 200 ? Promise.resolve(data.data) : Promise.reject(data.msg)
   })
 }
 
