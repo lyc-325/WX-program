@@ -16,7 +16,7 @@
     <view class="nickname">{{item.nickname}}</view>
   </view>
 </view>
-<view bindtap="toFriendAdd" class="plus">+</view>
+<view bindtap="toAdd" class="plus">+</view>
 </template>
 
 <style scoped>
@@ -100,6 +100,14 @@ export default class Friends extends wepy.page {
       avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
       nickname: '安德烈舍甫琴科'
     }]
+  }
+
+  methods = {
+    toAdd() {
+      wepy.navigateTo({
+        url: '/pages/add'
+      })
+    }
   }
 }
 </script>

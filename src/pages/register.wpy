@@ -134,12 +134,12 @@ export default class Register extends wepy.page {
         }
         let token
         try {
-          const resp = await NIM.create({
+          const resp = await NIM.create(
             accid,
             name: nickName,
             icon: avatarUrl,
             props: infos
-          })
+          )
           token = resp.token
         } catch (e) {
           if (e.code === 414) {

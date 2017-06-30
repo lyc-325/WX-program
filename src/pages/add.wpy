@@ -1,103 +1,55 @@
 <template>
-<view class="container">
-  <form bindsubmit="search">
-    <view class="searchBar">
-      <input name="name" type="text" placeholder="昵称/微信号" comfirm-type="搜索" />
-    </view>
-  </form>
-  <view class="list" for="{{friends}}" key="{{index}}">
+<view class="root">
+  <view>
+    <form bindsubmit="search">
+      <view class="search">
+        <input name="name" type="text" placeholder="昵称" comfirm-type="搜索" />
+      </view>
+    </form>
+  </view>
+  <view @tap="toApply({{item.id}})" class="friend" wx:for="{{friends}}" wx:key="{{id}}">
     <view class="avatar">
       <image src="{{item.avatar}}" mode="scaleToFill" />
     </view>
-    <view class="info">
+    <view class="info" >
       <view class="item">
-        <view class="label">昵称</view>
         <view class="value">{{ item.nickname }}</view>
       </view>
-      <view class="item">
-        <view class="label">微信号</view>
-        <view class="value">{{ item.wexin }}</view>
-      </view>
     </view>
-    <view @tap="handleSubmit" class="add">添加</view>
   </view>
 </view>
 </template>
 
 <style scoped>
-.container {
-  padding-top: 20rpx;
+.root > view {
+  padding: 20rpx;
+  border-bottom: 1px solid #eee;
 }
 
-.searchBar {
-  width: 720rpx;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+form {
+  width: 100%;
 }
 
-.search {
-  width: 120rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  border-radius: 10rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
-  font-size: 24rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
-}
-
-input {
-  width: 550rpx;
+.search input{
   text-align: center;
   background: white;
   font-size: 30rpx;
-  border-radius: 10rpx;
   border: 1px solid #eee;
 }
 
-.list {
+.friend {
   display: flex;
-  margin-top: 20rpx;
-  width: 96%;
-  height: 200rpx;
   align-items: center;
-  border: 1px solid #eee;
-  justify-content: space-around;
-}
-
-.avatar image {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-}
-
-.info {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-.info>.item {
-  margin-top: 10rpx;
-  width: 260rpx;
-  display: flex;
-  justify-content: space-between;
-}
-
-.add {
-  width: 150rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 20rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
   font-size: 32rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
+}
+
+.friend .avatar {
+  margin-right: 10rpx;
+}
+
+.friend .avatar image {
+  width: 80rpx;
+  height: 80rpx;
 }
 </style>
 
@@ -109,13 +61,18 @@ export default class Add extends wepy.page {
   }
 
   data = {
-
+    friends: [{
+      id: 1,
+      nickname: 'www',
+      wexin: '1fsdfdf',
+      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400'
+    }]
   }
 
   methods = {
-    handleSubmit() {
+    toApply(accid) {
       wepy.navigateTo({
-        url: '../apply/apply'
+        url: `/pages/apply?accid=${accid}`
       })
     }
   }

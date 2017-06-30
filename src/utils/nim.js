@@ -27,26 +27,28 @@ function createHeader() {
  */
 function request(options) {
   const {api, data, method} = options
-  const header = createHeader()
+  const header = {
+    ...createHeader(),
+    ...(options.header || {})
+  }
   return wepy.request({
     url: `${config.server}/${api}`,
     header,
     data,
     method: method || 'POST'
   }).then(({ data }) => {
-    return data.code === 200 ? Promise.resolve(data.info) : Promise.reject(data)
+    return data.code === 200 ? Promise.resolve(data) : Promise.reject(data)
   })
 }
 
 /**
  * 创建用户
- * @param options Object
- * @param options.accid String
- * @param options.name String
- * @param options.icon String
- * @param optiosn.props Object
+ * @param accid String
+ * @param name String
+ * @param icon String
+ * @param props Object
  */
-function create({accid, name, icon, props}) {
+function create(accid, name, icon, props) {
   return request({
     api: 'user/create.action',
     data: {
@@ -54,16 +56,12 @@ function create({accid, name, icon, props}) {
       name,
       icon
     }
-  })
+  }).then(R.prop('info'))
 }
 
 /**
- * 创建用户
- * @param options Object
- * @param options.accid String
- * @param options.name String
- * @param options.icon String
- * @param optiosn.props Object
+ * 登录用户，获得token
+ * @param accid String
  */
 function login(accid) {
   return request({
@@ -71,7 +69,7 @@ function login(accid) {
     data: {
       accid
     }
-  }).then(({token}) => token)
+  }).then(R.compose(R.prop('token'), R.prop('info')))
 }
 
 /**
@@ -104,6 +102,38 @@ function getInstance(options) {
 }
 
 /**
+ * 获得用户名片
+ * @param  accid String
+ */
+function getUserInfo(accid) {
+  return request({
+    api: 'user/getUinfos.action',
+    data: {
+      accids: JSON.stringify([accid])
+    }
+  }).then(R.compose(R.head, R.prop('uinfos')))
+}
+
+const _addFriend = R.curry(function (type, accid, faccid, msg) {
+  return request({
+    api: 'friend/add.action',
+    data: {
+      accid,
+      faccid,
+      type,
+      msg: msg || ''
+    }
+  })
+})
+
+// 发送好友申请
+const sendApply = _addFriend(2)
+// 接受好友申请
+const acceptFriendApply = _addFriend(3)
+// 拒绝好友申请
+const rejectFriendApply = _addFriend(3)
+
+/**
  * 需要被 Promise 化的函数
  */
 const promisedFunctions = [
@@ -129,5 +159,9 @@ const promisedFunctions = [
 module.exports = {
   login,
   create,
-  getInstance
+  getInstance,
+  getUserInfo,
+  sendApply,
+  acceptFriendApply,
+  rejectFriendApply
 }
