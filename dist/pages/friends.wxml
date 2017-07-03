@@ -1,15 +1,15 @@
 
 <view class="root _deba049">
   <view class="search _deba049">
-    <input type="text" placeholder="搜索" class="_deba049"/>
+    <input type="text" placeholder="搜索" confirm-type="search" bindconfirm="filter" bindinput="filter" class="_deba049"/>
   </view>
 
-  <view class="notification _deba049">
-    <view class="_deba049">申请与通知</view>
-    <view class="badge _deba049">4</view>
+  <view  wx:if="{{notifications > 0}}" class="notification _deba049">
+    <view bindtap="toNotification" class="_deba049">申请与通知</view>
+    <view class="badge _deba049">{{notifications}}</view>
   </view>
 
-  <view  wx:for="{{list}}" wx:key="{{index}}" class="friend _deba049">
+  <view  wx:for="{{showedFriends}}" wx:key="{{index}}" class="friend _deba049" bindtap="toChat" data-wepy-params-a="{{index}}">
     <view class="avatar _deba049">
       <image mode="scaleToFill" src="{{item.avatar}}" class="_deba049"/>
     </view>

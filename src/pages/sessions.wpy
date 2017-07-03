@@ -5,8 +5,8 @@
   </view>
 </view>
 <view class='list'>
-  <view wx:for='{{list}}' wx:key='{{index}}' class='item'>
-    <view bindtap='toChat' @touchstart='handleTouchStart' @touchmove='handleTouchMove' @touchend='handleTouchEnd' data-index='{{index}}' style='{{item.style}}' class='content'>
+  <view wx:for='{{sessions}}' wx:key='{{index}}' class='item'>
+    <view bindtap='toChat' @touchstart='handleTouchStart' @touchmove='handleTouchMove' @touchend='handleTouchEnd' style='{{item.style}}' class='content'>
       <view class='avatar'>
         <image mode='scaleToFill' src='{{item.avatar}}' />
       </view>
@@ -125,6 +125,8 @@ import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import R from '../libs/ramda'
 import touch from '../utils/touch'
+import NIM from '../utils/nim'
+import log from '../utils/log'
 
 /**
  * 获得列表 index
@@ -155,25 +157,26 @@ export default class Sessions extends wepy.page {
   }
 
   data = {
-    list: [
-      {
-        from: '老张',
-        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-        msg: '干嘛呢？'
-      },
-      {
-        from: '老赵',
-        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-        msg: '干嘛呢？'
-      },
-      {
-        from: '老于',
-        avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-        msg: '干嘛呢？'
-      }
-    ],
+    sessions: [],
     navs: ['好友消息', '系统消息'],
     currentNav: 0
+  }
+
+  async onLoad() {
+    const nimInstance = NIM.getInstance({
+      account: this.user.accid,
+      token: this.nim.token,
+      onSessions: sessions => {
+        const merged = nimInstance.mergeSessions(this.sessions, sessions)
+        this.sessions = merged
+        this.$apply()
+      },
+      onUpdateSession: session => {
+        const merged = nimInstance.mergeSessions(this.sessions, session)
+        this.sessions = merged
+        this.$apply()
+      }
+    })
   }
 
   methods = {
@@ -185,7 +188,7 @@ export default class Sessions extends wepy.page {
       if (touch.isOnePointTouch(evt)) {
         const {
           startX,
-          list
+          sessions
         } = this
         const currX = touch.getClientX(false)(evt)
         const distX = startX - currX
@@ -195,40 +198,49 @@ export default class Sessions extends wepy.page {
           [distX => distX <= 0, R.always(0)],
           [R.T, distX => distX >= LAST_WIDTH ? -BUTTONS_WIDTH : -distX]
         ])(distX)
-        list[index].style = `left:${width}rpx`
-        this.list = list
+        sessions[index].style = `left:${width}rpx`
+        this.sessions = sessions
       }
     },
     handleTouchEnd(evt) {
       if (touch.isOnePointTouch(true)(evt)) {
         const {
           startX,
-          list
+          sessions
         } = this
         const currX = touch.getClientX(true)(evt)
         const distX = startX - currX
         const index = getIndex(evt)
         const width = distX > LAST_WIDTH / 2 ? -BUTTONS_WIDTH : 0
-        list[index].style = `left:${width}rpx`
-        this.list = list
+        sessions[index].style = `left:${width}rpx`
+        this.sessions = sessions
       }
     },
-    showDeleteModal(evt) {
+    async showDeleteModal(evt) {
       // 删除消息步骤
       // 1. 显示删除确认
       // 2. 进行删除
       // 3. 重新渲染列表
-      wepy.showModal({
-        title: '警告',
-        content: '确认删除该消息？',
-        success: res => {
-          console.log(res)
-        }
-      })
+      try {
+        wepy.showModal({
+          title: '警告',
+          content: '确认删除该会话？',
+          success: res => {
+            console.log(res)
+          }
+        })
+      } catch (e) {
+        log.error({
+          page: 'sessions',
+          opr: 'delete message',
+          info: e
+        })
+      }
     },
-    toChat() {
+    toChat(index) {
+      const { to } = this.sessions[index]
       wepy.navigateTo({
-        url: '../chat/chat?id=1&nickname=wepyj'
+        url: `/pages/chat?faccid=${to}`
       })
     }
   }

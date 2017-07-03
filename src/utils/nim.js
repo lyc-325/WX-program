@@ -54,7 +54,8 @@ function create(accid, name, icon, props) {
     data: {
       accid,
       name,
-      icon
+      icon,
+      props
     }
   }).then(R.prop('info'))
 }
@@ -80,24 +81,29 @@ function login(accid) {
  */
 function getInstance(options) {
   const nim = NIM.getInstance({
+    db: true,
     appKey: config.appKey,
-    account: options.account,
-    token: options.token,
     onerror(error) {
       console.error('[NIM] error', error)
     },
-    onconnect(obj) {
-      console.log('[NIM] connectd')
+    ondisconnect() {
+      console.log('[NIM] disconnect')
     },
-    onsessions: options.onsessions,
-    onupdatesession: options.opupdatesession
+    onwillreconnect(obj) {
+      console.log('[NIM] will reconnect')
+    },
+    onsyncdone() {
+      console.log('[NIM] sync done')
+    },
+    onfriends(friends) {
+      console.log('[NIM] on friends', friends)
+    },
+    ...options
   })
-
   // Promisify nim functions
-  R.forEach((key) => {
-    nim[key] = promisify(nim[key].bind(nim))
-  }, promisedFunctions)
-
+  // R.forEach((key) => {
+  //   nim[key] = promisify(nim[key].bind(nim))
+  // }, promisedFunctions)
   return nim
 }
 
@@ -127,11 +133,11 @@ const _addFriend = R.curry(function (type, accid, faccid, msg) {
 })
 
 // 发送好友申请
-const sendApply = _addFriend(2)
+const sendApply = _addFriend(1)
 // 接受好友申请
 const acceptFriendApply = _addFriend(3)
 // 拒绝好友申请
-const rejectFriendApply = _addFriend(3)
+const rejectFriendApply = _addFriend(4)
 
 /**
  * 需要被 Promise 化的函数

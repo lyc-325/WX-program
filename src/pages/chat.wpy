@@ -28,12 +28,12 @@
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed cursor-spacing="40" />
+  <textarea auto-height fixed cursor-spacing="40" @input="setText"/>
   <view class="button">
-    <image @tap="handleChooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
+    <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
   </view>
   <view class="button">
-    <image @tap="handleSubmit" src="../../static/icons/send.png" mode="scaleToFill" />
+    <image @tap="send" src="../../static/icons/send.png" mode="scaleToFill" />
   </view>
 </view>
 </template>
@@ -150,27 +150,87 @@
 
 <script>
 import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import NIM from '../utils/nim'
+import log from '../utils/log'
+import R from '../lib/R'
+
+const genMsg = msg => ({
+  ...msg
+})
+
+@connect({
+  user: state => state.common.user,
+  nim: state => state.common.nim
+})
 export default class Chat extends wepy.page {
   config = {
     navigationBarTitleText: '聊天'
   }
 
   data = {
-
+    msgs: [],
+    text: '',
+    nimInstance: null,
+    friend: null
   }
 
   methods = {
-    handleChooseImage() {
-      wepy.chooseImage({
-        success(res) {
-          console.log(res)
-        }
-      })
+    async chooseImage() {
+      const result = wepy.chooseImage()
+      console.log('images', result)
     },
-
-    handleSubmit() {
-
+    async send() {
+      const text = R.trim(this.text)
+      if (text.length) {
+        try {
+          const msg = await this.nimInstance.sendText({
+            text: this.text,
+            scene: 'p2p',
+            to: this.friend.accid
+          })
+          this.msgs = [...this.msgs, genMsg(msg)]
+          this.$apply()
+        } catch (e) {
+          log.error({
+            page: 'chat',
+            opr: 'sendText',
+            info: e
+          })
+          this.msgs = [...this.msgs, genMsg({
+            content: text
+          })]
+          this.$apply()
+        }
+      }
+    },
+    setText(e) {
+      this.text = e.detail.value
     }
+  }
+
+  async onLoad(options) {
+    const { faccid } = options
+    // 获得好友对象
+    const friend = await NIM.getUserInfo(faccid)
+    this.friend = {
+      accid: friend.accid,
+      avatar: friend.icon,
+      nickname: friend.name
+    }
+    this.$apply()
+    // 获得消息实例
+    this.nimInstance = NIM.getInstance({
+      account: this.user.accid,
+      token: this.nim.token,
+      onMsg: msg => {
+        console.log('收到消息', msg.scene, msg.type, msg)
+        if (msg.to === faccid || msg.from === faccid) {
+          this.msgs = [...this.msgs, msg]
+          this.$apply()
+        }
+      }
+    })
   }
 }
 </script>

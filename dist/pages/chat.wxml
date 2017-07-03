@@ -28,11 +28,11 @@
 </view>
 
 <view class="operation _ce2f508">
-  <textarea auto-height fixed="fixed" cursor-spacing="40" class="_ce2f508"/>
+  <textarea auto-height fixed="fixed" cursor-spacing="40" bindinput="setText" class="_ce2f508"/>
   <view class="button _ce2f508">
-    <image bindtap="handleChooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_ce2f508"/>
+    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_ce2f508"/>
   </view>
   <view class="button _ce2f508">
-    <image bindtap="handleSubmit" src="../../static/icons/send.png" mode="scaleToFill" class="_ce2f508"/>
+    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" class="_ce2f508"/>
   </view>
 </view>

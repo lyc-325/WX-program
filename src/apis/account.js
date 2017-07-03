@@ -22,3 +22,13 @@ export const getToken = function (username, password) {
     method: 'POST'
   }).then(({ Token }) => Token)
 }
+
+export const search = function (nickname) {
+  return jf.request({
+    api: 'accounts/search/',
+    data: {
+      s: nickname
+    },
+    method: 'POST'
+  })
+}

@@ -1,15 +1,15 @@
 <template>
 <view class="root">
   <view class="search">
-    <input type="text" placeholder="搜索" />
+    <input type="text" placeholder="搜索" confirm-type="search" @confirm="filter" @input="filter"/>
   </view>
 
-  <view class="notification">
-    <view>申请与通知</view>
-    <view class="badge">4</view>
+  <view wx:if="{{notifications > 0}}" class="notification">
+    <view @tap="toNotification">申请与通知</view>
+    <view class="badge">{{notifications}}</view>
   </view>
 
-  <view wx:for="{{list}}" wx:key="{{index}}" class="friend">
+  <view wx:for="{{showedFriends}}" wx:key="{{index}}" class="friend" @tap="toChat({{index}})">
     <view class="avatar">
       <image mode="scaleToFill" src="{{item.avatar}}"></image>
     </view>
@@ -85,21 +85,31 @@
 
 <script>
 import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import NIM from '../utils/nim'
+import R from '../libs/ramda'
+
+const filter = R.curry((name, friend) => friend.nickname.includes(name))
+
+const getFriend = friend => ({
+  nickname: friend.nick,
+  avatar: friend.avatar,
+  accid: friend.account
+})
+
+@connect({
+  user: state => state.common.user,
+  nim: state => state.common.nim
+})
 export default class Friends extends wepy.page {
   config = {
     navigationBarTitleText: '好友'
   }
 
   data = {
-    list: [{
-      id: 1,
-      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-      nickname: '小张'
-    }, {
-      id: 2,
-      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400',
-      nickname: '安德烈舍甫琴科'
-    }]
+    showedFriends: [],
+    friends: [],
+    notifications: 0
   }
 
   methods = {
@@ -107,7 +117,36 @@ export default class Friends extends wepy.page {
       wepy.navigateTo({
         url: '/pages/add'
       })
+    },
+    toChat(index) {
+      const friend = this.showedFriends[index]
+      wepy.navigateTo({
+        url: `pages/chat?faccid=${friend.accid}`
+      })
+    },
+    toNotification() {
+      wepy.navigateTo({
+        url: '/pages/notifications'
+      })
+    },
+    filter(e) {
+      const value = R.trim(e.detail.value)
+      this.showedFriends = this.friends.filter(filter(value))
     }
+  }
+
+  onShow() {
+    // 初始化 NIM 对象用于接收系统通知
+    NIM.getInstance({
+      account: this.user.accid,
+      token: this.nim.token,
+      debug: true,
+      onusers: friends => {
+        this.friends = friends.map(getFriend)
+        this.showedFriends = this.friends.map(R.identity)
+        this.$apply()
+      }
+    })
   }
 }
 </script>

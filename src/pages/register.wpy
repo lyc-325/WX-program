@@ -2,27 +2,27 @@
 <!--register.wxml-->
 <view class="form-error" wx:if="{{formError}}">{{formError}}</view>
 
-<form bindsubmit="submit">
+<form @submit="submit">
   <view class="container">
     <view class="title">个人信息完善</view>
     <view class="item">
       <view class="label">公司</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'company' ? 'error' : ''}}" name="company" bindfocus="bindFocus" />
+        <input type="text" class="{{formErrorKey === 'company' ? 'error' : ''}}" name="company" @focus="bindFocus" />
       </view>
     </view>
 
     <view class="item">
       <view class="label">手机</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" bindfocus="bindFocus" />
+        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" @focus="bindFocus" />
       </view>
     </view>
 
     <view class="item">
       <view class="label">邮箱</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}}" name="email" bindfocus="bindFocus" />
+        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}}" name="email" @focus="bindFocus" />
       </view>
     </view>
 
@@ -136,9 +136,9 @@ export default class Register extends wepy.page {
         try {
           const resp = await NIM.create(
             accid,
-            name: nickName,
-            icon: avatarUrl,
-            props: infos
+            nickName,
+            avatarUrl,
+            infos
           )
           token = resp.token
         } catch (e) {
@@ -150,7 +150,11 @@ export default class Register extends wepy.page {
 
         try {
           const password = R.takeLast(5)(accid)
-          const user = await api.createUser(accid, password, infos)
+          const user = await api.createUser(accid, password, {
+            ...infos,
+            name: nickName,
+            icon: avatarUrl
+          })
           const { Token } = user
 
           setUser({

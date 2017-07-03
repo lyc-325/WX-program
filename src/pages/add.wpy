@@ -1,28 +1,28 @@
 <template>
 <view class="root">
   <view>
-    <form bindsubmit="search">
+    <form>
       <view class="search">
-        <input name="name" type="text" placeholder="昵称" comfirm-type="搜索" />
+        <input name="name" type="text" placeholder="昵称" maxlength="20" confirm-type="search" @confirm="search" />
       </view>
     </form>
   </view>
-  <view @tap="toApply({{item.id}})" class="friend" wx:for="{{friends}}" wx:key="{{id}}">
-    <view class="avatar">
-      <image src="{{item.avatar}}" mode="scaleToFill" />
-    </view>
-    <view class="info" >
-      <view class="item">
-        <view class="value">{{ item.nickname }}</view>
+  <view class="friend" wx:for="{{friends}}" wx:key="accid" @tap="toApply({{index}})">
+      <view class="avatar">
+        <image src="{{item.avatar}}" mode="scaleToFill" />
       </view>
-    </view>
+      <view class="info" >
+        <view class="item">
+          <view class="value">{{ item.nickname }}</view>
+        </view>
+      </view>
   </view>
 </view>
 </template>
 
 <style scoped>
 .root > view {
-  padding: 20rpx;
+  padding: 20rpx;index
   border-bottom: 1px solid #eee;
 }
 
@@ -55,25 +55,32 @@ form {
 
 <script>
 import wepy from 'wepy'
+import * as api from '../apis/account'
 export default class Add extends wepy.page {
   config = {
     navigationBarTitleText: '添加好友'
   }
 
   data = {
-    friends: [{
-      id: 1,
-      nickname: 'www',
-      wexin: '1fsdfdf',
-      avatar: 'https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400'
-    }]
+    friends: []
   }
 
   methods = {
-    toApply(accid) {
+    toApply(index) {
+      const { accid } = this.friends[index]
       wepy.navigateTo({
         url: `/pages/apply?accid=${accid}`
       })
+    },
+    async search(e) {
+      const nickname = e.detail.value
+      const result = await api.search(nickname)
+      this.friends = result.map(friend => ({
+        accid: friend.accid,
+        avatar: friend.icon,
+        nickname: friend.name
+      }))
+      this.$apply()
     }
   }
 }

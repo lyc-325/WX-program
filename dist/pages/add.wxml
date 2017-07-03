@@ -1,20 +1,20 @@
 
 <view class="root _dbf2b56">
   <view class="_dbf2b56">
-    <form bindsubmit="search" class="_dbf2b56">
+    <form class="_dbf2b56">
       <view class="search _dbf2b56">
-        <input name="name" type="text" placeholder="昵称" comfirm-type="搜索" class="_dbf2b56"/>
+        <input name="name" type="text" placeholder="昵称" maxlength="20" confirm-type="search" bindconfirm="search" class="_dbf2b56"/>
       </view>
     </form>
   </view>
-  <view bindtap="toApply" class="friend _dbf2b56"  wx:for="{{friends}}" wx:key="{{id}}" data-wepy-params-a="{{item.id}}">
-    <view class="avatar _dbf2b56">
-      <image src="{{item.avatar}}" mode="scaleToFill" class="_dbf2b56"/>
-    </view>
-    <view class="info _dbf2b56">
-      <view class="item _dbf2b56">
-        <view class="value _dbf2b56">{{ item.nickname }}</view>
+  <view class="friend _dbf2b56"  wx:for="{{friends}}" wx:key="accid" bindtap="toApply" data-wepy-params-a="{{index}}">
+      <view class="avatar _dbf2b56">
+        <image src="{{item.avatar}}" mode="scaleToFill" class="_dbf2b56"/>
       </view>
-    </view>
+      <view class="info _dbf2b56">
+        <view class="item _dbf2b56">
+          <view class="value _dbf2b56">{{ item.nickname }}</view>
+        </view>
+      </view>
   </view>
 </view>
