@@ -119,6 +119,19 @@ import {
 } from '../actions/common'
 
 import {
+  refreshSessions
+} from '../actions/sessions'
+
+import {
+  refreshFriends
+} from '../actions/friends'
+
+import {
+  refreshMsgs,
+  refreshMsgsByTo
+} from '../actions/chat'
+
+import {
   connect
 } from 'wepy-redux'
 
@@ -126,16 +139,24 @@ import * as api from '../apis/account'
 
 const config = wx
 
+const getFriend = friend => ({
+  nickname: friend.nick,
+  avatar: friend.avatar,
+  accid: friend.account
+})
+
 @connect({
-  user(state) {
-    return state.common.user
-  },
-  nim(state) {
-    return state.common.nim
-  }
+  user: state => state.common.user,
+  nim: state => state.common.nim,
+  friends: state => state.friends.friends,
+  msgs: state => state.chat.msgs
 }, {
   setUser,
-  setNim
+  setNim,
+  refreshFriends,
+  refreshSessions,
+  refreshMsgs,
+  refreshMsgsByTo
 })
 export default class Chatrooms extends wepy.page {
   config = {
@@ -146,8 +167,25 @@ export default class Chatrooms extends wepy.page {
     rooms: []
   }
 
+  methods = {
+    pushMsg: function (msgs) {
+      const { refreshMsgs, refreshMsgsByTo } = this.methods
+      if (!Array.isArray(msgs)) {
+        msgs = [msgs]
+      }
+      const sessionId = msgs[0].sessionId
+      const to = msgs[0].to
+      const merged = (this.msgs[sessionId] || [], msgs)
+      const mergedByTo = (this.msgs[to] || [], msgs)
+      refreshMsgs(sessionId, merged)
+      refreshMsgsByTo(to, mergedByTo)
+      console.log(111111111111)
+    }
+  }
+
   async onLoad() {
-    const { setUser, setNim } = this.methods
+    const { setUser, setNim, refreshSessions, refreshFriends } = this.methods
+    const pushMsg = this.methods.pushMsg.bind(this)
     wepy.showLoading()
     const { code } = await wepy.login()
     const { data } = await wepy.request({
@@ -160,7 +198,7 @@ export default class Chatrooms extends wepy.page {
 
     const user = {
       ...userInfo,
-      accid: openid
+      accid: openid.toLowerCase()
     }
 
     setUser(user)
@@ -178,9 +216,38 @@ export default class Chatrooms extends wepy.page {
         jfToken: Token
       })
 
-      setNim({
-        token
+      // 初始化 nim 对象
+      const nim = NIM.getInstance({
+        account: this.user.accid,
+        token: token,
+        debug: true,
+        onusers: friends => {
+          refreshFriends(friends.map(getFriend))
+          this.$apply()
+        },
+        onsessions: sessions => {
+          const merged = nim.mergeSessions(this.sessions, sessions)
+          refreshSessions(merged)
+          this.$apply()
+        },
+        onupdatesession: session => {
+          const merged = nim.mergeSessions(this.sessions, session)
+          refreshSessions(merged)
+          this.$apply()
+        },
+        onmsg: msg => {
+          pushMsg(msg)
+          this.$apply()
+        },
+        onroamingmsgs: obj => {
+          pushMsg(obj.msgs)
+        },
+        onofflinemsgs: obj => {
+          pushMsg(obj.msgs)
+        }
       })
+
+      setNim(nim)
 
       setTimeout(() => {
         this.rooms = mockRooms

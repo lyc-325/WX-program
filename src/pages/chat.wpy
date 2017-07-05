@@ -1,34 +1,19 @@
 <template>
 <view class="list">
-  <view class="item opposite">
-    <view class="avatar">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" />
+  <block wx:for="{{msgs}}" wx:key="idServer">
+    <view class="item {{ user.accid === item.from ? 'mine':'opposite' }}">
+      <view class="avatar">
+        <image mode="scaleToFill" src="{{user.avatarUrl}}" />
+      </view>
+      <view class="content">
+        <text>{{item.text}}</text>
+      </view>
     </view>
-    <view class="content">
-      <text>你在干嘛呢？</text>
-    </view>
-  </view>
-  <view class="item mine">
-    <view class="avatar">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" />
-    </view>
-    <view class="content">
-      <text>你猜猜呢？</text>
-    </view>
-  </view>
-
-  <view class="item mine">
-    <view class="avatar">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" />
-    </view>
-    <view class="content">
-      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp"></image>
-    </view>
-  </view>
+  </block>
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed cursor-spacing="40" @input="setText"/>
+  <textarea auto-height fixed cursor-spacing="40" @input="setText" value="{{text}}"/>
   <view class="button">
     <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
   </view>
@@ -38,7 +23,7 @@
 </view>
 </template>
 
-<style scoped>
+<style>
 .operation {
   position: fixed;
   display: flex;
@@ -49,6 +34,7 @@
   padding: 5px 5px;
   border-top: 1px solid #eee;
   z-index: 5;
+  background-color: white;
 }
 
 .operation > view {
@@ -84,7 +70,10 @@
 }
 
 .list {
+  z-index: 0;
   padding: 50rpx;
+  height: 100%;
+  overflow: scroll;
 }
 
 .list > .item {
@@ -152,16 +141,15 @@
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import NIM from '../utils/nim'
-import log from '../utils/log'
-import R from '../lib/R'
-
-const genMsg = msg => ({
-  ...msg
-})
+import * as log from '../utils/log'
+import R from '../libs/ramda'
 
 @connect({
   user: state => state.common.user,
-  nim: state => state.common.nim
+  nim: state => state.common.nim,
+  msgs: function (state) {
+    return state.chat.msgs[this.to] || []
+  }
 })
 export default class Chat extends wepy.page {
   config = {
@@ -169,9 +157,7 @@ export default class Chat extends wepy.page {
   }
 
   data = {
-    msgs: [],
     text: '',
-    nimInstance: null,
     friend: null
   }
 
@@ -182,14 +168,15 @@ export default class Chat extends wepy.page {
     },
     async send() {
       const text = R.trim(this.text)
+      this.text = ''
       if (text.length) {
         try {
-          const msg = await this.nimInstance.sendText({
-            text: this.text,
+          await this.nim.sendText({
+            text,
             scene: 'p2p',
             to: this.friend.accid
           })
-          this.msgs = [...this.msgs, genMsg(msg)]
+          this.text = ''
           this.$apply()
         } catch (e) {
           log.error({
@@ -197,9 +184,6 @@ export default class Chat extends wepy.page {
             opr: 'sendText',
             info: e
           })
-          this.msgs = [...this.msgs, genMsg({
-            content: text
-          })]
           this.$apply()
         }
       }
@@ -211,6 +195,7 @@ export default class Chat extends wepy.page {
 
   async onLoad(options) {
     const { faccid } = options
+    this.to = faccid
     // 获得好友对象
     const friend = await NIM.getUserInfo(faccid)
     this.friend = {
@@ -219,18 +204,6 @@ export default class Chat extends wepy.page {
       nickname: friend.name
     }
     this.$apply()
-    // 获得消息实例
-    this.nimInstance = NIM.getInstance({
-      account: this.user.accid,
-      token: this.nim.token,
-      onMsg: msg => {
-        console.log('收到消息', msg.scene, msg.type, msg)
-        if (msg.to === faccid || msg.from === faccid) {
-          this.msgs = [...this.msgs, msg]
-          this.$apply()
-        }
-      }
-    })
   }
 }
 </script>

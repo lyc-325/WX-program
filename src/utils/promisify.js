@@ -4,7 +4,11 @@ module.exports = R.curry(function (func, options) {
   return new Promise((resolve, reject) => {
     options = options || {}
     options.done = function (error, obj) {
-      return error ? reject(error) : resolve(obj)
+      if (error) {
+        reject(error)
+      } else {
+        resolve(obj)
+      }
     }
     func(options)
   })

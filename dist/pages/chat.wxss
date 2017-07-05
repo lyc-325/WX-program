@@ -1,5 +1,5 @@
 
-.operation._ce2f508 {
+.operation {
   position: fixed;
   display: flex;
   width: 100%;
@@ -9,26 +9,27 @@
   padding: 5px 5px;
   border-top: 1px solid #eee;
   z-index: 5;
+  background-color: white;
 }
 
-.operation > view._ce2f508 {
+.operation > view {
   padding: 10rpx;
 }
 
-.operation textarea._ce2f508{
+.operation textarea{
   border: 1px solid #eee;
   padding: 5px;
   font-size: 35rpx;
   width: 60%;
 }
 
-.operation .buttons._ce2f508 {
+.operation .buttons {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.operation > .button._ce2f508 {
+.operation > .button {
   flex-grow: 1;
   padding: 0;
   text-align: center;
@@ -38,31 +39,34 @@
   margin-top: 12rpx;
 }
 
-.operation > .button image._ce2f508{
+.operation > .button image{
   width: 50rpx;
   height: 50rpx;
 }
 
-.list._ce2f508 {
+.list {
+  z-index: 0;
   padding: 50rpx;
+  height: 100%;
+  overflow: scroll;
 }
 
-.list > .item._ce2f508 {
+.list > .item {
   display: flex;
   align-items: flex-start;
 }
 
-.list > .item .avatar._ce2f508 {
+.list > .item .avatar {
   padding: 5px;
   margin: 0 10px;
 }
 
-.list > .item .avatar image._ce2f508{
+.list > .item .avatar image{
   width: 100rpx;
   height: 100rpx;
 }
 
-.list > .item .content._ce2f508 {
+.list > .item .content {
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -73,15 +77,15 @@
 }
 
 
-.list > .item.mine._ce2f508 {
+.list > .item.mine {
   flex-direction: row-reverse;
 }
 
-.list > .item.mine .content._ce2f508{
+.list > .item.mine .content{
   background-color: #51C332;
 }
 
-.list > .item.mine .content._ce2f508::after {
+.list > .item.mine .content::after {
     content: '';
     position: absolute;
     width: 0;
@@ -92,11 +96,11 @@
     border-bottom: 5px solid transparent;
 }
 
-.list > .item.opposite .content._ce2f508{
+.list > .item.opposite .content{
   background-color: antiquewhite;
 }
 
-.list > .item.opposite .content._ce2f508::before {
+.list > .item.opposite .content::before {
     content: '';
     position: absolute;
     width: 0;
