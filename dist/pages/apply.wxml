@@ -2,23 +2,20 @@
 <view class="container _df46726">
   <view class="friend _df46726">
     <view class="avatar _df46726">
-      <image src="{{avatar}}" mode="scaleToFill" class="_df46726"/>
+      <image src="{{friend.avatar}}" mode="scaleToFill" class="_df46726"/>
     </view>
     <view class="info _df46726">
       <view class="item _df46726">
-        <view class="label _df46726">昵称</view>
-        <view class="value _df46726">{{ nickname }}</view>
-      </view>
-      <view class="item _df46726">
-        <view class="label _df46726">微信号</view>
-        <view class="value _df46726">{{ wexin }}</view>
+        <view class="value _df46726">{{ friend.nickname }}</view>
       </view>
     </view>
   </view>
-  <form class="_df46726">
-    <view class="area _df46726">
-      <textarea placeholder="验证信息" auto-focus class="_df46726"/>
-    </view>
-    <view class="send _df46726">发送</view>
-  </form>
+  <view class="form _df46726">
+    <form class="_df46726">
+      <view class="area _df46726">
+        <textarea placeholder="验证信息（不超过20个字符）" auto-focus maxlength="20" bindinput="setMsg" class="_df46726"/>
+      </view>
+      <button class="send _df46726" loading="{{requesting}}" bindtap="submit">发送</button>
+    </form>
+  </view>
 </view>

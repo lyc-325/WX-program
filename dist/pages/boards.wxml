@@ -1,11 +1,11 @@
 
 <view scroll-x="true" style="width:100%" class="navbar _0b2850e">
-  <view  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _0b2850e">
+  <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _0b2850e">
     {{item}}
   </view>
 </view>
 <view class="list _0b2850e">
-  <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" class="item _0b2850e">
+  <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _0b2850e">
     <view class="cover _0b2850e">
       <image mode="scaleToFill" src="{{item.cover}}" class="_0b2850e"/>
     </view>
@@ -22,4 +22,4 @@
     </view>
   </view>
 </view>
-<view bindtap="handlePublishTap" class="publish _0b2850e">发布</view>
+<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _0b2850e">发布</view>

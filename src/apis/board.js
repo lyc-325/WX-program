@@ -3,33 +3,47 @@ import wepy from 'wepy'
 
 export const boardPublish = function(infos) {
   return jf.request({
-    api: 'article/create',
+    api: 'article/create/',
     data: {
       ...infos
     },
     method: 'POST'
   })
 }
-
-export const boardList = function(token) {
+export const categoryList = function() {
   return jf.request({
-    api: `article/list/${token}`,
+    api: 'article/category/list/',
     method: 'GET'
   })
+}
+export const boardList = function(category, token) {
+  if (token) {
+    return jf.request({
+      api: `article/screen_article/${category}/${token}/`,
+      method: 'GET'
+    })
+  } else {
+    token = category
+    return jf.request({
+      api: `article/list/${token}/`,
+      method: 'GET'
+    })
+  }
 }
 
 export const boardDetail = function(pk, token) {
   return jf.request({
-    api: `article/list/${token}/${pk}`,
+    api: `article/detail/${token}/${pk}/`,
     method: 'GET'
   })
 }
 
-export const uploadImages = function (imgs) {
+export const uploadImages = function (imgs, token) {
   return Promise.all(imgs.map(img => jf.upload({
-    api: '/api/resources/upload_file/',
-    filePath: img.imgPath,
-    method: 'POST'
+    api: 'resources/up_f/',
+    name: 'boardImg',
+    filePath: img,
+    formData: { token: token }
   })))
 }
 

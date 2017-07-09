@@ -2,10 +2,15 @@
 <form bindsubmit="bindFormSubmit" class="_bf826c7">
   <view class="container _bf826c7">
     <view class="item _bf826c7">
-      <input placeholder="标题" auto-focus class="_bf826c7"/>
+      <input name="title" placeholder="标题" auto-focus class="_bf826c7"/>
     </view>
+    <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_bf826c7">
+      <view class="picker _bf826c7">
+        分类：<view class="slider _bf826c7">{{categories[index].name}}</view>
+      </view>
+    </picker>
     <view class="item _bf826c7">
-      <textarea placeholder="内容" auto-focus class="_bf826c7"/>
+      <textarea name="content" placeholder="内容" auto-focus class="_bf826c7"/>
     </view>
     <view bindtap="handleUpload" class="upload _bf826c7">上传图片</view>
     <scroll-view scroll-x="true" class="imgBar _bf826c7">
@@ -15,6 +20,6 @@
         </image>
       </view>
     </scroll-view>
-    <view form-type="submit" class="publish _bf826c7">发布</view>
+    <button form-type="submit" class="publish _bf826c7">发布</button>
   </view>
 </form>

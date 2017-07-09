@@ -2,6 +2,7 @@
 .container._df46726 {
   padding-top: 20rpx;
 }
+
 .friend._df46726 {
   display: flex;
   width: 96%;
@@ -26,33 +27,20 @@
   display: flex;
   justify-content: space-between;
 }
-.add._df46726 {
-  width: 150rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 20rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
-  font-size: 32rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
-}
+
 .area._df46726 {
-  width: 94%;
+  padding: 20rpx;
   border: 1rpx #eee solid;
-  border-radius: 10rpx;
   margin-bottom: 20rpx;
 }
+
 .send._df46726 {
-  width: 180rpx;
   height: 80rpx;
   line-height: 80rpx;
-  border-radius: 20rpx;
+  border-radius: 5px;
   text-align: center;
   background-color: #1eb571;
   color: white;
   font-size: 36rpx;
   font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
 }

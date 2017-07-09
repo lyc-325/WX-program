@@ -1,122 +1,86 @@
 <template>
-<view class="container">
-  <form bindsubmit="search">
-    <view class="searchBar">
-      <input name="name" type="text" placeholder="昵称/微信号" comfirm-type="搜索" />
-    </view>
-  </form>
-  <view class="list" for="{{friends}}" key="{{index}}">
-    <view class="avatar">
-      <image src="{{item.avatar}}" mode="scaleToFill" />
-    </view>
-    <view class="info">
-      <view class="item">
-        <view class="label">昵称</view>
-        <view class="value">{{ item.nickname }}</view>
+<view class="root">
+  <view>
+    <form>
+      <view class="search">
+        <input name="name" type="text" placeholder="昵称" maxlength="20" confirm-type="search" @confirm="search" />
       </view>
-      <view class="item">
-        <view class="label">微信号</view>
-        <view class="value">{{ item.wexin }}</view>
+    </form>
+  </view>
+  <view class="friend" wx:for="{{friends}}" wx:key="accid" @tap="toApply({{index}})">
+      <view class="avatar">
+        <image src="{{item.avatar}}" mode="scaleToFill" />
       </view>
-    </view>
-    <view @tap="handleSubmit" class="add">添加</view>
+      <view class="info" >
+        <view class="item">
+          <view class="value">{{ item.nickname }}</view>
+        </view>
+      </view>
   </view>
 </view>
 </template>
 
 <style scoped>
-.container {
-  padding-top: 20rpx;
+.root > view {
+  padding: 20rpx;index
+  border-bottom: 1px solid #eee;
 }
 
-.searchBar {
-  width: 720rpx;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+form {
+  width: 100%;
 }
 
-.search {
-  width: 120rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  border-radius: 10rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
-  font-size: 24rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
-}
-
-input {
-  width: 550rpx;
+.search input{
   text-align: center;
   background: white;
   font-size: 30rpx;
-  border-radius: 10rpx;
   border: 1px solid #eee;
 }
 
-.list {
+.friend {
   display: flex;
-  margin-top: 20rpx;
-  width: 96%;
-  height: 200rpx;
   align-items: center;
-  border: 1px solid #eee;
-  justify-content: space-around;
-}
-
-.avatar image {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 50%;
-}
-
-.info {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-.info>.item {
-  margin-top: 10rpx;
-  width: 260rpx;
-  display: flex;
-  justify-content: space-between;
-}
-
-.add {
-  width: 150rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 20rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
   font-size: 32rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
+}
+
+.friend .avatar {
+  margin-right: 10rpx;
+}
+
+.friend .avatar image {
+  width: 80rpx;
+  height: 80rpx;
 }
 </style>
 
 <script>
 import wepy from 'wepy'
+import * as api from '../apis/account'
 export default class Add extends wepy.page {
   config = {
     navigationBarTitleText: '添加好友'
   }
 
   data = {
-
+    friends: []
   }
 
   methods = {
-    handleSubmit() {
+    toApply(index) {
+      const { accid } = this.friends[index]
       wepy.navigateTo({
-        url: '../apply/apply'
+        url: `/pages/apply?accid=${accid}`
       })
+    },
+    async search(e) {
+      const nickname = e.detail.value
+      const result = await api.search(nickname)
+      this.friends = result.map(friend => ({
+        accid: friend.accid,
+        avatar: friend.icon,
+        nickname: friend.name
+      }))
+      this.$apply()
     }
   }
 }

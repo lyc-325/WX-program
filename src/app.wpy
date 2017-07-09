@@ -76,20 +76,34 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
+      // 聊天室
       'pages/chatrooms',
+      // 消息
       'pages/sessions',
+      // 留言板
       'pages/boards',
+      // 好犹豫
       'pages/friends',
+      // 我的
       'pages/mine',
-      'pages/chat',
+      // // 聊天
+      // 'pages/chat',
+      // 好友
       'pages/friend',
-      'pages/notification',
+      // 好用申请消息
+      'pages/notifications',
+      // 留言板详情
       'pages/board',
+      // 发布留言
       'pages/publish',
+      // 添加好友
+      'pages/add',
+      // 申请
       'pages/apply',
+      // 聊天室
       'pages/chatroom',
-      'pages/register',
-      'pages/add'
+      // 注册
+      'pages/register'
     ],
     tabBar: {
       color: '#707070',

@@ -2,25 +2,22 @@
 <view class="container">
   <view class="friend">
     <view class="avatar">
-      <image src="{{avatar}}" mode="scaleToFill" />
+      <image src="{{friend.avatar}}" mode="scaleToFill" />
     </view>
     <view class="info">
       <view class="item">
-        <view class="label">昵称</view>
-        <view class="value">{{ nickname }}</view>
-      </view>
-      <view class="item">
-        <view class="label">微信号</view>
-        <view class="value">{{ wexin }}</view>
+        <view class="value">{{ friend.nickname }}</view>
       </view>
     </view>
   </view>
-  <form>
-    <view class="area">
-      <textarea placeholder="验证信息" auto-focus/>
-    </view>
-    <view class="send">发送</view>
-  </form>
+  <view class="form">
+    <form>
+      <view class="area">
+        <textarea placeholder="验证信息（不超过20个字符）" auto-focus maxlength="20" @input="setMsg"/>
+      </view>
+      <button class="send" loading="{{requesting}}" @tap="submit">发送</button>
+    </form>
+  </view>
 </view>
 </template>
 
@@ -28,6 +25,7 @@
 .container {
   padding-top: 20rpx;
 }
+
 .friend {
   display: flex;
   width: 96%;
@@ -52,47 +50,92 @@
   display: flex;
   justify-content: space-between;
 }
-.add {
-  width: 150rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  border-radius: 20rpx;
-  text-align: center;
-  background-color: #1eb571;
-  color: white;
-  font-size: 32rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
-}
+
 .area {
-  width: 94%;
+  padding: 20rpx;
   border: 1rpx #eee solid;
-  border-radius: 10rpx;
   margin-bottom: 20rpx;
 }
+
 .send {
-  width: 180rpx;
   height: 80rpx;
   line-height: 80rpx;
-  border-radius: 20rpx;
+  border-radius: 5px;
   text-align: center;
   background-color: #1eb571;
   color: white;
   font-size: 36rpx;
   font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
 }
 </style>
 
 <script>
 import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import NIM from '../utils/nim'
+import log from '../utils/log'
+
+@connect({
+  user(state) {
+    return state.common.user
+  }
+})
 export default class Apply extends wepy.page {
   config = {
     navigationBarTitleText: '好友申请'
   }
 
   data = {
+    friend: null,
+    requesting: false,
+    msg: ''
+  }
 
+  methods = {
+    setMsg(e) {
+      this.msg = e.detail.value
+    },
+    async submit() {
+      this.requesting = true
+      try {
+        // 发送好友申请
+        await NIM.sendApply(this.user.accid, this.friend.accid, this.msg)
+        wepy.showToast({
+          title: '请求发送成功'
+        }).then(() => wepy.navigateBack())
+      } catch (e) {
+        this.requesting = false
+        log.error({
+          page: 'apply',
+          opr: 'sendApply',
+          info: e
+        })
+      }
+    }
+  }
+
+  async onLoad(options) {
+    // 加载用户信息
+    const { accid } = options
+    try {
+      wepy.showLoading()
+      const user = await NIM.getUserInfo(accid)
+      console.log('user', user)
+      this.friend = {
+        accid,
+        avatar: user.icon,
+        nickname: user.name
+      }
+      wepy.hideLoading()
+      this.$apply()
+    } catch (e) {
+      log.error({
+        page: 'apply',
+        opr: 'getUserInfo',
+        info: e
+      })
+      wepy.navigateBack()
+    }
   }
 }
 </script>

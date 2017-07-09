@@ -1,11 +1,16 @@
 <template>
-<form bindsubmit="bindFormSubmit">
+<form @submit="bindFormSubmit">
   <view class="container">
     <view class="item">
-      <input placeholder="标题" auto-focus/>
+      <input name="title" placeholder="标题" auto-focus/>
     </view>
+    <picker @change="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}">
+      <view class="picker">
+        分类：<view class="slider">{{categories[index].name}}</view>
+      </view>
+    </picker>
     <view class="item">
-      <textarea placeholder="内容" auto-focus/>
+      <textarea name="content" placeholder="内容" auto-focus/>
     </view>
     <view @tap="handleUpload" class="upload">上传图片</view>
     <scroll-view scroll-x="true" class="imgBar">
@@ -15,7 +20,7 @@
         </image>
       </view>
     </scroll-view>
-    <view form-type="submit" class="publish">发布</view>
+    <button form-type="submit" class="publish">发布</button>
   </view>
 </form>
 </template>
@@ -34,7 +39,21 @@
   border-radius: 10rpx;
   margin-bottom: 20rpx;
 }
-
+.picker {
+  font-size: 36rpx;
+  display: flex;
+  width: 380rpx;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  align-items: center;
+}
+.slider {
+  border: 1rpx #ccc solid;
+  width: 240rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  padding: 10rpx;
+}
 .publish {
   width: 180rpx;
   height: 80rpx;
@@ -70,6 +89,7 @@
 }
 
 .image {
+  position: relative;
   display: inline-block;
   width: 375rpx;
   height: 240rpx;
@@ -82,8 +102,8 @@ image {
 
 .cancel {
   position: absolute;
-  bottom: 50rpx;
-  right: 20rpx;
+  bottom: 10rpx;
+  right: 10rpx;
   width: 40rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -99,16 +119,39 @@ image {
 
 <script>
 import wepy from 'wepy'
+import { connect } from 'wepy-redux'
+import * as api from '../apis/board'
+@connect({
+  user(state) {
+    return state.common.user
+  }
+})
 export default class Publish extends wepy.page {
   config = {
     navigationBarTitleText: '发布'
   }
 
   data = {
-    imgs: []
+    imgs: [],
+    categories: [],
+    index: 0,
+    loading: false,
+    disabled: false
+  }
+
+  onLoad () {
+    let self = this
+    api.categoryList().then(results => {
+      console.log('results', results)
+      self.categories = results
+      self.$apply()
+    })
   }
 
   methods = {
+    bindPickerChange (e) {
+      this.index = e.detail.value
+    },
     handleUpload () {
       let self = this
       wepy.chooseImage().then(res => {
@@ -116,9 +159,31 @@ export default class Publish extends wepy.page {
         self.$apply()
       })
     },
-
     handleCancel (e) {
       this.imgs.splice(e.currentTarget.dataset.index, 1)
+    },
+    async bindFormSubmit (e) {
+      const { jfToken, username } = this.user
+      const data = await api.uploadImages(this.imgs, jfToken)
+      const title = e.detail.value.title
+      const text = e.detail.value.content
+      const categoryId = this.categories[this.index].id
+      console.log('data', data)
+      this.loading = true
+      this.disabled = true
+      await api.boardPublish({
+        title,
+        text,
+        token: jfToken,
+        creator: username,
+        pic_urls: data.map(({url}) => url),
+        category_id: categoryId
+      })
+      this.loading = false
+      this.disabled = false
+      wepy.switchTab({
+        url: `boards?categoryId=${categoryId}`
+      })
     }
   }
 }

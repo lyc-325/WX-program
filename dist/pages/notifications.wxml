@@ -1,0 +1,20 @@
+
+<view class="list _5ade5a0">
+  <view class="item _5ade5a0"  wx:for="{{notifications}}" wx:key="id">
+    <view class="avatar _5ade5a0">
+      <image mode="aspectFit" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_5ade5a0"/>
+    </view>
+    <view class="info _5ade5a0">
+      <view class="_5ade5a0">老张 请求加你为好友</view>
+      <view class="_5ade5a0">验证 我是老张</view>
+    </view>
+
+    <view wx:if="{{item.completed}}" class="operation _5ade5a0">
+      <view class="accept _5ade5a0" bindtap="feedback" data-wepy-params-a="{{index}}" data-wepy-params-b="accept">同意</view>
+      <view class="reject _5ade5a0" bindtap="feedback" data-wepy-params-a="{{index}}" data-wepy-params-b="reject">拒绝</view>
+    </view>
+    <view wx:else class="operation _5ade5a0">
+      <view class="status _5ade5a0">已完成</view>
+    </view>
+  </view>
+</view>

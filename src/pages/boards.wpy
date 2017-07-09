@@ -1,11 +1,11 @@
 <template>
 <view scroll-x="true" style="width:100%" class="navbar">
-  <view wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
+  <view @tap="changeNav" wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
     {{item}}
   </view>
 </view>
 <view class="list">
-  <view wx:for="{{list}}" @tap="handleItemTap" wx:key="index" class="item">
+  <view wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
     <view class="cover">
       <image mode="scaleToFill" src="{{item.cover}}" />
     </view>
@@ -22,7 +22,7 @@
     </view>
   </view>
 </view>
-<view @tap="handlePublishTap" class="publish">发布</view>
+<view @tap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish">发布</view>
 </template>
 
 <style scoped>
@@ -113,7 +113,9 @@
 <script>
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
-// import api from '../apis/board'
+import * as api from '../apis/board'
+import { jf } from '../config'
+
 // import { connect } from 'wepy-redux'
 @connect({
   user(state) {
@@ -123,32 +125,91 @@ import { connect } from 'wepy-redux'
 
 export default class Boards extends wepy.page {
   config = {
-    navigationBarTitleText: '留言板2'
+    navigationBarTitleText: '商友圈'
   }
 
   data = {
     list: [],
-    navs: ['金融', '哲学', '体育', '政治'],
-    currentNav: 1
+    navs: [],
+    currentNav: 0,
+    categories: []
   }
 
   methods = {
-    handlePublishTap() {
-      wepy.navigateTo({
-        url: '../publish'
+    changeNav (e) {
+      const { jfToken } = this.user
+      this.currentNav = e.currentTarget.dataset.index
+      api.boardList(this.categories[this.currentNav].id, jfToken).then(res => {
+        this.list = res.map(item => ({
+          id: item.id,
+          title: item.title,
+          content: item.text,
+          createdBy: item.creator,
+          createdAt: item.dateline,
+          cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+          read: 200
+        }))
+        this.$apply()
       })
     },
-    handleItemTap() {
+    handlePublishTap(e) {
       wepy.navigateTo({
-        url: '../board'
+        url: 'publish'
+      })
+    },
+    handleItemTap(e) {
+      console.log('item', this.list[e.currentTarget.dataset.index])
+      const id = this.list[e.currentTarget.dataset.index].id
+      console.log('id', id)
+      console.log(`board?id=${id}`)
+      wepy.navigateTo({
+        url: `board?id=${id}`
       })
     }
   }
 
-  async onLoad() {
-    console.log(this.user)
+  async onLoad(option) {
+    const { jfToken } = this.user
     // const token = await getToken()
-    // const res = await api.boardList(token)
+    // console.log(api)
+    const results = await api.categoryList()
+    // console.log('results', results)
+    this.navs = results.map(({name}) => name)
+    this.categories = results
+    // if (option.categoryId) {
+    //   results.forEach((item, index) => {
+    //     if (item.id === option.categoryId) {
+    //       this.currentNav = index
+    //     }
+    //   })
+    // }
+    const res = await api.boardList(results[this.currentNav].id, jfToken)
+    this.list = res.map(item => ({
+      id: item.id,
+      title: item.title,
+      content: item.text,
+      createdBy: item.creator,
+      createdAt: item.dateline,
+      cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+      read: 200
+    }))
+    // console.log('board', res)
+    // await res.forEach(item => {
+    //   if (item.pic_urls[0]) {
+    //     api.downloadImage(item.pic_urls[0]).then(res => {
+    //       self.list.push({
+    //         id: item.id,
+    //         title: item.title,
+    //         content: item.text,
+    //         createdBy: item.creator,
+    //         createdAt: item.dateline,
+    //         cover: res.tempFilePath,
+    //         read: 200
+    //       })
+    //     })
+    //   }
+    // })
+    this.$apply()
     // const boards = res.data;
     // const reses = await api.downloadImages(boards.map(({ cover_img }) => cover_img))
     // const tempFiles = reses.map(({tempFilePath}) => tempFilePath)
