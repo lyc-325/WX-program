@@ -100,11 +100,16 @@ function getInstance(options) {
     },
     ...options
   })
+  const nimPromised = {}
   // Promisify nim functions
-  // R.forEach((key) => {
-  //   nim[key] = promisify(nim[key].bind(nim))
-  // }, promisedFunctions)
-  return nim
+  R.forEach((key) => {
+    nimPromised[key] = promisify(nim[key].bind(nim))
+  }, promisedFunctions)
+  // bind other functions
+  R.forEach((key) => {
+    nimPromised[key] = nim[key].bind(nim)
+  }, needFunctions)
+  return nimPromised
 }
 
 /**
@@ -139,6 +144,11 @@ const acceptFriendApply = _addFriend(3)
 // 拒绝好友申请
 const rejectFriendApply = _addFriend(4)
 
+const needFunctions = [
+  'mergeSessions',
+  'mergeMsgs'
+]
+
 /**
  * 需要被 Promise 化的函数
  */
@@ -153,6 +163,7 @@ const promisedFunctions = [
 
   // 消息相关
   'sendText',
+  'previewFile',
   'sendFile',
   'resendMsg',
   'markMsgRead',

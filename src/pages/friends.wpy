@@ -86,20 +86,16 @@
 <script>
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
-import NIM from '../utils/nim'
 import R from '../libs/ramda'
 
 const filter = R.curry((name, friend) => friend.nickname.includes(name))
 
-const getFriend = friend => ({
-  nickname: friend.nick,
-  avatar: friend.avatar,
-  accid: friend.account
-})
-
 @connect({
   user: state => state.common.user,
-  nim: state => state.common.nim
+  nim: state => state.common.nim,
+  showedFriends: function (state) {
+    return state.friends.friends.filter(filter(this.filter))
+  }
 })
 export default class Friends extends wepy.page {
   config = {
@@ -107,9 +103,8 @@ export default class Friends extends wepy.page {
   }
 
   data = {
-    showedFriends: [],
-    friends: [],
-    notifications: 0
+    notifications: 0,
+    filter: ''
   }
 
   methods = {
@@ -121,7 +116,7 @@ export default class Friends extends wepy.page {
     toChat(index) {
       const friend = this.showedFriends[index]
       wepy.navigateTo({
-        url: `pages/chat?faccid=${friend.accid}`
+        url: `/pages/chat?faccid=${friend.accid}`
       })
     },
     toNotification() {
@@ -131,22 +126,8 @@ export default class Friends extends wepy.page {
     },
     filter(e) {
       const value = R.trim(e.detail.value)
-      this.showedFriends = this.friends.filter(filter(value))
+      this.filter = value
     }
-  }
-
-  onShow() {
-    // 初始化 NIM 对象用于接收系统通知
-    NIM.getInstance({
-      account: this.user.accid,
-      token: this.nim.token,
-      debug: true,
-      onusers: friends => {
-        this.friends = friends.map(getFriend)
-        this.showedFriends = this.friends.map(R.identity)
-        this.$apply()
-      }
-    })
   }
 }
 </script>

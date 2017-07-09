@@ -9,7 +9,7 @@
       <view>验证 我是老张</view>
     </view>
 
-    <view wx:if={{item.completed}} class="operation">
+    <view wx:if="{{item.completed}}" class="operation">
       <view class="accept" @tap="feedback({{index}}, 'accept')">同意</view>
       <view class="reject" @tap="feedback({{index}}, 'reject')">拒绝</view>
     </view>
@@ -116,7 +116,7 @@ export default class Notifications extends wepy.page {
           opr: 'onsysmsg',
           info: sysMsgs
         })
-        this.notifications = notifications.map(notification => ({
+        this.notifications = sysMsgs.map(notification => ({
           ...notification
         }))
       }
@@ -125,14 +125,14 @@ export default class Notifications extends wepy.page {
 
   methods = {
     async feedback(index, type) {
-      const notification = notifications[index]
+      const notification = this.notifications[index]
       const operation = R.cond([
         [R.equals('accept'), () => NIM.acceptFriendApply],
         [R.equals('reject'), () => NIM.rejectFriendApply]
       ])(type)
       try {
         wepy.showLoading()
-        const result = await operation(this.user.accid, notification.faccid)
+        await operation(this.user.accid, notification.faccid)
         wepy.hideLoading()
       } catch (e) {
         log.error({

@@ -125,7 +125,6 @@ import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import R from '../libs/ramda'
 import touch from '../utils/touch'
-import NIM from '../utils/nim'
 import log from '../utils/log'
 
 /**
@@ -144,12 +143,9 @@ const BUTTONS_WIDTH = 200
 const LAST_WIDTH = 200
 
 @connect({
-  user(state) {
-    return state.common.user
-  },
-  nim(state) {
-    return state.common.nim
-  }
+  user: state => state.common.user,
+  nim: state => state.common.nim,
+  sessions: state => state.common.sessions
 })
 export default class Sessions extends wepy.page {
   config = {
@@ -157,26 +153,8 @@ export default class Sessions extends wepy.page {
   }
 
   data = {
-    sessions: [],
     navs: ['好友消息', '系统消息'],
     currentNav: 0
-  }
-
-  async onLoad() {
-    const nimInstance = NIM.getInstance({
-      account: this.user.accid,
-      token: this.nim.token,
-      onSessions: sessions => {
-        const merged = nimInstance.mergeSessions(this.sessions, sessions)
-        this.sessions = merged
-        this.$apply()
-      },
-      onUpdateSession: session => {
-        const merged = nimInstance.mergeSessions(this.sessions, session)
-        this.sessions = merged
-        this.$apply()
-      }
-    })
   }
 
   methods = {

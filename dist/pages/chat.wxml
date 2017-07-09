@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <view class="list _df5d8f8">
   <view class="item opposite _df5d8f8">
     <view class="avatar _df5d8f8">
@@ -34,5 +35,30 @@
   </view>
   <view class="button _df5d8f8">
     <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" class="_df5d8f8"/>
+=======
+<view class="list">
+  <block  wx:for="{{msgs}}" wx:key="idServer">
+    <view class="item {{ user.accid === item.from ? 'mine':'opposite' }}">
+      <view class="avatar">
+        <image mode="scaleToFill" src="{{user.avatarUrl}}"/>
+      </view>
+      <view class="content">
+        <view wx:if="{{item.type === 'text' }}">
+          <text>{{item.text}}</text>
+        </view>
+        <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"/>
+      </view>
+    </view>
+  </block>
+</view>
+
+<view class="operation">
+  <textarea auto-height fixed="fixed" cursor-spacing="40" bindinput="setText"/>
+  <view class="button">
+    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill"/>
+  </view>
+  <view class="button">
+    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill"/>
+>>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   </view>
 </view>

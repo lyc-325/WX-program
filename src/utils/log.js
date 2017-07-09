@@ -11,7 +11,7 @@ const _log = R.curry((type, options) => {
       console.info(prompt, info)
       break
     case 'log':
-      console.log(prompt, log)
+      console.log(prompt, info)
       break
   }
 })
