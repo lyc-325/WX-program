@@ -6,14 +6,19 @@
         <image mode="scaleToFill" src="{{user.avatarUrl}}" />
       </view>
       <view class="content">
-        <text>{{item.text}}</text>
+        <view wx:if="{{item.type === 'text' }}">
+          <text>{{item.text}}</text>
+        </view>
+        <view wx:elif="{{item.type === 'image' }}">
+          <image></image>
+        </view>
       </view>
     </view>
   </block>
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed cursor-spacing="40" @input="setText" value="{{text}}"/>
+  <textarea auto-height fixed cursor-spacing="40" @input="setText" value="{{text}}" />
   <view class="button">
     <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
   </view>
@@ -37,11 +42,11 @@
   background-color: white;
 }
 
-.operation > view {
+.operation>view {
   padding: 10rpx;
 }
 
-.operation textarea{
+.operation textarea {
   border: 1px solid #eee;
   padding: 5px;
   font-size: 35rpx;
@@ -54,7 +59,7 @@
   justify-content: space-around;
 }
 
-.operation > .button {
+.operation>.button {
   flex-grow: 1;
   padding: 0;
   text-align: center;
@@ -64,7 +69,7 @@
   margin-top: 12rpx;
 }
 
-.operation > .button image{
+.operation>.button image {
   width: 50rpx;
   height: 50rpx;
 }
@@ -76,22 +81,22 @@
   overflow: scroll;
 }
 
-.list > .item {
+.list>.item {
   display: flex;
   align-items: flex-start;
 }
 
-.list > .item .avatar {
+.list>.item .avatar {
   padding: 5px;
   margin: 0 10px;
 }
 
-.list > .item .avatar image{
+.list>.item .avatar image {
   width: 100rpx;
   height: 100rpx;
 }
 
-.list > .item .content {
+.list>.item .content {
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -102,44 +107,46 @@
 }
 
 
-.list > .item.mine {
+.list>.item.mine {
   flex-direction: row-reverse;
 }
 
-.list > .item.mine .content{
+.list>.item.mine .content {
   background-color: #51C332;
 }
 
-.list > .item.mine .content::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    right: -10px;
-    border-top: 5px solid transparent;
-    border-left: 10px solid #51C332;
-    border-bottom: 5px solid transparent;
+.list>.item.mine .content::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: -10px;
+  border-top: 5px solid transparent;
+  border-left: 10px solid #51C332;
+  border-bottom: 5px solid transparent;
 }
 
-.list > .item.opposite .content{
+.list>.item.opposite .content {
   background-color: antiquewhite;
 }
 
-.list > .item.opposite .content::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: -10px;
-    border-top: 5px solid transparent;
-    border-right: 10px solid antiquewhite;
-    border-bottom: 5px solid transparent;
+.list>.item.opposite .content::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -10px;
+  border-top: 5px solid transparent;
+  border-right: 10px solid antiquewhite;
+  border-bottom: 5px solid transparent;
 }
 </style>
 
 <script>
 import wepy from 'wepy'
-import { connect } from 'wepy-redux'
+import {
+  connect
+} from 'wepy-redux'
 import NIM from '../utils/nim'
 import * as log from '../utils/log'
 import R from '../libs/ramda'
@@ -147,7 +154,7 @@ import R from '../libs/ramda'
 @connect({
   user: state => state.common.user,
   nim: state => state.common.nim,
-  msgs: function (state) {
+  msgs: function(state) {
     return state.chat.msgs[this.to] || []
   }
 })
@@ -163,8 +170,28 @@ export default class Chat extends wepy.page {
 
   methods = {
     async chooseImage() {
-      const result = wepy.chooseImage()
-      console.log('images', result)
+      const res = await wepy.chooseImage({
+        count: 1
+      })
+      console.log('tmp file paths', res)
+      try {
+        const file = await this.nim.previewFile({
+          type: 'image',
+          wxFilePath: res.tempFilePaths[0]
+        })
+        await this.nim.sendFile({
+          scene: 'p2p',
+          type: 'image',
+          to: this.friend.accid,
+          file: file
+        })
+      } catch (error) {
+        log.error({
+          page: 'chatrooms',
+          opr: 'sendFile',
+          info: error
+        })
+      }
     },
     async send() {
       const text = R.trim(this.text)
@@ -194,7 +221,9 @@ export default class Chat extends wepy.page {
   }
 
   async onLoad(options) {
-    const { faccid } = options
+    const {
+      faccid
+    } = options
     this.to = faccid
     // 获得好友对象
     const friend = await NIM.getUserInfo(faccid)

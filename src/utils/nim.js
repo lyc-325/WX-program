@@ -163,6 +163,7 @@ const promisedFunctions = [
 
   // 消息相关
   'sendText',
+  'previewFile',
   'sendFile',
   'resendMsg',
   'markMsgRead',

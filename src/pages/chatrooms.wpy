@@ -179,7 +179,6 @@ export default class Chatrooms extends wepy.page {
       const mergedByTo = (this.msgs[to] || [], msgs)
       refreshMsgs(sessionId, merged)
       refreshMsgsByTo(to, mergedByTo)
-      console.log(111111111111)
     }
   }
 
