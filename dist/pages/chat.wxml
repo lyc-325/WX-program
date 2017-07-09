@@ -10,7 +10,7 @@
           <text>{{item.text}}</text>
         </view>
         <view wx:elif="{{item.type === 'image' }}">
-          <image/>
+          <image src="{{item.file.url}}"/>
         </view>
       </view>
     </view>
