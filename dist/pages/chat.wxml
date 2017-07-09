@@ -9,16 +9,14 @@
         <view wx:if="{{item.type === 'text' }}">
           <text>{{item.text}}</text>
         </view>
-        <view wx:elif="{{item.type === 'image' }}">
-          <image src="{{item.file.url}}"/>
-        </view>
+        <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"/>
       </view>
     </view>
   </block>
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed="fixed" cursor-spacing="40" bindinput="setText" value="{{text}}"/>
+  <textarea auto-height fixed="fixed" cursor-spacing="40" bindinput="setText"/>
   <view class="button">
     <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill"/>
   </view>

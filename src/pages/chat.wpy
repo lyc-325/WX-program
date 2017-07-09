@@ -9,16 +9,14 @@
         <view wx:if="{{item.type === 'text' }}">
           <text>{{item.text}}</text>
         </view>
-        <view wx:elif="{{item.type === 'image' }}">
-          <image src="{{item.file.url}}"></image>
-        </view>
+        <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
       </view>
     </view>
   </block>
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed cursor-spacing="40" @input="setText" value="{{text}}" />
+  <textarea auto-height fixed cursor-spacing="40" @input="setText" />
   <view class="button">
     <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
   </view>
@@ -106,7 +104,6 @@
   display: flex;
 }
 
-
 .list>.item.mine {
   flex-direction: row-reverse;
 }
@@ -173,7 +170,7 @@ export default class Chat extends wepy.page {
       const res = await wepy.chooseImage({
         count: 1
       })
-      console.log('tmp file paths', res)
+
       try {
         const file = await this.nim.previewFile({
           type: 'image',
