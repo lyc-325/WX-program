@@ -1,33 +1,33 @@
 
-<view class="root _c2152c4">
-  <view class="container _c2152c4">
-    <view class="head _c2152c4">
-      <view class="value _c2152c4">{{title}}</view>
+<view class="root _c64b4cc">
+  <view class="container _c64b4cc">
+    <view class="head _c64b4cc">
+      <view class="value _c64b4cc">{{title}}</view>
     </view>
 
-    <view class="item _c2152c4">
-      <view class="label _c2152c4">发布人</view>
-      <view class="value _c2152c4">{{createdBy}}</view>
+    <view class="item _c64b4cc">
+      <view class="label _c64b4cc">发布人</view>
+      <view class="value _c64b4cc">{{createdBy}}</view>
     </view>
 
-    <view class="item _c2152c4">
-      <view class="label _c2152c4">发布时间</view>
-      <view class="value _c2152c4">{{createdAt}}</view>
+    <view class="item _c64b4cc">
+      <view class="label _c64b4cc">发布时间</view>
+      <view class="value _c64b4cc">{{createdAt}}</view>
     </view>
 
-    <view class="item _c2152c4">
-      <view class="label _c2152c4">浏览量</view>
-      <view class="value _c2152c4">{{read}}</view>
+    <view class="item _c64b4cc">
+      <view class="label _c64b4cc">浏览量</view>
+      <view class="value _c64b4cc">{{read}}</view>
     </view>
 
-    <scroll-view scroll-x="true" class="imgBar _c2152c4"  wx:if="{{imgs.length !== 0 }}">
-      <view class="image _c2152c4" wx:for="{{imgs}}" wx:key="{{index}}">
-        <image mode="scaleToFill" src="{{item}}" class="_c2152c4"/>
+    <scroll-view scroll-x="true" class="imgBar _c64b4cc"  wx:if="{{imgs.length !== 0 }}">
+      <view class="image _c64b4cc" wx:for="{{imgs}}" wx:key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" class="_c64b4cc"/>
       </view>
     </scroll-view>
-    <view class="area _c2152c4">
-      <view class="label _c2152c4">内容</view>
-      <view class="value _c2152c4">{{content}}</view>
+    <view class="area _c64b4cc">
+      <view class="label _c64b4cc">内容</view>
+      <view class="value _c64b4cc">{{content}}</view>
     </view>
   </view>
 </view>

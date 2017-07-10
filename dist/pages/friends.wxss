@@ -1,17 +1,17 @@
 
-.root > view._735bf66 {
+.root > view._deba049 {
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
 
-.search input._735bf66{
+.search input._deba049{
   text-align: center;
   background: white;
   font-size: 30rpx;
   border: 1px solid #eee;
 }
 
-.notification._735bf66 {
+.notification._deba049 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +19,7 @@
   background-color: #eee;
 }
 
-.notification .badge._735bf66 {
+.notification .badge._deba049 {
   border-radius: 50%;
   width: 50rpx;
   height: 50rpx;
@@ -30,22 +30,22 @@
   background-color: red;
 }
 
-.friend._735bf66 {
+.friend._deba049 {
   display: flex;
   align-items: center;
   font-size: 32rpx;
 }
 
-.friend .avatar._735bf66 {
+.friend .avatar._deba049 {
   margin-right: 10rpx;
 }
 
-.friend .avatar image._735bf66 {
+.friend .avatar image._deba049 {
   width: 80rpx;
   height: 80rpx;
 }
 
-.plus._735bf66 {
+.plus._deba049 {
   position: fixed;
   bottom: 10rpx;
   right: 10rpx;

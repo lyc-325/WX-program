@@ -1,44 +1,44 @@
 
-<view class="navbar _042f442">
-  <view for="{{navs}}" key="unique" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _042f442">
+<view class="navbar _7280563">
+  <view for="{{navs}}" key="unique" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _7280563">
     {{item}}
   </view>
 </view>
 
-<view class="list _042f442">
-  <view class="item opposite _042f442">
-    <view class="avatar _042f442">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_042f442"/>
+<view class="list _7280563">
+  <view class="item opposite _7280563">
+    <view class="avatar _7280563">
+      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_7280563"/>
     </view>
-    <view class="content _042f442">
-      <text class="_042f442">你在干嘛呢？</text>
+    <view class="content _7280563">
+      <text class="_7280563">你在干嘛呢？</text>
     </view>
   </view>
-  <view class="item mine _042f442">
-    <view class="avatar _042f442">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_042f442"/>
+  <view class="item mine _7280563">
+    <view class="avatar _7280563">
+      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_7280563"/>
     </view>
-    <view class="content _042f442">
-      <text class="_042f442">你猜猜呢？</text>
+    <view class="content _7280563">
+      <text class="_7280563">你猜猜呢？</text>
     </view>
   </view>
 
-  <view class="item mine _042f442">
-    <view class="avatar _042f442">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_042f442"/>
+  <view class="item mine _7280563">
+    <view class="avatar _7280563">
+      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_7280563"/>
     </view>
-    <view class="content _042f442">
-      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp" class="_042f442"/>
+    <view class="content _7280563">
+      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp" class="_7280563"/>
     </view>
   </view>
 </view>
 
-<view class="operation _042f442" style="align-items: {{align}}">
-  <textarea auto-height fixed="fixed" cursor-spacing="40" class="_042f442"/>
-  <view class="button _042f442">
-    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_042f442"/>
+<view class="operation _7280563" style="align-items: {{align}}">
+  <textarea auto-height fixed="fixed" cursor-spacing="40" class="_7280563"/>
+  <view class="button _7280563">
+    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_7280563"/>
   </view>
-  <view class="button _042f442">
-    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" class="_042f442"/>
+  <view class="button _7280563">
+    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" class="_7280563"/>
   </view>
 </view>

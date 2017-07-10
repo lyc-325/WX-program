@@ -1,21 +1,21 @@
 
-<view class="container _df46726">
-  <view class="friend _df46726">
-    <view class="avatar _df46726">
-      <image src="{{friend.avatar}}" mode="scaleToFill" class="_df46726"/>
+<view class="container _45a93bc">
+  <view class="friend _45a93bc">
+    <view class="avatar _45a93bc">
+      <image src="{{friend.avatar}}" mode="scaleToFill" class="_45a93bc"/>
     </view>
-    <view class="info _df46726">
-      <view class="item _df46726">
-        <view class="value _df46726">{{ friend.nickname }}</view>
+    <view class="info _45a93bc">
+      <view class="item _45a93bc">
+        <view class="value _45a93bc">{{ friend.nickname }}</view>
       </view>
     </view>
   </view>
-  <view class="form _df46726">
-    <form class="_df46726">
-      <view class="area _df46726">
-        <textarea placeholder="验证信息（不超过20个字符）" auto-focus maxlength="20" bindinput="setMsg" class="_df46726"/>
+  <view class="form _45a93bc">
+    <form class="_45a93bc">
+      <view class="area _45a93bc">
+        <textarea placeholder="验证信息（不超过20个字符）" auto-focus maxlength="20" bindinput="setMsg" class="_45a93bc"/>
       </view>
-      <button class="send _df46726" loading="{{requesting}}" bindtap="submit">发送</button>
+      <button class="send _45a93bc" loading="{{requesting}}" bindtap="submit">发送</button>
     </form>
   </view>
 </view>

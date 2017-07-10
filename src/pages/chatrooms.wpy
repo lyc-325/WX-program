@@ -170,13 +170,14 @@ export default class Chatrooms extends wepy.page {
   methods = {
     pushMsg: function (msgs) {
       const { refreshMsgs, refreshMsgsByTo } = this.methods
+      const { mergeMsgs } = this.nim
       if (!Array.isArray(msgs)) {
         msgs = [msgs]
       }
       const sessionId = msgs[0].sessionId
-      const to = msgs[0].to
-      const merged = (this.msgs[sessionId] || [], msgs)
-      const mergedByTo = (this.msgs[to] || [], msgs)
+      const to = msgs[0].target
+      const merged = mergeMsgs(this.msgs[sessionId] || [], msgs)
+      const mergedByTo = mergeMsgs(this.msgs[to] || [], msgs)
       refreshMsgs(sessionId, merged)
       refreshMsgsByTo(to, mergedByTo)
     }
@@ -192,7 +193,7 @@ export default class Chatrooms extends wepy.page {
     })
     const { openid } = data
     const { userInfo } = await wepy.getUserInfo()
-    console.log('openid', openid);
+
     const password = R.takeLast(5)(openid)
 
     const user = {

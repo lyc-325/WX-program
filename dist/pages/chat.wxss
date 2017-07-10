@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
-.operation._df5d8f8 {
-=======
 .operation {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   position: fixed;
   display: flex;
   width: 100%;
@@ -16,40 +12,24 @@
   background-color: white;
 }
 
-<<<<<<< HEAD
-.operation > view._df5d8f8 {
-  padding: 10rpx;
-}
-
-.operation textarea._df5d8f8{
-=======
 .operation>view {
   padding: 10rpx;
 }
 
 .operation textarea {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   border: 1px solid #eee;
   padding: 5px;
   font-size: 35rpx;
   width: 60%;
 }
 
-<<<<<<< HEAD
-.operation .buttons._df5d8f8 {
-=======
 .operation .buttons {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-<<<<<<< HEAD
-.operation > .button._df5d8f8 {
-=======
 .operation>.button {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   flex-grow: 1;
   padding: 0;
   text-align: center;
@@ -59,58 +39,35 @@
   margin-top: 12rpx;
 }
 
-<<<<<<< HEAD
-.operation > .button image._df5d8f8{
-=======
 .operation>.button image {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   width: 50rpx;
   height: 50rpx;
 }
 
-<<<<<<< HEAD
-.list._df5d8f8 {
-=======
 .list {
   z-index: 0;
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   padding: 50rpx;
+  padding-bottom: 100rpx;
   height: 100%;
   overflow: scroll;
 }
 
-<<<<<<< HEAD
-.list > .item._df5d8f8 {
-=======
 .list>.item {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   display: flex;
   align-items: flex-start;
 }
 
-<<<<<<< HEAD
-.list > .item .avatar._df5d8f8 {
-=======
 .list>.item .avatar {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   padding: 5px;
   margin: 0 10px;
 }
 
-<<<<<<< HEAD
-.list > .item .avatar image._df5d8f8{
-=======
 .list>.item .avatar image {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   width: 100rpx;
   height: 100rpx;
 }
 
-<<<<<<< HEAD
-.list > .item .content._df5d8f8 {
-=======
 .list>.item .content {
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -120,50 +77,15 @@
   display: flex;
 }
 
-<<<<<<< HEAD
-
-.list > .item.mine._df5d8f8 {
+.list>.item.opposite {
   flex-direction: row-reverse;
 }
 
-.list > .item.mine .content._df5d8f8{
+.list>.item.opposite .content {
   background-color: #51C332;
 }
 
-.list > .item.mine .content._df5d8f8::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    right: -10px;
-    border-top: 5px solid transparent;
-    border-left: 10px solid #51C332;
-    border-bottom: 5px solid transparent;
-}
-
-.list > .item.opposite .content._df5d8f8{
-  background-color: antiquewhite;
-}
-
-.list > .item.opposite .content._df5d8f8::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    left: -10px;
-    border-top: 5px solid transparent;
-    border-right: 10px solid antiquewhite;
-    border-bottom: 5px solid transparent;
-=======
-.list>.item.mine {
-  flex-direction: row-reverse;
-}
-
-.list>.item.mine .content {
-  background-color: #51C332;
-}
-
-.list>.item.mine .content::after {
+.list>.item.opposite .content::after {
   content: '';
   position: absolute;
   width: 0;
@@ -174,11 +96,11 @@
   border-bottom: 5px solid transparent;
 }
 
-.list>.item.opposite .content {
+.list>.item.mine .content {
   background-color: antiquewhite;
 }
 
-.list>.item.opposite .content::before {
+.list>.item.mine .content::before {
   content: '';
   position: absolute;
   width: 0;
@@ -187,5 +109,4 @@
   border-top: 5px solid transparent;
   border-right: 10px solid antiquewhite;
   border-bottom: 5px solid transparent;
->>>>>>> b25b6dbca11662d3df32d47a85cea644fe7984b0
 }

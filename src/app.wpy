@@ -87,7 +87,7 @@ export default class extends wepy.app {
       // 我的
       'pages/mine',
       // // 聊天
-      // 'pages/chat',
+      'pages/chat',
       // 好友
       'pages/friend',
       // 好用申请消息

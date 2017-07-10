@@ -1,25 +1,25 @@
 
-<form bindsubmit="bindFormSubmit" class="_bf826c7">
-  <view class="container _bf826c7">
-    <view class="item _bf826c7">
-      <input name="title" placeholder="标题" auto-focus class="_bf826c7"/>
+<form bindsubmit="bindFormSubmit" class="_57ea6c3">
+  <view class="container _57ea6c3">
+    <view class="item _57ea6c3">
+      <input name="title" placeholder="标题" auto-focus class="_57ea6c3"/>
     </view>
-    <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_bf826c7">
-      <view class="picker _bf826c7">
-        分类：<view class="slider _bf826c7">{{categories[index].name}}</view>
+    <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_57ea6c3">
+      <view class="picker _57ea6c3">
+        分类：<view class="slider _57ea6c3">{{categories[index].name}}</view>
       </view>
     </picker>
-    <view class="item _bf826c7">
-      <textarea name="content" placeholder="内容" auto-focus class="_bf826c7"/>
+    <view class="item _57ea6c3">
+      <textarea name="content" placeholder="内容" auto-focus class="_57ea6c3"/>
     </view>
-    <view bindtap="handleUpload" class="upload _bf826c7">上传图片</view>
-    <scroll-view scroll-x="true" class="imgBar _bf826c7">
-      <view class="image _bf826c7"  wx:for="{{imgs}}" wx:key="{{index}}">
-        <image mode="scaleToFill" src="{{item}}" class="_bf826c7">
-          <view class="cancel _bf826c7" data-index="{{index}}" bindtap="handleCancel">X</view>
+    <view bindtap="handleUpload" class="upload _57ea6c3">上传图片</view>
+    <scroll-view scroll-x="true" class="imgBar _57ea6c3">
+      <view class="image _57ea6c3"  wx:for="{{imgs}}" wx:key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" class="_57ea6c3">
+          <view class="cancel _57ea6c3" data-index="{{index}}" bindtap="handleCancel">X</view>
         </image>
       </view>
     </scroll-view>
-    <button form-type="submit" class="publish _bf826c7">发布</button>
+    <button form-type="submit" class="publish _57ea6c3">发布</button>
   </view>
 </form>

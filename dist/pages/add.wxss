@@ -1,31 +1,31 @@
 
-.root > view._d7ae74e {
+.root > view._dbf2b56 {
   padding: 20rpx;index
   border-bottom: 1px solid #eee;
 }
 
-form._d7ae74e {
+form._dbf2b56 {
   width: 100%;
 }
 
-.search input._d7ae74e{
+.search input._dbf2b56{
   text-align: center;
   background: white;
   font-size: 30rpx;
   border: 1px solid #eee;
 }
 
-.friend._d7ae74e {
+.friend._dbf2b56 {
   display: flex;
   align-items: center;
   font-size: 32rpx;
 }
 
-.friend .avatar._d7ae74e {
+.friend .avatar._dbf2b56 {
   margin-right: 10rpx;
 }
 
-.friend .avatar image._d7ae74e {
+.friend .avatar image._dbf2b56 {
   width: 80rpx;
   height: 80rpx;
 }

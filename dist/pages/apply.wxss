@@ -1,9 +1,9 @@
 
-.container._df46726 {
+.container._45a93bc {
   padding-top: 20rpx;
 }
 
-.friend._df46726 {
+.friend._45a93bc {
   display: flex;
   width: 96%;
   height: 200rpx;
@@ -11,30 +11,30 @@
   justify-content: space-around;
 }
 
-.avatar image._df46726 {
+.avatar image._45a93bc {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
 }
-.info._df46726 {
+.info._45a93bc {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
-.info > .item._df46726 {
+.info > .item._45a93bc {
   margin-top: 10rpx;
   width: 260rpx;
   display: flex;
   justify-content: space-between;
 }
 
-.area._df46726 {
+.area._45a93bc {
   padding: 20rpx;
   border: 1rpx #eee solid;
   margin-bottom: 20rpx;
 }
 
-.send._df46726 {
+.send._45a93bc {
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 5px;

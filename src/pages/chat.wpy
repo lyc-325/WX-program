@@ -75,6 +75,7 @@
 .list {
   z-index: 0;
   padding: 50rpx;
+  padding-bottom: 100rpx;
   height: 100%;
   overflow: scroll;
 }
@@ -104,15 +105,15 @@
   display: flex;
 }
 
-.list>.item.mine {
+.list>.item.opposite {
   flex-direction: row-reverse;
 }
 
-.list>.item.mine .content {
+.list>.item.opposite .content {
   background-color: #51C332;
 }
 
-.list>.item.mine .content::after {
+.list>.item.opposite .content::after {
   content: '';
   position: absolute;
   width: 0;
@@ -123,11 +124,11 @@
   border-bottom: 5px solid transparent;
 }
 
-.list>.item.opposite .content {
+.list>.item.mine .content {
   background-color: antiquewhite;
 }
 
-.list>.item.opposite .content::before {
+.list>.item.mine .content::before {
   content: '';
   position: absolute;
   width: 0;
@@ -147,6 +148,9 @@ import {
 import NIM from '../utils/nim'
 import * as log from '../utils/log'
 import R from '../libs/ramda'
+import {
+  refreshMsgsByTo
+} from '../actions/chat'
 
 @connect({
   user: state => state.common.user,
@@ -154,6 +158,8 @@ import R from '../libs/ramda'
   msgs: function(state) {
     return state.chat.msgs[this.to] || []
   }
+}, {
+  refreshMsgsByTo
 })
 export default class Chat extends wepy.page {
   config = {
@@ -166,7 +172,15 @@ export default class Chat extends wepy.page {
   }
 
   methods = {
+    pushMsg (msg) {
+      const { refreshMsgsByTo } = this.methods
+      const { mergeMsgs } = this.nim
+      const to = msg.target
+      const mergedByTo = mergeMsgs(this.msgs || [], msg)
+      refreshMsgsByTo(to, mergedByTo)
+    },
     async chooseImage() {
+      const { pushMsg } = this.methods
       const res = await wepy.chooseImage({
         count: 1
       })
@@ -176,12 +190,14 @@ export default class Chat extends wepy.page {
           type: 'image',
           wxFilePath: res.tempFilePaths[0]
         })
-        await this.nim.sendFile({
+        const msg = await this.nim.sendFile({
           scene: 'p2p',
           type: 'image',
           to: this.friend.accid,
           file: file
         })
+        pushMsg(msg)
+        this.$apply()
       } catch (error) {
         log.error({
           page: 'chatrooms',
@@ -191,16 +207,18 @@ export default class Chat extends wepy.page {
       }
     },
     async send() {
+      const { pushMsg } = this.methods
       const text = R.trim(this.text)
       this.text = ''
       if (text.length) {
         try {
-          await this.nim.sendText({
+          const msg = await this.nim.sendText({
             text,
             scene: 'p2p',
             to: this.friend.accid
           })
           this.text = ''
+          pushMsg(msg)
           this.$apply()
         } catch (e) {
           log.error({
