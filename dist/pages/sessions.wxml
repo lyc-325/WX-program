@@ -6,7 +6,7 @@
 </view>
 <view class="list _7a22e66">
   <view  wx:for="{{sessions}}" wx:key="{{index}}" class="item _7a22e66">
-    <view bindtap="toChat" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd" style="{{item.style}}" class="content _7a22e66">
+    <view data-index="{{index}}" bindtap="toChat" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd" style="{{item.style}}" class="content _7a22e66">
       <view class="avatar _7a22e66">
         <image mode="scaleToFill" src="{{item.avatar}}" class="_7a22e66"/>
       </view>

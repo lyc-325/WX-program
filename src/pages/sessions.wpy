@@ -6,7 +6,7 @@
 </view>
 <view class='list'>
   <view wx:for='{{sessions}}' wx:key='{{index}}' class='item'>
-    <view bindtap='toChat' @touchstart='handleTouchStart' @touchmove='handleTouchMove' @touchend='handleTouchEnd' style='{{item.style}}' class='content'>
+    <view data-index="{{index}}" @tap='toChat' @touchstart='handleTouchStart' @touchmove='handleTouchMove' @touchend='handleTouchEnd' style='{{item.style}}' class='content'>
       <view class='avatar'>
         <image mode='scaleToFill' src='{{item.avatar}}' />
       </view>
@@ -145,7 +145,7 @@ const LAST_WIDTH = 200
 @connect({
   user: state => state.common.user,
   nim: state => state.common.nim,
-  sessions: state => state.common.sessions
+  sessions: state => state.sessions.sessions
 })
 export default class Sessions extends wepy.page {
   config = {
@@ -215,7 +215,8 @@ export default class Sessions extends wepy.page {
         })
       }
     },
-    toChat(index) {
+    toChat(evt) {
+      const index = getIndex(evt)
       const { to } = this.sessions[index]
       wepy.navigateTo({
         url: `/pages/chat?faccid=${to}`
