@@ -16,7 +16,8 @@
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed cursor-spacing="40" @input="setText" />
+  <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
+  <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
   <view class="button">
     <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
   </view>
@@ -168,19 +169,13 @@ export default class Chat extends wepy.page {
 
   data = {
     text: '',
-    friend: null
+    friend: null,
+    sended: false
   }
 
   methods = {
-    pushMsg (msg) {
-      const { refreshMsgsByTo } = this.methods
-      const { mergeMsgs } = this.nim
-      const to = msg.target
-      const mergedByTo = mergeMsgs(this.msgs || [], msg)
-      refreshMsgsByTo(to, mergedByTo)
-    },
     async chooseImage() {
-      const { pushMsg } = this.methods
+      const pushMsg = this.methods.pushMsg.bind(this)
       const res = await wepy.chooseImage({
         count: 1
       })
@@ -197,7 +192,6 @@ export default class Chat extends wepy.page {
           file: file
         })
         pushMsg(msg)
-        this.$apply()
       } catch (error) {
         log.error({
           page: 'chatrooms',
@@ -207,7 +201,8 @@ export default class Chat extends wepy.page {
       }
     },
     async send() {
-      const { pushMsg } = this.methods
+      // ? why bind
+      const pushMsg = this.methods.pushMsg.bind(this)
       const text = R.trim(this.text)
       this.text = ''
       if (text.length) {
@@ -219,19 +214,29 @@ export default class Chat extends wepy.page {
           })
           this.text = ''
           pushMsg(msg)
-          this.$apply()
         } catch (e) {
           log.error({
             page: 'chat',
             opr: 'sendText',
             info: e
           })
-          this.$apply()
         }
       }
     },
     setText(e) {
       this.text = e.detail.value
+    },
+    pushMsg (msg) {
+      const { refreshMsgsByTo } = this.methods
+      const { mergeMsgs } = this.nim
+      const to = msg.target
+      const mergedByTo = mergeMsgs(this.msgs || [], msg)
+      refreshMsgsByTo(to, mergedByTo)
+      this.sended = true
+      this.$apply()
+    },
+    handleFocus() {
+      this.sended = false
     }
   }
 
@@ -247,7 +252,6 @@ export default class Chat extends wepy.page {
       avatar: friend.icon,
       nickname: friend.name
     }
-    this.$apply()
   }
 }
 </script>

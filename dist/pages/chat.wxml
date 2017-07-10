@@ -16,7 +16,8 @@
 </view>
 
 <view class="operation">
-  <textarea auto-height fixed="fixed" cursor-spacing="40" bindinput="setText"/>
+  <textarea  wx:if="{{sended}}" value="" auto-height fixed="fixed" cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
+  <textarea  wx:else auto-height auto-focus fixed="fixed" cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
   <view class="button">
     <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill"/>
   </view>
