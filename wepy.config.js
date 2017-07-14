@@ -10,6 +10,11 @@ module.exports = {
       jsOutput: path.join('web', 'index.js')
     }
   },
+  appConfig: {
+    promisifyAPI: {
+      'createSelectorQuery': false
+    }
+  },
   eslint: true,
   compilers: {
     less: {
@@ -36,8 +41,7 @@ module.exports = {
       ]
     }
   },
-  plugins: {
-  }
+  plugins: {}
 }
 
 if (prod) {
@@ -46,14 +50,13 @@ if (prod) {
   // module.exports.compilers['sass'] = {outputStyle: 'compressed'}
 
   // 压缩less
-  module.exports.compilers['less'] = {compress: true}
+  module.exports.compilers['less'] = { compress: true }
 
   // 压缩js
   module.exports.plugins = {
     uglifyjs: {
       filter: /\.js$/,
-      config: {
-      }
+      config: {}
     },
     imagemin: {
       filter: /\.(jpg|png|jpeg)$/,

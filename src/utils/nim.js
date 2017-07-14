@@ -11,7 +11,7 @@ const config = nim
  */
 function createHeader() {
   const nonce = Math.ceil(Math.random() * 10000).toString()
-  const curTime = (Math.floor(Date.now() / 1000)).toString()
+  const curTime = (Date.parse(new Date()) / 1000).toString()
   const checkSum = sha1(`${config.appSecret}${nonce}${curTime}`)
   return {
     'Content-Type': 'application/x-www-form-urlencoded',

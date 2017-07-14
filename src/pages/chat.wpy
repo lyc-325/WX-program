@@ -1,19 +1,17 @@
 <template>
-<view class="list">
-  <block wx:for="{{msgs}}" wx:key="idServer">
-    <view class="item {{ user.accid === item.from ? 'mine':'opposite' }}">
-      <view class="avatar">
-        <image mode="scaleToFill" src="{{user.avatarUrl}}" />
-      </view>
-      <view class="content">
-        <view wx:if="{{item.type === 'text' }}">
-          <text>{{item.text}}</text>
-        </view>
-        <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
-      </view>
+<scroll-view scroll-y scroll-into-view="item{{intoView}}" id="list">
+  <view wx:for="{{msgs}}" wx:key="idServer" id="item{{item.idServer}}" class="item {{ user.accid === item.from ? 'mine':'opposite' }}">
+    <view class="avatar">
+      <image mode="scaleToFill" src="{{user.avatarUrl}}" />
     </view>
-  </block>
-</view>
+    <view class="content">
+      <view wx:if="{{item.type === 'text' }}">
+        <text>{{item.text}}</text>
+      </view>
+      <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
+    </view>
+  </view>
+</scroll-view>
 
 <view class="operation">
   <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
@@ -73,30 +71,33 @@
   height: 50rpx;
 }
 
-.list {
+scroll-view {
+  top:0;left:0;
+  position: absolute;
   z-index: 0;
-  padding: 50rpx;
-  padding-bottom: 100rpx;
   height: 100%;
-  overflow: scroll;
 }
 
-.list>.item {
+.item:last-child {
+  margin-bottom: 100rpx;
+}
+
+.item {
   display: flex;
   align-items: flex-start;
 }
 
-.list>.item .avatar {
+.item .avatar {
   padding: 5px;
   margin: 0 10px;
 }
 
-.list>.item .avatar image {
+.item .avatar image {
   width: 100rpx;
   height: 100rpx;
 }
 
-.list>.item .content {
+.item .content {
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -106,15 +107,15 @@
   display: flex;
 }
 
-.list>.item.opposite {
+.item.opposite {
   flex-direction: row-reverse;
 }
 
-.list>.item.opposite .content {
+.item.opposite .content {
   background-color: #51C332;
 }
 
-.list>.item.opposite .content::after {
+.item.opposite .content::after {
   content: '';
   position: absolute;
   width: 0;
@@ -125,11 +126,11 @@
   border-bottom: 5px solid transparent;
 }
 
-.list>.item.mine .content {
+.item.mine .content {
   background-color: antiquewhite;
 }
 
-.list>.item.mine .content::before {
+.item.mine .content::before {
   content: '';
   position: absolute;
   width: 0;
@@ -158,6 +159,11 @@ import {
   nim: state => state.common.nim,
   msgs: function(state) {
     return state.chat.msgs[this.to] || []
+  },
+  intoView: function(state) {
+    const msgs = state.chat.msgs[this.to] || []
+    const last = R.last(msgs)
+    return last ? last.idServer : ''
   }
 }, {
   refreshMsgsByTo
@@ -175,6 +181,7 @@ export default class Chat extends wepy.page {
 
   methods = {
     async chooseImage() {
+      // 进行图片选择并上传
       const pushMsg = this.methods.pushMsg.bind(this)
       const res = await wepy.chooseImage({
         count: 1
@@ -227,6 +234,7 @@ export default class Chat extends wepy.page {
       this.text = e.detail.value
     },
     pushMsg (msg) {
+      // 新消息放入
       const { refreshMsgsByTo } = this.methods
       const { mergeMsgs } = this.nim
       const to = msg.target
@@ -252,6 +260,16 @@ export default class Chat extends wepy.page {
       avatar: friend.icon,
       nickname: friend.name
     }
+  }
+
+  onShow() {
+
+    // const query = wepy.createSelectorQuery()
+    // query.select('#list').boundingClientRect(rect => {
+    //   console.log('rectangle', rect)
+    //   this.scrollTop = rect.bottom
+    //   this.$apply()
+    // }).exec()
   }
 }
 </script>

@@ -44,30 +44,33 @@
   height: 50rpx;
 }
 
-.list {
+scroll-view {
+  top:0;left:0;
+  position: absolute;
   z-index: 0;
-  padding: 50rpx;
-  padding-bottom: 100rpx;
   height: 100%;
-  overflow: scroll;
 }
 
-.list>.item {
+.item:last-child {
+  margin-bottom: 100rpx;
+}
+
+.item {
   display: flex;
   align-items: flex-start;
 }
 
-.list>.item .avatar {
+.item .avatar {
   padding: 5px;
   margin: 0 10px;
 }
 
-.list>.item .avatar image {
+.item .avatar image {
   width: 100rpx;
   height: 100rpx;
 }
 
-.list>.item .content {
+.item .content {
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -77,15 +80,15 @@
   display: flex;
 }
 
-.list>.item.opposite {
+.item.opposite {
   flex-direction: row-reverse;
 }
 
-.list>.item.opposite .content {
+.item.opposite .content {
   background-color: #51C332;
 }
 
-.list>.item.opposite .content::after {
+.item.opposite .content::after {
   content: '';
   position: absolute;
   width: 0;
@@ -96,11 +99,11 @@
   border-bottom: 5px solid transparent;
 }
 
-.list>.item.mine .content {
+.item.mine .content {
   background-color: antiquewhite;
 }
 
-.list>.item.mine .content::before {
+.item.mine .content::before {
   content: '';
   position: absolute;
   width: 0;

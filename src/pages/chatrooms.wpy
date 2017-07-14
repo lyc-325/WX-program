@@ -72,6 +72,14 @@
 </style>
 
 <script>
+const getFriend = function(friend) {
+  return {
+    nickname: friend.nick,
+    avatar: friend.avatar,
+    accid: friend.account
+  }
+}
+
 const mockRooms = [{
   id: 0,
   cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
@@ -108,7 +116,7 @@ import wepy from 'wepy'
 import R from '../libs/ramda'
 
 import {
-  wx
+  wx as config
 } from '../config'
 
 import NIM from '../utils/nim'
@@ -136,14 +144,6 @@ import {
 } from 'wepy-redux'
 
 import * as api from '../apis/account'
-
-const config = wx
-
-const getFriend = friend => ({
-  nickname: friend.nick,
-  avatar: friend.avatar,
-  accid: friend.account
-})
 
 @connect({
   user: state => state.common.user,
