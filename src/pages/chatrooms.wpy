@@ -1,12 +1,12 @@
 <template>
 <view class="list">
   <block wx:for="{{rooms}}" wx:key="id">
-    <view class="item">
+    <view class="item" @tap="toChatroom({{index}})">
       <view class="cover">
         <image mode="scaleToFill" src="{{item.cover}}"></image>
       </view>
       <view class="info">
-        <view class="title">{{item.title}}</view>
+        <view class="title">{{item.name}}</view>
         <view class="members">{{item.members}}</view>
       </view>
     </view>
@@ -72,48 +72,17 @@
 </style>
 
 <script>
-const getFriend = function(friend) {
-  return {
-    nickname: friend.nick,
-    avatar: friend.avatar,
-    accid: friend.account
-  }
-}
-
-const mockRooms = [{
-  id: 0,
-  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
-  title: '一起哈皮的聊天室',
-  members: 50
-}, {
-  id: 1,
-  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
-  title: '一起哈皮的聊天室3',
-  members: 50
-}, {
-  id: 2,
-  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
-  title: '一起哈皮的聊天室4',
-  members: 50
-}, {
-  id: 3,
-  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
-  title: '一起哈皮的聊天室5',
-  members: 50
-}, {
-  id: 4,
-  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
-  title: '一起哈皮的聊天室6',
-  members: 50
-}, {
-  id: 5,
-  cover: 'http://b.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=6d24a14af81f3a295ac8d2c8a11edb0c/e824b899a9014c088f762831027b02087af4f4d1.jpg',
-  title: '一起哈皮的聊天室7',
-  members: 50
-}]
+// const getFriend = function(friend) {
+//   return {
+//     nickname: friend.nick,
+//     avatar: friend.avatar,
+//     accid: friend.account
+//   }
+// }
 
 import wepy from 'wepy'
 import R from '../libs/ramda'
+import log from '../utils/log'
 
 import {
   wx as config
@@ -122,27 +91,28 @@ import {
 import NIM from '../utils/nim'
 
 import {
-  setUser,
-  setNim
+  setUser
+  // setNim
 } from '../actions/common'
 
-import {
-  refreshSessions
-} from '../actions/sessions'
-
-import {
-  refreshFriends
-} from '../actions/friends'
-
-import {
-  refreshMsgs,
-  refreshMsgsByTo
-} from '../actions/chat'
+// import {
+//   refreshSessions
+// } from '../actions/sessions'
+//
+// import {
+//   refreshFriends
+// } from '../actions/friends'
+//
+// import {
+//   refreshMsgs,
+//   refreshMsgsByTo
+// } from '../actions/chat'
 
 import {
   connect
 } from 'wepy-redux'
 
+import * as chatroomApi from '../apis/chatroom'
 import * as api from '../apis/account'
 
 @connect({
@@ -151,12 +121,12 @@ import * as api from '../apis/account'
   friends: state => state.friends.friends,
   msgs: state => state.chat.msgs
 }, {
-  setUser,
-  setNim,
-  refreshFriends,
-  refreshSessions,
-  refreshMsgs,
-  refreshMsgsByTo
+  setUser
+//   setNim,
+//   refreshFriends,
+//   refreshSessions,
+//   refreshMsgs,
+//   refreshMsgsByTo
 })
 export default class Chatrooms extends wepy.page {
   config = {
@@ -168,24 +138,31 @@ export default class Chatrooms extends wepy.page {
   }
 
   methods = {
-    pushMsg: function (msgs) {
-      const { refreshMsgs, refreshMsgsByTo } = this.methods
-      const { mergeMsgs } = this.nim
-      if (!Array.isArray(msgs)) {
-        msgs = [msgs]
-      }
-      const sessionId = msgs[0].sessionId
-      const to = msgs[0].target
-      const merged = mergeMsgs(this.msgs[sessionId] || [], msgs)
-      const mergedByTo = mergeMsgs(this.msgs[to] || [], msgs)
-      refreshMsgs(sessionId, merged)
-      refreshMsgsByTo(to, mergedByTo)
+    // pushMsg: function (msgs) {
+    //   const { refreshMsgs, refreshMsgsByTo } = this.methods
+    //   const { mergeMsgs } = this.nim
+    //   if (!Array.isArray(msgs)) {
+    //     msgs = [msgs]
+    //   }
+    //   const sessionId = msgs[0].sessionId
+    //   const to = msgs[0].target
+    //   const merged = mergeMsgs(this.msgs[sessionId] || [], msgs)
+    //   const mergedByTo = mergeMsgs(this.msgs[to] || [], msgs)
+    //   refreshMsgs(sessionId, merged)
+    //   refreshMsgsByTo(to, mergedByTo)
+    // },
+    toChatroom: function(index) {
+      const id = this.rooms[index].id
+      console.log('chatroomid', id)
+      wepy.navigateTo({
+        url: `/pages/chatroom?id=${id}`
+      })
     }
   }
 
   async onLoad() {
-    const { setUser, setNim, refreshSessions, refreshFriends } = this.methods
-    const pushMsg = this.methods.pushMsg.bind(this)
+    const { setUser } = this.methods
+    // const pushMsg = this.methods.pushMsg.bind(this)
     wepy.showLoading()
     const { code } = await wepy.login()
     const { data } = await wepy.request({
@@ -213,50 +190,62 @@ export default class Chatrooms extends wepy.page {
 
       setUser({
         ...this.user,
-        jfToken: Token
+        jfToken: Token,
+        nimToken: token
       })
 
       // 初始化 nim 对象
-      const nim = NIM.getInstance({
-        account: this.user.accid,
-        token: token,
-        debug: true,
-        onusers: friends => {
-          refreshFriends(friends.map(getFriend))
-          this.$apply()
-        },
-        onsessions: sessions => {
-          const merged = nim.mergeSessions(this.sessions, sessions)
-          refreshSessions(merged)
-          this.$apply()
-        },
-        onupdatesession: session => {
-          const merged = nim.mergeSessions(this.sessions, session)
-          refreshSessions(merged)
-          this.$apply()
-        },
-        onmsg: msg => {
-          pushMsg(msg)
-          this.$apply()
-        },
-        onroamingmsgs: obj => {
-          pushMsg(obj.msgs)
-        },
-        onofflinemsgs: obj => {
-          pushMsg(obj.msgs)
-        }
-      })
+      // const nim = NIM.getInstance({
+      //   account: this.user.accid,
+      //   token: token,
+      //   debug: true,
+      //   onusers: friends => {
+      //     refreshFriends(friends.map(getFriend))
+      //     this.$apply()
+      //   },
+      //   onsessions: sessions => {
+      //     const merged = nim.mergeSessions(this.sessions, sessions)
+      //     refreshSessions(merged)
+      //     this.$apply()
+      //   },
+      //   onupdatesession: session => {
+      //     const merged = nim.mergeSessions(this.sessions, session)
+      //     refreshSessions(merged)
+      //     this.$apply()
+      //   },
+      //   onmsg: msg => {
+      //     pushMsg(msg)
+      //     this.$apply()
+      //   },
+      //   onroamingmsgs: obj => {
+      //     pushMsg(obj.msgs)
+      //   },
+      //   onofflinemsgs: obj => {
+      //     pushMsg(obj.msgs)
+      //   }
+      // })
+      //
+      // setNim(nim)
 
-      setNim(nim)
-
-      setTimeout(() => {
-        this.rooms = mockRooms
-        wepy.hideLoading()
-        // 通过 $apply 强制脏检查
-        this.$apply()
-      }, 2000)
+      // 拉取聊天室列表
+      const rooms = await chatroomApi.getList()
+      const ids = rooms.map(R.prop('roomid'))
+      const chatrooms = await NIM.getChatrooms(ids)
+      const members = chatrooms.map(R.prop('onlineusercount'))
+      this.rooms = rooms.map((room, index) => ({
+        id: room.roomid,
+        name: room.name,
+        cover: room.pic_url,
+        memebers: members[index]
+      }))
+      this.$apply()
+      wepy.hideLoading()
     } catch (e) {
-      console.error('app error', e)
+      log.error({
+        page: 'chatrooms',
+        opr: 'init',
+        info: e
+      })
       wepy.navigateTo({
         url: '/pages/register'
       })

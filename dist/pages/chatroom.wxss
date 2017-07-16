@@ -1,5 +1,5 @@
 
-.operation._7280563 {
+.operation {
   position: fixed;
   display: flex;
   width: 100%;
@@ -11,24 +11,24 @@
   z-index: 5;
 }
 
-.operation>view._7280563 {
+.operation>view {
   padding: 10rpx;
 }
 
-.operation textarea._7280563 {
+.operation textarea {
   border: 1px solid #eee;
   padding: 5px;
   font-size: 35rpx;
   width: 60%;
 }
 
-.operation .buttons._7280563 {
+.operation .buttons {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.operation>.button._7280563 {
+.operation>.button {
   flex-grow: 1;
   padding: 0;
   text-align: center;
@@ -38,31 +38,38 @@
   margin-top: 12rpx;
 }
 
-.operation>.button image._7280563 {
+.operation>.button image {
   width: 50rpx;
   height: 50rpx;
 }
 
-.list._7280563 {
-  padding: 50rpx;
+scroll-view {
+  top:0;left:0;
+  position: absolute;
+  z-index: 0;
+  height: 100%;
 }
 
-.list>.item._7280563 {
+.list-item:last-child {
+  margin-bottom: 100rpx;
+}
+
+.list-item {
   display: flex;
   align-items: flex-start;
 }
 
-.list>.item .avatar._7280563 {
+.list-item .avatar {
   padding: 5px;
   margin: 0 10px;
 }
 
-.list>.item .avatar image._7280563 {
+.list-item .avatar image {
   width: 100rpx;
   height: 100rpx;
 }
 
-.list>.item .content._7280563 {
+.list-item .content {
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -73,15 +80,15 @@
 }
 
 
-.list>.item.mine._7280563 {
+.list-item.mine {
   flex-direction: row-reverse;
 }
 
-.list>.item.mine .content._7280563 {
+.list-item.mine .content {
   background-color: #51C332;
 }
 
-.list>.item.mine .content._7280563::after {
+.list-item.mine .content::after {
   content: '';
   position: absolute;
   width: 0;
@@ -92,11 +99,11 @@
   border-bottom: 5px solid transparent;
 }
 
-.list>.item.opposite .content._7280563 {
+.list-item.opposite .content {
   background-color: antiquewhite;
 }
 
-.list>.item.opposite .content._7280563::before {
+.list-item.opposite .content::before {
   content: '';
   position: absolute;
   width: 0;

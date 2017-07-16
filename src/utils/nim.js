@@ -1,6 +1,6 @@
 import R from '../libs/ramda'
-import NIM from '../libs/NIM_Web_NIM_v3.8.0'
-import promisify from './promisify'
+// import NIM from '../libs/NIM_Web_NIM_v3.8.0'
+// import promisify from './promisify'
 import { nim } from '../config'
 import sha1 from 'sha1'
 import wepy from 'wepy'
@@ -26,7 +26,7 @@ function createHeader() {
  * 执行 NIM 相关请求
  */
 function request(options) {
-  const {api, data, method} = options
+  const { api, data, method } = options
   const header = {
     ...createHeader(),
     ...(options.header || {})
@@ -80,36 +80,33 @@ function login(accid) {
  * @param options.onSessions Function
  */
 function getInstance(options) {
-  const nim = NIM.getInstance({
-    db: true,
-    appKey: config.appKey,
-    onerror(error) {
-      console.error('[NIM] error', error)
-    },
-    ondisconnect() {
-      console.log('[NIM] disconnect')
-    },
-    onwillreconnect(obj) {
-      console.log('[NIM] will reconnect')
-    },
-    onsyncdone() {
-      console.log('[NIM] sync done')
-    },
-    onfriends(friends) {
-      console.log('[NIM] on friends', friends)
-    },
-    ...options
-  })
-  const nimPromised = {}
-  // Promisify nim functions
-  R.forEach((key) => {
-    nimPromised[key] = promisify(nim[key].bind(nim))
-  }, promisedFunctions)
-  // bind other functions
-  R.forEach((key) => {
-    nimPromised[key] = nim[key].bind(nim)
-  }, needFunctions)
-  return nimPromised
+  // const nim = NIM.getInstance({
+  //   db: true,
+  //   appKey: config.appKey,
+  //   onerror(error) {
+  //     console.error('[NIM] error', error)
+  //   },
+  //   ondisconnect() {
+  //     console.log('[NIM] disconnect')
+  //   },
+  //   onwillreconnect(obj) {
+  //     console.log('[NIM] will reconnect')
+  //   },
+  //   onsyncdone() {
+  //     console.log('[NIM] sync done')
+  //   },
+  //   ...options
+  // })
+  // const nimPromised = {}
+  // // Promisify nim functions
+  // R.forEach((key) => {
+  //   nimPromised[key] = promisify(nim[key].bind(nim))
+  // }, promisedFunctions)
+  // // bind other functions
+  // R.forEach((key) => {
+  //   nimPromised[key] = nim[key].bind(nim)
+  // }, needFunctions)
+  // return nimPromised
 }
 
 /**
@@ -144,34 +141,66 @@ const acceptFriendApply = _addFriend(3)
 // 拒绝好友申请
 const rejectFriendApply = _addFriend(4)
 
-const needFunctions = [
-  'mergeSessions',
-  'mergeMsgs'
-]
+/**
+ * 获得聊天室
+ * @param  {Array} ids
+ */
+const getChatrooms = function (ids) {
+  const requests = ids.map(id => request({
+    api: 'chatroom/get.action',
+    data: {
+      roomid: id,
+      needOnlineUserCount: true
+    }
+  }).then(R.prop('chatroom')))
+  return Promise.all(requests)
+}
 
 /**
- * 需要被 Promise 化的函数
+ * 获得聊天室地址
+ * @param  {String} accid
+ * @param  {String} id
  */
-const promisedFunctions = [
-  // 好友关系相关 API
-  'addFriend',
-  'applyFriend',
-  'passFriendApply',
-  'rejectFriendApply',
-  'deleteFriend',
-  'updateFriend',
+const getChatroomAddresses = function (accid, id) {
+  return request({
+    api: 'chatroom/requestAddr.action',
+    data: {
+      roomid: id,
+      accid
+    }
+  }).then(R.prop('addr'))
+}
 
-  // 消息相关
-  'sendText',
-  'previewFile',
-  'sendFile',
-  'resendMsg',
-  'markMsgRead',
-  'getHistoryMsgs', // 云端保存的历史记录
-
-  // 聊天室
-  'getChatroomAddress'
-]
+// const needFunctions = [
+//   'mergeSessions',
+//   'mergeMsgs',
+//   'disconnect',
+//   'connect'
+// ]
+//
+// /**
+//  * 需要被 Promise 化的函数
+//  */
+// const promisedFunctions = [
+//   // 好友关系相关 API
+//   'addFriend',
+//   'applyFriend',
+//   'passFriendApply',
+//   'rejectFriendApply',
+//   'deleteFriend',
+//   'updateFriend',
+//
+//   // 消息相关
+//   'sendText',
+//   'previewFile',
+//   'sendFile',
+//   'resendMsg',
+//   'markMsgRead',
+//   'getHistoryMsgs', // 云端保存的历史记录
+//
+//   // 聊天室
+//   'getChatroomAddress'
+// ]
 
 module.exports = {
   login,
@@ -180,5 +209,7 @@ module.exports = {
   getUserInfo,
   sendApply,
   acceptFriendApply,
-  rejectFriendApply
+  rejectFriendApply,
+  getChatrooms,
+  getChatroomAddresses
 }

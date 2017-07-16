@@ -1,12 +1,12 @@
 
 <view class="list">
   <block  wx:for="{{rooms}}" wx:key="id">
-    <view class="item">
+    <view class="item" bindtap="toChatroom" data-wepy-params-a="{{index}}">
       <view class="cover">
         <image mode="scaleToFill" src="{{item.cover}}"/>
       </view>
       <view class="info">
-        <view class="title">{{item.title}}</view>
+        <view class="title">{{item.name}}</view>
         <view class="members">{{item.members}}</view>
       </view>
     </view>

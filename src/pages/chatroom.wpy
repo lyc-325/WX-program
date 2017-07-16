@@ -1,50 +1,37 @@
 <template>
 <view class="navbar">
-  <view for="{{navs}}" key="unique" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
+  <view wx:for="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
     {{item}}
   </view>
 </view>
 
-<view class="list">
-  <view class="item opposite">
+<scroll-view scroll-y scroll-into-view="item{{intoView}}" id="list">
+  <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
     <view class="avatar">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" />
+      <image mode="scaleToFill" src="{{user.avatarUrl}}" />
     </view>
     <view class="content">
-      <text>你在干嘛呢？</text>
+      <view wx:if="{{item.type === 'text' }}">
+        <text>{{item.text}}</text>
+      </view>
+      <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
     </view>
   </view>
-  <view class="item mine">
-    <view class="avatar">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" />
-    </view>
-    <view class="content">
-      <text>你猜猜呢？</text>
-    </view>
-  </view>
+</scroll-view>
 
-  <view class="item mine">
-    <view class="avatar">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" />
-    </view>
-    <view class="content">
-      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp"></image>
-    </view>
-  </view>
-</view>
-
-<view class="operation" style="align-items: {{align}}">
-  <textarea auto-height fixed cursor-spacing="40" />
+<view class="operation">
+  <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
+  <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
   <view class="button">
-    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
+    <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
   </view>
   <view class="button">
-    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" />
+    <image @tap="send" src="../../static/icons/send.png" mode="scaleToFill" />
   </view>
 </view>
 </template>
 
-<style scoped>
+<style>
 .operation {
   position: fixed;
   display: flex;
@@ -89,26 +76,33 @@
   height: 50rpx;
 }
 
-.list {
-  padding: 50rpx;
+scroll-view {
+  top:0;left:0;
+  position: absolute;
+  z-index: 0;
+  height: 100%;
 }
 
-.list>.item {
+.list-item:last-child {
+  margin-bottom: 100rpx;
+}
+
+.list-item {
   display: flex;
   align-items: flex-start;
 }
 
-.list>.item .avatar {
+.list-item .avatar {
   padding: 5px;
   margin: 0 10px;
 }
 
-.list>.item .avatar image {
+.list-item .avatar image {
   width: 100rpx;
   height: 100rpx;
 }
 
-.list>.item .content {
+.list-item .content {
   padding: 20rpx;
   position: relative;
   border-radius: 5px;
@@ -119,15 +113,15 @@
 }
 
 
-.list>.item.mine {
+.list-item.mine {
   flex-direction: row-reverse;
 }
 
-.list>.item.mine .content {
+.list-item.mine .content {
   background-color: #51C332;
 }
 
-.list>.item.mine .content::after {
+.list-item.mine .content::after {
   content: '';
   position: absolute;
   width: 0;
@@ -138,11 +132,11 @@
   border-bottom: 5px solid transparent;
 }
 
-.list>.item.opposite .content {
+.list-item.opposite .content {
   background-color: antiquewhite;
 }
 
-.list>.item.opposite .content::before {
+.list-item.opposite .content::before {
   content: '';
   position: absolute;
   width: 0;
@@ -156,6 +150,32 @@
 
 <script>
 import wepy from 'wepy'
+import R from '../libs/ramda'
+import ChatroomSDK from '../utils/chatroom'
+import NIM from '../utils/nim'
+import * as log from '../utils/log'
+import {
+  refreshMsgs
+} from '../actions/chatroom'
+
+import {
+  connect
+} from 'wepy-redux'
+
+@connect({
+  user: state => state.common.user,
+  nim: state => state.common.nim,
+  msgs: function (state) {
+    return state.chatroom.msgs[this.roomId] || []
+  },
+  intoView: function(state) {
+    const msgs = state.chatroom.msgs[this.roomId] || []
+    const last = R.last(msgs)
+    return last ? last.idClient : ''
+  }
+}, {
+  refreshMsgs
+})
 export default class Chatroom extends wepy.page {
   config = {
     navigationBarTitleText: '聊天室'
@@ -163,7 +183,110 @@ export default class Chatroom extends wepy.page {
 
   data = {
     navs: ['聊天', '公告', '成员'],
-    currentNav: 0
+    currentNav: 0,
+    chatroom: null,
+    roomId: null,
+    sended: false,
+    text: ''
+  }
+
+  methods = {
+    async chooseImage() {
+      // 进行图片选择并上传
+      const pushMsg = this.methods.pushMsg.bind(this)
+      const res = await wepy.chooseImage({
+        count: 1
+      })
+
+      try {
+        const file = await this.chatroom.previewFile({
+          type: 'image',
+          wxFilePath: res.tempFilePaths[0]
+        })
+        const msg = await this.chatroom.sendFile({
+          type: 'image',
+          file: file
+        })
+        pushMsg(msg)
+      } catch (error) {
+        log.error({
+          page: 'chatroom',
+          opr: 'sendFile',
+          info: error
+        })
+      }
+    },
+    async send() {
+      // ? why bind
+      const pushMsg = this.methods.pushMsg.bind(this)
+      const text = R.trim(this.text)
+      this.text = ''
+      if (text.length) {
+        try {
+          const msg = await this.chatroom.sendText({
+            text
+          })
+          this.text = ''
+          pushMsg(msg)
+        } catch (e) {
+          log.error({
+            page: 'chatroom',
+            opr: 'sendText',
+            info: e
+          })
+        }
+      }
+    },
+    setText(e) {
+      this.text = e.detail.value
+    },
+    pushMsg: function (msgs) {
+      const { refreshMsgs } = this.methods
+      if (!Array.isArray(msgs)) {
+        msgs = [msgs]
+      }
+      const roomId = msgs[0].chatroomId
+      const merged = [...this.msgs, ...msgs]
+      refreshMsgs(roomId, merged)
+      this.sended = true
+      this.$apply()
+    },
+    handleFocus() {
+      this.sended = false
+    }
+  }
+
+  async onLoad(options) {
+    const { id } = options
+    this.roomId = id
+    try {
+      const { nimToken, accid } = this.user
+      const roomId = this.roomId
+      const address = await NIM.getChatroomAddresses(accid, roomId)
+      this.chatroom = ChatroomSDK.getInstance({
+        debug: true,
+        account: accid,
+        token: nimToken,
+        chatroomId: roomId,
+        chatroomAddresses: address,
+        onmsgs: function(msgs) {
+          console.log('收到聊天室消息', msgs)
+        },
+        onconnect: function() {
+          console.log('收到聊天室消息')
+        }
+      })
+    } catch (e) {
+      log.error({
+        page: 'chatroom',
+        opr: 'getInstance',
+        info: e
+      })
+    }
+  }
+
+  async onShow() {
+
   }
 }
 </script>

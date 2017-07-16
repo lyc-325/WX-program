@@ -1,44 +1,31 @@
 
-<view class="navbar _7280563">
-  <view for="{{navs}}" key="unique" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _7280563">
+<view class="navbar">
+  <view  wx:for="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
     {{item}}
   </view>
 </view>
 
-<view class="list _7280563">
-  <view class="item opposite _7280563">
-    <view class="avatar _7280563">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_7280563"/>
+<scroll-view scroll-y scroll-into-view="item{{intoView}}" id="list">
+  <view  wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
+    <view class="avatar">
+      <image mode="scaleToFill" src="{{user.avatarUrl}}"/>
     </view>
-    <view class="content _7280563">
-      <text class="_7280563">你在干嘛呢？</text>
-    </view>
-  </view>
-  <view class="item mine _7280563">
-    <view class="avatar _7280563">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_7280563"/>
-    </view>
-    <view class="content _7280563">
-      <text class="_7280563">你猜猜呢？</text>
+    <view class="content">
+      <view wx:if="{{item.type === 'text' }}">
+        <text>{{item.text}}</text>
+      </view>
+      <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"/>
     </view>
   </view>
+</scroll-view>
 
-  <view class="item mine _7280563">
-    <view class="avatar _7280563">
-      <image mode="scaleToFill" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_7280563"/>
-    </view>
-    <view class="content _7280563">
-      <image mode="aspectFit" src="https://i3.hoopchina.com.cn/blogfile/201706/21/BbsImg149801400021149_505x636.png?x-oss-process=image/resize,w_800/format,webp" class="_7280563"/>
-    </view>
+<view class="operation">
+  <textarea  wx:if="{{sended}}" value="" auto-height fixed="fixed" cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
+  <textarea  wx:else auto-height auto-focus fixed="fixed" cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
+  <view class="button">
+    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill"/>
   </view>
-</view>
-
-<view class="operation _7280563" style="align-items: {{align}}">
-  <textarea auto-height fixed="fixed" cursor-spacing="40" class="_7280563"/>
-  <view class="button _7280563">
-    <image bindtap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" class="_7280563"/>
-  </view>
-  <view class="button _7280563">
-    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill" class="_7280563"/>
+  <view class="button">
+    <image bindtap="send" src="../../static/icons/send.png" mode="scaleToFill"/>
   </view>
 </view>

@@ -123,18 +123,18 @@ export default class extends wepy.app {
           selectedIconPath: 'static/icons/board_selected.png',
           text: '留言板'
         },
-        {
-          pagePath: 'pages/sessions',
-          iconPath: 'static/icons/message.png',
-          selectedIconPath: 'static/icons/message_selected.png',
-          text: '消息'
-        },
-        {
-          pagePath: 'pages/friends',
-          iconPath: 'static/icons/friends.png',
-          selectedIconPath: 'static/icons/friends_selected.png',
-          text: '好友'
-        },
+        // {
+        //   pagePath: 'pages/sessions',
+        //   iconPath: 'static/icons/message.png',
+        //   selectedIconPath: 'static/icons/message_selected.png',
+        //   text: '消息'
+        // },
+        // {
+        //   pagePath: 'pages/friends',
+        //   iconPath: 'static/icons/friends.png',
+        //   selectedIconPath: 'static/icons/friends_selected.png',
+        //   text: '好友'
+        // },
         {
           pagePath: 'pages/mine',
           iconPath: 'static/icons/mine.png',

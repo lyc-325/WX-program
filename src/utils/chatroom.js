@@ -1,48 +1,55 @@
 import Chatroom from '../libs/NIM_Web_Chatroom_v3.8.0'
 import promisify from './promisify'
-import config from '../config'
+import { nim as config } from '../config'
 import R from '../libs/ramda'
 
 /**
  * getInstance
- * @param account String
- * @param token String
- * @param id String
- * @param addresses Array
  */
-function getInstance(account, token, id, addresses) {
-  return new Promise((resolve, reject) => {
-    const chatroom = Chatroom.getInstance({
-      appKey: config.appKey,
-      account,
-      token,
-      chatroomId: id,
-      chatroomAddresses: addresses,
-      onerror(error) {
-        reject(error)
-      },
-      onconnect(obj) {
-        // Promisify chatrrom functions
-        R.forEach((key) => {
-          chatroom[key] = promisify(chatroom[key].bind(chatroom))
-        }, promisedFunctions)
-        resolve(chatroom)
-      }
-    })
+function getInstance(options) {
+  const chatroom = Chatroom.getInstance({
+    appKey: config.appKey,
+    account: options.account,
+    token: options.token,
+    chatroomId: options.chatroomId,
+    chatroomAddresses: options.chatroomAddresses,
+    onconnect() {
+      console.log('[NIM Chatroom connect]')
+    },
+    onerror(error) {
+      console.error('[NIM Chatroom] error', error)
+    },
+    ondisconnect() {
+      console.log('[NIM Chatroom] disconnect')
+    },
+    onwillreconnect(obj) {
+      console.log('[NIM Chatroom] will reconnect')
+    },
+    onsyncdone() {
+      console.log('[NIM Chatroom] sync done')
+    },
+    ...options
   })
+  const chatroomPromised = {}
+  // Promisify chatroom functions
+  R.forEach((key) => {
+    chatroomPromised[key] = promisify(chatroom[key].bind(chatroom))
+  }, promisedFunctions)
+  // bind other functions
+  R.forEach((key) => {
+    chatroomPromised[key] = chatroom[key].bind(chatroom)
+  }, needFunctions)
+  return chatroomPromised
 }
 
+const needFunctions = [
+  // 'mergeMsgs'
+]
+
 const promisedFunctions = [
-  'getChatroom',
-  'updateChatroom',
-  'updateMyChatroomMemberInfo',
-
   'sendText',
-  'sendFile',
-  'getHistoryMsgs',
-
-  'getChatroomMembers',
-  'markChatroomManager'
+  'previewFile',
+  'sendFile'
 ]
 
 module.exports = {
