@@ -6,9 +6,9 @@ import chat from './chat'
 import chatroom from './chatroom'
 
 module.exports = combineReducers({
-  common,
-  sessions,
-  friends,
-  chat,
-  chatroom
+    common,
+    sessions,
+    friends,
+    chat,
+    chatroom
 })

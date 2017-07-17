@@ -49,7 +49,8 @@ const needFunctions = [
 const promisedFunctions = [
   'sendText',
   'previewFile',
-  'sendFile'
+  'sendFile',
+  'getHistoryMsgs'
 ]
 
 module.exports = {

@@ -9,6 +9,7 @@
   padding: 5px 5px;
   border-top: 1px solid #eee;
   z-index: 5;
+  background-color: white;
 }
 
 .operation>view {
@@ -44,14 +45,15 @@
 }
 
 scroll-view {
-  top:0;left:0;
+  top: 80rpx;
+  left: 0;
   position: absolute;
   z-index: 0;
   height: 100%;
 }
 
 .list-item:last-child {
-  margin-bottom: 100rpx;
+  margin-bottom: 180rpx;
 }
 
 .list-item {
@@ -77,8 +79,14 @@ scroll-view {
   margin-top: 10px;
   max-width: 350rpx;
   display: flex;
+  word-wrap:break-word;
+  word-break:normal;
 }
 
+.list-item .content view text {
+  word-wrap:break-word;
+  word-break:normal;
+}
 
 .list-item.mine {
   flex-direction: row-reverse;
