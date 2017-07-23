@@ -82,7 +82,7 @@
 
 import wepy from 'wepy'
 import R from '../libs/ramda'
-import log from '../utils/log'
+import * as log from '../utils/log'
 
 import {
   wx as config
