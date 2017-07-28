@@ -1,6 +1,6 @@
 
    <view scroll-x="true" style="width:100%;" class="navbar _3a4b55c">
-   <view style="display:flex; border-bottom:2rpx solid #eee" class="_3a4b55c">
+   <view style="display:flex; padding:10rpx 0; background:#eee" class="_3a4b55c">
    <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _3a4b55c">
     {{item}}
    </view>

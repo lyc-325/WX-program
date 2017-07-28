@@ -1,27 +1,37 @@
 <template>
 <form @submit="bindFormSubmit">
-  <view class="container">
-    <view class="item">
-      <input name="title" placeholder="标题" auto-focus/>
-    </view>
-    <picker @change="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}">
-      <view class="picker">
-        选择分类：<view class="slider">{{categories[index].name}}</view>
-      </view>
-    </picker>
-    <view class="item" style="width:70%;">
-      <textarea name="content" placeholder="内容" auto-focus/>
-    </view>
-    <view  class="imgBar">
-      <view class="image" wx:for="{{imgs}}" wx:key="{{index}}">
-        <image mode="scaleToFill" src="{{item}}">
-          <view class="cancel" data-index="{{index}}" @tap="handleCancel">X</view>
-        </image>
+  <view class="controlBlock">
+    <span @tap="goBack" class="publish">取消</span>
+    <span form-type="submit" class="publish">发布</span>
+  </view>
+  <view class="containerP">
+    <view class="itemBlock">
+      <span>标题：</span>
+      <view class="item">
+        <input name="title" placeholder="标题" >
       </view>
     </view>
-    <view class="controlBlock">
-      <button @tap="handleUpload" class="upload">上传图片</button>
-      <button form-type="submit" class="publish">发布</button>
+    <view class="itemBlock">
+      <span>分类：</span>
+      <picker @change="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}">
+        <view class="picker">
+          <view class="slider">{{categories[index].name}}</view>
+        </view>
+      </picker>
+    </view>
+    <view class="itemBlock">
+      <span>内容：</span>
+      <textarea style="width: 70%;" auto-height name="content" placeholder="内容">
+    </view>
+    <view class="itemBlockImage">
+      <view style=""><span>图片：</span><buttom @tap="handleUpload"  class="upload">选择图片</buttom></view>
+      <view  class="imgBar">
+        <view class="image" wx:for="{{imgs}}" wx:key="{{index}}">
+          <image mode="scaleToFill" src="{{item}}">
+            <view class="cancel" data-index="{{index}}" @tap="handleCancel">X</view>
+          </image>
+        </view>
+      </view>
     </view>
   </view>
 </form>
@@ -30,30 +40,45 @@
 <style scoped>
 /* board_publish.wxss */
 .controlBlock{
-  width:80%;
+  width: 80%;
   display:flex;
-  margin-bottom: 60rpx;
-
+  padding: 10rpx 10%;
+  margin-bottom: 40rpx;
+  background-color: #1eb571;
+  justify-content: space-between;
+  font-weight: 700;
 }
-.container {
-  display: flex;
+.containerP {
   flex-flow: column;
-  width: 100%;
+  width: 80%;
+  margin: 0 7%;
+  padding: 3%;
+  align-items: left;
+  border-left:2rpx solid #eee;
+  border-right:2rpx solid #eee;
+  border-radius: 10rpx;
 }
-
+.itemBlock{
+  display: flex;
+  border-bottom:2rpx solid #eee;
+  padding: 20rpx 0;
+}
 .item {
   border: 1rpx #ccc solid;
   border-radius: 10rpx;
-  margin-bottom: 20rpx;
+}
+.itemBlockImage {
+  margin-top: 30rpx;
+}
+.item input{
+  border: none !important;
 }
 .picker {
-  padding: 20rpx 0;
   font-size: 36rpx;
   display: flex;
-  width: 380rpx;
+  width: 150rpx;
   justify-content: space-between;
-  margin-bottom: 20rpx;
-  align-items: center;
+  align-items: left;
 }
 .slider {
   /*border: 1rpx #ccc solid;*/
@@ -65,16 +90,16 @@
   padding: 10rpx;
 }
 .publish {
-  width: 180rpx;
-  height: 80rpx;
+  /*width: 180rpx;*/
+  /*height: 80rpx;*/
   line-height: 80rpx;
-  border-radius: 20rpx;
+  /*border-radius: 20rpx;*/
   text-align: center;
-  background-color: #1eb571;
+  /*background-color: #1eb571;*/
   color: white;
   font-size: 36rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
+  /*font-weight: 700;*/
+  /*box-shadow: 1px 1px 5px #ccc;*/
 }
 
 .upload {
@@ -83,33 +108,33 @@
   width: 240rpx;
   height: 80rpx;
   line-height: 80rpx;
-  border-radius: 20rpx;
+  border-radius: 10rpx;
+  padding: 10rpx 20rpx;
   text-align: center;
-  background-color: #1eb571;
-  color: white;
+  background: #1eb571;
+  color: #FFFFFF;
   font-size: 36rpx;
-  font-weight: 700;
-  box-shadow: 1px 1px 5px #ccc;
+  /*box-shadow: 1px 1px 5px #ccc;*/
 }
 
 .imgBar {
   white-space: nowrap;
-  width:70%;
-  margin-bottom: 20rpx;
+  width:100%;
+  margin: 50rpx 0;
 }
 
 .image {
   position:relative;
   display:inline-block;
   width:50%;
-  height:200rpx;
+  height:300rpx;
   float:left;
 
 }
 
 image {
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: 95%;
 }
 
 .cancel {
@@ -153,6 +178,7 @@ export default class Publish extends wepy.page {
 
   onLoad () {
     let self = this
+    self.imgs = []
     api.categoryList().then(results => {
       console.log('results', results)
       self.categories = results
@@ -161,6 +187,12 @@ export default class Publish extends wepy.page {
   }
 
   methods = {
+    goBack() {
+        console.log('执行了')
+      wepy.switchTab({
+        url: `pages/boards`
+      })
+    },
     bindPickerChange (e) {
       this.index = e.detail.value
     },
@@ -191,6 +223,7 @@ export default class Publish extends wepy.page {
         pic_urls: data.map(({url}) => url),
         category_id: categoryId
       })
+      this.imgs = []
       this.loading = false
       this.disabled = false
       wepy.switchTab({
