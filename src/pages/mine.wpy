@@ -44,6 +44,10 @@
 </template>
 
 <style scoped>
+.root {
+  width: 80%;
+  margin: 0 10%;
+  }
 .root>view {
   padding: 20rpx;
   border-bottom: 1px solid #eee;
@@ -78,13 +82,16 @@
 
 <script>
 import wepy from 'wepy'
+import * as api from '../apis/mine'
+console.log('qweqweqweqweqwe')
+
 export default class Mine extends wepy.page {
   config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '我的信息'
   }
-
-  data = {
-
+  async onLoad() {
+    const res = await api.getUserData('76572b6d68c03186f16cbae31f48051cce022213', '13')
+    console.log(res.credits)
   }
 }
 </script>

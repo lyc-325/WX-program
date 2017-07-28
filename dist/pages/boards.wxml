@@ -1,25 +1,27 @@
 
-<view scroll-x="true" style="width:100%" class="navbar _b924dfd">
-  <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _b924dfd">
+   <view scroll-x="true" style="width:100%;" class="navbar _3a4b55c">
+   <view style="display:flex; border-bottom:2rpx solid #eee" class="_3a4b55c">
+   <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _3a4b55c">
     {{item}}
+   </view>
+   </view>
   </view>
-</view>
-<view class="list _b924dfd">
-  <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _b924dfd">
-    <view class="cover _b924dfd">
-      <image mode="scaleToFill" src="{{item.cover}}" class="_b924dfd"/>
+  <view class="list _3a4b55c" style="padding-top: 80rpx;">
+  <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _3a4b55c">
+    <view class="cover _3a4b55c">
+      <image mode="scaleToFill" src="{{item.cover}}" class="_3a4b55c"/>
     </view>
-    <view class="info _b924dfd">
-      <view class="title _b924dfd">{{item.title}}</view>
-      <view class="content _b924dfd">{{item.content}}</view>
-      <view class="footer _b924dfd">
-        <view class="createdBy _b924dfd">{{item.createdBy}}</view>
-        <view class="createdAt _b924dfd">{{item.createdAt}}</view>
-        <view class="read _b924dfd">
+    <view class="info _3a4b55c">
+      <view class="title _3a4b55c">{{item.title}}</view>
+      <view class="content _3a4b55c">{{item.content}}</view>
+      <view class="footer _3a4b55c">
+        <view class="createdBy _3a4b55c">{{item.createdBy}}</view>
+        <view class="createdAt _3a4b55c">{{item.createdAt}}</view>
+        <view class="read _3a4b55c">
           {{item.read}} 阅读
         </view>
       </view>
     </view>
   </view>
 </view>
-<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _b924dfd">发布</view>
+<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _3a4b55c">发布</view>

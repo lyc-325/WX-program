@@ -1,160 +1,162 @@
 <style lang='less'>
-/**app.wxss**/
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
+  /**app.wxss**/
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200 rpx 0;
+    box-sizing: border-box;
+  }
 
-.button {
-  padding: 20px;
-}
+  .button {
+    padding: 20px;
+  }
 
-.navbar{
-  flex: none;
-  display: flex;
-  background: #fff;
-  overflow-x: scroll;
-}
+  .navbar {
+    flex: none;
+    display: flex;
+    background: #fff;
+    overflow-x: scroll;
+  }
 
-.navbar .item{
-  position: relative;
-  flex: auto;
-  text-align: center;
-  line-height: 80rpx;
-  white-space: nowrap;
-  padding: 0 20rpx;
-}
+  .navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80 rpx;
+    white-space: nowrap;
+    padding: 0 20 rpx;
+  }
 
-.navbar .item.active{
-  color: #1EB571;
-}
+  .navbar .item.active {
+    color: #1EB571;
+    border-bottom: 2rpx solid #1EB571;
+  }
 
-.navbar .item.active:after{
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4rpx;
-  background: #1EB571;
-}
+  .navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4 rpx;
+    background: #1EB571;
+  }
 
-.form-error {
-  background-color: red;
-  color: #fff;
-  position: fixed;
-  padding: 10rpx;
-  top:0;
-  width: 100%;
-  text-align: center;
-}
+  .form-error {
+    background-color: red;
+    color: #fff;
+    position: fixed;
+    padding: 10 rpx;
+    top: 0;
+    width: 100%;
+    text-align: center;
+  }
 
-input.error{
-  color: red;
-}
+  input.error {
+    color: red;
+  }
 </style>
 
 <script>
-import wepy from 'wepy'
-import 'wepy-async-function'
+  import wepy from 'wepy'
+  import 'wepy-async-function'
 
-import {
-  setStore
-} from 'wepy-redux'
+  import {
+    setStore
+  } from 'wepy-redux'
 
-import configureStore from './configureStore'
-const store = configureStore()
+  import configureStore from './configureStore'
+  const store = configureStore()
 
-setStore(store)
+  setStore(store)
 
-export default class extends wepy.app {
-  config = {
-    pages: [
-      // 聊天室
-      'pages/chatrooms',
-      // 消息
-      'pages/sessions',
-      // 留言板
-      'pages/boards',
-      // 好犹豫
-      'pages/friends',
-      // 我的
-      'pages/mine',
-      // // 聊天
-      'pages/chat',
-      // 好友
-      'pages/friend',
-      // 好用申请消息
-      'pages/notifications',
-      // 留言板详情
-      'pages/board',
-      // 发布留言
-      'pages/publish',
-      // 添加好友
-      'pages/add',
-      // 申请
-      'pages/apply',
-      // 聊天室
-      'pages/chatroom',
-      // 注册
-      'pages/register'
-    ],
-    tabBar: {
-      color: '#707070',
-      selectedColor: '#1EB571',
-      borderStyle: '#ccc',
-      backgroundColor: '#fff',
-      list: [
-        {
-          pagePath: 'pages/chatrooms',
-          iconPath: 'static/icons/chatroom.png',
-          selectedIconPath: 'static/icons/chatroom_selected.png',
-          text: '聊天室'
-        },
-        {
-          pagePath: 'pages/boards',
-          iconPath: 'static/icons/board.png',
-          selectedIconPath: 'static/icons/board_selected.png',
-          text: '留言板'
-        },
-        // {
-        //   pagePath: 'pages/sessions',
-        //   iconPath: 'static/icons/message.png',
-        //   selectedIconPath: 'static/icons/message_selected.png',
-        //   text: '消息'
-        // },
-        // {
-        //   pagePath: 'pages/friends',
-        //   iconPath: 'static/icons/friends.png',
-        //   selectedIconPath: 'static/icons/friends_selected.png',
-        //   text: '好友'
-        // },
-        {
-          pagePath: 'pages/mine',
-          iconPath: 'static/icons/mine.png',
-          selectedIconPath: 'static/icons/mine_selected.png',
-          text: '我的'
-        }
-      ]
-    },
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        // 聊天室
+        'pages/chatrooms',
+        // 消息
+        'pages/sessions',
+        // 留言板
+        'pages/boards',
+        // 好犹豫
+        'pages/friends',
+        // 我的
+        'pages/mine',
+        // // 聊天
+        'pages/chat',
+        // 好友
+        'pages/friend',
+        // 好用申请消息
+        'pages/notifications',
+        // 留言板详情
+        'pages/board',
+        // 发布留言
+        'pages/publish',
+        // 添加好友
+        'pages/add',
+        // 申请
+        'pages/apply',
+        // 聊天室
+        'pages/chatroom',
+        // 注册
+        'pages/register'
+      ],
+      tabBar: {
+        color: '#707070',
+        selectedColor: '#1EB571',
+        borderStyle: '#ccc',
+        backgroundColor: '#fff',
+        list: [
+          {
+            pagePath: 'pages/chatrooms',
+            iconPath: 'static/icons/chatroom.png',
+            selectedIconPath: 'static/icons/chatroom_selected.png',
+            text: '聊天室'
+          },
+          {
+            pagePath: 'pages/boards',
+            iconPath: 'static/icons/board.png',
+            selectedIconPath: 'static/icons/board_selected.png',
+            text: '留言板'
+          },
+          // {
+          //   pagePath: 'pages/sessions',
+          //   iconPath: 'static/icons/message.png',
+          //   selectedIconPath: 'static/icons/message_selected.png',
+          //   text: '消息'
+          // },
+          // {
+          //   pagePath: 'pages/friends',
+          //   iconPath: 'static/icons/friends.png',
+          //   selectedIconPath: 'static/icons/friends_selected.png',
+          //   text: '好友'
+          // },
+          {
+            pagePath: 'pages/mine',
+            iconPath: 'static/icons/mine.png',
+            selectedIconPath: 'static/icons/mine_selected.png',
+            text: '个人中心'
+          }
+        ]
+      },
+      window: {
+        backgroundTextStyle: 'light',
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTitleText: 'WeChat',
+        navigationBarTextStyle: 'black'
+      }
     }
-  }
 
-  constructor() {
-    super()
-    this.use('requestfix')
-    this.use('promisify')
+    constructor() {
+      super()
+      this.use('requestfix')
+      this.use('promisify')
+    }
+
   }
-}
 </script>

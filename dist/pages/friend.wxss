@@ -1,34 +1,34 @@
 
-.container._dca4c64 {
+.container._12d412d {
   padding: 100rpx 200rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.container .avatar._dca4c64 {
+.container .avatar._12d412d {
   padding: 50rpx;
   text-align: center;
 }
 
-.container .avatar image._dca4c64 {
+.container .avatar image._12d412d {
   width: 200rpx;
   height: 200rpx;
 }
 
-.container .info._dca4c64 {
+.container .info._12d412d {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.container .info > .item._dca4c64 {
+.container .info > .item._12d412d {
   display: flex;
   justify-content: space-between;
   padding: 20rpx 0;
 }
 
-.container .add._dca4c64 {
+.container .add._12d412d {
   margin-top: 50rpx;
   background: red;
   color: white;

@@ -6,28 +6,35 @@
     </view>
     <picker @change="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}">
       <view class="picker">
-        分类：<view class="slider">{{categories[index].name}}</view>
+        选择分类：<view class="slider">{{categories[index].name}}</view>
       </view>
     </picker>
-    <view class="item">
+    <view class="item" style="width:70%;">
       <textarea name="content" placeholder="内容" auto-focus/>
     </view>
-    <view @tap="handleUpload" class="upload">上传图片</view>
-    <scroll-view scroll-x="true" class="imgBar">
+    <view  class="imgBar">
       <view class="image" wx:for="{{imgs}}" wx:key="{{index}}">
         <image mode="scaleToFill" src="{{item}}">
           <view class="cancel" data-index="{{index}}" @tap="handleCancel">X</view>
         </image>
       </view>
-    </scroll-view>
-    <button form-type="submit" class="publish">发布</button>
+    </view>
+    <view class="controlBlock">
+      <button @tap="handleUpload" class="upload">上传图片</button>
+      <button form-type="submit" class="publish">发布</button>
+    </view>
   </view>
 </form>
 </template>
 
 <style scoped>
 /* board_publish.wxss */
+.controlBlock{
+  width:80%;
+  display:flex;
+  margin-bottom: 60rpx;
 
+}
 .container {
   display: flex;
   flex-flow: column;
@@ -40,6 +47,7 @@
   margin-bottom: 20rpx;
 }
 .picker {
+  padding: 20rpx 0;
   font-size: 36rpx;
   display: flex;
   width: 380rpx;
@@ -48,9 +56,11 @@
   align-items: center;
 }
 .slider {
-  border: 1rpx #ccc solid;
-  width: 240rpx;
+  /*border: 1rpx #ccc solid;*/
+  width: 150rpx;
   text-align: center;
+  background: #1eb571;
+  color: white;
   border-radius: 10rpx;
   padding: 10rpx;
 }
@@ -68,9 +78,9 @@
 }
 
 .upload {
-  margin-left: -425rpx;
-  margin-bottom: 20rpx;
-  width: 180rpx;
+  /*margin-left: -425rpx;*/
+  /*margin-bottom: 20rpx;*/
+  width: 240rpx;
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 20rpx;
@@ -84,15 +94,17 @@
 
 .imgBar {
   white-space: nowrap;
-  display: flex;
+  width:70%;
   margin-bottom: 20rpx;
 }
 
 .image {
-  position: relative;
-  display: inline-block;
-  width: 375rpx;
-  height: 240rpx;
+  position:relative;
+  display:inline-block;
+  width:50%;
+  height:200rpx;
+  float:left;
+
 }
 
 image {
@@ -128,7 +140,7 @@ import * as api from '../apis/board'
 })
 export default class Publish extends wepy.page {
   config = {
-    navigationBarTitleText: '发布'
+    navigationBarTitleText: '发布消息'
   }
 
   data = {

@@ -1,33 +1,33 @@
 
-<view class="root _c64b4cc">
-  <view class="container _c64b4cc">
-    <view class="head _c64b4cc">
-      <view class="value _c64b4cc">{{title}}</view>
+<view class="root _39d534a">
+  <view class="container _39d534a">
+    <view class="head _39d534a">
+      <view class="value _39d534a">{{title}}</view>
     </view>
 
-    <view class="item _c64b4cc">
-      <view class="label _c64b4cc">发布人</view>
-      <view class="value _c64b4cc">{{createdBy}}</view>
+    <view class="item _39d534a">
+      <view class="label _39d534a">发布人:</view>
+      <view class="value _39d534a">{{createdBy}}</view>
     </view>
 
-    <view class="item _c64b4cc">
-      <view class="label _c64b4cc">发布时间</view>
-      <view class="value _c64b4cc">{{createdAt}}</view>
+    <view class="item _39d534a">
+      <view class="label _39d534a">发布时间:</view>
+      <view class="value _39d534a">{{createdAt}}</view>
     </view>
 
-    <view class="item _c64b4cc">
-      <view class="label _c64b4cc">浏览量</view>
-      <view class="value _c64b4cc">{{read}}</view>
+    <view class="item _39d534a" style="border-bottom: 2rpx solid #eee;">
+      <view class="label _39d534a">浏览量:</view>
+      <view class="value _39d534a">{{read}}</view>
     </view>
 
-    <scroll-view scroll-x="true" class="imgBar _c64b4cc"  wx:if="{{imgs.length !== 0 }}">
-      <view class="image _c64b4cc" wx:for="{{imgs}}" wx:key="{{index}}">
-        <image mode="scaleToFill" src="{{item}}" class="_c64b4cc"/>
+    <view class="imgBar _39d534a"  wx:if="{{imgs.length !== 0 }}">
+      <view class="image _39d534a" wx:for="{{imgs}}" wx:key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" class="_39d534a"/>
       </view>
-    </scroll-view>
-    <view class="area _c64b4cc">
-      <view class="label _c64b4cc">内容</view>
-      <view class="value _c64b4cc">{{content}}</view>
+    </view>
+    <view class="area _39d534a">
+      <view class="label _39d534a" style="border-bottom: 2rpx solid #eee;">内容</view>
+      <view class="value _39d534a">{{content}}</view>
     </view>
   </view>
 </view>

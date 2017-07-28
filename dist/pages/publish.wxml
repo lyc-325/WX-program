@@ -1,25 +1,27 @@
 
-<form bindsubmit="bindFormSubmit" class="_57ea6c3">
-  <view class="container _57ea6c3">
-    <view class="item _57ea6c3">
-      <input name="title" placeholder="标题" auto-focus class="_57ea6c3"/>
+<form bindsubmit="bindFormSubmit" class="_fb92b44">
+  <view class="container _fb92b44">
+    <view class="item _fb92b44">
+      <input name="title" placeholder="标题" auto-focus class="_fb92b44"/>
     </view>
-    <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_57ea6c3">
-      <view class="picker _57ea6c3">
-        分类：<view class="slider _57ea6c3">{{categories[index].name}}</view>
+    <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_fb92b44">
+      <view class="picker _fb92b44">
+        选择分类：<view class="slider _fb92b44">{{categories[index].name}}</view>
       </view>
     </picker>
-    <view class="item _57ea6c3">
-      <textarea name="content" placeholder="内容" auto-focus class="_57ea6c3"/>
+    <view class="item _fb92b44" style="width:70%;">
+      <textarea name="content" placeholder="内容" auto-focus class="_fb92b44"/>
     </view>
-    <view bindtap="handleUpload" class="upload _57ea6c3">上传图片</view>
-    <scroll-view scroll-x="true" class="imgBar _57ea6c3">
-      <view class="image _57ea6c3"  wx:for="{{imgs}}" wx:key="{{index}}">
-        <image mode="scaleToFill" src="{{item}}" class="_57ea6c3">
-          <view class="cancel _57ea6c3" data-index="{{index}}" bindtap="handleCancel">X</view>
+    <view class="imgBar _fb92b44">
+      <view class="image _fb92b44"  wx:for="{{imgs}}" wx:key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" class="_fb92b44">
+          <view class="cancel _fb92b44" data-index="{{index}}" bindtap="handleCancel">X</view>
         </image>
       </view>
-    </scroll-view>
-    <button form-type="submit" class="publish _57ea6c3">发布</button>
+    </view>
+    <view class="controlBlock _fb92b44">
+      <button bindtap="handleUpload" class="upload _fb92b44">上传图片</button>
+      <button form-type="submit" class="publish _fb92b44">发布</button>
+    </view>
   </view>
 </form>

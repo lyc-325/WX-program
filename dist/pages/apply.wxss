@@ -1,9 +1,9 @@
 
-.container._45a93bc {
+.container._b93323a {
   padding-top: 20rpx;
 }
 
-.friend._45a93bc {
+.friend._b93323a {
   display: flex;
   width: 96%;
   height: 200rpx;
@@ -11,30 +11,30 @@
   justify-content: space-around;
 }
 
-.avatar image._45a93bc {
+.avatar image._b93323a {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
 }
-.info._45a93bc {
+.info._b93323a {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
-.info > .item._45a93bc {
+.info > .item._b93323a {
   margin-top: 10rpx;
   width: 260rpx;
   display: flex;
   justify-content: space-between;
 }
 
-.area._45a93bc {
+.area._b93323a {
   padding: 20rpx;
   border: 1rpx #eee solid;
   margin-bottom: 20rpx;
 }
 
-.send._45a93bc {
+.send._b93323a {
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 5px;

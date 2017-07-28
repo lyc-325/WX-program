@@ -1,19 +1,19 @@
 
-<view class="root _deba049">
-  <view class="search _deba049">
-    <input type="text" placeholder="搜索" confirm-type="search" bindconfirm="filter" bindinput="filter" class="_deba049"/>
+<view class="root _fb3b66c">
+  <view class="search _fb3b66c">
+    <input type="text" placeholder="搜索" confirm-type="search" bindconfirm="filter" bindinput="filter" class="_fb3b66c"/>
   </view>
 
-  <view  wx:if="{{notifications > 0}}" class="notification _deba049">
-    <view bindtap="toNotification" class="_deba049">申请与通知</view>
-    <view class="badge _deba049">{{notifications}}</view>
+  <view  wx:if="{{notifications > 0}}" class="notification _fb3b66c">
+    <view bindtap="toNotification" class="_fb3b66c">申请与通知</view>
+    <view class="badge _fb3b66c">{{notifications}}</view>
   </view>
 
-  <view  wx:for="{{showedFriends}}" wx:key="{{index}}" class="friend _deba049" bindtap="toChat" data-wepy-params-a="{{index}}">
-    <view class="avatar _deba049">
-      <image mode="scaleToFill" src="{{item.avatar}}" class="_deba049"/>
+  <view  wx:for="{{showedFriends}}" wx:key="{{index}}" class="friend _fb3b66c" bindtap="toChat" data-wepy-params-a="{{index}}">
+    <view class="avatar _fb3b66c">
+      <image mode="scaleToFill" src="{{item.avatar}}" class="_fb3b66c"/>
     </view>
-    <view class="nickname _deba049">{{item.nickname}}</view>
+    <view class="nickname _fb3b66c">{{item.nickname}}</view>
   </view>
 </view>
-<view bindtap="toAdd" class="plus _deba049">+</view>
+<view bindtap="toAdd" class="plus _fb3b66c">+</view>

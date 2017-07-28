@@ -1,30 +1,34 @@
 
-.root>view._5f09083 {
+.root._03978bc {
+  width: 80%;
+  margin: 0 10%;
+  }
+.root>view._03978bc {
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
 
-.base._5f09083 {
+.base._03978bc {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.base>view._5f09083:first-child {
+.base>view._03978bc:first-child {
   display: flex;
   align-items: center;
 }
 
-.base .avatar._5f09083 {
+.base .avatar._03978bc {
   margin-right: 10rpx;
 }
 
-.base .avatar image._5f09083 {
+.base .avatar image._03978bc {
   width: 100rpx;
   height: 100rpx;
 }
 
-.details>.item._5f09083 {
+.details>.item._03978bc {
   display: flex;
   padding: 10rpx 0;
   justify-content: space-between;
