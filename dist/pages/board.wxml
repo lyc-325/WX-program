@@ -1,33 +1,33 @@
 
-<view class="root _39d534a">
-  <view class="container _39d534a">
-    <view class="head _39d534a">
-      <view class="value _39d534a">{{title}}</view>
+<view class="root _0639b95">
+  <view class="container _0639b95">
+    <view class="head _0639b95">
+      <view class="value _0639b95">{{title}}</view>
     </view>
 
-    <view class="item _39d534a">
-      <view class="label _39d534a">发布人:</view>
-      <view class="value _39d534a">{{createdBy}}</view>
+    <view class="item _0639b95">
+      <view class="label _0639b95">发布人:</view>
+      <view class="value _0639b95">{{createdBy}}</view>
     </view>
 
-    <view class="item _39d534a">
-      <view class="label _39d534a">发布时间:</view>
-      <view class="value _39d534a">{{createdAt}}</view>
+    <view class="item _0639b95">
+      <view class="label _0639b95">发布时间:</view>
+      <view class="value _0639b95">{{createdAt}}</view>
     </view>
 
-    <view class="item _39d534a" style="border-bottom: 2rpx solid #eee;">
-      <view class="label _39d534a">浏览量:</view>
-      <view class="value _39d534a">{{read}}</view>
+    <view class="item _0639b95" style="border-bottom: 2rpx solid #eee;">
+      <view class="label _0639b95">浏览量:</view>
+      <view class="value _0639b95">{{read}}</view>
     </view>
 
-    <view class="imgBar _39d534a"  wx:if="{{imgs.length !== 0 }}">
-      <view class="image _39d534a" wx:for="{{imgs}}" wx:key="{{index}}">
-        <image mode="scaleToFill" src="{{item}}" class="_39d534a"/>
+    <view class="imgBar _0639b95"  wx:if="{{imgs.length !== 0 }}">
+      <view class="image _0639b95" wx:for="{{imgs}}" wx:key="{{index}}">
+        <image mode="scaleToFill" src="{{item}}" class="_0639b95"/>
       </view>
     </view>
-    <view class="area _39d534a">
-      <view class="label _39d534a" style="border-bottom: 2rpx solid #eee;">内容</view>
-      <view class="value _39d534a">{{content}}</view>
+    <view class="area _0639b95">
+      <view class="label _0639b95" style="border-bottom: 2rpx solid #eee;">内容</view>
+      <view class="value _0639b95">{{content}}</view>
     </view>
   </view>
 </view>

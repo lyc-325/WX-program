@@ -157,6 +157,17 @@
       this.use('requestfix')
       this.use('promisify')
     }
-
+//    onLaunch() {
+//      console.log('这个执行了吗')
+//      wepy.showShareMenu({
+//        withShareTicket: true,
+//        success: (res) => {
+//          console.log(res)
+//        },
+//        complete: (res) => {
+//          console.log(res)
+//        }
+//      })
+//    }
   }
 </script>

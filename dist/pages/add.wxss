@@ -1,31 +1,31 @@
 
-.root > view._6e95154 {
+.root > view._9bcb9e0 {
   padding: 20rpx;index
   border-bottom: 1px solid #eee;
 }
 
-form._6e95154 {
+form._9bcb9e0 {
   width: 100%;
 }
 
-.search input._6e95154{
+.search input._9bcb9e0{
   text-align: center;
   background: white;
   font-size: 30rpx;
   border: 1px solid #eee;
 }
 
-.friend._6e95154 {
+.friend._9bcb9e0 {
   display: flex;
   align-items: center;
   font-size: 32rpx;
 }
 
-.friend .avatar._6e95154 {
+.friend .avatar._9bcb9e0 {
   margin-right: 10rpx;
 }
 
-.friend .avatar image._6e95154 {
+.friend .avatar image._9bcb9e0 {
   width: 80rpx;
   height: 80rpx;
 }

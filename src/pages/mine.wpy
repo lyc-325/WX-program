@@ -1,13 +1,17 @@
 <template>
 <view class="root">
-  <view class="base">
-    <view>
-      <view class="avatar">
-        <image mode="scaleToFill" src="{{avatar}}" />
-      </view>
-      <view class="nickname">{{nickname}}</view>
-    </view>
-    <view class="membership">{{membership}}</view>
+  <!--<view class="base">-->
+    <!--<view>-->
+      <!--<view class="avatar">-->
+        <!--<image mode="scaleToFill" src="{{avatar}}" />-->
+      <!--</view>-->
+      <!--<view class="nickname">{{nickname}}</view>-->
+    <!--</view>-->
+    <!--<view class="membership">{{membership}}</view>-->
+  <!--</view>-->
+  <view class="userinfo" @tap="handleViewTap">
+    <image class="userinfo-avatar" src="{{userInfoData.avatarUrl}}" background-size="cover"/>
+    <view class="userinfo-nickname">{{userInfoData.nickName}}</view>
   </view>
   <view class="details">
     <view class="item">
@@ -44,6 +48,21 @@
 </template>
 
 <style scoped>
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.userinfo-avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+  }
+
+.userinfo-nickname {
+    color: #aaa;
+  }
 .root {
   width: 80%;
   margin: 0 10%;
@@ -83,15 +102,24 @@
 <script>
 import wepy from 'wepy'
 import * as api from '../apis/mine'
-console.log('qweqweqweqweqwe')
 
 export default class Mine extends wepy.page {
   config = {
     navigationBarTitleText: '我的信息'
   }
+  data = {
+    userInfoData: {
+      nickName: '加载中...'
+    }
+  }
   async onLoad() {
+    let self = this
     const res = await api.getUserData('76572b6d68c03186f16cbae31f48051cce022213', '13')
-    console.log(res.credits)
+    console.log(res)
+    var userData = await wepy.getUserInfo()
+    self.userInfoData = userData.userInfo
+    console.log(self.userInfoData)
+    self.$apply()
   }
 }
 </script>

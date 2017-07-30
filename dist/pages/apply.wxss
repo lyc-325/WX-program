@@ -1,9 +1,9 @@
 
-.container._b93323a {
+.container._468ac1d {
   padding-top: 20rpx;
 }
 
-.friend._b93323a {
+.friend._468ac1d {
   display: flex;
   width: 96%;
   height: 200rpx;
@@ -11,30 +11,30 @@
   justify-content: space-around;
 }
 
-.avatar image._b93323a {
+.avatar image._468ac1d {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
 }
-.info._b93323a {
+.info._468ac1d {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
-.info > .item._b93323a {
+.info > .item._468ac1d {
   margin-top: 10rpx;
   width: 260rpx;
   display: flex;
   justify-content: space-between;
 }
 
-.area._b93323a {
+.area._468ac1d {
   padding: 20rpx;
   border: 1rpx #eee solid;
   margin-bottom: 20rpx;
 }
 
-.send._b93323a {
+.send._468ac1d {
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 5px;

@@ -187,10 +187,10 @@ export default class Publish extends wepy.page {
   }
 
   methods = {
-    goBack() {
-        console.log('执行了')
+    goBack () {
+      console.log('执行了')
       wepy.switchTab({
-        url: `pages/boards`
+        url: `boards`
       })
     },
     bindPickerChange (e) {

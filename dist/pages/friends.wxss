@@ -1,17 +1,17 @@
 
-.root > view._fb3b66c {
+.root > view._247f8f8 {
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
 
-.search input._fb3b66c{
+.search input._247f8f8{
   text-align: center;
   background: white;
   font-size: 30rpx;
   border: 1px solid #eee;
 }
 
-.notification._fb3b66c {
+.notification._247f8f8 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +19,7 @@
   background-color: #eee;
 }
 
-.notification .badge._fb3b66c {
+.notification .badge._247f8f8 {
   border-radius: 50%;
   width: 50rpx;
   height: 50rpx;
@@ -30,22 +30,22 @@
   background-color: red;
 }
 
-.friend._fb3b66c {
+.friend._247f8f8 {
   display: flex;
   align-items: center;
   font-size: 32rpx;
 }
 
-.friend .avatar._fb3b66c {
+.friend .avatar._247f8f8 {
   margin-right: 10rpx;
 }
 
-.friend .avatar image._fb3b66c {
+.friend .avatar image._247f8f8 {
   width: 80rpx;
   height: 80rpx;
 }
 
-.plus._fb3b66c {
+.plus._247f8f8 {
   position: fixed;
   bottom: 10rpx;
   right: 10rpx;

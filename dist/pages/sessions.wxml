@@ -1,27 +1,27 @@
 
-<view class="navbar _d761728">
-  <view for="{{navs}}" key="unique" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ' '}} _d761728">
+<view class="navbar _d6a261c">
+  <view for="{{navs}}" key="unique" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ' '}} _d6a261c">
     {{item}}
   </view>
 </view>
-<view class="list _d761728">
-  <view  wx:for="{{sessions}}" wx:key="{{index}}" class="item _d761728">
-    <view data-index="{{index}}" bindtap="toChat" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd" style="{{item.style}}" class="content _d761728">
-      <view class="avatar _d761728">
-        <image mode="scaleToFill" src="{{item.avatar}}" class="_d761728"/>
+<view class="list _d6a261c">
+  <view  wx:for="{{sessions}}" wx:key="{{index}}" class="item _d6a261c">
+    <view data-index="{{index}}" bindtap="toChat" bindtouchstart="handleTouchStart" bindtouchmove="handleTouchMove" bindtouchend="handleTouchEnd" style="{{item.style}}" class="content _d6a261c">
+      <view class="avatar _d6a261c">
+        <image mode="scaleToFill" src="{{item.avatar}}" class="_d6a261c"/>
       </view>
-      <view class="info _d761728">
-        <view class="from _d761728">
-          <view class="name _d761728">{{item.from}}</view>
-          <view class="date _d761728">2017-03-08</view>
+      <view class="info _d6a261c">
+        <view class="from _d6a261c">
+          <view class="name _d6a261c">{{item.from}}</view>
+          <view class="date _d6a261c">2017-03-08</view>
         </view>
-        <view class="msg _d761728">
+        <view class="msg _d6a261c">
           {{item.msg}}
         </view>
       </view>
     </view>
-    <view class="buttons _d761728">
-      <view class="del _d761728" data-addressid="{{item.address.ID}}" data-id="{{index}}" bindtap="showDeleteModal">删除</view>
+    <view class="buttons _d6a261c">
+      <view class="del _d6a261c" data-addressid="{{item.address.ID}}" data-id="{{index}}" bindtap="showDeleteModal">删除</view>
     </view>
   </view>
 </view>

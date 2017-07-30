@@ -1,27 +1,27 @@
 
-   <view scroll-x="true" style="width:100%;" class="navbar _3a4b55c">
-   <view style="display:flex; padding:10rpx 0; background:#eee" class="_3a4b55c">
-   <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _3a4b55c">
+   <view scroll-x="true" style="width:100%;" class="navbar _089d13c">
+   <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;" class="_089d13c">
+   <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _089d13c">
     {{item}}
    </view>
    </view>
   </view>
-  <view class="list _3a4b55c" style="padding-top: 80rpx;">
-  <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _3a4b55c">
-    <view class="cover _3a4b55c">
-      <image mode="scaleToFill" src="{{item.cover}}" class="_3a4b55c"/>
+  <view class="list _089d13c" style="padding-top: 80rpx;">
+  <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _089d13c">
+    <view class="cover _089d13c">
+      <image mode="scaleToFill" src="{{item.cover}}" class="_089d13c"/>
     </view>
-    <view class="info _3a4b55c">
-      <view class="title _3a4b55c">{{item.title}}</view>
-      <view class="content _3a4b55c">{{item.content}}</view>
-      <view class="footer _3a4b55c">
-        <view class="createdBy _3a4b55c">{{item.createdBy}}</view>
-        <view class="createdAt _3a4b55c">{{item.createdAt}}</view>
-        <view class="read _3a4b55c">
+    <view class="info _089d13c">
+      <view class="title _089d13c">{{item.title}}</view>
+      <view class="content _089d13c">{{item.content}}</view>
+      <view class="footer _089d13c">
+        <view class="createdBy _089d13c">{{item.createdBy}}</view>
+        <view class="createdAt _089d13c">{{item.createdAt}}</view>
+        <view class="read _089d13c">
           {{item.read}} 阅读
         </view>
       </view>
     </view>
   </view>
 </view>
-<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _3a4b55c">发布</view>
+<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _089d13c">发布</view>

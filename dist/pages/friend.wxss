@@ -1,34 +1,34 @@
 
-.container._12d412d {
+.container._d43a333 {
   padding: 100rpx 200rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.container .avatar._12d412d {
+.container .avatar._d43a333 {
   padding: 50rpx;
   text-align: center;
 }
 
-.container .avatar image._12d412d {
+.container .avatar image._d43a333 {
   width: 200rpx;
   height: 200rpx;
 }
 
-.container .info._12d412d {
+.container .info._d43a333 {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.container .info > .item._12d412d {
+.container .info > .item._d43a333 {
   display: flex;
   justify-content: space-between;
   padding: 20rpx 0;
 }
 
-.container .add._12d412d {
+.container .add._d43a333 {
   margin-top: 50rpx;
   background: red;
   color: white;

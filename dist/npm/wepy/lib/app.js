@@ -118,9 +118,7 @@ var _class = function () {
                 createContext: true,
                 createCanvasContext: true,
                 hideKeyboard: true,
-                stopPullDownRefresh: true,
-                // custom
-                createSelectorQuery: true
+                stopPullDownRefresh: true
             };
             Object.keys(wx).forEach(function (key) {
                 if (!noPromiseMethods[key] && key.substr(0, 2) !== 'on' && !/\w+Sync$/.test(key)) {

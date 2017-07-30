@@ -311,7 +311,7 @@ export default class Chatroom extends wepy.page {
             const res = await chatroom.getHistoryMsgs({
               limit: 100
             })
-            const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !=='tip')
+            const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip')
             console.log('history messages', msgs)
             // 刷新消息
             pushMsg(msgs || [])

@@ -1,34 +1,49 @@
 
-.root._03978bc {
+.userinfo._7d321b0 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.userinfo-avatar._7d321b0 {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+  }
+
+.userinfo-nickname._7d321b0 {
+    color: #aaa;
+  }
+.root._7d321b0 {
   width: 80%;
   margin: 0 10%;
   }
-.root>view._03978bc {
+.root>view._7d321b0 {
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
 
-.base._03978bc {
+.base._7d321b0 {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.base>view._03978bc:first-child {
+.base>view._7d321b0:first-child {
   display: flex;
   align-items: center;
 }
 
-.base .avatar._03978bc {
+.base .avatar._7d321b0 {
   margin-right: 10rpx;
 }
 
-.base .avatar image._03978bc {
+.base .avatar image._7d321b0 {
   width: 100rpx;
   height: 100rpx;
 }
 
-.details>.item._03978bc {
+.details>.item._7d321b0 {
   display: flex;
   padding: 10rpx 0;
   justify-content: space-between;

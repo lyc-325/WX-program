@@ -1,21 +1,21 @@
 
-<view class="container _b93323a">
-  <view class="friend _b93323a">
-    <view class="avatar _b93323a">
-      <image src="{{friend.avatar}}" mode="scaleToFill" class="_b93323a"/>
+<view class="container _468ac1d">
+  <view class="friend _468ac1d">
+    <view class="avatar _468ac1d">
+      <image src="{{friend.avatar}}" mode="scaleToFill" class="_468ac1d"/>
     </view>
-    <view class="info _b93323a">
-      <view class="item _b93323a">
-        <view class="value _b93323a">{{ friend.nickname }}</view>
+    <view class="info _468ac1d">
+      <view class="item _468ac1d">
+        <view class="value _468ac1d">{{ friend.nickname }}</view>
       </view>
     </view>
   </view>
-  <view class="form _b93323a">
-    <form class="_b93323a">
-      <view class="area _b93323a">
-        <textarea placeholder="验证信息（不超过20个字符）" auto-focus maxlength="20" bindinput="setMsg" class="_b93323a"/>
+  <view class="form _468ac1d">
+    <form class="_468ac1d">
+      <view class="area _468ac1d">
+        <textarea placeholder="验证信息（不超过20个字符）" auto-focus maxlength="20" bindinput="setMsg" class="_468ac1d"/>
       </view>
-      <button class="send _b93323a" loading="{{requesting}}" bindtap="submit">发送</button>
+      <button class="send _468ac1d" loading="{{requesting}}" bindtap="submit">发送</button>
     </form>
   </view>
 </view>

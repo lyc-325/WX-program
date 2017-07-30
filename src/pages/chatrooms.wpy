@@ -190,24 +190,50 @@ export default class Chatrooms extends wepy.page {
       })
     }
   }
-
+  onShareAppMessage = function (res) {
+    console.log('执行了分享')
+    return {
+      title: '江峰小程序',
+      path: '/page/chatrooms',
+      success: function (res) {
+        console.log(res.shareTickets[0])
+        wepy.getShareInfo({
+          shareTicket: res.shareTickets[0],
+          success: function (res) {
+            console.log(res)
+            console.log('不执行')
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+        // 转发失败
+      }
+    }
+  }
   async onLoad() {
     const { setUser } = this.methods
     // const pushMsg = this.methods.pushMsg.bind(this)
     wepy.showLoading()
+    wepy.showShareMenu({
+      withShareTicket: true,
+      success: (res) => {
+        console.log(res)
+      }
+    })
     const { code } = await wepy.login()
     const { data } = await wepy.request({
       url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
     })
     const { openid } = data
     const { userInfo } = await wepy.getUserInfo()
-
     const password = R.takeLast(5)(openid)
 
     const user = {
       ...userInfo,
       accid: openid.toLowerCase()
     }
+    console.log(user)
 
     setUser(user)
     // 如果用户尚未在 网易云注册 则先注册

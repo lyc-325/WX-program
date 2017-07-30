@@ -1,27 +1,27 @@
 
-<view class="container _12d412d">
-  <view class="avatar _12d412d">
-    <image src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" mode="scaleToFill" class="_12d412d"/>
+<view class="container _d43a333">
+  <view class="avatar _d43a333">
+    <image src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" mode="scaleToFill" class="_d43a333"/>
   </view>
 
-  <view class="info _12d412d">
-    <view class="item _12d412d">
-      <view class="label _12d412d">昵称</view>
-      <view class="value _12d412d">老哥</view>
+  <view class="info _d43a333">
+    <view class="item _d43a333">
+      <view class="label _d43a333">昵称</view>
+      <view class="value _d43a333">老哥</view>
     </view>
-    <view class="item _12d412d">
-      <view class="label _12d412d">性别</view>
-      <view class="value _12d412d">男</view>
+    <view class="item _d43a333">
+      <view class="label _d43a333">性别</view>
+      <view class="value _d43a333">男</view>
     </view>
-    <view class="item _12d412d">
-      <view class="label _12d412d">微信号</view>
-      <view class="value _12d412d">WooSure</view>
+    <view class="item _d43a333">
+      <view class="label _d43a333">微信号</view>
+      <view class="value _d43a333">WooSure</view>
     </view>
-    <view class="item _12d412d">
-      <view class="label _12d412d">公司</view>
-      <view class="value _12d412d">腾讯科技</view>
+    <view class="item _d43a333">
+      <view class="label _d43a333">公司</view>
+      <view class="value _d43a333">腾讯科技</view>
     </view>
   </view>
 
-  <view class="add _12d412d">添加</view>
+  <view class="add _d43a333">添加</view>
 </view>

@@ -1,43 +1,47 @@
 
-<view class="root _03978bc">
-  <view class="base _03978bc">
-    <view class="_03978bc">
-      <view class="avatar _03978bc">
-        <image mode="scaleToFill" src="{{avatar}}" class="_03978bc"/>
-      </view>
-      <view class="nickname _03978bc">{{nickname}}</view>
-    </view>
-    <view class="membership _03978bc">{{membership}}</view>
+<view class="root _7d321b0">
+  <!--<view class="base">-->
+    <!--<view>-->
+      <!--<view class="avatar">-->
+        <!--<image mode="scaleToFill" src="{{avatar}}" />-->
+      <!--</view>-->
+      <!--<view class="nickname">{{nickname}}</view>-->
+    <!--</view>-->
+    <!--<view class="membership">{{membership}}</view>-->
+  <!--</view>-->
+  <view class="userinfo _7d321b0" bindtap="handleViewTap">
+    <image class="userinfo-avatar _7d321b0" src="{{userInfoData.avatarUrl}}" background-size="cover"/>
+    <view class="userinfo-nickname _7d321b0">{{userInfoData.nickName}}</view>
   </view>
-  <view class="details _03978bc">
-    <view class="item _03978bc">
-      <view class="label _03978bc">公司</view>
-      <view class="value _03978bc">{{company}}</view>
+  <view class="details _7d321b0">
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">公司</view>
+      <view class="value _7d321b0">{{company}}</view>
     </view>
 
-    <view class="item _03978bc">
-      <view class="label _03978bc">手机号</view>
-      <view class="value _03978bc">{{phone}}</view>
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">手机号</view>
+      <view class="value _7d321b0">{{phone}}</view>
     </view>
 
-    <view class="item _03978bc">
-      <view class="label _03978bc">邮箱</view>
-      <view class="value _03978bc">{{email}}</view>
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">邮箱</view>
+      <view class="value _7d321b0">{{email}}</view>
     </view>
 
-    <view class="item _03978bc">
-      <view class="label _03978bc">性别</view>
-      <view class="value _03978bc">{{sex}}</view>
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">性别</view>
+      <view class="value _7d321b0">{{sex}}</view>
     </view>
 
-    <view class="item _03978bc">
-      <view class="label _03978bc">QQ</view>
-      <view class="value _03978bc">{{QQ}}</view>
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">QQ</view>
+      <view class="value _7d321b0">{{QQ}}</view>
     </view>
 
-    <view class="item _03978bc">
-      <view class="label _03978bc">积分</view>
-      <view class="value _03978bc">{{credits}}</view>
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">积分</view>
+      <view class="value _7d321b0">{{credits}}</view>
     </view>
   </view>
 </view>
