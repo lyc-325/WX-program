@@ -3,312 +3,33 @@
   <component name="ChangeListManager">
     <list default="true" id="8dc03a95-593a-46f6-aae2-873e44aaffb7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.wepycache" afterPath="$PROJECT_DIR$/.wepycache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/actions/chat.js" afterPath="$PROJECT_DIR$/dist/actions/chat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/actions/chatroom.js" afterPath="$PROJECT_DIR$/dist/actions/chatroom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/actions/common.js" afterPath="$PROJECT_DIR$/dist/actions/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/actions/friends.js" afterPath="$PROJECT_DIR$/dist/actions/friends.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/actions/sessions.js" afterPath="$PROJECT_DIR$/dist/actions/sessions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/apis/account.js" afterPath="$PROJECT_DIR$/dist/apis/account.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/apis/board.js" afterPath="$PROJECT_DIR$/dist/apis/board.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/apis/chatroom.js" afterPath="$PROJECT_DIR$/dist/apis/chatroom.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/apis/mine.js" afterPath="$PROJECT_DIR$/dist/apis/mine.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/app.js" afterPath="$PROJECT_DIR$/dist/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/counter.js" afterPath="$PROJECT_DIR$/dist/components/counter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/components/group.wxss" afterPath="$PROJECT_DIR$/dist/components/group.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/config.js" afterPath="$PROJECT_DIR$/dist/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/configureStore.js" afterPath="$PROJECT_DIR$/dist/configureStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs/NIM_Web_Chatroom_v3.8.0.js" afterPath="$PROJECT_DIR$/dist/libs/NIM_Web_Chatroom_v3.8.0.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs/NIM_Web_NIM_v3.8.0.js" afterPath="$PROJECT_DIR$/dist/libs/NIM_Web_NIM_v3.8.0.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs/NIM_Web_Netcall_v3.8.0.js" afterPath="$PROJECT_DIR$/dist/libs/NIM_Web_Netcall_v3.8.0.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/libs/ramda.js" afterPath="$PROJECT_DIR$/dist/libs/ramda.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/asyncToGenerator.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/asyncToGenerator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/classCallCheck.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/classCallCheck.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/createClass.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/createClass.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/defineProperty.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/defineProperty.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/extends.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/extends.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/inherits.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/inherits.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/possibleConstructorReturn.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/possibleConstructorReturn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/toConsumableArray.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/toConsumableArray.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/typeof.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/helpers/typeof.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/babel-runtime/regenerator/index.js" afterPath="$PROJECT_DIR$/dist/npm/babel-runtime/regenerator/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/charenc/charenc.js" afterPath="$PROJECT_DIR$/dist/npm/charenc/charenc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/array/from.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/array/from.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/json/stringify.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/json/stringify.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/number/is-integer.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/number/is-integer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/assign.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/assign.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/create.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/define-property.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/define-property.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/freeze.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/freeze.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/get-own-property-names.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/get-own-property-names.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/get-own-property-symbols.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/get-own-property-symbols.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/get-prototype-of.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/get-prototype-of.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/keys.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/keys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/set-prototype-of.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/object/set-prototype-of.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/promise.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/promise.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/set.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/set.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/symbol/index.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/symbol/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/fn/symbol/iterator.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/fn/symbol/iterator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_a-function.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_a-function.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_an-instance.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_an-instance.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_an-object.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_an-object.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-from-iterable.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-from-iterable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-includes.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-includes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-methods.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-methods.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-species-constructor.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-species-constructor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-species-create.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_array-species-create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_classof.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_classof.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_cof.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_cof.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_collection-strong.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_collection-strong.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_collection-to-json.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_collection-to-json.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_collection.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_collection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_core.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_create-property.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_create-property.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_ctx.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_ctx.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_defined.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_defined.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_descriptors.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_descriptors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_dom-create.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_dom-create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_enum-bug-keys.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_enum-bug-keys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_enum-keys.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_enum-keys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_export.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_export.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_fails.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_fails.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_for-of.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_for-of.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_global.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_global.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_has.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_has.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_hide.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_hide.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_ie8-dom-define.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_ie8-dom-define.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_invoke.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_invoke.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iobject.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iobject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-array-iter.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-array-iter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-array.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-array.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-integer.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-integer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-object.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_is-object.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-call.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-call.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-create.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-define.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-define.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-detect.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-detect.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-step.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_iter-step.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_keyof.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_keyof.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_meta.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_meta.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_microtask.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_microtask.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-assign.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-assign.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-create.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-dp.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-dp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-dps.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-dps.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gopd.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gopd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gopn-ext.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gopn-ext.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gopn.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gopn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gpo.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-gpo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-keys-internal.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-keys-internal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-keys.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-keys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-sap.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_object-sap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_property-desc.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_property-desc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_redefine-all.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_redefine-all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_set-proto.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_set-proto.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_set-species.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_set-species.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_set-to-string-tag.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_set-to-string-tag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_shared-key.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_shared-key.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_shared.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_shared.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_species-constructor.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_species-constructor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_string-at.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_string-at.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_task.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_task.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-index.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-integer.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-integer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-iobject.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-iobject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-length.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-length.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-object.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-object.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-primitive.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_to-primitive.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_uid.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_uid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_wks-define.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_wks-define.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_wks.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/_wks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/core.get-iterator-method.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/core.get-iterator-method.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.array.from.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.array.from.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.array.iterator.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.array.iterator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.number.is-integer.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.number.is-integer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.assign.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.assign.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.create.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.create.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.define-property.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.define-property.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.freeze.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.freeze.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.get-own-property-names.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.get-own-property-names.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.get-prototype-of.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.get-prototype-of.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.keys.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.keys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.set-prototype-of.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.object.set-prototype-of.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.promise.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.promise.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.set.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.set.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.string.iterator.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.string.iterator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.symbol.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es6.symbol.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es7.set.to-json.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/es7.set.to-json.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/core-js/library/modules/web.dom.iterable.js" afterPath="$PROJECT_DIR$/dist/npm/core-js/library/modules/web.dom.iterable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/crypt/crypt.js" afterPath="$PROJECT_DIR$/dist/npm/crypt/crypt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/flux-standard-action/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/flux-standard-action/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/invariant/browser.js" afterPath="$PROJECT_DIR$/dist/npm/invariant/browser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash._basefor/index.js" afterPath="$PROJECT_DIR$/dist/npm/lodash._basefor/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash.isarguments/index.js" afterPath="$PROJECT_DIR$/dist/npm/lodash.isarguments/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash.isarray/index.js" afterPath="$PROJECT_DIR$/dist/npm/lodash.isarray/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash.isplainobject/index.js" afterPath="$PROJECT_DIR$/dist/npm/lodash.isplainobject/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash.keysin/index.js" afterPath="$PROJECT_DIR$/dist/npm/lodash.keysin/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_DataView.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_DataView.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_Map.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_Map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_Promise.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_Promise.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_Set.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_Set.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_Symbol.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_Symbol.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_WeakMap.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_WeakMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_arrayLikeKeys.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_arrayLikeKeys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_arrayMap.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_arrayMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseFindIndex.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseFindIndex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseGetTag.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseGetTag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseIndexOf.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseIndexOf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseIsArguments.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseIsArguments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseIsNaN.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseIsNaN.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseIsNative.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseIsNative.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseIsTypedArray.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseIsTypedArray.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseKeys.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseKeys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseTimes.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseTimes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseToString.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseToString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseUnary.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseUnary.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_baseValues.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_baseValues.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_coreJsData.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_coreJsData.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_freeGlobal.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_freeGlobal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_getNative.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_getNative.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_getPrototype.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_getPrototype.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_getRawTag.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_getRawTag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_getTag.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_getTag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_getValue.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_getValue.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_isIndex.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_isIndex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_isMasked.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_isMasked.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_isPrototype.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_isPrototype.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_nativeKeys.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_nativeKeys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_nodeUtil.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_nodeUtil.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_objectToString.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_objectToString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_overArg.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_overArg.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_root.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_root.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_strictIndexOf.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_strictIndexOf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/_toSource.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/_toSource.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/identity.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/identity.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/includes.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/includes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isArguments.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isArguments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isArray.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isArray.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isArrayLike.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isArrayLike.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isBuffer.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isBuffer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isEmpty.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isEmpty.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isFunction.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isFunction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isLength.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isLength.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isNil.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isNil.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isNull.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isNull.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isObject.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isObjectLike.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isObjectLike.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isPlainObject.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isPlainObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isString.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isSymbol.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isSymbol.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isTypedArray.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isTypedArray.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/isUndefined.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/isUndefined.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/keys.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/keys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/last.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/last.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/stubFalse.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/stubFalse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/toFinite.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/toFinite.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/toInteger.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/toInteger.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/toNumber.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/toNumber.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/toString.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/toString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/lodash/values.js" afterPath="$PROJECT_DIR$/dist/npm/lodash/values.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/promise-polyfill/promise.js" afterPath="$PROJECT_DIR$/dist/npm/promise-polyfill/promise.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/reduce-reducers/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/reduce-reducers/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/arrayToObject.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/arrayToObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/camelCase.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/camelCase.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/combineActions.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/combineActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/createAction.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/createAction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/createActions.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/createActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/handleAction.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/handleAction.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/handleActions.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/handleActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-actions/lib/ownKeys.js" afterPath="$PROJECT_DIR$/dist/npm/redux-actions/lib/ownKeys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux-promise/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/redux-promise/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/applyMiddleware.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/applyMiddleware.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/bindActionCreators.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/bindActionCreators.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/combineReducers.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/combineReducers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/compose.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/compose.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/createStore.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/createStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/redux/lib/utils/warning.js" afterPath="$PROJECT_DIR$/dist/npm/redux/lib/utils/warning.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/regenerator-runtime/runtime-module.js" afterPath="$PROJECT_DIR$/dist/npm/regenerator-runtime/runtime-module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/regenerator-runtime/runtime.js" afterPath="$PROJECT_DIR$/dist/npm/regenerator-runtime/runtime.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/sha1/sha1.js" afterPath="$PROJECT_DIR$/dist/npm/sha1/sha1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/symbol-observable/index.js" afterPath="$PROJECT_DIR$/dist/npm/symbol-observable/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/symbol-observable/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/symbol-observable/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/symbol-observable/lib/ponyfill.js" afterPath="$PROJECT_DIR$/dist/npm/symbol-observable/lib/ponyfill.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/connect/index.js" afterPath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/connect/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/helpers/index.js" afterPath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/helpers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/index.js" afterPath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/store.js" afterPath="$PROJECT_DIR$/dist/npm/wepy-redux/lib/store.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/app.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/base.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/component.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/component.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/event.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/mixin.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/mixin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/native.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/native.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/page.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/page.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/util.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/util.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/npm/wepy/lib/wepy.js" afterPath="$PROJECT_DIR$/dist/npm/wepy/lib/wepy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/add.js" afterPath="$PROJECT_DIR$/dist/pages/add.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/add.wxml" afterPath="$PROJECT_DIR$/dist/pages/add.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/add.wxss" afterPath="$PROJECT_DIR$/dist/pages/add.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/apply.js" afterPath="$PROJECT_DIR$/dist/pages/apply.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/apply.wxml" afterPath="$PROJECT_DIR$/dist/pages/apply.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/apply.wxss" afterPath="$PROJECT_DIR$/dist/pages/apply.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/board.js" afterPath="$PROJECT_DIR$/dist/pages/board.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/board.wxml" afterPath="$PROJECT_DIR$/dist/pages/board.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/board.wxss" afterPath="$PROJECT_DIR$/dist/pages/board.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/boards.js" afterPath="$PROJECT_DIR$/dist/pages/boards.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/boards.wxml" afterPath="$PROJECT_DIR$/dist/pages/boards.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/boards.wxss" afterPath="$PROJECT_DIR$/dist/pages/boards.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chat.js" afterPath="$PROJECT_DIR$/dist/pages/chat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chatroom.js" afterPath="$PROJECT_DIR$/dist/pages/chatroom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chatroom.wxml" afterPath="$PROJECT_DIR$/dist/pages/chatroom.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chatroom.wxss" afterPath="$PROJECT_DIR$/dist/pages/chatroom.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chatrooms.js" afterPath="$PROJECT_DIR$/dist/pages/chatrooms.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chatrooms.wxml" afterPath="$PROJECT_DIR$/dist/pages/chatrooms.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/chatrooms.wxss" afterPath="$PROJECT_DIR$/dist/pages/chatrooms.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/friend.js" afterPath="$PROJECT_DIR$/dist/pages/friend.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/friend.wxml" afterPath="$PROJECT_DIR$/dist/pages/friend.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/friend.wxss" afterPath="$PROJECT_DIR$/dist/pages/friend.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/friends.js" afterPath="$PROJECT_DIR$/dist/pages/friends.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/friends.wxml" afterPath="$PROJECT_DIR$/dist/pages/friends.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/friends.wxss" afterPath="$PROJECT_DIR$/dist/pages/friends.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/index.js" afterPath="$PROJECT_DIR$/dist/pages/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/index.wxss" afterPath="$PROJECT_DIR$/dist/pages/index.wxss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/mine.js" afterPath="$PROJECT_DIR$/dist/pages/mine.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/mine.json" afterPath="$PROJECT_DIR$/dist/pages/mine.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/mine.wxml" afterPath="$PROJECT_DIR$/dist/pages/mine.wxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/mine.wxss" afterPath="$PROJECT_DIR$/dist/pages/mine.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/notifications.js" afterPath="$PROJECT_DIR$/dist/pages/notifications.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/notifications.wxml" afterPath="$PROJECT_DIR$/dist/pages/notifications.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/notifications.wxss" afterPath="$PROJECT_DIR$/dist/pages/notifications.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/publish.js" afterPath="$PROJECT_DIR$/dist/pages/publish.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/publish.wxml" afterPath="$PROJECT_DIR$/dist/pages/publish.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/publish.wxss" afterPath="$PROJECT_DIR$/dist/pages/publish.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/register.js" afterPath="$PROJECT_DIR$/dist/pages/register.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/sessions.js" afterPath="$PROJECT_DIR$/dist/pages/sessions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/sessions.wxml" afterPath="$PROJECT_DIR$/dist/pages/sessions.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/pages/sessions.wxss" afterPath="$PROJECT_DIR$/dist/pages/sessions.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/reducers/chat.js" afterPath="$PROJECT_DIR$/dist/reducers/chat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/reducers/chatroom.js" afterPath="$PROJECT_DIR$/dist/reducers/chatroom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/reducers/common.js" afterPath="$PROJECT_DIR$/dist/reducers/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/reducers/friends.js" afterPath="$PROJECT_DIR$/dist/reducers/friends.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/reducers/index.js" afterPath="$PROJECT_DIR$/dist/reducers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/reducers/sessions.js" afterPath="$PROJECT_DIR$/dist/reducers/sessions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/chatroom.js" afterPath="$PROJECT_DIR$/dist/utils/chatroom.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/jf.js" afterPath="$PROJECT_DIR$/dist/utils/jf.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/log.js" afterPath="$PROJECT_DIR$/dist/utils/log.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/nim.js" afterPath="$PROJECT_DIR$/dist/utils/nim.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/promisify.js" afterPath="$PROJECT_DIR$/dist/utils/promisify.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/touch.js" afterPath="$PROJECT_DIR$/dist/utils/touch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/util.js" afterPath="$PROJECT_DIR$/dist/utils/util.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/utils/validator.js" afterPath="$PROJECT_DIR$/dist/utils/validator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/apis/account.js" afterPath="$PROJECT_DIR$/src/apis/account.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/apis/board.js" afterPath="$PROJECT_DIR$/src/apis/board.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/apis/mine.js" afterPath="$PROJECT_DIR$/src/apis/mine.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app.wpy" afterPath="$PROJECT_DIR$/src/app.wpy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/config.js" afterPath="$PROJECT_DIR$/src/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/board.wpy" afterPath="$PROJECT_DIR$/src/pages/board.wpy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/boards.wpy" afterPath="$PROJECT_DIR$/src/pages/boards.wpy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/chatroom.wpy" afterPath="$PROJECT_DIR$/src/pages/chatroom.wpy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/chatrooms.wpy" afterPath="$PROJECT_DIR$/src/pages/chatrooms.wpy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/mine.wpy" afterPath="$PROJECT_DIR$/src/pages/mine.wpy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/publish.wpy" afterPath="$PROJECT_DIR$/src/pages/publish.wpy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/jf.js" afterPath="$PROJECT_DIR$/src/utils/jf.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/log.js" afterPath="$PROJECT_DIR$/src/utils/log.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -332,107 +53,110 @@
       <file leaf-file-name="chatrooms.wpy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/chatrooms.wpy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3614">
-              <caret line="118" column="4" lean-forward="false" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="4" />
+            <state relative-caret-position="1717">
+              <caret line="187" column="35" lean-forward="true" selection-start-line="187" selection-start-column="35" selection-end-line="187" selection-end-column="35" />
               <folding>
+                <element signature="e#2050#2073#0" expanded="true" />
                 <element signature="e#2490#2528#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mine.wpy" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/pages/mine.wpy">
+      <file leaf-file-name="chatroom.wpy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/chatroom.wpy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="51" column="18" lean-forward="true" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-              <folding>
-                <element signature="e#2023#2046#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-220">
+              <caret line="264" column="3" lean-forward="true" selection-start-line="264" selection-start-column="3" selection-end-line="264" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="boards.wpy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/boards.wpy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-303">
+              <caret line="129" column="27" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mine.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/apis/mine.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="chatroom.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/chatroom.js">
+        <entry file="file://$PROJECT_DIR$/src/apis/chatroom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+            <state relative-caret-position="160">
+              <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="board.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/apis/board.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
               <folding>
-                <element signature="e#0#54#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validator.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/validator.js">
+      <file leaf-file-name="jf.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/jf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-40">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/util.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="touch.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/touch.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="promisify.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/promisify.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="10" column="7" lean-forward="false" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nim.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/nim.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="115" column="29" lean-forward="false" selection-start-line="115" selection-start-column="29" selection-end-line="115" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apply.wpy" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/apply.wpy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-80">
-              <caret line="123" column="21" lean-forward="false" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="21" />
+            <state relative-caret-position="20">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
-                <element signature="e#1287#1310#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="board.wpy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/board.wpy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="126" column="6" lean-forward="true" selection-start-line="126" selection-start-column="6" selection-end-line="126" selection-end-column="6" />
+              <folding>
+                <element signature="e#1806#1829#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mine.wpy" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/mine.wpy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="371">
+              <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="131" selection-end-column="6" />
+              <folding>
+                <element signature="e#2127#2150#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/apis/account.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -448,20 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>login()</find>
-      <find>login\</find>
-      <find>login</find>
-      <find>code</find>
-      <find>boardList</find>
-      <find>F</find>
-      <find>this.user</find>
-      <find>container</find>
-      <find>imgBar</find>
-      <find>item</find>
-      <find>slider</find>
-      <find>image</find>
-      <find>imgs</find>
-      <find>submit</find>
       <find>publish</find>
       <find>textarea</find>
       <find>containerP</find>
@@ -478,7 +188,24 @@
       <find>rooms</find>
       <find>userInfoData</find>
       <find>wx</find>
+      <find>setUser</find>
+      <find>pushMsg</find>
+      <find>Token</find>
+      <find>submit</find>
+      <find>createUser</find>
+      <find>refreshMsgs</find>
+      <find>send()</find>
+      <find>item</find>
+      <find>getToken</find>
+      <find>accid</find>
+      <find>login_views</find>
+      <find>toChatroom</find>
+      <find>handleItemTap</find>
+      <find>console</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -487,17 +214,22 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/pages/add.wpy" />
-        <option value="$PROJECT_DIR$/src/pages/board.wpy" />
-        <option value="$PROJECT_DIR$/src/apis/board.js" />
         <option value="$PROJECT_DIR$/dist/pages/boards.js" />
-        <option value="$PROJECT_DIR$/src/apis/mine.js" />
         <option value="$PROJECT_DIR$/src/index.template.html" />
         <option value="$PROJECT_DIR$/src/pages/publish.wpy" />
         <option value="$PROJECT_DIR$/src/pages/chatroom.wpy" />
-        <option value="$PROJECT_DIR$/src/pages/boards.wpy" />
-        <option value="$PROJECT_DIR$/src/app.wpy" />
-        <option value="$PROJECT_DIR$/src/pages/chatrooms.wpy" />
+        <option value="$PROJECT_DIR$/src/apis/mine.js" />
+        <option value="$PROJECT_DIR$/dist/apis/account.js" />
         <option value="$PROJECT_DIR$/src/pages/mine.wpy" />
+        <option value="$PROJECT_DIR$/src/apis/account.js" />
+        <option value="$PROJECT_DIR$/src/utils/log.js" />
+        <option value="$PROJECT_DIR$/src/config.js" />
+        <option value="$PROJECT_DIR$/src/pages/chatrooms.wpy" />
+        <option value="$PROJECT_DIR$/src/app.wpy" />
+        <option value="$PROJECT_DIR$/src/pages/boards.wpy" />
+        <option value="$PROJECT_DIR$/src/utils/jf.js" />
+        <option value="$PROJECT_DIR$/src/pages/board.wpy" />
+        <option value="$PROJECT_DIR$/src/apis/board.js" />
       </list>
     </option>
   </component>
@@ -519,10 +251,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
-    <option name="height" value="744" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -628,7 +360,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="F:/vmshare/小程序测试/myproject" />
+    <property name="last_opened_file_path" value="F:/桌面工作文件/aes-sample 小程序解密" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="nodejs_interpreter_path" value="I:/node/node" />
     <property name="editor.config.accepted" value="true" />
@@ -719,27 +451,27 @@
       <workItem from="1501204209344" duration="19902000" />
       <workItem from="1501401317519" duration="4065000" />
       <workItem from="1501413694467" duration="5731000" />
-      <workItem from="1501434756472" duration="3332000" />
+      <workItem from="1501434756472" duration="30066000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78170000" />
+    <option name="totallyTimeSpent" value="104904000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
+    <frame x="1358" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17686567" sideWeight="0.4960981" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12486828" sideWeight="0.4960981" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2667758" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26583594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17702845" sideWeight="0.5039019" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35929388" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17702845" sideWeight="0.5039019" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -755,13 +487,13 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3371522" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17708333" sideWeight="0.4960981" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21391486" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12486828" sideWeight="0.4960981" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26687434" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26583594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17702845" sideWeight="0.5039019" order="3" side_tool="true" content_ui="tabs" />
@@ -779,76 +511,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/sessions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libs/NIM_Web_Chatroom_v3.8.0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1820">
-          <caret line="0" column="2021" lean-forward="false" selection-start-line="0" selection-start-column="2021" selection-end-line="0" selection-end-column="2021" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/board.wpy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/pages/chatrooms.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="207" column="27" lean-forward="false" selection-start-line="207" selection-start-column="27" selection-end-line="207" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/apis/account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="26" column="2" lean-forward="false" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/pages/boards.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/utils/nim.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="242" column="16" lean-forward="false" selection-start-line="242" selection-start-column="16" selection-end-line="242" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/apis/chatroom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/static/icons/board.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/static/icons/board_selected.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -891,60 +553,11 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/chatroom.wpy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="191" column="10" lean-forward="false" selection-start-line="191" selection-start-column="10" selection-end-line="191" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/apis/account.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20">
-          <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/apis/board.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-264">
-          <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/apis/chatroom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/apis/mine.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mixins/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8">
           <caret line="10" column="5" lean-forward="false" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/jf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/log.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-152">
-          <caret line="2" column="10" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -963,30 +576,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/boards.wpy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app.wpy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="171" column="3" lean-forward="true" selection-start-line="171" selection-start-column="3" selection-end-line="171" selection-end-column="3" />
-          <folding>
-            <element signature="e#1018#1041#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/wepy/lib/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="6" column="65" lean-forward="false" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1008,6 +602,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2686">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,6 +645,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-30">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1060,44 +656,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/chatroom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/validator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-40">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/touch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1115,35 +677,226 @@
         <state relative-caret-position="-80">
           <caret line="123" column="21" lean-forward="false" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="21" />
           <folding>
-            <element signature="e#1287#1310#0" expanded="true" />
+            <element signature="e#1287#1310#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/apis/account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="35" column="18" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/touch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/chatroom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-40">
+          <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/chat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/chatroom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/friends.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/sessions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/nim.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="115" column="29" lean-forward="false" selection-start-line="115" selection-start-column="29" selection-end-line="115" selection-end-column="29" />
+        <state relative-caret-position="-3000">
+          <caret line="43" column="3" lean-forward="false" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="67" lean-forward="false" selection-start-line="0" selection-start-column="67" selection-end-line="0" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/log.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="160" column="30" lean-forward="true" selection-start-line="160" selection-start-column="30" selection-end-line="160" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/register.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="71" column="8" lean-forward="true" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/chatroom.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-220">
+          <caret line="264" column="3" lean-forward="true" selection-start-line="264" selection-start-column="3" selection-end-line="264" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apis/account.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/chatrooms.wpy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3614">
-          <caret line="118" column="4" lean-forward="false" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="4" />
+        <state relative-caret-position="1717">
+          <caret line="187" column="35" lean-forward="true" selection-start-line="187" selection-start-column="35" selection-end-line="187" selection-end-column="35" />
           <folding>
+            <element signature="e#2050#2073#0" expanded="true" />
             <element signature="e#2490#2528#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/apis/mine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apis/chatroom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/jf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/boards.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-303">
+          <caret line="129" column="27" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/mine.wpy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="51" column="18" lean-forward="true" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+        <state relative-caret-position="371">
+          <caret line="126" column="0" lean-forward="false" selection-start-line="126" selection-start-column="0" selection-end-line="131" selection-end-column="6" />
           <folding>
-            <element signature="e#2023#2046#0" expanded="true" />
+            <element signature="e#2127#2150#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/board.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="126" column="6" lean-forward="true" selection-start-line="126" selection-start-column="6" selection-end-line="126" selection-end-column="6" />
+          <folding>
+            <element signature="e#1806#1829#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/apis/board.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="21" lean-forward="true" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

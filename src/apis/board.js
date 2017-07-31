@@ -10,6 +10,18 @@ export const boardPublish = function(infos) {
     method: 'POST'
   })
 }
+
+
+export const addReadNum = function(id, token) {
+  return jf.request({
+    api: 'article/add_read_num/',
+    data: {
+      id: id,
+      token: token.data
+    },
+    method: 'POST'
+  })
+}
 export const categoryList = function() {
   return jf.request({
     api: 'article/category/list/',

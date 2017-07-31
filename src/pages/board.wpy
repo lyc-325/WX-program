@@ -117,8 +117,17 @@ export default class Board extends wepy.page {
   }
   async onLoad(option) {
     const { id } = option
-    // console.log('id', id)
+//    console.log('id', id)
     const { jfToken } = this.user
+    var jfuserToken = await wepy.getStorage({
+      key: 'jfToken',
+      success: function(res) {
+        return res.data
+      }
+    })
+    console.log(jfuserToken)
+    await api.addReadNum(id, jfuserToken)
+//    console.log(addNUm)
     const res = await api.boardDetail(id, jfToken)
     console.log(res)
     this.title = res.title

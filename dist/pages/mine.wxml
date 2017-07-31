@@ -16,32 +16,32 @@
   <view class="details _7d321b0">
     <view class="item _7d321b0">
       <view class="label _7d321b0">公司</view>
-      <view class="value _7d321b0">{{company}}</view>
+      <view class="value _7d321b0">{{userData.company}}</view>
     </view>
 
     <view class="item _7d321b0">
       <view class="label _7d321b0">手机号</view>
-      <view class="value _7d321b0">{{phone}}</view>
+      <view class="value _7d321b0">{{userData.phone}}</view>
     </view>
 
     <view class="item _7d321b0">
       <view class="label _7d321b0">邮箱</view>
-      <view class="value _7d321b0">{{email}}</view>
+      <view class="value _7d321b0">{{userData.email}}</view>
     </view>
 
     <view class="item _7d321b0">
       <view class="label _7d321b0">性别</view>
-      <view class="value _7d321b0">{{sex}}</view>
+      <view class="value _7d321b0">{{userData.sex}}</view>
     </view>
 
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">QQ</view>
-      <view class="value _7d321b0">{{QQ}}</view>
-    </view>
+    <!--<view class="item">-->
+      <!--<view class="label">QQ</view>-->
+      <!--<view class="value">{{userData.QQ}}</view>-->
+    <!--</view>-->
 
     <view class="item _7d321b0">
       <view class="label _7d321b0">积分</view>
-      <view class="value _7d321b0">{{credits}}</view>
+      <view class="value _7d321b0">{{userData.integration}}</view>
     </view>
   </view>
 </view>

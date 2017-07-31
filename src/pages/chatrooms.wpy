@@ -165,7 +165,8 @@ export default class Chatrooms extends wepy.page {
   }
 
   data = {
-    rooms: []
+    rooms: [],
+    jfUserid: ''
   }
 
   methods = {
@@ -194,38 +195,43 @@ export default class Chatrooms extends wepy.page {
     console.log('执行了分享')
     return {
       title: '江峰小程序',
-      path: '/page/chatrooms',
-      success: function (res) {
-        console.log(res.shareTickets[0])
-        wepy.getShareInfo({
-          shareTicket: res.shareTickets[0],
-          success: function (res) {
-            console.log(res)
-            console.log('不执行')
-          }
-        })
-      },
-      fail: function (res) {
-        console.log(res)
-        // 转发失败
-      }
+      path: '/pages/chatrooms'
+//      success: function (res) {
+//        console.log(res)
+//        console.log(this.methods)
+//        this.methods.getshareInfo(res.shareTickets[0])
+//      }
+//      fail: function (res) {
+//        console.log(res)
+//        // 转发失败
+//      }
     }
   }
+
   async onLoad() {
     const { setUser } = this.methods
     // const pushMsg = this.methods.pushMsg.bind(this)
     wepy.showLoading()
-    wepy.showShareMenu({
-      withShareTicket: true,
-      success: (res) => {
-        console.log(res)
-      }
+    await wepy.showShareMenu({
+      withShareTicket: true
     })
+//    console.log(network)
+//    var network1 = await wepy.getShareInfo({
+//      shareTicket: '1bb9af90-66d9-497c-b1bf-cda4d9040817',
+//      complete: function (res) {
+//        return res
+//      }
+//    })
+//    console.log(network1)
     const { code } = await wepy.login()
     const { data } = await wepy.request({
       url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
     })
     const { openid } = data
+    const { session_key } = data
+    wepy.setStorage({
+      key: 'jfOpenId',
+      data: session_key})
     const { userInfo } = await wepy.getUserInfo()
     const password = R.takeLast(5)(openid)
 
@@ -233,14 +239,20 @@ export default class Chatrooms extends wepy.page {
       ...userInfo,
       accid: openid.toLowerCase()
     }
-    console.log(user)
-
     setUser(user)
     // 如果用户尚未在 网易云注册 则先注册
     try {
       const token = await NIM.login(openid)
-      const Token = await api.getToken(openid, password.toLowerCase())
-
+      const userId = await api.getTokenUserId(openid, password.toLowerCase())
+      this.jfUserid = userId.id
+//      const Token = await api.getToken(openid, password.toLowerCase())
+      const Token = userId.Token
+      wepy.setStorage({
+        key: 'jfUserId',
+        data: userId.id})
+      wepy.setStorage({
+        key: 'jfToken',
+        data: Token})
       if (!Token) {
         throw new Error('user not exist')
       }
@@ -250,7 +262,6 @@ export default class Chatrooms extends wepy.page {
         jfToken: Token,
         nimToken: token
       })
-
       // 初始化 nim 对象
       // const nim = NIM.getInstance({
       //   account: this.user.accid,
@@ -296,7 +307,6 @@ export default class Chatrooms extends wepy.page {
         memebers: members[index],
         announcement: room.announcement
       }))
-      console.log(this.rooms)
       this.$apply()
       wepy.hideLoading()
     } catch (e) {

@@ -23,6 +23,17 @@ export const getToken = function (username, password) {
   }).then(({ Token }) => Token)
 }
 
+export const getTokenUserId = function (username, password) {
+  return jf.request({
+    api: 'accounts/login_views/',
+    data: {
+      username,
+      password
+    },
+    method: 'POST'
+  }).then((res) => res)
+}
+
 export const search = function (nickname) {
   return jf.request({
     api: 'accounts/search/',

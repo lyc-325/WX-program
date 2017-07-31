@@ -175,8 +175,8 @@ export default class Boards extends wepy.page {
     handleItemTap(e) {
       console.log('item', this.list[e.currentTarget.dataset.index])
       const id = this.list[e.currentTarget.dataset.index].id
-      console.log('id', id)
-      console.log(`board?id=${id}`)
+//      console.log('id', id)
+//      console.log(`board?id=${id}`)
       wepy.navigateTo({
         url: `board?id=${id}`
       })

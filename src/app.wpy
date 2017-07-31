@@ -157,17 +157,20 @@
       this.use('requestfix')
       this.use('promisify')
     }
-//    onLaunch() {
-//      console.log('这个执行了吗')
-//      wepy.showShareMenu({
-//        withShareTicket: true,
-//        success: (res) => {
-//          console.log(res)
-//        },
-//        complete: (res) => {
-//          console.log(res)
-//        }
-//      })
-//    }
+
+    async onLaunch (options) {
+      if (options.shareTicket) {
+        const shareInfo = await wepy.getShareInfo({
+          shareTicket: options.shareTicket,
+          success: function (res) {
+            return res
+          }
+        })
+        wepy.setStorage({
+          key: 'jfShareInfo',
+          data: shareInfo
+        })
+      }
+    }
   }
 </script>

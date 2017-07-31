@@ -16,32 +16,32 @@
   <view class="details">
     <view class="item">
       <view class="label">公司</view>
-      <view class="value">{{company}}</view>
+      <view class="value">{{userData.company}}</view>
     </view>
 
     <view class="item">
       <view class="label">手机号</view>
-      <view class="value">{{phone}}</view>
+      <view class="value">{{userData.phone}}</view>
     </view>
 
     <view class="item">
       <view class="label">邮箱</view>
-      <view class="value">{{email}}</view>
+      <view class="value">{{userData.email}}</view>
     </view>
 
     <view class="item">
       <view class="label">性别</view>
-      <view class="value">{{sex}}</view>
+      <view class="value">{{userData.sex}}</view>
     </view>
 
-    <view class="item">
-      <view class="label">QQ</view>
-      <view class="value">{{QQ}}</view>
-    </view>
+    <!--<view class="item">-->
+      <!--<view class="label">QQ</view>-->
+      <!--<view class="value">{{userData.QQ}}</view>-->
+    <!--</view>-->
 
     <view class="item">
       <view class="label">积分</view>
-      <view class="value">{{credits}}</view>
+      <view class="value">{{userData.integration}}</view>
     </view>
   </view>
 </view>
@@ -96,6 +96,7 @@
   display: flex;
   padding: 10rpx 0;
   justify-content: space-between;
+  color: #6b6b6b;
 }
 </style>
 
@@ -105,20 +106,34 @@ import * as api from '../apis/mine'
 
 export default class Mine extends wepy.page {
   config = {
-    navigationBarTitleText: '我的信息'
+    navigationBarTitleText: '个人中心'
   }
+
   data = {
     userInfoData: {
       nickName: '加载中...'
-    }
+    },
+    userData: {}
   }
+
   async onLoad() {
     let self = this
-    const res = await api.getUserData('76572b6d68c03186f16cbae31f48051cce022213', '13')
-    console.log(res)
+    var jfuserId = await wepy.getStorage({
+      key: 'jfUserId',
+      success: function(res) {
+        return res.data
+      }
+    })
+    var jfuserToken = await wepy.getStorage({
+      key: 'jfToken',
+      success: function(res) {
+        return res.data
+      }
+    })
+    var resData = await api.getUserData(jfuserToken.data, jfuserId.data)
+    self.userData = resData
     var userData = await wepy.getUserInfo()
     self.userInfoData = userData.userInfo
-    console.log(self.userInfoData)
     self.$apply()
   }
 }
