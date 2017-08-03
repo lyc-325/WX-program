@@ -185,22 +185,56 @@ export default class Chatrooms extends wepy.page {
     // },
     toChatroom: function(index) {
       const id = this.rooms[index].id
-      console.log('chatroomid', id)
+      const pk = this.rooms[index].pk
+      console.log(this.rooms[index])
       wepy.navigateTo({
-        url: `/pages/chatroom?id=${id}`
+        url: `/pages/chatroom?id=${id}&pk=${pk}`
       })
     }
   }
-  onShareAppMessage = function (res) {
-    console.log('执行了分享')
+  onShareAppMessage = async function (res) {
+    console.log('执行了分享2')
+    var jfaccid = await wepy.getStorage({
+      key: 'jfAccid',
+      success: function(res) {
+        return res.data
+      }
+    })
     return {
       title: '江峰小程序',
-      path: '/pages/chatrooms'
-//      success: function (res) {
-//        console.log(res)
-//        console.log(this.methods)
-//        this.methods.getshareInfo(res.shareTickets[0])
-//      }
+      path: `/pages/chatrooms?accid=${jfaccid}`
+//      success: async function (res) {
+//        console.log(res.shareTickets[0])
+//        var shareInfo = await wepy.getShareInfo({
+//          shareTicket: res.shareTickets[0],
+//          success: function (res) {
+//            return res
+//          }
+//        })
+//        console.log(shareInfo)
+//        var sessionKey = await wepy.getStorage({
+//          key: 'jfSessionKey',
+//          success: function(res) {
+//            return res.data
+//          }
+//        })
+//        var shareParse = await api.shareParsing(sessionKey, shareInfo)
+//        console.log(shareParse)
+//        var shareToken = await wepy.getStorage({
+//          key: 'jfToken',
+//          success: function(res) {
+//            return res.data
+//          }
+//        })
+//        var shareAccid = await wepy.getStorage({
+//          key: 'jfAccid',
+//          success: function(res) {
+//            return res.data
+//          }
+//        })
+//        var shareOpenid = await api.saveOpenGid(shareToken, shareParse, shareAccid)
+//        console.log(shareOpenid)
+//      },
 //      fail: function (res) {
 //        console.log(res)
 //        // 转发失败
@@ -208,14 +242,15 @@ export default class Chatrooms extends wepy.page {
     }
   }
 
-  async onLoad() {
+  async onLoad(options) {
+    console.log('分享回调2')
     const { setUser } = this.methods
     // const pushMsg = this.methods.pushMsg.bind(this)
     wepy.showLoading()
-    await wepy.showShareMenu({
+    var network = await wepy.showShareMenu({
       withShareTicket: true
     })
-//    console.log(network)
+    console.log(network)
 //    var network1 = await wepy.getShareInfo({
 //      shareTicket: '1bb9af90-66d9-497c-b1bf-cda4d9040817',
 //      complete: function (res) {
@@ -230,8 +265,11 @@ export default class Chatrooms extends wepy.page {
     const { openid } = data
     const { session_key } = data
     wepy.setStorage({
-      key: 'jfOpenId',
+      key: 'jfSessionKey',
       data: session_key})
+    wepy.setStorage({
+      key: 'jfAccid',
+      data: openid})
     const { userInfo } = await wepy.getUserInfo()
     const password = R.takeLast(5)(openid)
 
@@ -245,8 +283,10 @@ export default class Chatrooms extends wepy.page {
       const token = await NIM.login(openid)
       const userId = await api.getTokenUserId(openid, password.toLowerCase())
       this.jfUserid = userId.id
-//      const Token = await api.getToken(openid, password.toLowerCase())
       const Token = userId.Token
+      if (options.accid && options.accid !== openid) {
+        await api.checkOpenGid(Token, options.accid)
+      }
       wepy.setStorage({
         key: 'jfUserId',
         data: userId.id})
@@ -305,7 +345,8 @@ export default class Chatrooms extends wepy.page {
         name: room.name,
         cover: room.pic_url,
         memebers: members[index],
-        announcement: room.announcement
+        announcement: room.announcement,
+        pk: room.id
       }))
       this.$apply()
       wepy.hideLoading()

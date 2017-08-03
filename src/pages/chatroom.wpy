@@ -1,34 +1,48 @@
 <template>
-<view class="navbar">
-  <view wx:for="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
-    {{item}}
-  </view>
-</view>
-
-<scroll-view scroll-y scroll-into-view="item{{intoView}}" id="list">
-  <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
-    <view class="avatar">
-      <image mode="scaleToFill" src="{{user.avatarUrl}}" />
-    </view>
-    <view class="content">
-      <view wx:if="{{item.type === 'text' }}">
-        <text>{{item.text}}</text>
+  <view class="header" style="width:100%;position:fixed;z-index:101;font-size:35rpx; line-height:60rpx;">
+    <view class="navbar">
+      <view @tap="changeNav" wx:for="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
+        {{item}}
       </view>
-      <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
     </view>
   </view>
-</scroll-view>
-
-<view class="operation">
-  <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
-  <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
-  <view class="button">
-    <image @tap="chooseImage" src="../../static/icons/image.png" mode="scaleToFill" />
+  <view wx:if="{{currentNav === 0}}" class="bodyBlock">
+    <scroll-view scroll-y scroll-into-view="item{{intoView}}" id="list">
+      <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
+        <view class="avatar">
+          <image mode="scaleToFill" src="{{item.fromAvatar}}" />
+        </view>
+        <view class="content">
+          <view wx:if="{{item.type === 'text' }}">
+            <text>{{item.text}}</text>
+          </view>
+          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="operation">
+      <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
+      <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
+      <view class="button">
+        <image @tap="chooseImage" src="../static/icons/image.png" mode="scaleToFill" />
+      </view>
+      <view class="button">
+        <image @tap="send" src="../static/icons/send.png" mode="scaleToFill" />
+      </view>
+    </view>
   </view>
-  <view class="button">
-    <image @tap="send" src="../../static/icons/send.png" mode="scaleToFill" />
+  <view wx:if="{{currentNav === 1}}" class="detailBlock">
+    <view class="detailList">
+      <view class="userinfo" @tap="handleViewTap">
+        <image class="userinfo-avatar" src="{{roomData.pic_url}}" background-size="cover"/>
+        <view class="userinfo-nickname">{{roomData.name}}</view>
+      </view>
+      <view class="item">
+        <view class="label">公告:</view>
+        <view class="value" style="margin-left: 20rpx;">{{roomData.announcement}}</view>
+      </view>
+    </view>
   </view>
-</view>
 </template>
 
 <style>
@@ -39,7 +53,7 @@
   bottom: 0;
   left: 0;
   /*align-items: flex-end;*/
-  padding: 5px 5px;
+  padding: 10px 5px;
   border-top: 1px solid #eee;
   z-index: 5;
   background-color: white;
@@ -47,6 +61,37 @@
 
 .operation>view {
   padding: 10rpx;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10%;
+}
+
+.userinfo>.userinfo-nickname {
+  color: #aaa;
+}
+
+.detailBlock {
+  width: 70%;
+  margin: 0 15%;
+  position: absolute;
+}
+.detailList {
+  margin-top: 80rpx;
+}
+.detailList>.item {
+  display: flex;
+  padding: 20rpx 0;
+  /*justify-content: space-between;*/
+  color: #6b6b6b;
 }
 
 .operation textarea {
@@ -165,6 +210,7 @@ import * as log from '../utils/log'
 import {
   refreshMsgs
 } from '../actions/chatroom'
+import * as chatroomApi from '../apis/chatroom'
 
 import {
   connect
@@ -190,15 +236,23 @@ export default class Chatroom extends wepy.page {
   }
 
   data = {
-    navs: ['聊天', '公告', '成员'],
+    navs: ['聊天', '详情'],
     currentNav: 0,
     chatroom: null,
     roomId: null,
     sended: false,
-    text: ''
+    text: '',
+    roomData: {
+      name: '加载中...'
+    }
   }
 
   methods = {
+    changeNav (e) {
+      console.log(e)
+      this.currentNav = e.currentTarget.dataset.index
+      this.$apply()
+    },
     async chooseImage() {
       // 进行图片选择并上传
       const pushMsg = this.methods.pushMsg.bind(this)
@@ -253,6 +307,7 @@ export default class Chatroom extends wepy.page {
       if (!Array.isArray(msgs)) {
         msgs = [msgs]
       }
+      console.log(msgs)
       const roomId = msgs[0].chatroomId || this.roomId
       const merged = [...this.msgs, ...msgs]
       refreshMsgs(roomId, merged)
@@ -267,6 +322,9 @@ export default class Chatroom extends wepy.page {
   async onLoad(options) {
     const { id } = options
     this.roomId = id
+    const { pk } = options
+    const roomInfo = await chatroomApi.getOneById(pk)
+    this.roomData = roomInfo
     const pushMsg = this.methods.pushMsg.bind(this)
     const apply = this.$apply.bind(this)
     const hasMsgs = this.msgs.length > 0

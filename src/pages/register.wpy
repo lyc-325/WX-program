@@ -25,7 +25,6 @@
         <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}}" name="email" @focus="bindFocus" />
       </view>
     </view>
-
     <view class="item">
       <button form-type="submit" loading="{{requesting}}">提交</button>
     </view>
@@ -107,7 +106,8 @@ export default class Register extends wepy.page {
   data = {
     requesting: false,
     formError: null,
-    formErrorKey: null
+    formErrorKey: null,
+    showOpenId: ''
   }
 
   methods = {
@@ -115,7 +115,30 @@ export default class Register extends wepy.page {
       this.formError = null
       this.formErrorKey = null
     },
-
+//    async showParsing(e) {
+//      var sessionKey = await wepy.getStorage({
+//        key: 'jfSessionKey',
+//        success: function(res) {
+//          return res.data
+//        }
+//      })
+//      var shareInfo = await wepy.getStorage({
+//        key: 'jfShareInfo',
+//        success: function(res) {
+//          return res.data
+//        }
+//      })
+//      const shareParse = await api.shareParsing(sessionKey, shareInfo.data)
+//      var shareToken = await wepy.getStorage({
+//        key: 'jfToken',
+//        success: function(res) {
+//          return res.data
+//        }
+//      })
+//      console.log(shareParse)
+//      var shareOpenid = await api.checkOpenGid(shareToken, shareParse)
+//      console.log(shareOpenid)
+//    },
     async submit(e) {
       const errorKey = validate(e.detail.value)
       const { company, phone, email } = e.detail.value

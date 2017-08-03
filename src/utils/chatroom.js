@@ -7,6 +7,7 @@ import R from '../libs/ramda'
  * getInstance
  */
 function getInstance(options) {
+  console.log(options)
   const chatroom = Chatroom.getInstance({
     appKey: config.appKey,
     account: options.account,

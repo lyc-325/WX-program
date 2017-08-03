@@ -10,8 +10,8 @@
     <!--<view class="membership">{{membership}}</view>-->
   <!--</view>-->
   <view class="userinfo _7d321b0" bindtap="handleViewTap">
-    <image class="userinfo-avatar _7d321b0" src="{{userInfoData.avatarUrl}}" background-size="cover"/>
-    <view class="userinfo-nickname _7d321b0">{{userInfoData.nickName}}</view>
+    <image class="userinfo-avatar _7d321b0" src="{{userData.icon}}" background-size="cover"/>
+    <view class="userinfo-nickname _7d321b0">{{userData.name}}</view>
   </view>
   <view class="details _7d321b0">
     <view class="item _7d321b0">
@@ -31,7 +31,7 @@
 
     <view class="item _7d321b0">
       <view class="label _7d321b0">性别</view>
-      <view class="value _7d321b0">{{userData.sex}}</view>
+      <view class="value _7d321b0">{{userData.gender == '1'? '男':'女'}}</view>
     </view>
 
     <!--<view class="item">-->
@@ -42,6 +42,10 @@
     <view class="item _7d321b0">
       <view class="label _7d321b0">积分</view>
       <view class="value _7d321b0">{{userData.integration}}</view>
+    </view>
+    <view class="item _7d321b0">
+      <view class="label _7d321b0">等级</view>
+      <view class="value _7d321b0">{{levelData}}</view>
     </view>
   </view>
 </view>

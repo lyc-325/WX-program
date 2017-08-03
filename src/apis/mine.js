@@ -3,11 +3,15 @@
  */
 import jf from '../utils/jf'
 
-export const getUserData = function(token,id) {
+export const getUserData = function (token, id) {
   return jf.request({
     api: `accounts/detail/${token}/${id}`,
     data: {},
     method: 'GET'
   })
+}
+
+export const getLevel = function (score) {
+    return parseInt(score/10)
 }
 

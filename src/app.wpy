@@ -158,19 +158,20 @@
       this.use('promisify')
     }
 
-    async onLaunch (options) {
-      if (options.shareTicket) {
-        const shareInfo = await wepy.getShareInfo({
-          shareTicket: options.shareTicket,
-          success: function (res) {
-            return res
-          }
-        })
-        wepy.setStorage({
-          key: 'jfShareInfo',
-          data: shareInfo
-        })
-      }
-    }
+//    async onLaunch (options) {
+//      console.log(options)
+//      if (options.shareTicket) {
+//        const shareInfo = await wepy.getShareInfo({
+//          shareTicket: options.shareTicket,
+//          success: function (res) {
+//            return res
+//          }
+//        })
+//        wepy.setStorage({
+//          key: 'jfShareInfo',
+//          data: shareInfo
+//        })
+//      }
+//    }
   }
 </script>

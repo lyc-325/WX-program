@@ -10,7 +10,7 @@ export const getList = function() {
 
 export const getOneById = function(id) {
   return jf.request({
-    api: `chat_room/{id}/detail/`,
+    api: `chat_room/${id}/detail/`,
     data: {},
     method: 'GET'
   })
