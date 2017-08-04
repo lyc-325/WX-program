@@ -1,10 +1,13 @@
 
 <!--register.wxml-->
 <view class="form-error"  wx:if="{{formError}}">{{formError}}</view>
-
+  <view class="title" style="padding: 10px; text-align: center;">个人信息完善</view>
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userData.avatarUrl}}" background-size="cover"/>
+    <view class="userinfo-nickname">{{userData.nickName}}</view>
+  </view>
 <form bindsubmit="submit">
   <view class="container">
-    <view class="title">个人信息完善</view>
     <view class="item">
       <view class="label">公司</view>
       <view class="input">
@@ -26,7 +29,7 @@
       </view>
     </view>
     <view class="item">
-      <button form-type="submit" loading="{{requesting}}">提交</button>
+      <button class="register_btn" form-type="submit" loading="{{requesting}}">提交</button>
     </view>
   </view>
 </form>

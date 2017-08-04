@@ -251,13 +251,6 @@ export default class Chatrooms extends wepy.page {
       withShareTicket: true
     })
     console.log(network)
-//    var network1 = await wepy.getShareInfo({
-//      shareTicket: '1bb9af90-66d9-497c-b1bf-cda4d9040817',
-//      complete: function (res) {
-//        return res
-//      }
-//    })
-//    console.log(network1)
     const { code } = await wepy.login()
     const { data } = await wepy.request({
       url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
@@ -285,7 +278,9 @@ export default class Chatrooms extends wepy.page {
       this.jfUserid = userId.id
       const Token = userId.Token
       if (options.accid && options.accid !== openid) {
-        await api.checkOpenGid(Token, options.accid)
+        wepy.setStorage({
+          key: 'backAccid',
+          data: options.accid})
       }
       wepy.setStorage({
         key: 'jfUserId',

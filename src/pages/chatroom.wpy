@@ -7,30 +7,72 @@
     </view>
   </view>
   <view wx:if="{{currentNav === 0}}" class="bodyBlock">
-    <scroll-view scroll-y scroll-into-view="item{{intoView}}" id="list">
+    <scroll-view scroll-y scroll-into-view="item{{intoView}}" class="{{ view }}" id="list">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
         <view class="avatar">
           <image mode="scaleToFill" src="{{item.fromAvatar}}" />
         </view>
         <view class="content">
-          <view wx:if="{{item.type === 'text' }}">
+          <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
+                 style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
+          <view wx:elif="{{item.emji[0].type === 'txt'}}">
             <text>{{item.text}}</text>
           </view>
           <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
+
         </view>
       </view>
     </scroll-view>
-    <view class="operation">
+    <view class="operation" class="{{ showem }}">
       <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
       <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
-      <view class="button">
-        <image @tap="chooseImage" src="../static/icons/image.png" mode="scaleToFill" />
+      <view class="button" @tap="openEmoji" mode="scaleToFill">
+        <image src="../static/icons/emoj.png"/>
       </view>
-      <view class="button">
-        <image @tap="send" src="../static/icons/send.png" mode="scaleToFill" />
+      <view  class="button" @tap="chooseImage">
+        <image  src="../static/icons/image.png" mode="scaleToFill" />
+      </view>
+      <view  class="button" @tap="send" style="width:15%; ">
+        <image  src="../static/icons/send.png" mode="scaleToFill" />
       </view>
     </view>
+    <swiper class="emoji_list" class="{{ show }}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"
+            interval="{{interval}}" duration="{{duration}}">
+      <block>
+        <swiper-item>
+          <view class="emoji_item">
+            <image wx:for="{{ emojiObj.map1 }}" src="{{ emojiObj.path + item }}" wx:key=""
+                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+          </view>
+          <view class="emoji_item">
+            <image wx:for="{{ emojiObj.map2 }}" src="{{ emojiObj.path + item }}" wx:key=""
+                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+          </view>
+          <view class="emoji_item">
+            <image wx:for="{{ emojiObj.map3 }}" src="{{ emojiObj.path + item }}" wx:key=""
+                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+          </view>
+        </swiper-item>
+      </block>
+      <block class="second">
+        <swiper-item>
+          <view class="emoji_item">
+            <image wx:for="{{ emojiObj.map4 }}" src="{{ emojiObj.path + item }}" wx:key=""
+                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+          </view>
+          <view class="emoji_item">
+            <image wx:for="{{ emojiObj.map5 }}" src="{{ emojiObj.path + item }}" wx:key=""
+                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+          </view>
+          <view class="emoji_item">
+            <image wx:for="{{ emojiObj.map6 }}" src="{{ emojiObj.path + item }}" wx:key=""
+                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
+
   <view wx:if="{{currentNav === 1}}" class="detailBlock">
     <view class="detailList">
       <view class="userinfo" @tap="handleViewTap">
@@ -58,11 +100,31 @@
   z-index: 5;
   background-color: white;
 }
-
+.showEmojiOperation{
+  position: fixed;
+  display: flex;
+  width: 100%;
+  bottom: 150px;
+  left: 0;
+  /*align-items: flex-end;*/
+  padding: 10px 5px;
+  border-top: 1px solid #eee;
+  z-index: 5;
+  background-color: white;}
 .operation>view {
   padding: 10rpx;
 }
-
+.showEmojiOperation>view {
+  padding: 10rpx;
+}
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 10px 0 0;
+  padding-top: 3px;
+  border-radius: 3px;
+  float: left;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -100,6 +162,12 @@
   font-size: 35rpx;
   width: 60%;
 }
+.showEmojiOperation textarea {
+  border: 1px solid #eee;
+  padding: 5px;
+  font-size: 35rpx;
+  width: 60%;
+}
 
 .operation .buttons {
   display: flex;
@@ -107,6 +175,11 @@
   justify-content: space-around;
 }
 
+.showEmojiOperation .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .operation>.button {
   flex-grow: 1;
   padding: 0;
@@ -116,12 +189,23 @@
   margin-bottom: 10rpx;
   margin-top: 12rpx;
 }
-
+.showEmojiOperation>.button {
+  flex-grow: 1;
+  padding: 0;
+  text-align: center;
+  line-height: 50rpx;
+  height: 50rpx;
+  margin-bottom: 10rpx;
+  margin-top: 12rpx;
+}
 .operation>.button image {
   width: 50rpx;
   height: 50rpx;
 }
-
+.showEmojiOperation>.button image {
+  width: 50rpx;
+  height: 50rpx;
+}
 scroll-view {
   top: 80rpx;
   left: 0;
@@ -147,6 +231,7 @@ scroll-view {
 .list-item .avatar image {
   width: 100rpx;
   height: 100rpx;
+  border-radius: 50%;
 }
 
 .list-item .content {
@@ -199,6 +284,45 @@ scroll-view {
   border-right: 10px solid antiquewhite;
   border-bottom: 5px solid transparent;
 }
+.emoji_list {
+  display: none;
+}
+
+.showEmoji {
+  width: 100%;
+  height: 145px;
+  background-color: #dddddd;
+  padding-top: 10px;
+  padding-left: 3%;
+  display: block;
+  position: fixed;
+  bottom: 0;
+}
+
+.emoji_list image, .showEmoji image {
+  width: 26px;
+  height: 26px;
+  margin: 5px 2%;
+}
+
+.emoji {
+  width: 26px;
+  height: 26px;
+  margin: 0 0;
+}
+
+.emoji_item {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 20px;
+}
+.open_emoji, .send_image, .open_camera, .v-record {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
 
 <script>
@@ -206,6 +330,7 @@ import wepy from 'wepy'
 import R from '../libs/ramda'
 import ChatroomSDK from '../utils/chatroom'
 import NIM from '../utils/nim'
+import FaceIM from '../utils/WebIM'
 import * as log from '../utils/log'
 import {
   refreshMsgs
@@ -244,10 +369,67 @@ export default class Chatroom extends wepy.page {
     text: '',
     roomData: {
       name: '加载中...'
-    }
+    },
+    indicatorDots: true,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000,
+    show: 'emoji_list',
+    showem: 'operation',
+    emoji: FaceIM.default.Emoji,
+    emojiObj: FaceIM.default.EmojiObj
   }
 
   methods = {
+    openEmoji (e) {
+      if (this.show === 'showEmoji') {
+        this.show = 'emoji_list'
+        this.showem = 'operation'
+      } else {
+        this.show = 'showEmoji'
+        this.showem = 'showEmojiOperation'
+      }
+      this.$apply()
+    },
+    async sendEmoji (event) {
+      var that = this
+      var emoji = event.target.dataset.emoji
+      var msglen = that.data.text.length - 1
+      if (emoji && emoji !== '[del]') {
+        var str = that.data.text + emoji
+      } else if (emoji === '[del]') {
+        var start = that.data.text.lastIndexOf('[')
+        var end = that.data.text.lastIndexOf(']')
+        var len = end - start
+        if (end !== -1 && end === msglen && len >= 3 && len <= 4) {
+          str = that.data.text.slice(0, start)
+        } else {
+          str = that.data.text.slice(0, msglen)
+        }
+      }
+      this.text = str
+      const pushMsg = this.methods.pushMsg.bind(this)
+      var text = R.trim(this.text)
+      this.text = ''
+      if (text.length) {
+        try {
+          const msg = await this.chatroom.sendText({
+            text
+          })
+          this.text = ''
+          pushMsg(msg)
+          this.show = 'emoji_list'
+          this.showem = 'operation'
+          this.$apply()
+        } catch (e) {
+          log.error({
+            page: 'chatroom',
+            opr: 'sendText',
+            info: e
+          })
+        }
+      }
+    },
     changeNav (e) {
       console.log(e)
       this.currentNav = e.currentTarget.dataset.index
@@ -307,6 +489,30 @@ export default class Chatroom extends wepy.page {
       if (!Array.isArray(msgs)) {
         msgs = [msgs]
       }
+      console.log('就是这个图')
+      msgs = msgs.map(msg => {
+        if (msg.type === 'text') {
+          return {
+            emji: FaceIM.default.parseEmoji(msg.text.replace(/\n/mg, '')),
+            chatroomId: msg.chatroomId,
+            flow: msg.flow,
+            from: msg.from,
+            fromAvatar: msg.fromAvatar,
+            fromClientType: msg.fromClientType,
+            fromCustom: msg.fromCustom,
+            fromNick: msg.fromNick,
+            idClient: msg.idClient,
+            resend: msg.resend,
+            status: msg.status,
+            text: msg.text,
+            time: msg.time,
+            type: msg.type,
+            userUpdateTime: msg.userUpdateTime
+          }
+        } else {
+          return msg
+        }
+      })
       console.log(msgs)
       const roomId = msgs[0].chatroomId || this.roomId
       const merged = [...this.msgs, ...msgs]
@@ -370,7 +576,8 @@ export default class Chatroom extends wepy.page {
               limit: 100
             })
             const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip')
-            console.log('history messages', msgs)
+//            console.log('history messages', msgs)
+
             // 刷新消息
             pushMsg(msgs || [])
             apply()
@@ -388,8 +595,8 @@ export default class Chatroom extends wepy.page {
     }
   }
 
-  async onShow() {
-
-  }
+//  async onShow() {
+//
+//  }
 }
 </script>

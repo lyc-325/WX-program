@@ -1,10 +1,13 @@
 <template>
 <!--register.wxml-->
 <view class="form-error" wx:if="{{formError}}">{{formError}}</view>
-
+  <view class="title" style="padding: 10px; text-align: center;">个人信息完善</view>
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userData.avatarUrl}}" background-size="cover"/>
+    <view class="userinfo-nickname">{{userData.nickName}}</view>
+  </view>
 <form @submit="submit">
   <view class="container">
-    <view class="title">个人信息完善</view>
     <view class="item">
       <view class="label">公司</view>
       <view class="input">
@@ -26,7 +29,7 @@
       </view>
     </view>
     <view class="item">
-      <button form-type="submit" loading="{{requesting}}">提交</button>
+      <button class="register_btn" form-type="submit" loading="{{requesting}}">提交</button>
     </view>
   </view>
 </form>
@@ -42,12 +45,27 @@
   text-align: center;
   font-size: 20px;
 }
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  margin-top: 20rpx;
+  color: #aaa;
+}
 
 .container > .item {
-  padding: 50rpx;
+  padding: 30rpx;
   display: flex;
   align-items: center;
-  margin-top: 30rpx;
+  margin-top: 50rpx;
 }
 
 .container > .item .label {
@@ -56,6 +74,25 @@
 
 .container > .item input {
   border: 1px solid #eee;
+  display:block;
+  height:1.8rem;
+  text-overflow:clip;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:UICTFontTextStyleBody;
+  border-radius:5%;
+}
+.register_btn {
+  width:100%;
+  height:55px;
+  position:fixed;
+  bottom:0;
+  right:0;
+  border-radius:0;
+  line-height:55px;
+  color:rgb(255,255,255);
+  background-color: #1eb571;
+
 }
 </style>
 
@@ -107,7 +144,8 @@ export default class Register extends wepy.page {
     requesting: false,
     formError: null,
     formErrorKey: null,
-    showOpenId: ''
+    showOpenId: '',
+    userData: {}
   }
 
   methods = {
@@ -189,7 +227,16 @@ export default class Register extends wepy.page {
           setNim({
             token
           })
-
+          var backAccid = await wepy.getStorage({
+            key: 'backAccid',
+            success: function(res) {
+              return res.data
+            }
+          })
+          // 回调 加积分
+          if (backAccid) {
+            await api.checkOpenGid(Token, backAccid.data)
+          }
           wepy.reLaunch({
             url: '/pages/chatrooms'
           })
@@ -202,6 +249,11 @@ export default class Register extends wepy.page {
         this.requesting = false
       }
     }
+  }
+  async onLoad() {
+    const { userInfo } = await wepy.getUserInfo()
+    this.userData = userInfo
+    this.$apply()
   }
 }
 </script>
