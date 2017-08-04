@@ -119,7 +119,7 @@
             text: '聊天室'
           },
           {
-            pagePath: 'pages/register',
+            pagePath: 'pages/boards',
             iconPath: 'static/icons/board.png',
             selectedIconPath: 'static/icons/board_selected.png',
             text: '留言板'

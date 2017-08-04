@@ -113,7 +113,7 @@ export default class Board extends wepy.page {
     content: '',
     createdBy: '',
     createdAt: '',
-    read: 200
+    read: ''
   }
   async onLoad(option) {
     const { id } = option
@@ -134,6 +134,7 @@ export default class Board extends wepy.page {
     this.content = res.text
     this.createdBy = res.creator
     this.createdAt = res.dateline
+    this.read = res.click_num
     this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`)
     this.$apply()
   }

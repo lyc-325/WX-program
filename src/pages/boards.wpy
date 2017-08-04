@@ -162,7 +162,7 @@ export default class Boards extends wepy.page {
           createdBy: item.creator,
           createdAt: item.dateline,
           cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
-          read: 200
+          read: item.click_num
         }))
         this.$apply()
       })
