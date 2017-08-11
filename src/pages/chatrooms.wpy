@@ -194,15 +194,17 @@ export default class Chatrooms extends wepy.page {
   }
   onShareAppMessage = async function (res) {
     console.log('执行了分享2')
-    var jfaccid = await wepy.getStorage({
-      key: 'jfAccid',
-      success: function(res) {
-        return res.data
-      }
-    })
+    var { data } = await wepy.getStorage({key: 'jfAccid'})
+//    var jfaccid = await wepy.getStorage({
+//      key: 'jfAccid',
+//      success: function(res) {
+//        return res
+//      }
+//    })
+    console.log(`/pages/chatrooms?accid=${data}`)
     return {
       title: '江峰小程序',
-      path: `/pages/chatrooms?accid=${jfaccid}`
+      path: `/pages/chatrooms?id=1212`
 //      success: async function (res) {
 //        console.log(res.shareTickets[0])
 //        var shareInfo = await wepy.getShareInfo({
@@ -256,13 +258,13 @@ export default class Chatrooms extends wepy.page {
       url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
     })
     const { openid } = data
-    const { session_key } = data
-    wepy.setStorage({
-      key: 'jfSessionKey',
-      data: session_key})
-    wepy.setStorage({
-      key: 'jfAccid',
-      data: openid})
+//    const { session_key } = data
+//    wepy.setStorage({
+//      key: 'jfSessionKey',
+//      data: session_key})
+//    wepy.setStorage({
+//      key: 'jfAccid',
+//      data: openid})
     const { userInfo } = await wepy.getUserInfo()
     const password = R.takeLast(5)(openid)
 
@@ -277,17 +279,23 @@ export default class Chatrooms extends wepy.page {
       const userId = await api.getTokenUserId(openid, password.toLowerCase())
       this.jfUserid = userId.id
       const Token = userId.Token
+      console.log('accid', options)
       if (options.accid && options.accid !== openid) {
         wepy.setStorage({
           key: 'backAccid',
           data: options.accid})
+        console.log('加积分1', options.accid)
+      } else {
+        wepy.setStorage({
+          key: 'backAccid',
+          data: '123'})
       }
-      wepy.setStorage({
-        key: 'jfUserId',
-        data: userId.id})
-      wepy.setStorage({
-        key: 'jfToken',
-        data: Token})
+//      wepy.setStorage({
+//        key: 'jfUserId',
+//        data: userId.id})
+//      wepy.setStorage({
+//        key: 'jfToken',
+//        data: Token})
       if (!Token) {
         throw new Error('user not exist')
       }
@@ -295,7 +303,8 @@ export default class Chatrooms extends wepy.page {
       setUser({
         ...this.user,
         jfToken: Token,
-        nimToken: token
+        nimToken: token,
+        userData: userId
       })
       // 初始化 nim 对象
       // const nim = NIM.getInstance({
@@ -356,5 +365,19 @@ export default class Chatrooms extends wepy.page {
       })
     }
   }
+  async onShow(options) {
+    console.log('accidShow', options)
+//    if (options.accid && options.accid !== openid) {
+//      wepy.setStorage({
+//        key: 'backAccid',
+//        data: options.accid})
+//      console.log('加积分1', options.accid)
+//    } else {
+//      wepy.setStorage({
+//        key: 'backAccid',
+//        data: '123'})
+//    }
+  }
 }
+
 </script>

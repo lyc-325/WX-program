@@ -28,11 +28,13 @@
   padding: 30rpx;
   display: flex;
   align-items: center;
-  margin-top: 50rpx;
+  margin-top: 10rpx;
 }
 
 .container > .item .label {
   padding: 10rpx;
+  width: 150rpx;
+  text-align:center;
 }
 
 .container > .item input {

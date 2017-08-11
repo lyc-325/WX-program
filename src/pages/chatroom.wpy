@@ -15,7 +15,7 @@
         <view class="content">
           <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
                  style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
-          <view wx:elif="{{item.emji[0].type === 'txt'}}">
+          <view wx:elif="{{item.emji[0].type === 'text'}}">
             <text>{{item.text}}</text>
           </view>
           <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
@@ -206,12 +206,13 @@
   width: 50rpx;
   height: 50rpx;
 }
+
 scroll-view {
   top: 80rpx;
   left: 0;
   position: absolute;
   z-index: 0;
-  height: 100%;
+  bottom: 100rpx;
 }
 
 .list-item:last-child {
@@ -539,7 +540,7 @@ export default class Chatroom extends wepy.page {
       const roomId = this.roomId
       const address = await NIM.getChatroomAddresses(accid, roomId)
       const chatroom = ChatroomSDK.getInstance({
-        debug: true,
+//        debug: true,
         account: accid,
         token: nimToken,
         chatroomId: roomId,
@@ -550,14 +551,21 @@ export default class Chatroom extends wepy.page {
             opr: 'initialize sdk instance',
             info: msgs
           })
+          console.log('收到聊天室信息', msgs)
           pushMsg(msgs.map(msg => {
             if (msg.type === 'notification') {
+              console.log('这个hhh', msg.attach)
               // 进入聊天室信息
               const tip = R.cond([
                 [R.equals('memberEnter'), R.always('加入聊天室')],
                 [R.equals('memberExit'), R.always('退出聊天室')]
               ])(msg.attach.type)
               console.log(`${msg.attach.fromNick} ${tip}`)
+              return {
+                ...msg,
+                type: 'text',
+                text: tip
+              }
             } else {
               return msg
             }
@@ -575,7 +583,7 @@ export default class Chatroom extends wepy.page {
             const res = await chatroom.getHistoryMsgs({
               limit: 100
             })
-            const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip')
+            const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
 //            console.log('history messages', msgs)
 
             // 刷新消息

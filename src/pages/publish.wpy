@@ -1,8 +1,8 @@
 <template>
 <form @submit="bindFormSubmit">
   <view class="controlBlock">
-    <span @tap="goBack" class="publish">取消</span>
-    <span form-type="submit" class="publish">发布</span>
+    <button  @tap="goBack" class="publish">取消</button>
+    <button  form-type="submit" class="publish">发布</button>
   </view>
   <view class="containerP">
     <view class="itemBlock">
@@ -40,13 +40,17 @@
 <style scoped>
 /* board_publish.wxss */
 .controlBlock{
-  width: 80%;
   display:flex;
-  padding: 10rpx 10%;
-  margin-bottom: 40rpx;
-  background-color: #1eb571;
-  justify-content: space-between;
-  font-weight: 700;
+  padding:10rpx 1%;
+  margin-bottom:40rpx;
+  background-color:#1eb571;
+  justify-content:space-around;
+  font-weight:700;
+}
+.controlBlock button{
+  color: #FFFFFF;
+  border: none;
+  background: #1eb571;
 }
 .containerP {
   flex-flow: column;
@@ -179,11 +183,17 @@ export default class Publish extends wepy.page {
   onLoad () {
     let self = this
     self.imgs = []
-    api.categoryList().then(results => {
-      console.log('results', results)
-      self.categories = results
-      self.$apply()
-    })
+    if (this.user.userData) {
+      api.categoryList().then(results => {
+        console.log('results', results)
+        self.categories = results
+        self.$apply()
+      })
+    } else {
+      wepy.reLaunch({
+        url: '/pages/register'
+      })
+    }
   }
 
   methods = {
@@ -207,7 +217,9 @@ export default class Publish extends wepy.page {
       this.imgs.splice(e.currentTarget.dataset.index, 1)
     },
     async bindFormSubmit (e) {
-      const { jfToken, username } = this.user
+      console.log('点击了发布')
+      const { jfToken, nickName } = this.user
+      console.log(this.user)
       const data = await api.uploadImages(this.imgs, jfToken)
       const title = e.detail.value.title
       const text = e.detail.value.content
@@ -219,7 +231,7 @@ export default class Publish extends wepy.page {
         title,
         text,
         token: jfToken,
-        creator: username,
+        creator: nickName,
         pic_urls: data.map(({url}) => url),
         category_id: categoryId
       })

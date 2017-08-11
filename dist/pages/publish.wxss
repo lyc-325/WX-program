@@ -1,13 +1,17 @@
 
 /* board_publish.wxss */
 .controlBlock._66f09fe{
-  width: 80%;
   display:flex;
-  padding: 10rpx 10%;
-  margin-bottom: 40rpx;
-  background-color: #1eb571;
-  justify-content: space-between;
-  font-weight: 700;
+  padding:10rpx 1%;
+  margin-bottom:40rpx;
+  background-color:#1eb571;
+  justify-content:space-around;
+  font-weight:700;
+}
+.controlBlock button._66f09fe{
+  color: #FFFFFF;
+  border: none;
+  background: #1eb571;
 }
 .containerP._66f09fe {
   flex-flow: column;

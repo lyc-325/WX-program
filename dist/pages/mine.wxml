@@ -10,42 +10,63 @@
     <!--<view class="membership">{{membership}}</view>-->
   <!--</view>-->
   <view class="userinfo _7d321b0" bindtap="handleViewTap">
+    <view  wx:if="{{isEdit === true}}" class="closeEdit _7d321b0" bindtap="closeUserInfoTap">取 消</view>
     <image class="userinfo-avatar _7d321b0" src="{{userData.icon}}" background-size="cover"/>
-    <view class="userinfo-nickname _7d321b0">{{userData.name}}</view>
+    <!--<view class="userinfo-nickname">{{userData.name}}</view>-->
+    <view  wx:if="{{isEdit === false}}" class="infoEdit _7d321b0" bindtap="editUserInfoTap">编 辑</view>
+    <view  wx:elif="{{isEdit === true}}" class="infoEdit _7d321b0" bindtap="saveUserInfoTap">保 存</view>
   </view>
   <view class="details _7d321b0">
     <view class="item _7d321b0">
+      <view class="label _7d321b0">姓名</view>
+      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.name}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.name}}" bindinput="nameKeyInput" placeholder="姓名" class="_7d321b0"/>
+    </view>
+
+    <view class="item _7d321b0">
       <view class="label _7d321b0">公司</view>
-      <view class="value _7d321b0">{{userData.company}}</view>
+      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.company}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.company}}" bindinput="companyKeyInput" placeholder="公司" class="_7d321b0"/>
     </view>
 
     <view class="item _7d321b0">
-      <view class="label _7d321b0">手机号</view>
-      <view class="value _7d321b0">{{userData.phone}}</view>
+      <view class="label _7d321b0">联系方式</view>
+      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.phone}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.phone}}" bindinput="phoneKeyInput" placeholder="联系方式" class="_7d321b0"/>
     </view>
 
     <view class="item _7d321b0">
-      <view class="label _7d321b0">邮箱</view>
-      <view class="value _7d321b0">{{userData.email}}</view>
+      <view class="label _7d321b0">主要经营</view>
+      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.ex}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.ex}}" bindinput="exKeyInput" placeholder="主要经营" class="_7d321b0"/>
     </view>
 
     <view class="item _7d321b0">
-      <view class="label _7d321b0">性别</view>
-      <view class="value _7d321b0">{{userData.gender == '1'? '男':'女'}}</view>
+      <view class="label _7d321b0">职位</view>
+      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.token}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.token}}" bindinput="tokenKeyInput" placeholder="职位" class="_7d321b0"/>
     </view>
 
-    <!--<view class="item">-->
-      <!--<view class="label">QQ</view>-->
-      <!--<view class="value">{{userData.QQ}}</view>-->
-    <!--</view>-->
-
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">积分</view>
-      <view class="value _7d321b0">{{userData.integration}}</view>
-    </view>
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">等级</view>
-      <view class="value _7d321b0">{{levelData}}</view>
     </view>
   </view>
-</view>
+
+  <view class="list _7d321b0">
+    <view style="color:#6b6b6b; padding:10px;" class="_7d321b0">发布列表</view>
+    <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _7d321b0">
+      <view class="cover _7d321b0">
+        <image mode="scaleToFill" src="{{item.cover}}" class="_7d321b0"/>
+      </view>
+      <view class="info _7d321b0">
+        <view class="title _7d321b0">{{item.title}}</view>
+        <view class="content _7d321b0">{{item.content}}</view>
+        <view class="footer _7d321b0">
+          <view class="createdBy _7d321b0">{{item.createdBy}}</view>
+          <view class="createdAt _7d321b0">{{item.createdAt}}</view>
+          <view class="read _7d321b0">
+            {{item.read}} 阅读
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _7d321b0">发布</view>

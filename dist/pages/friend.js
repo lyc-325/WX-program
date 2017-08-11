@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
+exports.default = undefined;
 
 var _getPrototypeOf = require('./../npm/babel-runtime/core-js/object/get-prototype-of.js');
 
@@ -49,7 +49,5 @@ var Friend = function (_wepy$page) {
   return Friend;
 }(_wepy2.default.page);
 
-
-Page(require('./../npm/wepy/lib/wepy.js').default.$createPage(Friend , 'pages/friend'));
-
+exports.default = Friend;
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZyaWVuZC5qcyJdLCJuYW1lcyI6WyJGcmllbmQiLCJjb25maWciLCJuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0IiwiZGF0YSIsInBhZ2UiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQ0E7Ozs7OztJQUNxQkEsTTs7Ozs7Ozs7Ozs7Ozs7NE1BQ25CQyxNLEdBQVM7QUFDUEMsOEJBQXdCO0FBRGpCLEssUUFJVEMsSSxHQUFPLEU7Ozs7RUFMMkIsZUFBS0MsSTs7a0JBQXBCSixNIiwiZmlsZSI6ImZyaWVuZC5qcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG5pbXBvcnQgd2VweSBmcm9tICd3ZXB5J1xyXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBGcmllbmQgZXh0ZW5kcyB3ZXB5LnBhZ2Uge1xyXG4gIGNvbmZpZyA9IHtcclxuICAgIG5hdmlnYXRpb25CYXJUaXRsZVRleHQ6ICflpb3lj4snXHJcbiAgfVxyXG5cclxuICBkYXRhID0ge1xyXG5cclxuICB9XHJcbn1cclxuIl19

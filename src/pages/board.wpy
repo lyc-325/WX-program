@@ -5,9 +5,9 @@
       <view class="value">{{title}}</view>
     </view>
 
-    <view class="item">
+    <view class="item" @tap="handleName">
       <view class="label">发布人:</view>
-      <view class="value">{{createdBy}}</view>
+      <view class="value">{{createdBy}} <span style="color: #545a63">(查看详情)</span></view>
     </view>
 
     <view class="item">
@@ -46,7 +46,7 @@
   margin-bottom: 20rpx;
 }
 .item {
-  font-size: 28rpx;
+  font-size: 36rpx;
   display: flex;
   flex-flow: row;
   width: 80%;
@@ -87,7 +87,9 @@ image {
   margin-bottom: 16rpx;
 }
 .area > .value {
-  font-size: 28rpx;
+  font-size: 34rpx;
+  color: #545a63;
+  text-indent:2em;
 }
 </style>
 
@@ -113,30 +115,37 @@ export default class Board extends wepy.page {
     content: '',
     createdBy: '',
     createdAt: '',
-    read: ''
+    read: '',
+    author_id: ''
+  }
+  methods = {
+    handleName (e) {
+      wepy.navigateTo({
+        url: `userInfo?id=${this.author_id}`
+      })
+    }
   }
   async onLoad(option) {
     const { id } = option
-//    console.log('id', id)
-    const { jfToken } = this.user
-    var jfuserToken = await wepy.getStorage({
-      key: 'jfToken',
-      success: function(res) {
-        return res.data
-      }
-    })
-    console.log(jfuserToken)
-    await api.addReadNum(id, jfuserToken)
-//    console.log(addNUm)
-    const res = await api.boardDetail(id, jfToken)
-    console.log(res)
-    this.title = res.title
-    this.content = res.text
-    this.createdBy = res.creator
-    this.createdAt = res.dateline
-    this.read = res.click_num
-    this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`)
-    this.$apply()
+    console.log('user', this.user)
+    if (this.user.userData) {
+      const { jfToken } = this.user
+      await api.addReadNum(id, jfToken)
+      const res = await api.boardDetail(id, jfToken)
+      console.log(res)
+      this.title = res.title
+      this.content = res.text
+      this.createdBy = res.author.name
+      this.createdAt = res.dateline
+      this.read = res.click_num
+      this.author_id = res.author_id
+      this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`)
+      this.$apply()
+    } else {
+      wepy.reLaunch({
+        url: '/pages/register'
+      })
+    }
   }
 }
 </script>

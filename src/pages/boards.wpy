@@ -1,5 +1,5 @@
 <template>
-   <view scroll-x="true" style="width:100%;" class="navbar">
+   <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar">
    <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;">
    <view @tap="changeNav" wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
     {{item}}
@@ -7,7 +7,7 @@
    </view>
   </view>
   <view class="list" style="padding-top: 80rpx;">
-  <view wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
+  <view wx:if="{{list.length > 0}}"wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
     <view class="cover">
       <image mode="scaleToFill" src="{{item.cover}}" />
     </view>
@@ -23,6 +23,9 @@
       </view>
     </view>
   </view>
+    <view wx:if="{{list.length === 0}}"  class="item">
+      <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;">当前分类没有信息</view>
+    </view>
 </view>
 <view @tap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish">发布</view>
 </template>
@@ -129,13 +132,19 @@
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import * as api from '../apis/board'
-import { jf } from '../config'
+import * as apiA from '../apis/account'
+import R from '../libs/ramda'
+import { jf, wx as config } from '../config'
+import * as log from '../utils/log'
 
-// import { connect } from 'wepy-redux'
+import {
+  setUser
+} from '../actions/common'
+
 @connect({
-  user(state) {
-    return state.common.user
-  }
+  user: state => state.common.user
+}, {
+  setUser
 })
 
 export default class Boards extends wepy.page {
@@ -152,14 +161,14 @@ export default class Boards extends wepy.page {
 
   methods = {
     changeNav (e) {
-      const { jfToken } = this.user
+//      const { jfToken } = this.user
       this.currentNav = e.currentTarget.dataset.index
-      api.boardList(this.categories[this.currentNav].id, jfToken).then(res => {
+      api.boardList(this.categories[this.currentNav].id).then(res => {
         this.list = res.map(item => ({
           id: item.id,
           title: item.title,
           content: item.text,
-          createdBy: item.creator,
+          createdBy: item.author.name,
           createdAt: item.dateline,
           cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
           read: item.click_num
@@ -183,8 +192,54 @@ export default class Boards extends wepy.page {
     }
   }
 
-  async onLoad(option) {
-    const { jfToken } = this.user
+  async onLoad(options) {
+    const { setUser } = this.methods
+    // const pushMsg = this.methods.pushMsg.bind(this)
+    wepy.showLoading()
+    const { code } = await wepy.login()
+    const { data } = await wepy.request({
+      url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
+    })
+    const { openid } = data
+    const { userInfo } = await wepy.getUserInfo()
+    const password = R.takeLast(5)(openid)
+
+    const user = {
+      ...userInfo,
+      accid: openid.toLowerCase()
+    }
+    setUser(user)
+    // 如果用户尚未在 则先注册
+    try {
+      const userId = await apiA.getTokenUserId(openid, password.toLowerCase())
+      this.jfUserid = userId.id
+      const Token = userId.Token
+      if (!Token) {
+        throw new Error('user not exist')
+      }
+
+      setUser({
+        ...this.user,
+        jfToken: Token,
+        userData: userId
+      })
+      this.$apply()
+      wepy.hideLoading()
+    } catch (e) {
+      log.error({
+        page: 'chatrooms',
+        opr: 'init',
+        info: e
+      })
+      wepy.hideLoading()
+//      wepy.navigateTo({
+//        url: '/pages/register'
+//      })
+    }
+  }
+
+  async onShow(option) {
+//    const { jfToken } = this.user
     // const token = await getToken()
     // console.log(api)
     const results = await api.categoryList()
@@ -198,15 +253,15 @@ export default class Boards extends wepy.page {
     //     }
     //   })
     // }
-    const res = await api.boardList(results[this.currentNav].id, jfToken)
+    const res = await api.boardList(results[this.currentNav].id)
     this.list = res.map(item => ({
       id: item.id,
       title: item.title,
       content: item.text,
-      createdBy: item.creator,
+      createdBy: item.author.name,
       createdAt: item.dateline,
       cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
-      read: 200
+      read: item.click_num
     }))
     // console.log('board', res)
     // await res.forEach(item => {

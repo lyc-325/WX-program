@@ -117,12 +117,13 @@
   width: 50rpx;
   height: 50rpx;
 }
+
 scroll-view {
   top: 80rpx;
   left: 0;
   position: absolute;
   z-index: 0;
-  height: 100%;
+  bottom: 100rpx;
 }
 
 .list-item:last-child {

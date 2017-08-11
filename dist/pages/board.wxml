@@ -5,9 +5,9 @@
       <view class="value _0639b95">{{title}}</view>
     </view>
 
-    <view class="item _0639b95">
+    <view class="item _0639b95" bindtap="handleName">
       <view class="label _0639b95">发布人:</view>
-      <view class="value _0639b95">{{createdBy}}</view>
+      <view class="value _0639b95">{{createdBy}} <span style="color: #545a63" class="_0639b95">(查看详情)</span></view>
     </view>
 
     <view class="item _0639b95">

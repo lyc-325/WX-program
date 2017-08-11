@@ -4,10 +4,17 @@
   <view class="title" style="padding: 10px; text-align: center;">个人信息完善</view>
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{userData.avatarUrl}}" background-size="cover"/>
-    <view class="userinfo-nickname">{{userData.nickName}}</view>
+    <!--<view class="userinfo-nickname">{{userData.nickName}}</view>-->
   </view>
 <form bindsubmit="submit">
   <view class="container">
+    <view class="item">
+      <view class="label">姓名</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'name'? 'error' : ''}}" name="name" bindfocus="bindFocus"/>
+      </view>
+    </view>
+
     <view class="item">
       <view class="label">公司</view>
       <view class="input">
@@ -16,18 +23,26 @@
     </view>
 
     <view class="item">
-      <view class="label">手机</view>
+      <view class="label">职位</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'token'? 'error' : ''}}" name="token" bindfocus="bindFocus"/>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="label">主要经营</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'ex'? 'error' : ''}}" name="ex" bindfocus="bindFocus"/>
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="label">联系方式</view>
       <view class="input">
         <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" bindfocus="bindFocus"/>
       </view>
     </view>
 
-    <view class="item">
-      <view class="label">邮箱</view>
-      <view class="input">
-        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}}" name="email" bindfocus="bindFocus"/>
-      </view>
-    </view>
     <view class="item">
       <button class="register_btn" form-type="submit" loading="{{requesting}}">提交</button>
     </view>

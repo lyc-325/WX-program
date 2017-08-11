@@ -1,0 +1,132 @@
+
+  .userinfo._4073524 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar._4073524 {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname._4073524 {
+    color: #aaa;
+  }
+  .root._4073524 {
+    width: 90%;
+    margin: 0 5%;
+  }
+  .root>view._4073524 {
+    padding: 20rpx;
+    border-bottom: 1px solid #eee;
+  }
+
+  .base._4073524 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .base>view._4073524:first-child {
+    display: flex;
+    align-items: center;
+  }
+
+  .base .avatar._4073524 {
+    margin-right: 10rpx;
+  }
+
+  .base .avatar image._4073524 {
+    width: 100rpx;
+    height: 100rpx;
+  }
+
+  .details>.item._4073524 {
+    display: flex;
+    padding: 10rpx 0;
+    justify-content: space-between;
+    color: #6b6b6b;
+  }
+  .list._4073524{
+    padding:0 5%;
+    background-color: #fff;
+  }
+  .list>.item._4073524 {
+    position: relative;
+    border-top: 2rpx solid #eee;
+    height: 200rpx;
+    display: flex;
+  }
+
+  .list>.item._4073524:first-child {
+    border-top: none;
+  }
+
+  .list>.item._4073524:last-child {
+    border-bottom: 2rpx solid #eee;
+  }
+
+  .list>.item .cover._4073524 {
+    width: 150rpx;
+    height: 150rpx;
+    padding: 30rpx;
+  }
+
+  .list>.item .cover image._4073524 {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 10rpx;
+  }
+
+  .list>.item .info._4073524 {
+    width: 500rpx;
+    padding: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .list>.item .info .title._4073524 {
+    width: 100%;
+    font-size: 32rpx;
+  }
+
+  .list>.item .info .content._4073524 {
+    font-size: 26rpx;
+    line-height: 30rpx;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: dimgray;
+  }
+
+  .list>.item .info .footer._4073524 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 25rpx;
+    color: darkgray;
+  }
+
+  .list>.item .info .footer._4073524 {
+    display: flex;
+  }
+
+  .publish._4073524 {
+    position: fixed;
+    bottom: 20rpx;
+    right: 20rpx;
+    width: 180rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 20rpx;
+    text-align: center;
+    background-color: #1eb571;
+    color: white;
+    font-size: 36rpx;
+    font-weight: 700;
+    box-shadow: 1px 1px 5px #ccc;
+  }

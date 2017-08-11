@@ -10,45 +10,66 @@
     <!--<view class="membership">{{membership}}</view>-->
   <!--</view>-->
   <view class="userinfo" @tap="handleViewTap">
+    <view wx:if="{{isEdit === true}}" class="closeEdit" @tap="closeUserInfoTap">取 消</view>
     <image class="userinfo-avatar" src="{{userData.icon}}" background-size="cover"/>
-    <view class="userinfo-nickname">{{userData.name}}</view>
+    <!--<view class="userinfo-nickname">{{userData.name}}</view>-->
+    <view wx:if="{{isEdit === false}}" class="infoEdit" @tap="editUserInfoTap">编 辑</view>
+    <view wx:elif="{{isEdit === true}}" class="infoEdit" @tap="saveUserInfoTap">保 存</view>
   </view>
   <view class="details">
     <view class="item">
+      <view class="label">姓名</view>
+      <view wx:if="{{isEdit === false}}" class="value">{{userData.name}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.name}}" bindinput="nameKeyInput" placeholder="姓名" >
+    </view>
+
+    <view class="item">
       <view class="label">公司</view>
-      <view class="value">{{userData.company}}</view>
+      <view wx:if="{{isEdit === false}}" class="value">{{userData.company}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.company}}" bindinput="companyKeyInput" placeholder="公司" >
     </view>
 
     <view class="item">
-      <view class="label">手机号</view>
-      <view class="value">{{userData.phone}}</view>
+      <view class="label">联系方式</view>
+      <view wx:if="{{isEdit === false}}" class="value">{{userData.phone}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.phone}}" bindinput="phoneKeyInput" placeholder="联系方式" >
     </view>
 
     <view class="item">
-      <view class="label">邮箱</view>
-      <view class="value">{{userData.email}}</view>
+      <view class="label">主要经营</view>
+      <view wx:if="{{isEdit === false}}" class="value">{{userData.ex}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.ex}}" bindinput="exKeyInput" placeholder="主要经营" >
     </view>
 
     <view class="item">
-      <view class="label">性别</view>
-      <view class="value">{{userData.gender == '1'? '男':'女'}}</view>
+      <view class="label">职位</view>
+      <view wx:if="{{isEdit === false}}" class="value">{{userData.token}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.token}}" bindinput="tokenKeyInput" placeholder="职位" >
     </view>
 
-    <!--<view class="item">-->
-      <!--<view class="label">QQ</view>-->
-      <!--<view class="value">{{userData.QQ}}</view>-->
-    <!--</view>-->
-
-    <view class="item">
-      <view class="label">积分</view>
-      <view class="value">{{userData.integration}}</view>
-    </view>
-    <view class="item">
-      <view class="label">等级</view>
-      <view class="value">{{levelData}}</view>
     </view>
   </view>
 </view>
+  <view class="list">
+    <view style="color:#6b6b6b; padding:10px;">发布列表</view>
+    <view wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
+      <view class="cover">
+        <image mode="scaleToFill" src="{{item.cover}}" />
+      </view>
+      <view class="info">
+        <view class="title">{{item.title}}</view>
+        <view class="content">{{item.content}}</view>
+        <view class="footer">
+          <view class="createdBy">{{item.createdBy}}</view>
+          <view class="createdAt">{{item.createdAt}}</view>
+          <view class="read">
+            {{item.read}} 阅读
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view @tap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish">发布</view>
 </template>
 
 <style scoped>
@@ -63,13 +84,28 @@
     height: 120rpx;
     border-radius: 50%;
   }
-
+.infoEdit{
+  position:absolute;
+  right:10%;
+  padding:5px 10px;
+  border:1px solid #eee;
+  border-radius:10%;
+  top:2%;
+}
+.closeEdit{
+  position:absolute;
+  left:10%;
+  padding:5px 10px;
+  border:1px solid #eee;
+  border-radius:10%;
+  top:2%;
+}
 .userinfo-nickname {
     color: #aaa;
   }
 .root {
-  width: 80%;
-  margin: 0 10%;
+  width: 90%;
+  margin: 0 5%;
   }
 .root>view {
   padding: 20rpx;
@@ -97,47 +133,220 @@
 }
 
 .details>.item {
+   display: flex;
+   padding: 10rpx 0;
+   justify-content: space-between;
+   color: #6b6b6b;
+ }
+
+.list{
+  padding:0 5%;
+  background-color: #fff;
+}
+.list>.item {
+  position: relative;
+  border-top: 2rpx solid #eee;
+  height: 200rpx;
   display: flex;
-  padding: 10rpx 0;
+}
+
+.list>.item:first-child {
+  border-top: none;
+}
+
+.list>.item:last-child {
+  border-bottom: 2rpx solid #eee;
+}
+
+.list>.item .cover {
+  width: 150rpx;
+  height: 150rpx;
+  padding: 30rpx;
+}
+
+.list>.item .cover image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10rpx;
+}
+
+.list>.item .info {
+  width: 500rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.list>.item .info .title {
+  width: 100%;
+  font-size: 32rpx;
+}
+
+.list>.item .info .content {
+  font-size: 26rpx;
+  line-height: 30rpx;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: dimgray;
+}
+
+.list>.item .info .footer {
+  display: flex;
   justify-content: space-between;
-  color: #6b6b6b;
+  font-size: 25rpx;
+  color: darkgray;
+}
+
+.list>.item .info .footer {
+  display: flex;
+}
+
+.publish {
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+  width: 180rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 36rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
 }
 </style>
 
 <script>
 import wepy from 'wepy'
 import * as api from '../apis/mine'
+import { jf } from '../config'
+import { connect } from 'wepy-redux'
 
+@connect({
+  user(state) {
+    return state.common.user
+  }
+})
 export default class Mine extends wepy.page {
   config = {
     navigationBarTitleText: '个人中心'
   }
 
   data = {
+    list: [],
     userData: {
       name: '加载中...'
     },
-    levelData: ''
+    newUserData: {},
+    levelData: '',
+    isEdit: false
   }
 
-  async onLoad() {
-    let self = this
-    var jfuserId = await wepy.getStorage({
-      key: 'jfUserId',
-      success: function(res) {
-        return res.data
+  methods = {
+    nameKeyInput(e) {
+      this.setData({
+        [`userData.name`]: e.detail.value
+      })
+      this.userData.name = e.detail.value
+      this.$apply()
+    },
+    companyKeyInput(e) {
+      this.setData({
+        [`userData.company`]: e.detail.value
+      })
+      this.userData.company = e.detail.value
+      this.$apply()
+    },
+    phoneKeyInput(e) {
+      this.setData({
+        [`userData.phone`]: e.detail.value
+      })
+      this.userData.phone = e.detail.value
+      this.$apply()
+    },
+    tokenKeyInput(e) {
+      this.setData({
+        [`userData.token`]: e.detail.value
+      })
+      this.userData.token = e.detail.value
+      this.$apply()
+    },
+    exKeyInput(e) {
+      this.setData({
+        [`userData.ex`]: e.detail.value
+      })
+      this.userData.ex = e.detail.value
+      this.$apply()
+    },
+    editUserInfoTap(e) {
+      this.isEdit = true
+    },
+    closeUserInfoTap() {
+      this.isEdit = false
+      this.userData = this.user.userData
+      this.$apply()
+    },
+    async saveUserInfoTap(e) {
+      this.isEdit = false
+      const { id } = this.userData
+      var postData = {
+        name: this.userData.name,
+        company: this.userData.company,
+        phone: this.userData.phone,
+        token: this.userData.token,
+        ex: this.userData.ex
       }
+      await api.modifyUserInfo(id, postData)
+      this.$apply()
+    },
+    handlePublishTap(e) {
+      wepy.navigateTo({
+        url: 'publish'
+      })
+    },
+    handleItemTap(e) {
+      const id = this.list[e.currentTarget.dataset.index].id
+      wepy.navigateTo({
+        url: `board?id=${id}`
+      })
+    }
+  }
+  onShareAppMessage = async function (res) {
+    console.log('执行了分享')
+    return {
+      title: '江峰小程序',
+      path: `/pages/boards`
+    }
+  }
+  async onShow() {
+    await wepy.showShareMenu({
+      withShareTicket: true
     })
-    var jfuserToken = await wepy.getStorage({
-      key: 'jfToken',
-      success: function(res) {
-        return res.data
-      }
-    })
-    var resData = await api.getUserData(jfuserToken.data, jfuserId.data)
-    self.userData = resData
-    self.levelData = api.getLevel(resData.integration)
-    self.$apply()
+    if (this.user.userData) {
+      console.log('this.user', this.user)
+      this.userData = this.user.userData
+      const res = await api.getMsgList(this.user.userData.id)
+      this.list = res.map(item => ({
+        id: item.id,
+        title: item.title,
+        content: item.text,
+        createdBy: item.author.name,
+        createdAt: item.dateline,
+        cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+        read: item.click_num
+      }))
+      this.$apply()
+    } else {
+      wepy.reLaunch({
+        url: '/pages/register'
+      })
+    }
   }
 }
 </script>

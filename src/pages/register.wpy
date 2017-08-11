@@ -4,10 +4,17 @@
   <view class="title" style="padding: 10px; text-align: center;">个人信息完善</view>
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{userData.avatarUrl}}" background-size="cover"/>
-    <view class="userinfo-nickname">{{userData.nickName}}</view>
+    <!--<view class="userinfo-nickname">{{userData.nickName}}</view>-->
   </view>
 <form @submit="submit">
   <view class="container">
+    <view class="item">
+      <view class="label">姓名</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'name'? 'error' : ''}}" name="name" @focus="bindFocus" />
+      </view>
+    </view>
+
     <view class="item">
       <view class="label">公司</view>
       <view class="input">
@@ -16,18 +23,26 @@
     </view>
 
     <view class="item">
-      <view class="label">手机</view>
+      <view class="label">职位</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'token'? 'error' : ''}}" name="token" @focus="bindFocus" />
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="label">主要经营</view>
+      <view class="input">
+        <input type="text" class="{{formErrorKey === 'ex'? 'error' : ''}}" name="ex" @focus="bindFocus" />
+      </view>
+    </view>
+
+    <view class="item">
+      <view class="label">联系方式</view>
       <view class="input">
         <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" @focus="bindFocus" />
       </view>
     </view>
 
-    <view class="item">
-      <view class="label">邮箱</view>
-      <view class="input">
-        <input type="text" class="{{formErrorKey === 'email'? 'error' : ''}}" name="email" @focus="bindFocus" />
-      </view>
-    </view>
     <view class="item">
       <button class="register_btn" form-type="submit" loading="{{requesting}}">提交</button>
     </view>
@@ -65,11 +80,13 @@
   padding: 30rpx;
   display: flex;
   align-items: center;
-  margin-top: 50rpx;
+  margin-top: 10rpx;
 }
 
 .container > .item .label {
   padding: 10rpx;
+  width: 150rpx;
+  text-align:center;
 }
 
 .container > .item input {
@@ -100,15 +117,13 @@
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import R from '../libs/ramda'
-import NIM from '../utils/nim'
 import * as api from '../apis/account'
 
 import {
-  setUser,
-  setNim
+  setUser
 } from '../actions/common'
 
-import { validator, validateLength, validateEmail, validatePhone } from '../utils/validator'
+import { validator, validateLength, validatePhone } from '../utils/validator'
 
 // 校验规则配置
 const rules = {
@@ -116,13 +131,21 @@ const rules = {
     prompt: '公司名称在1-20字以内',
     validate: validateLength(1, 20)
   },
-  email: {
-    prompt: '邮箱不合法',
-    validate: validateEmail
+  name: {
+    prompt: '昵称在1-10字以内',
+    validate: validateLength(1, 10)
   },
   phone: {
     prompt: '电话号码不合法',
     validate: validatePhone
+  },
+  token: {
+    prompt: '职位名称在1-20字以内',
+    validate: validateLength(1, 20)
+  },
+  ex: {
+    prompt: '主要经营在1-20字以内',
+    validate: validateLength(1, 20)
   }
 }
 
@@ -179,41 +202,42 @@ export default class Register extends wepy.page {
 //    },
     async submit(e) {
       const errorKey = validate(e.detail.value)
-      const { company, phone, email } = e.detail.value
+      const { name, company, token, ex, phone } = e.detail.value
       const { setUser } = this.methods
       if (!errorKey) {
         this.requesting = true
 
-        const { accid, nickName, avatarUrl, gender } = this.user
+        const { accid, avatarUrl, gender } = this.user
 
         const infos = {
+          name,
           company,
+          token,
           phone,
-          email,
+          ex,
           gender,
           credits: 0
         }
-        let token
-        try {
-          const resp = await NIM.create(
-            accid,
-            nickName,
-            avatarUrl,
-            infos
-          )
-          token = resp.token
-        } catch (e) {
-          if (e.code === 414) {
-            const resp = await NIM.login(accid)
-            token = resp.token
-          }
-        }
+//        let token
+//        try {
+//          const resp = await NIM.create(
+//            accid,
+//            nickName,
+//            avatarUrl,
+//            infos
+//          )
+//          token = resp.token
+//        } catch (e) {
+//          if (e.code === 414) {
+//            const resp = await NIM.login(accid)
+//            token = resp.token
+//          }
+//        }
 
         try {
           const password = R.takeLast(5)(accid)
           const user = await api.createUser(accid, password, {
             ...infos,
-            name: nickName,
             icon: avatarUrl
           })
           const { Token } = user
@@ -224,21 +248,21 @@ export default class Register extends wepy.page {
             jfToken: Token
           })
 
-          setNim({
-            token
-          })
-          var backAccid = await wepy.getStorage({
-            key: 'backAccid',
-            success: function(res) {
-              return res.data
-            }
-          })
+//          setNim({
+//            token
+//          })
+//          var backAccid = await wepy.getStorage({
+//            key: 'backAccid',
+//            success: function(res) {
+//              return res
+//            }
+//          })
           // 回调 加积分
-          if (backAccid) {
-            await api.checkOpenGid(Token, backAccid.data)
-          }
+//          if (backAccid.data !== '123') {
+//            await api.checkOpenGid(Token, backAccid.data)
+//          }
           wepy.reLaunch({
-            url: '/pages/chatrooms'
+            url: '/pages/boards'
           })
         } catch (e) {
           console.error('create user', e)
@@ -253,6 +277,13 @@ export default class Register extends wepy.page {
   async onLoad() {
     const { userInfo } = await wepy.getUserInfo()
     this.userData = userInfo
+//    var backAccid = await wepy.getStorage({
+//      key: 'backAccid',
+//      success: function(res) {
+//        return res
+//      }
+//    })
+//    console.log('加积分', backAccid)
     this.$apply()
   }
 }

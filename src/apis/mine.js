@@ -15,3 +15,20 @@ export const getLevel = function (score) {
     return parseInt(score/10)
 }
 
+export const modifyUserInfo = function(id, token) {
+  return jf.request({
+    api: `accounts/modify/${id}/`,
+    data: token,
+    method: 'POST'
+  })
+}
+
+export const getMsgList = function(id) {
+  return jf.request({
+    api: `article/get_article_by_user_id/`,
+    data: {
+      id: id
+    },
+    method: 'POST'
+  })
+}

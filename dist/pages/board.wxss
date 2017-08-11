@@ -11,7 +11,7 @@
   margin-bottom: 20rpx;
 }
 .item._0639b95 {
-  font-size: 28rpx;
+  font-size: 36rpx;
   display: flex;
   flex-flow: row;
   width: 80%;
@@ -52,5 +52,7 @@ image._0639b95 {
   margin-bottom: 16rpx;
 }
 .area > .value._0639b95 {
-  font-size: 28rpx;
+  font-size: 34rpx;
+  color: #545a63;
+  text-indent:2em;
 }

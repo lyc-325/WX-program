@@ -17,7 +17,7 @@ export const addReadNum = function(id, token) {
     api: 'article/add_read_num/',
     data: {
       id: id,
-      token: token.data
+      token: token
     },
     method: 'POST'
   })
@@ -28,19 +28,19 @@ export const categoryList = function() {
     method: 'GET'
   })
 }
-export const boardList = function(category, token) {
-  if (token) {
+export const boardList = function(category) {
+  // if (token) {
     return jf.request({
-      api: `article/screen_article/${category}/${token}/`,
+      api: `article/screen_article/${category}/`,
       method: 'GET'
     })
-  } else {
-    token = category
-    return jf.request({
-      api: `article/list/${token}/`,
-      method: 'GET'
-    })
-  }
+  // } else {
+  //   token = category
+  //   return jf.request({
+  //     api: `article/list/${token}/`,
+  //     method: 'GET'
+  //   })
+  // }
 }
 
 export const boardDetail = function(pk, token) {

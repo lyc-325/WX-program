@@ -14,7 +14,7 @@
         </view>
         <view class="content">
           <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
-          <view wx:elif="{{item.emji[0].type === 'txt'}}">
+          <view wx:elif="{{item.emji[0].type === 'text'}}">
             <text>{{item.text}}</text>
           </view>
           <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"/>

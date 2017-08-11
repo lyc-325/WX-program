@@ -1,0 +1,53 @@
+
+  <view class="root _4073524">
+    <view class="userinfo _4073524" bindtap="handleViewTap">
+      <image class="userinfo-avatar _4073524" src="{{userData.icon}}" background-size="cover"/>
+    </view>
+    <view class="details _4073524">
+      <view class="item _4073524">
+        <view class="label _4073524">姓名</view>
+        <view class="value _4073524">{{userData.name}}</view>
+      </view>
+
+      <view class="item _4073524">
+        <view class="label _4073524">公司</view>
+        <view class="value _4073524">{{userData.company}}</view>
+      </view>
+
+      <view class="item _4073524">
+        <view class="label _4073524">联系方式</view>
+        <view class="value _4073524">{{userData.phone}}</view>
+      </view>
+
+      <view class="item _4073524">
+        <view class="label _4073524">主要经营</view>
+        <view class="value _4073524">{{userData.ex}}</view>
+      </view>
+
+      <view class="item _4073524">
+        <view class="label _4073524">职位</view>
+        <view class="value _4073524">{{userData.token}}</view>
+      </view>
+
+    </view>
+  </view>
+  <view class="list _4073524">
+    <view style="color:#6b6b6b; padding:10px;" class="_4073524">发布列表</view>
+    <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _4073524">
+      <view class="cover _4073524">
+        <image mode="scaleToFill" src="{{item.cover}}" class="_4073524"/>
+      </view>
+      <view class="info _4073524">
+        <view class="title _4073524">{{item.title}}</view>
+        <view class="content _4073524">{{item.content}}</view>
+        <view class="footer _4073524">
+          <view class="createdBy _4073524">{{item.createdBy}}</view>
+          <view class="createdAt _4073524">{{item.createdAt}}</view>
+          <view class="read _4073524">
+            {{item.read}} 阅读
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _4073524">发布</view>

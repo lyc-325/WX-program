@@ -1,8 +1,8 @@
 
 <form bindsubmit="bindFormSubmit" class="_66f09fe">
   <view class="controlBlock _66f09fe">
-    <span bindtap="goBack" class="publish _66f09fe">取消</span>
-    <span form-type="submit" class="publish _66f09fe">发布</span>
+    <button bindtap="goBack" class="publish _66f09fe">取消</button>
+    <button form-type="submit" class="publish _66f09fe">发布</button>
   </view>
   <view class="containerP _66f09fe">
     <view class="itemBlock _66f09fe">
