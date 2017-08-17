@@ -22,6 +22,18 @@ export const addReadNum = function(id, token) {
     method: 'POST'
   })
 }
+
+export const searchList = function(valueId, searchValue) {
+  return jf.request({
+    api: 'article/category/search/',
+    data: {
+      id: valueId,
+      s: searchValue
+    },
+    method: 'POST'
+  })
+}
+
 export const categoryList = function() {
   return jf.request({
     api: 'article/category/list/',

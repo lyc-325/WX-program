@@ -106,7 +106,7 @@ import { jf } from '../config'
 })
 export default class Board extends wepy.page {
   config = {
-    navigationBarTitleText: '留言板'
+    navigationBarTitleText: '商友圈'
   }
 
   data = {

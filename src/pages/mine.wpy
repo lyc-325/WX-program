@@ -52,13 +52,16 @@
 </view>
   <view class="list">
     <view style="color:#6b6b6b; padding:10px;">发布列表</view>
-    <view wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
-      <view class="cover">
+    <view wx:for="{{list}}"   wx:key="index" data-index="{{index}}" class="item">
+      <view class="cover" @tap="handleItemTap({{item.id}})">
         <image mode="scaleToFill" src="{{item.cover}}" />
       </view>
       <view class="info">
-        <view class="title">{{item.title}}</view>
-        <view class="content">{{item.content}}</view>
+        <view class="title">
+          <view>{{item.title}}</view>
+          <view @tap="deleteItem({{item}},{{index}})">删除</view>
+        </view>
+        <view class="content" @tap="handleItemTap({{item.id}})">{{item.content}}</view>
         <view class="footer">
           <view class="createdBy">{{item.createdBy}}</view>
           <view class="createdAt">{{item.createdAt}}</view>
@@ -179,8 +182,9 @@
 }
 
 .list>.item .info .title {
-  width: 100%;
   font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
 }
 
 .list>.item .info .content {
@@ -249,6 +253,11 @@ export default class Mine extends wepy.page {
   }
 
   methods = {
+    async deleteItem(item, index) {
+      await api.delItem(item.id)
+      this.list.splice(index, 1)
+      this.$apply()
+    },
     nameKeyInput(e) {
       this.setData({
         [`userData.name`]: e.detail.value
@@ -310,8 +319,8 @@ export default class Mine extends wepy.page {
         url: 'publish'
       })
     },
-    handleItemTap(e) {
-      const id = this.list[e.currentTarget.dataset.index].id
+    handleItemTap(Id) {
+      const id = Id
       wepy.navigateTo({
         url: `board?id=${id}`
       })

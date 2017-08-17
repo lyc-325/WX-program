@@ -105,8 +105,9 @@
 }
 
 .list>.item .info .title._7d321b0 {
-  width: 100%;
   font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
 }
 
 .list>.item .info .content._7d321b0 {

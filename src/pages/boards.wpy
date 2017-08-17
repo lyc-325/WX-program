@@ -1,11 +1,15 @@
 <template>
+  <view class="section" style="display: flex;justify-content: flex-end; padding: 5px 10px;">
+    <input class="searchInput" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
+    <button @tap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;">搜索</button>
+  </view>
    <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar">
    <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;">
    <view @tap="changeNav" wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}}">
     {{item}}
    </view>
    </view>
-  </view>
+   </view>
   <view class="list" style="padding-top: 80rpx;">
   <view wx:if="{{list.length > 0}}"wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
     <view class="cover">
@@ -60,6 +64,17 @@
   border-top: none;
 }
 
+.searchInput{
+  display:block;
+  height: 2rem;
+  text-overflow:clip;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:UICTFontTextStyleBody;
+  min-height: 2rem;
+  border-bottom:1px solid #eee;
+
+}
 .list>.item:last-child {
   border-bottom: 2rpx solid #eee;
 }
@@ -156,14 +171,37 @@ export default class Boards extends wepy.page {
     list: [],
     navs: [],
     currentNav: 0,
-    categories: []
+    categories: [],
+    searchValue: ''
   }
 
   methods = {
     changeNav (e) {
 //      const { jfToken } = this.user
       this.currentNav = e.currentTarget.dataset.index
+      this.searchValue = ''
       api.boardList(this.categories[this.currentNav].id).then(res => {
+        this.list = res.map(item => ({
+          id: item.id,
+          title: item.title,
+          content: item.text,
+          createdBy: item.author.name,
+          createdAt: item.dateline,
+          cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+          read: item.click_num
+        }))
+        this.$apply()
+      })
+    },
+    searchKeyInput(e) {
+      this.setData({
+        [`searchValue`]: e.detail.value
+      })
+      this.searchValue = e.detail.value
+      this.$apply()
+    },
+    searchTap(e) {
+      api.searchList(this.categories[this.currentNav].id, this.searchValue).then(res => {
         this.list = res.map(item => ({
           id: item.id,
           title: item.title,

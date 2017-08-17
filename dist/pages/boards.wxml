@@ -1,11 +1,15 @@
 
+  <view class="section _089d13c" style="display: flex;justify-content: flex-end; padding: 5px 10px;">
+    <input class="searchInput _089d13c" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
+    <button bindtap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;" class="_089d13c">搜索</button>
+  </view>
    <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar _089d13c">
    <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;" class="_089d13c">
    <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _089d13c">
     {{item}}
    </view>
    </view>
-  </view>
+   </view>
   <view class="list _089d13c" style="padding-top: 80rpx;">
   <view  wx:if="{{list.length > 0}}" wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _089d13c">
     <view class="cover _089d13c">

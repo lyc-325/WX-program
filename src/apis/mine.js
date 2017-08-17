@@ -32,3 +32,14 @@ export const getMsgList = function(id) {
     method: 'POST'
   })
 }
+export const delItem = function(id) {
+  var postArr =[]
+  postArr.push(id)
+  return jf.request({
+    api: `article/category/del_l/`,
+    data: {
+      pk_list: postArr
+    },
+    method: 'POST'
+  })
+}

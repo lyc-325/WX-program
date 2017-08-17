@@ -52,13 +52,16 @@
 
   <view class="list _7d321b0">
     <view style="color:#6b6b6b; padding:10px;" class="_7d321b0">发布列表</view>
-    <view  wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _7d321b0">
-      <view class="cover _7d321b0">
+    <view  wx:for="{{list}}" wx:key="index" data-index="{{index}}" class="item _7d321b0">
+      <view class="cover _7d321b0" bindtap="handleItemTap" data-wepy-params-a="{{item.id}}">
         <image mode="scaleToFill" src="{{item.cover}}" class="_7d321b0"/>
       </view>
       <view class="info _7d321b0">
-        <view class="title _7d321b0">{{item.title}}</view>
-        <view class="content _7d321b0">{{item.content}}</view>
+        <view class="title _7d321b0">
+          <view class="_7d321b0">{{item.title}}</view>
+          <view bindtap="deleteItem" class="_7d321b0" data-wepy-params-a="{{item}}" data-wepy-params-b="{{index}}">删除</view>
+        </view>
+        <view class="content _7d321b0" bindtap="handleItemTap" data-wepy-params-a="{{item.id}}">{{item.content}}</view>
         <view class="footer _7d321b0">
           <view class="createdBy _7d321b0">{{item.createdBy}}</view>
           <view class="createdAt _7d321b0">{{item.createdAt}}</view>

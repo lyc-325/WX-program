@@ -28,6 +28,17 @@
   border-top: none;
 }
 
+.searchInput._089d13c{
+  display:block;
+  height: 2rem;
+  text-overflow:clip;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:UICTFontTextStyleBody;
+  min-height: 2rem;
+  border-bottom:1px solid #eee;
+
+}
 .list>.item._089d13c:last-child {
   border-bottom: 2rpx solid #eee;
 }
