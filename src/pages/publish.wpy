@@ -221,6 +221,8 @@ export default class Publish extends wepy.page {
       const { jfToken, nickName } = this.user
       console.log(this.user)
       const data = await api.uploadImages(this.imgs, jfToken)
+      console.log(data)
+
       const title = e.detail.value.title
       const text = e.detail.value.content
       const categoryId = this.categories[this.index].id

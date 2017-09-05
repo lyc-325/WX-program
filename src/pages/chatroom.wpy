@@ -529,8 +529,8 @@ export default class Chatroom extends wepy.page {
   async onLoad(options) {
     const { id } = options
     this.roomId = id
-    const { pk } = options
-    const roomInfo = await chatroomApi.getOneById(pk)
+//    const { pk } = options
+    const roomInfo = await chatroomApi.getOneById(id)
     this.roomData = roomInfo
     const pushMsg = this.methods.pushMsg.bind(this)
     const apply = this.$apply.bind(this)

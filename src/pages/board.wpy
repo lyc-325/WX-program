@@ -135,7 +135,7 @@ export default class Board extends wepy.page {
       console.log(res)
       this.title = res.title
       this.content = res.text
-      this.createdBy = res.author.name
+      this.createdBy = res.author
       this.createdAt = res.dateline
       this.read = res.click_num
       this.author_id = res.author_id

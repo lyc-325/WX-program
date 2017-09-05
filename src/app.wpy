@@ -77,10 +77,10 @@
   export default class extends wepy.app {
     config = {
       pages: [
+        // 聊天室
+        'pages/chatrooms',
         // 留言板
         'pages/boards',
-        // 聊天室
-//        'pages/chatrooms',
         // 消息
         'pages/userInfo',
         // 消息
@@ -104,7 +104,7 @@
         // 申请
 //        'pages/apply',
         // 聊天室
-//        'pages/chatroom',
+        'pages/chatroom',
         // 注册
         'pages/register'
       ],
@@ -114,12 +114,12 @@
         borderStyle: '#ccc',
         backgroundColor: '#fff',
         list: [
-//          {
-//            pagePath: 'pages/chatrooms',
-//            iconPath: 'static/icons/chatroom.png',
-//            selectedIconPath: 'static/icons/chatroom_selected.png',
-//            text: '聊天室'
-//          },
+          {
+            pagePath: 'pages/chatrooms',
+            iconPath: 'static/icons/chatroom.png',
+            selectedIconPath: 'static/icons/chatroom_selected.png',
+            text: '聊天室'
+          },
           {
             pagePath: 'pages/boards',
             iconPath: 'static/icons/board.png',

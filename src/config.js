@@ -12,7 +12,7 @@ module.exports = {
   },
   // 江风后台配置
   jf: {
-    server: 'http://118.89.185.29:8007/api',
-    baseServer: 'http://118.89.185.29:8007'
+    server: 'http://39.108.188.32:8000/api',
+    baseServer: 'http://39.108.188.32:8000'
   }
 }

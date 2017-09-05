@@ -22,7 +22,7 @@ export const getToken = function (username, password) {
       password
     },
     method: 'POST'
-  }).then(({ Token }) => Token)
+  }).then((res) => res)
 }
 
 export const shareParsing = function (key, info) {

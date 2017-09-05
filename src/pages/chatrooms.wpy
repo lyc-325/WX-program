@@ -1,383 +1,292 @@
 <template>
-<view class="list">
-  <block wx:for="{{rooms}}" wx:key="id">
-    <view class="item" @tap="toChatroom({{index}})">
-      <view class="cover">
-        <image mode="scaleToFill" src="{{item.cover}}"></image>
+  <view class="list">
+    <block wx:for="{{rooms}}" wx:key="id">
+      <view class="item" @tap="toChatroom({{index}})">
+        <view class="cover">
+          <image mode="scaleToFill" src="{{item.cover}}"></image>
+        </view>
+        <view class="info">
+          <view>123</view>
+          <view class="title">{{item.name}}</view>
+          <view class="members">{{item.announcement}}</view>
+        </view>
       </view>
-      <view class="info">
-        <view class="title">{{item.name}}</view>
-        <view class="members">{{item.announcement}}</view>
-      </view>
-    </view>
-  </block>
-</view>
+    </block>
+  </view>
 </template>
 
 <style>
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  color: transparent;
-}
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
 
-.list {
-   /*display: flex;*/
-   /*flex-wrap: wrap;*/
-   /*align-items: center;*/
-   /*justify-content: space-between;*/
-   /*padding: 50rpx;*/
-   /*margin-bottom: -20rpx;*/
-   padding-left: 20rpx;
-   padding-right: 20rpx;
-   background-color: #fff;
-   border-top:1px solid #dad9d6;
-}
+  .list {
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+    /*padding: 50rpx;*/
+    /*margin-bottom: -20rpx;*/
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    background-color: #fff;
+    border-top:1px solid #dad9d6;
+  }
 
-.list>.item {
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*width: 300rpx;*/
-  /*height: 350rpx;*/
-  /*margin-right: 20rpx;*/
-  /*margin-bottom: 20rpx;*/
-  /*font-size: 25rpx;*/
-  /*border: 1px solid #eee;*/
-  height:156rpx;
-  border-bottom:1px solid #dad9d6;
-  box-sizing:border-box;
-  padding:20rpx;
-  position:relative;
+  .list>.item {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*width: 300rpx;*/
+    /*height: 350rpx;*/
+    /*margin-right: 20rpx;*/
+    /*margin-bottom: 20rpx;*/
+    /*font-size: 25rpx;*/
+    /*border: 1px solid #eee;*/
+    height:156rpx;
+    border-bottom:1px solid #dad9d6;
+    box-sizing:border-box;
+    padding: 12rpx 10rpx;
+    position:relative;
 
-}
+  }
 
-.list>.item .cover {
-  /*width: 100%;*/
-  /*height: 300rpx;*/
-  width:106rpx;
-  height:106rpx;
-  position:absolute;
-  overflow:hidden;
-  border-radius:10rpx;
+  .list>.item .cover {
+    /*width: 100%;*/
+    /*height: 300rpx;*/
+    width:106rpx;
+    height:106rpx;
+    position:absolute;
+    overflow:hidden;
+    border-radius:10rpx;
 
-}
+  }
 
-.list>.item .cover image {
-  /*width: 100%;*/
-  /*width: 300rpx;*/
-  /*height: 300rpx;*/
-  width:110rpx;
-  height:110rpx;
+  .list>.item .cover image {
+    /*width: 100%;*/
+    /*width: 300rpx;*/
+    /*height: 300rpx;*/
+    width:110rpx;
+    height:110rpx;
 
-}
+  }
 
-.list>.item .info {
-  /*position: relative;*/
-  /*height: 50rpx;*/
-  /*line-height: 50rpx;*/
-  margin-left:120rpx;
+  .list>.item .info {
+    /*position: relative;*/
+    /*height: 50rpx;*/
+    /*line-height: 50rpx;*/
+    margin-left:120rpx;
 
-}
+  }
 
-.list>.item .info .members {
-  /*position: absolute;*/
-  /*right: 0;*/
-  /*padding-right: 10rpx;*/
+  .list>.item .info .members {
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*padding-right: 10rpx;*/
 
-  overflow:hidden;
-  height:32rpx;
-  color:#7b7b7b;
-  font-size:26rpx;
-  padding-top:5rpx;
+    overflow:hidden;
+    height:32rpx;
+    color:#7b7b7b;
+    font-size:26rpx;
+    padding-top:5rpx;
 
-}
+  }
 
-.list>.item .info .title {
-  /*position: absolute;*/
-  /*left: 0;*/
-  /*padding-left: 10rpx;*/
-  color:#000;
-  font-size:32rpx;
-  padding:10rpx 0;
-}
+  .list>.item .info .title {
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*padding-left: 10rpx;*/
+    color:#000;
+    font-size:32rpx;
+    padding:10rpx 0;
+  }
 </style>
 
 <script>
-// const getFriend = function(friend) {
-//   return {
-//     nickname: friend.nick,
-//     avatar: friend.avatar,
-//     accid: friend.account
-//   }
-// }
+  // const getFriend = function(friend) {
+  //   return {
+  //     nickname: friend.nick,
+  //     avatar: friend.avatar,
+  //     accid: friend.account
+  //   }
+  // }
 
-import wepy from 'wepy'
-import R from '../libs/ramda'
-import * as log from '../utils/log'
+  import wepy from 'wepy'
+  import R from '../libs/ramda'
+  import * as log from '../utils/log'
 
-import {
-  wx as config
-} from '../config'
+  import {
+    wx as config
+  } from '../config'
 
-import NIM from '../utils/nim'
+  import NIM from '../utils/nim'
 
-import {
-  setUser
-  // setNim
-} from '../actions/common'
+  import {
+    setUser
+    // setNim
+  } from '../actions/common'
 
-// import {
-//   refreshSessions
-// } from '../actions/sessions'
-//
-// import {
-//   refreshFriends
-// } from '../actions/friends'
-//
-// import {
-//   refreshMsgs,
-//   refreshMsgsByTo
-// } from '../actions/chat'
+  // import {
+  //   refreshSessions
+  // } from '../actions/sessions'
+  //
+  // import {
+  //   refreshFriends
+  // } from '../actions/friends'
+  //
+  // import {
+  //   refreshMsgs,
+  //   refreshMsgsByTo
+  // } from '../actions/chat'
 
-import {
-  connect
-} from 'wepy-redux'
+  import {
+    connect
+  } from 'wepy-redux'
 
-import * as chatroomApi from '../apis/chatroom'
-import * as api from '../apis/account'
+  import * as chatroomApi from '../apis/chatroom'
+  import * as api from '../apis/account'
 
-@connect({
-  user: state => state.common.user,
-  nim: state => state.common.nim,
-  friends: state => state.friends.friends,
-  msgs: state => state.chat.msgs
-}, {
-  setUser
+  @connect({
+    user: state => state.common.user,
+    nim: state => state.common.nim,
+    friends: state => state.friends.friends,
+    msgs: state => state.chat.msgs
+  }, {
+    setUser
 //   setNim,
 //   refreshFriends,
 //   refreshSessions,
 //   refreshMsgs,
 //   refreshMsgsByTo
-})
-export default class Chatrooms extends wepy.page {
-  config = {
-    navigationBarTitleText: '聊天室'
-  }
-
-  data = {
-    rooms: [],
-    jfUserid: ''
-  }
-
-  methods = {
-    // pushMsg: function (msgs) {
-    //   const { refreshMsgs, refreshMsgsByTo } = this.methods
-    //   const { mergeMsgs } = this.nim
-    //   if (!Array.isArray(msgs)) {
-    //     msgs = [msgs]
-    //   }
-    //   const sessionId = msgs[0].sessionId
-    //   const to = msgs[0].target
-    //   const merged = mergeMsgs(this.msgs[sessionId] || [], msgs)
-    //   const mergedByTo = mergeMsgs(this.msgs[to] || [], msgs)
-    //   refreshMsgs(sessionId, merged)
-    //   refreshMsgsByTo(to, mergedByTo)
-    // },
-    toChatroom: function(index) {
-      const id = this.rooms[index].id
-      const pk = this.rooms[index].pk
-      console.log(this.rooms[index])
-      wepy.navigateTo({
-        url: `/pages/chatroom?id=${id}&pk=${pk}`
-      })
+  })
+  export default class Chatrooms extends wepy.page {
+    config = {
+      navigationBarTitleText: '聊天室'
     }
-  }
-  onShareAppMessage = async function (res) {
-    console.log('执行了分享2')
-    var { data } = await wepy.getStorage({key: 'jfAccid'})
-//    var jfaccid = await wepy.getStorage({
-//      key: 'jfAccid',
-//      success: function(res) {
-//        return res
-//      }
-//    })
-    console.log(`/pages/chatrooms?accid=${data}`)
-    return {
-      title: '江峰小程序',
-      path: `/pages/chatrooms?id=1212`
-//      success: async function (res) {
-//        console.log(res.shareTickets[0])
-//        var shareInfo = await wepy.getShareInfo({
-//          shareTicket: res.shareTickets[0],
-//          success: function (res) {
-//            return res
-//          }
-//        })
-//        console.log(shareInfo)
-//        var sessionKey = await wepy.getStorage({
-//          key: 'jfSessionKey',
-//          success: function(res) {
-//            return res.data
-//          }
-//        })
-//        var shareParse = await api.shareParsing(sessionKey, shareInfo)
-//        console.log(shareParse)
-//        var shareToken = await wepy.getStorage({
-//          key: 'jfToken',
-//          success: function(res) {
-//            return res.data
-//          }
-//        })
-//        var shareAccid = await wepy.getStorage({
-//          key: 'jfAccid',
-//          success: function(res) {
-//            return res.data
-//          }
-//        })
-//        var shareOpenid = await api.saveOpenGid(shareToken, shareParse, shareAccid)
-//        console.log(shareOpenid)
-//      },
-//      fail: function (res) {
-//        console.log(res)
-//        // 转发失败
-//      }
+
+    data = {
+      rooms: []
     }
-  }
 
-  async onLoad(options) {
-    console.log('分享回调2')
-    const { setUser } = this.methods
-    // const pushMsg = this.methods.pushMsg.bind(this)
-    wepy.showLoading()
-    var network = await wepy.showShareMenu({
-      withShareTicket: true
-    })
-    console.log(network)
-    const { code } = await wepy.login()
-    const { data } = await wepy.request({
-      url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
-    })
-    const { openid } = data
-//    const { session_key } = data
-//    wepy.setStorage({
-//      key: 'jfSessionKey',
-//      data: session_key})
-//    wepy.setStorage({
-//      key: 'jfAccid',
-//      data: openid})
-    const { userInfo } = await wepy.getUserInfo()
-    const password = R.takeLast(5)(openid)
-
-    const user = {
-      ...userInfo,
-      accid: openid.toLowerCase()
-    }
-    setUser(user)
-    // 如果用户尚未在 网易云注册 则先注册
-    try {
-      const token = await NIM.login(openid)
-      const userId = await api.getTokenUserId(openid, password.toLowerCase())
-      this.jfUserid = userId.id
-      const Token = userId.Token
-      console.log('accid', options)
-      if (options.accid && options.accid !== openid) {
-        wepy.setStorage({
-          key: 'backAccid',
-          data: options.accid})
-        console.log('加积分1', options.accid)
-      } else {
-        wepy.setStorage({
-          key: 'backAccid',
-          data: '123'})
-      }
-//      wepy.setStorage({
-//        key: 'jfUserId',
-//        data: userId.id})
-//      wepy.setStorage({
-//        key: 'jfToken',
-//        data: Token})
-      if (!Token) {
-        throw new Error('user not exist')
-      }
-
-      setUser({
-        ...this.user,
-        jfToken: Token,
-        nimToken: token,
-        userData: userId
-      })
-      // 初始化 nim 对象
-      // const nim = NIM.getInstance({
-      //   account: this.user.accid,
-      //   token: token,
-      //   debug: true,
-      //   onusers: friends => {
-      //     refreshFriends(friends.map(getFriend))
-      //     this.$apply()
-      //   },
-      //   onsessions: sessions => {
-      //     const merged = nim.mergeSessions(this.sessions, sessions)
-      //     refreshSessions(merged)
-      //     this.$apply()
-      //   },
-      //   onupdatesession: session => {
-      //     const merged = nim.mergeSessions(this.sessions, session)
-      //     refreshSessions(merged)
-      //     this.$apply()
-      //   },
-      //   onmsg: msg => {
-      //     pushMsg(msg)
-      //     this.$apply()
-      //   },
-      //   onroamingmsgs: obj => {
-      //     pushMsg(obj.msgs)
-      //   },
-      //   onofflinemsgs: obj => {
-      //     pushMsg(obj.msgs)
+    methods = {
+      // pushMsg: function (msgs) {
+      //   const { refreshMsgs, refreshMsgsByTo } = this.methods
+      //   const { mergeMsgs } = this.nim
+      //   if (!Array.isArray(msgs)) {
+      //     msgs = [msgs]
       //   }
-      // })
-      //
-      // setNim(nim)
+      //   const sessionId = msgs[0].sessionId
+      //   const to = msgs[0].target
+      //   const merged = mergeMsgs(this.msgs[sessionId] || [], msgs)
+      //   const mergedByTo = mergeMsgs(this.msgs[to] || [], msgs)
+      //   refreshMsgs(sessionId, merged)
+      //   refreshMsgsByTo(to, mergedByTo)
+      // },
+      toChatroom: function(index) {
+        const id = this.rooms[index].id
+        console.log('chatroomid', id)
+        wepy.navigateTo({
+          url: `/pages/chatroom?id=${id}`
+        })
+      }
+    }
 
-      // 拉取聊天室列表
-      const rooms = await chatroomApi.getList()
-      const ids = rooms.map(R.prop('roomid'))
-      const chatrooms = await NIM.getChatrooms(ids)
-      const members = chatrooms.map(R.prop('onlineusercount'))
-      this.rooms = rooms.map((room, index) => ({
-        id: room.roomid,
-        name: room.name,
-        cover: room.pic_url,
-        memebers: members[index],
-        announcement: room.announcement,
-        pk: room.id
-      }))
-      this.$apply()
-      wepy.hideLoading()
-    } catch (e) {
-      log.error({
-        page: 'chatrooms',
-        opr: 'init',
-        info: e
+    async onLoad() {
+      const { setUser } = this.methods
+      // const pushMsg = this.methods.pushMsg.bind(this)
+      wepy.showLoading()
+      console.log('this is chartRoom')
+      const { code } = await wepy.login()
+      const { data } = await wepy.request({
+        url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
       })
-      wepy.navigateTo({
-        url: '/pages/register'
-      })
+      const { openid } = data
+      const { userInfo } = await wepy.getUserInfo()
+
+      const password = R.takeLast(5)(openid)
+
+      const user = {
+        ...userInfo,
+        accid: openid.toLowerCase()
+      }
+
+      setUser(user)
+      // 如果用户尚未在 网易云注册 则先注册
+      try {
+        const token = await NIM.login(openid)
+        const userId = await api.getToken(openid, password.toLowerCase())
+        const {Token} = userId
+
+        if (!Token) {
+          throw new Error('user not exist')
+        }
+
+        setUser({
+          ...this.user,
+          jfToken: Token,
+          nimToken: token,
+          userData: userId
+        })
+
+        // 初始化 nim 对象
+        // const nim = NIM.getInstance({
+        //   account: this.user.accid,
+        //   token: token,
+        //   debug: true,
+        //   onusers: friends => {
+        //     refreshFriends(friends.map(getFriend))
+        //     this.$apply()
+        //   },
+        //   onsessions: sessions => {
+        //     const merged = nim.mergeSessions(this.sessions, sessions)
+        //     refreshSessions(merged)
+        //     this.$apply()
+        //   },
+        //   onupdatesession: session => {
+        //     const merged = nim.mergeSessions(this.sessions, session)
+        //     refreshSessions(merged)
+        //     this.$apply()
+        //   },
+        //   onmsg: msg => {
+        //     pushMsg(msg)
+        //     this.$apply()
+        //   },
+        //   onroamingmsgs: obj => {
+        //     pushMsg(obj.msgs)
+        //   },
+        //   onofflinemsgs: obj => {
+        //     pushMsg(obj.msgs)
+        //   }
+        // })
+        //
+        // setNim(nim)
+
+        // 拉取聊天室列表
+        const rooms = await chatroomApi.getList()
+        const ids = rooms.map(R.prop('roomid'))
+        const chatrooms = await NIM.getChatrooms(ids)
+        const members = chatrooms.map(R.prop('onlineusercount'))
+        this.rooms = rooms.map((room, index) => ({
+          id: room.roomid,
+          name: room.name,
+          cover: room.pic_url,
+          memebers: members[index],
+          announcement: room.announcement
+        }))
+        console.log(this.rooms)
+        this.$apply()
+        wepy.hideLoading()
+      } catch (e) {
+        log.error({
+          page: 'chatrooms',
+          opr: 'init',
+          info: e
+        })
+        wepy.navigateTo({
+          url: '/pages/register'
+        })
+      }
     }
   }
-  async onShow(options) {
-    console.log('accidShow', options)
-//    if (options.accid && options.accid !== openid) {
-//      wepy.setStorage({
-//        key: 'backAccid',
-//        data: options.accid})
-//      console.log('加积分1', options.accid)
-//    } else {
-//      wepy.setStorage({
-//        key: 'backAccid',
-//        data: '123'})
-//    }
-  }
-}
-
 </script>

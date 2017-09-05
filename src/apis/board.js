@@ -65,7 +65,7 @@ export const boardDetail = function(pk, token) {
 export const uploadImages = function (imgs, token) {
   return Promise.all(imgs.map(img => jf.upload({
     api: 'resources/up_f/',
-    name: 'boardImg',
+    name: 'file',
     filePath: img,
     formData: { token: token }
   })))

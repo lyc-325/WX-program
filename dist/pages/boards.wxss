@@ -5,7 +5,7 @@
   color: transparent;
 }
 .navbar._089d13c{
-   position: fixed;
+   /*position: fixed;*/
    z-index: 101;
    font-size: 35rpx;
  }

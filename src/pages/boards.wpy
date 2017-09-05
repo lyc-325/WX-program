@@ -1,5 +1,5 @@
 <template>
-  <view class="section" style="display: flex;justify-content: flex-end; padding: 5px 10px;">
+  <view class="section" style=" display: flex;justify-content: flex-end; padding: 5px 10px;">
     <input class="searchInput" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
     <button @tap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;">搜索</button>
   </view>
@@ -10,7 +10,7 @@
    </view>
    </view>
    </view>
-  <view class="list" style="padding-top: 80rpx;">
+  <view class="list" style="margin-top: 10rpx;">
   <view wx:if="{{list.length > 0}}"wx:for="{{list}}" @tap="handleItemTap" wx:key="index" data-index="{{index}}" class="item">
     <view class="cover">
       <image mode="scaleToFill" src="{{item.cover}}" />
@@ -41,7 +41,7 @@
   color: transparent;
 }
 .navbar{
-   position: fixed;
+   /*position: fixed;*/
    z-index: 101;
    font-size: 35rpx;
  }
@@ -142,15 +142,18 @@
   box-shadow: 1px 1px 5px #ccc;
 }
 </style>
-
+<!--import wepy from 'wepy'-->
+<!--import { connect } from 'wepy-redux'-->
+<!--import * as api from '../apis/board'-->
+<!--import * as apiA from '../apis/account'-->
+<!--import R from '../libs/ramda'-->
+<!--import { jf, wx as config } from '../config'-->
+<!--import * as log from '../utils/log'-->
 <script>
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import * as api from '../apis/board'
-import * as apiA from '../apis/account'
-import R from '../libs/ramda'
-import { jf, wx as config } from '../config'
-import * as log from '../utils/log'
+import { jf } from '../config'
 
 import {
   setUser
@@ -220,7 +223,7 @@ export default class Boards extends wepy.page {
       })
     },
     handleItemTap(e) {
-      console.log('item', this.list[e.currentTarget.dataset.index])
+//      console.log('item', this.list[e.currentTarget.dataset.index])
       const id = this.list[e.currentTarget.dataset.index].id
 //      console.log('id', id)
 //      console.log(`board?id=${id}`)
@@ -230,51 +233,51 @@ export default class Boards extends wepy.page {
     }
   }
 
-  async onLoad(options) {
-    const { setUser } = this.methods
-    // const pushMsg = this.methods.pushMsg.bind(this)
-    wepy.showLoading()
-    const { code } = await wepy.login()
-    const { data } = await wepy.request({
-      url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
-    })
-    const { openid } = data
-    const { userInfo } = await wepy.getUserInfo()
-    const password = R.takeLast(5)(openid)
-
-    const user = {
-      ...userInfo,
-      accid: openid.toLowerCase()
-    }
-    setUser(user)
-    // 如果用户尚未在 则先注册
-    try {
-      const userId = await apiA.getTokenUserId(openid, password.toLowerCase())
-      this.jfUserid = userId.id
-      const Token = userId.Token
-      if (!Token) {
-        throw new Error('user not exist')
-      }
-
-      setUser({
-        ...this.user,
-        jfToken: Token,
-        userData: userId
-      })
-      this.$apply()
-      wepy.hideLoading()
-    } catch (e) {
-      log.error({
-        page: 'chatrooms',
-        opr: 'init',
-        info: e
-      })
-      wepy.hideLoading()
+//  async onLoad(options) {
+//    const { setUser } = this.methods
+//
+//    wepy.showLoading()
+//    const { code } = await wepy.login()
+//    const { data } = await wepy.request({
+//      url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
+//    })
+//    const { openid } = data
+//    const { userInfo } = await wepy.getUserInfo()
+//    const password = R.takeLast(5)(openid)
+//
+//    const user = {
+//      ...userInfo,
+//      accid: openid.toLowerCase()
+//    }
+//    setUser(user)
+// 如果用户尚未在 则先注册
+//    try {
+//      const userId = await apiA.getTokenUserId(openid, password.toLowerCase())
+//      this.jfUserid = userId.id
+//      const Token = userId.Token
+//      if (!Token) {
+//        throw new Error('user not exist')
+//      }
+//
+//      setUser({
+//        ...this.user,
+//        jfToken: Token,
+//        userData: userId
+//      })
+//      this.$apply()
+//      wepy.hideLoading()
+//    } catch (e) {
+//      log.error({
+//        page: 'chatrooms',
+//        opr: 'init',
+//        info: e
+//      })
+//      wepy.hideLoading()
 //      wepy.navigateTo({
 //        url: '/pages/register'
 //      })
-    }
-  }
+//    }
+//  }
 
   async onShow(option) {
 //    const { jfToken } = this.user

@@ -1,14 +1,15 @@
 
-<view class="list">
-  <block  wx:for="{{rooms}}" wx:key="id">
-    <view class="item" bindtap="toChatroom" data-wepy-params-a="{{index}}">
-      <view class="cover">
-        <image mode="scaleToFill" src="{{item.cover}}"/>
+  <view class="list">
+    <block  wx:for="{{rooms}}" wx:key="id">
+      <view class="item" bindtap="toChatroom" data-wepy-params-a="{{index}}">
+        <view class="cover">
+          <image mode="scaleToFill" src="{{item.cover}}"/>
+        </view>
+        <view class="info">
+          <view>123</view>
+          <view class="title">{{item.name}}</view>
+          <view class="members">{{item.announcement}}</view>
+        </view>
       </view>
-      <view class="info">
-        <view class="title">{{item.name}}</view>
-        <view class="members">{{item.announcement}}</view>
-      </view>
-    </view>
-  </block>
-</view>
+    </block>
+  </view>

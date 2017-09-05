@@ -39,7 +39,7 @@
     <view class="item">
       <view class="label">联系方式</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" bindfocus="bindFocus"/>
+        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" bindfocus="bindFocus"/>
       </view>
     </view>
 

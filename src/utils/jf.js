@@ -5,7 +5,7 @@ const config = jf
 
 function request(options) {
   const { api, data, method } = options
-  console.log('url', `${config.server}/${api}`)
+  console.log('url', options)
   return wepy.request({
     url: `${config.server}/${api}`,
     header: {

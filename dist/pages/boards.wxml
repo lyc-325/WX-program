@@ -1,5 +1,5 @@
 
-  <view class="section _089d13c" style="display: flex;justify-content: flex-end; padding: 5px 10px;">
+  <view class="section _089d13c" style=" display: flex;justify-content: flex-end; padding: 5px 10px;">
     <input class="searchInput _089d13c" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
     <button bindtap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;" class="_089d13c">搜索</button>
   </view>
@@ -10,7 +10,7 @@
    </view>
    </view>
    </view>
-  <view class="list _089d13c" style="padding-top: 80rpx;">
+  <view class="list _089d13c" style="margin-top: 10rpx;">
   <view  wx:if="{{list.length > 0}}" wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _089d13c">
     <view class="cover _089d13c">
       <image mode="scaleToFill" src="{{item.cover}}" class="_089d13c"/>

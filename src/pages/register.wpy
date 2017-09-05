@@ -39,7 +39,7 @@
     <view class="item">
       <view class="label">联系方式</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="phone" @focus="bindFocus" />
+        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" @focus="bindFocus" />
       </view>
     </view>
 
@@ -117,6 +117,7 @@
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import R from '../libs/ramda'
+import NIM from '../utils/nim'
 import * as api from '../apis/account'
 
 import {
@@ -135,7 +136,7 @@ const rules = {
     prompt: '昵称在1-10字以内',
     validate: validateLength(1, 10)
   },
-  phone: {
+  mobile: {
     prompt: '电话号码不合法',
     validate: validatePhone
   },
@@ -202,37 +203,36 @@ export default class Register extends wepy.page {
 //    },
     async submit(e) {
       const errorKey = validate(e.detail.value)
-      const { name, company, token, ex, phone } = e.detail.value
+      console.log(e.detail.value)
+      const { name, company, token, ex, mobile } = e.detail.value
       const { setUser } = this.methods
       if (!errorKey) {
         this.requesting = true
 
-        const { accid, avatarUrl, gender } = this.user
+        const { accid, nickName, avatarUrl } = this.user
 
         const infos = {
           name,
           company,
           token,
-          phone,
-          ex,
-          gender,
-          credits: 0
+          mobile,
+          ex
         }
-//        let token
-//        try {
-//          const resp = await NIM.create(
-//            accid,
-//            nickName,
-//            avatarUrl,
-//            infos
-//          )
-//          token = resp.token
-//        } catch (e) {
-//          if (e.code === 414) {
-//            const resp = await NIM.login(accid)
-//            token = resp.token
-//          }
-//        }
+        let token
+        try {
+          const resp = await NIM.create(
+            accid,
+            nickName,
+            avatarUrl,
+            infos
+          )
+          token = resp.token
+        } catch (e) {
+          if (e.code === 414) {
+            const resp = await NIM.login(accid)
+            token = resp.token
+          }
+        }
 
         try {
           const password = R.takeLast(5)(accid)
@@ -262,7 +262,7 @@ export default class Register extends wepy.page {
 //            await api.checkOpenGid(Token, backAccid.data)
 //          }
           wepy.reLaunch({
-            url: '/pages/boards'
+            url: '/pages/chatrooms'
           })
         } catch (e) {
           console.error('create user', e)
