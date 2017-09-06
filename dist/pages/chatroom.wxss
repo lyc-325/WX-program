@@ -133,6 +133,7 @@ scroll-view {
 .list-item {
   display: flex;
   align-items: flex-start;
+  padding: 5px 0;
 }
 
 .list-item .avatar {

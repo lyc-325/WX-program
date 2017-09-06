@@ -6,7 +6,7 @@
           <image mode="scaleToFill" src="{{item.cover}}"></image>
         </view>
         <view class="info">
-          <view>123</view>
+          <!--<view>123</view>-->
           <view class="title">{{item.name}}</view>
           <view class="members">{{item.announcement}}</view>
         </view>
@@ -185,9 +185,10 @@
       // },
       toChatroom: function(index) {
         const id = this.rooms[index].id
-        console.log('chatroomid', id)
+        const roomid = this.rooms[index].roomid
+        console.log(roomid)
         wepy.navigateTo({
-          url: `/pages/chatroom?id=${id}`
+          url: `/pages/chatroom?id=${id}&roomid=${roomid}`
         })
       }
     }
@@ -268,7 +269,8 @@
         const chatrooms = await NIM.getChatrooms(ids)
         const members = chatrooms.map(R.prop('onlineusercount'))
         this.rooms = rooms.map((room, index) => ({
-          id: room.roomid,
+          id: room.id,
+          roomid: room.roomid,
           name: room.name,
           cover: room.pic_url,
           memebers: members[index],

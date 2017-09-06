@@ -9,16 +9,20 @@
   <view wx:if="{{currentNav === 0}}" class="bodyBlock">
     <scroll-view scroll-y scroll-into-view="item{{intoView}}" class="{{ view }}" id="list">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
-        <view class="avatar">
-          <image mode="scaleToFill" src="{{item.fromAvatar}}" />
+        <view class="avatar" @tap="handleName({{item}})">
+          <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
+          <p style="font-size: 10px; color: #545a63;">{{item.fromNick}}</p>
         </view>
         <view class="content">
           <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
                  style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
           <view wx:elif="{{item.emji[0].type === 'text'}}">
+            <text selectable="true" >{{item.text}}</text>
+          </view>
+          <view wx:elif="{{item.type === 'notification'}}">
             <text>{{item.text}}</text>
           </view>
-          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"></image>
+          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
 
         </view>
       </view>
@@ -222,6 +226,7 @@ scroll-view {
 .list-item {
   display: flex;
   align-items: flex-start;
+  padding: 5px 0;
 }
 
 .list-item .avatar {
@@ -382,6 +387,13 @@ export default class Chatroom extends wepy.page {
   }
 
   methods = {
+    async handleName (item) {
+      const itemAccid = item.from
+      const {id} = await chatroomApi.getItemId(itemAccid)
+      wepy.navigateTo({
+        url: `userInfo?id=${id}`
+      })
+    },
     openEmoji (e) {
       if (this.show === 'showEmoji') {
         this.show = 'emoji_list'
@@ -391,6 +403,21 @@ export default class Chatroom extends wepy.page {
         this.showem = 'showEmojiOperation'
       }
       this.$apply()
+    },
+    imgPreview (items, msgs) {
+      const imgUrl = items
+      const isImg = msg => msg.type === 'image'
+      const imgArr = R.filter(isImg)(msgs)
+      const imgUrlArr = imgArr.map(msg => {
+        return msg.file.url
+      })
+      wepy.previewImage({
+        current: imgUrl,
+        urls: imgUrlArr,
+        success: function (res) {
+          console.log(res)
+        }
+      })
     },
     async sendEmoji (event) {
       var that = this
@@ -490,7 +517,7 @@ export default class Chatroom extends wepy.page {
       if (!Array.isArray(msgs)) {
         msgs = [msgs]
       }
-      console.log('就是这个图')
+      console.log('就是这个图', msgs)
       msgs = msgs.map(msg => {
         if (msg.type === 'text') {
           return {
@@ -514,7 +541,7 @@ export default class Chatroom extends wepy.page {
           return msg
         }
       })
-      console.log(msgs)
+//      console.log(this.roomId)
       const roomId = msgs[0].chatroomId || this.roomId
       const merged = [...this.msgs, ...msgs]
       refreshMsgs(roomId, merged)
@@ -528,15 +555,16 @@ export default class Chatroom extends wepy.page {
 
   async onLoad(options) {
     const { id } = options
-    this.roomId = id
-//    const { pk } = options
-    const roomInfo = await chatroomApi.getOneById(id)
-    this.roomData = roomInfo
+    const {roomid} = options
+    this.roomId = roomid
+    console.log('roomid', this.roomId)
     const pushMsg = this.methods.pushMsg.bind(this)
     const apply = this.$apply.bind(this)
     const hasMsgs = this.msgs.length > 0
     try {
-      const { nimToken, accid } = this.user
+      const { nimToken, accid, avatarUrl, jfToken } = this.user
+      const roomInfo = await chatroomApi.getOneById(id, jfToken)
+      this.roomData = roomInfo
       const roomId = this.roomId
       const address = await NIM.getChatroomAddresses(accid, roomId)
       const chatroom = ChatroomSDK.getInstance({
@@ -551,20 +579,20 @@ export default class Chatroom extends wepy.page {
             opr: 'initialize sdk instance',
             info: msgs
           })
-          console.log('收到聊天室信息', msgs)
+//          console.log('收到聊天室信息', msgs)
           pushMsg(msgs.map(msg => {
             if (msg.type === 'notification') {
-              console.log('这个hhh', msg.attach)
               // 进入聊天室信息
               const tip = R.cond([
                 [R.equals('memberEnter'), R.always('加入聊天室')],
                 [R.equals('memberExit'), R.always('退出聊天室')]
               ])(msg.attach.type)
-              console.log(`${msg.attach.fromNick} ${tip}`)
+              const tipMsg = `${msg.attach.fromNick} ${tip}`
               return {
                 ...msg,
-                type: 'text',
-                text: tip
+                type: 'notification',
+                text: tipMsg,
+                fromAvatar: avatarUrl
               }
             } else {
               return msg
@@ -584,7 +612,7 @@ export default class Chatroom extends wepy.page {
               limit: 100
             })
             const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
-//            console.log('history messages', msgs)
+            console.log('history messages', msgs)
 
             // 刷新消息
             pushMsg(msgs || [])
@@ -603,8 +631,8 @@ export default class Chatroom extends wepy.page {
     }
   }
 
-//  async onShow() {
-//
-//  }
+  async onShow() {
+
+  }
 }
 </script>

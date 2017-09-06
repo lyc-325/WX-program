@@ -9,15 +9,19 @@
   <view  wx:if="{{currentNav === 0}}" class="bodyBlock">
     <scroll-view scroll-y scroll-into-view="item{{intoView}}" class="{{ view }}" id="list">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
-        <view class="avatar">
+        <view class="avatar" bindtap="handleName" data-wepy-params-a="{{item}}">
           <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
+          <p style="font-size: 10px; color: #545a63;">{{item.fromNick}}</p>
         </view>
         <view class="content">
           <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
           <view wx:elif="{{item.emji[0].type === 'text'}}">
+            <text selectable="true">{{item.text}}</text>
+          </view>
+          <view wx:elif="{{item.type === 'notification'}}">
             <text>{{item.text}}</text>
           </view>
-          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill"/>
+          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill" bindtap="imgPreview" data-wepy-params-a="{{item.file.url}}" data-wepy-params-b="{{msgs}}"/>
 
         </view>
       </view>

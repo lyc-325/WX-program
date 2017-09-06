@@ -8,9 +8,17 @@ export const getList = function() {
   })
 }
 
-export const getOneById = function(id) {
+export const getOneById = function(id, token) {
   return jf.request({
-    api: `chat_room/${id}/detail/`,
+    api: `chat_room/${id}/detail/?token=${token}`,
+    data: {},
+    method: 'GET'
+  })
+}
+
+export const getItemId = function(id) {
+  return jf.request({
+    api: `accounts/detail_by_accid/${id}/`,
     data: {},
     method: 'GET'
   })

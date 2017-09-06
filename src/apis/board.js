@@ -57,7 +57,7 @@ export const boardList = function(category) {
 
 export const boardDetail = function(pk, token) {
   return jf.request({
-    api: `article/detail/${token}/${pk}/`,
+    api: `article/detail/${pk}/?token=${token}`,
     method: 'GET'
   })
 }

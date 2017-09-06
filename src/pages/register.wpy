@@ -209,7 +209,7 @@ export default class Register extends wepy.page {
       if (!errorKey) {
         this.requesting = true
 
-        const { accid, nickName, avatarUrl } = this.user
+        const { accid, avatarUrl } = this.user
 
         const infos = {
           name,
@@ -222,7 +222,7 @@ export default class Register extends wepy.page {
         try {
           const resp = await NIM.create(
             accid,
-            nickName,
+            name,
             avatarUrl,
             infos
           )
