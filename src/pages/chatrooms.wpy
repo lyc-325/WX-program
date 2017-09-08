@@ -1,7 +1,7 @@
 <template>
   <view class="list">
     <block wx:for="{{rooms}}" wx:key="id">
-      <view class="item" @tap="toChatroom({{index}})">
+      <view class="item" @tap="toChatroom({{item}})">
         <view class="cover">
           <image mode="scaleToFill" src="{{item.cover}}"></image>
         </view>
@@ -183,12 +183,12 @@
       //   refreshMsgs(sessionId, merged)
       //   refreshMsgsByTo(to, mergedByTo)
       // },
-      toChatroom: function(index) {
-        const id = this.rooms[index].id
-        const roomid = this.rooms[index].roomid
-        console.log(roomid)
+      toChatroom: function(room) {
+        const id = room.id
+        const roomid = room.roomid
+        const creator = room.creator
         wepy.navigateTo({
-          url: `/pages/chatroom?id=${id}&roomid=${roomid}`
+          url: `/pages/chatroom?id=${id}&roomid=${roomid}&creator=${creator}`
         })
       }
     }
@@ -268,9 +268,12 @@
         const ids = rooms.map(R.prop('roomid'))
         const chatrooms = await NIM.getChatrooms(ids)
         const members = chatrooms.map(R.prop('onlineusercount'))
-        this.rooms = rooms.map((room, index) => ({
+        const roomList = room => room.valid
+        const roomArr = R.filter(roomList)(rooms)
+        this.rooms = roomArr.map((room, index) => ({
           id: room.id,
           roomid: room.roomid,
+          creator: room.creator,
           name: room.name,
           cover: room.pic_url,
           memebers: members[index],

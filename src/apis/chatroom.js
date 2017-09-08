@@ -23,3 +23,27 @@ export const getItemId = function(id) {
     method: 'GET'
   })
 }
+
+export const addToRoom = function(id, creator, num) {
+  return jf.request({
+    api: `chat_room/add_member/`,
+    data: {
+      roomid: id,
+      operator: creator,
+      target: num
+    },
+    method: 'POST'
+  })
+}
+
+export const getUserList = function(roomid, token) {
+  return jf.request({
+    api: `chat_room/member_list/`,
+    data: {
+      roomid: roomid,
+      limit: 50,
+      token: token
+    },
+    method: 'POST'
+  })
+}

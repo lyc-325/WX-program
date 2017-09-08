@@ -11,7 +11,7 @@
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
         <view class="avatar" bindtap="handleName" data-wepy-params-a="{{item}}">
           <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
-          <p style="font-size: 10px; color: #545a63;">{{item.fromNick}}</p>
+          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: center; overflow: hidden;">{{item.fromNick}}</view>
         </view>
         <view class="content">
           <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
@@ -21,8 +21,7 @@
           <view wx:elif="{{item.type === 'notification'}}">
             <text>{{item.text}}</text>
           </view>
-          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill" bindtap="imgPreview" data-wepy-params-a="{{item.file.url}}" data-wepy-params-b="{{msgs}}"/>
-
+          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" bindtap="imgPreview" data-wepy-params-a="{{item.file.url}}" data-wepy-params-b="{{msgs}}"/>
         </view>
       </view>
     </scroll-view>
@@ -78,6 +77,21 @@
       <view class="item">
         <view class="label">公告:</view>
         <view class="value" style="margin-left: 20rpx;">{{roomData.announcement}}</view>
+      </view>
+      <view class="item">
+        <view class="label">成员列表:</view>
+      </view>
+      <view wx:if="{{numList.length > 0}}" wx:for="{{numList}}" wx:key="index" class="userList" bindtap="handleNameId" data-wepy-params-a="{{item}}">
+        <view class="cover">
+          <image mode="scaleToFill" src="{{item.avator}}"/>
+          <image wx:if="{{item.is_admin}}" src="../static/icons/guan.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;"/>
+          <image wx:if="{{item.is_vip}}" src="../static/icons/V.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;"/>
+        </view>
+        <view class="info">
+          <view wx:if="{{!item.is_vip && !item.is_admin}}" class="title">{{item.name}}</view>
+          <view wx:if="{{item.is_vip || item.is_admin}}" class="title" style="color: red;">{{item.name}}</view>
+          <view class="content">{{item.company}}</view>
+        </view>
       </view>
     </view>
   </view>

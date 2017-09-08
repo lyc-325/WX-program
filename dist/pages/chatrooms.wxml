@@ -1,7 +1,7 @@
 
   <view class="list">
     <block  wx:for="{{rooms}}" wx:key="id">
-      <view class="item" bindtap="toChatroom" data-wepy-params-a="{{index}}">
+      <view class="item" bindtap="toChatroom" data-wepy-params-a="{{item}}">
         <view class="cover">
           <image mode="scaleToFill" src="{{item.cover}}"/>
         </view>

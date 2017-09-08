@@ -50,6 +50,7 @@
 
 .userinfo>.userinfo-nickname {
   color: #aaa;
+  margin-top: 20rpx;
 }
 
 .detailBlock {
@@ -133,7 +134,7 @@ scroll-view {
 .list-item {
   display: flex;
   align-items: flex-start;
-  padding: 5px 0;
+  padding: 7px 0;
 }
 
 .list-item .avatar {
@@ -166,6 +167,45 @@ scroll-view {
 
 .list-item.mine {
   flex-direction: row-reverse;
+}
+.userList{
+  position: relative;
+  /*border-top: 2rpx solid #eee;*/
+  height: 80rpx;
+  display: flex;
+}
+.userList .cover {
+  width: 35%;
+  height: 60rpx;
+  padding: 10rpx;
+}
+
+.userList .cover image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.userList .info {
+  width: 65%;
+  height: 70rpx;
+  padding: 5rpx;
+  display: flex;
+  line-height: 70rpx;
+  /*flex-direction: column;*/
+  justify-content: space-around;
+  font-size: 32rpx;
+  color: dimgray;
+}
+
+.userList .info .title {
+  width: 40%;
+  overflow: hidden;
+}
+
+.userList .info .content {
+  width: 60%;
+  overflow: hidden;
 }
 
 .list-item.mine .content {

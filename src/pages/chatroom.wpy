@@ -11,7 +11,7 @@
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
         <view class="avatar" @tap="handleName({{item}})">
           <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
-          <p style="font-size: 10px; color: #545a63;">{{item.fromNick}}</p>
+          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: center; overflow: hidden;">{{item.fromNick}}</view>
         </view>
         <view class="content">
           <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
@@ -22,8 +22,7 @@
           <view wx:elif="{{item.type === 'notification'}}">
             <text>{{item.text}}</text>
           </view>
-          <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" mode="scaleToFill" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
-
+          <image wx:elif="{{item.type === 'image' }}"  src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
         </view>
       </view>
     </scroll-view>
@@ -87,6 +86,21 @@
         <view class="label">公告:</view>
         <view class="value" style="margin-left: 20rpx;">{{roomData.announcement}}</view>
       </view>
+      <view class="item">
+        <view class="label">成员列表:</view>
+      </view>
+      <view wx:if="{{numList.length > 0}}" wx:for="{{numList}}"  wx:key="index"  class="userList" @tap="handleNameId({{item}})">
+        <view class="cover">
+          <image mode="scaleToFill" src="{{item.avator}}" />
+          <image wx:if="{{item.is_admin}}" src="../static/icons/guan.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;" />
+          <image wx:if="{{item.is_vip}}" src="../static/icons/V.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;" />
+        </view>
+        <view class="info">
+          <view wx:if="{{!item.is_vip && !item.is_admin}}" class="title">{{item.name}}</view>
+          <view wx:if="{{item.is_vip || item.is_admin}}" class="title" style="color: red;">{{item.name}}</view>
+          <view class="content">{{item.company}}</view>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -143,6 +157,7 @@
 
 .userinfo>.userinfo-nickname {
   color: #aaa;
+  margin-top: 20rpx;
 }
 
 .detailBlock {
@@ -226,7 +241,7 @@ scroll-view {
 .list-item {
   display: flex;
   align-items: flex-start;
-  padding: 5px 0;
+  padding: 7px 0;
 }
 
 .list-item .avatar {
@@ -259,6 +274,45 @@ scroll-view {
 
 .list-item.mine {
   flex-direction: row-reverse;
+}
+.userList{
+  position: relative;
+  /*border-top: 2rpx solid #eee;*/
+  height: 80rpx;
+  display: flex;
+}
+.userList .cover {
+  width: 35%;
+  height: 60rpx;
+  padding: 10rpx;
+}
+
+.userList .cover image {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.userList .info {
+  width: 65%;
+  height: 70rpx;
+  padding: 5rpx;
+  display: flex;
+  line-height: 70rpx;
+  /*flex-direction: column;*/
+  justify-content: space-around;
+  font-size: 32rpx;
+  color: dimgray;
+}
+
+.userList .info .title {
+  width: 40%;
+  overflow: hidden;
+}
+
+.userList .info .content {
+  width: 60%;
+  overflow: hidden;
 }
 
 .list-item.mine .content {
@@ -369,6 +423,7 @@ export default class Chatroom extends wepy.page {
   data = {
     navs: ['聊天', '详情'],
     currentNav: 0,
+    numList: [],
     chatroom: null,
     roomId: null,
     sended: false,
@@ -392,6 +447,12 @@ export default class Chatroom extends wepy.page {
       const {id} = await chatroomApi.getItemId(itemAccid)
       wepy.navigateTo({
         url: `userInfo?id=${id}`
+      })
+    },
+    handleNameId (item) {
+      const itemid = item.id
+      wepy.navigateTo({
+        url: `userInfo?id=${itemid}`
       })
     },
     openEmoji (e) {
@@ -556,14 +617,20 @@ export default class Chatroom extends wepy.page {
   async onLoad(options) {
     const { id } = options
     const {roomid} = options
+    const {creator} = options
     this.roomId = roomid
-    console.log('roomid', this.roomId)
     const pushMsg = this.methods.pushMsg.bind(this)
     const apply = this.$apply.bind(this)
     const hasMsgs = this.msgs.length > 0
     try {
       const { nimToken, accid, avatarUrl, jfToken } = this.user
+      if (creator !== accid) {
+        await chatroomApi.addToRoom(roomid, creator, accid)
+      }
+      await chatroomApi.addToRoom(roomid, creator, accid)
       const roomInfo = await chatroomApi.getOneById(id, jfToken)
+      const data = await chatroomApi.getUserList(roomid, jfToken)
+      this.numList = data
       this.roomData = roomInfo
       const roomId = this.roomId
       const address = await NIM.getChatroomAddresses(accid, roomId)
