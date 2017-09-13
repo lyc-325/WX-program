@@ -22,7 +22,7 @@
 
     <view class="imgBar _0639b95"  wx:if="{{imgs.length !== 0 }}">
       <view class="image _0639b95" wx:for="{{imgs}}" wx:key="{{index}}" bindtap="imgPreview" data-wepy-params-a="{{imgs}}" data-wepy-params-b="{{index}}">
-        <image mode="scaleToFill" src="{{item}}" class="_0639b95"/>
+        <image mode="aspectFit" src="{{item}}" class="_0639b95"/>
       </view>
     </view>
     <view class="area _0639b95">

@@ -42,7 +42,13 @@
         <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" @focus="bindFocus" />
       </view>
     </view>
-
+    <view class="item">
+      <view class="label">验证码</view>
+      <view class="input" style="display: flex;">
+        <input type="text" style="width: 180rpx;" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" @focus="bindFocus" />
+        <button type="primary"  size="small" disabled="{{disabled}}" style="margin-left: 5rpx;width: 190rpx; font-size: 12px;" @tap="getCode">{{codeButton}}</button>
+      </view>
+    </view>
     <view class="item">
       <button class="register_btn" form-type="submit" loading="{{requesting}}">提交</button>
     </view>
@@ -77,14 +83,14 @@
 }
 
 .container > .item {
-  padding: 30rpx;
+  padding: 20rpx;
   display: flex;
   align-items: center;
-  margin-top: 10rpx;
+  margin-top: 5rpx;
 }
 
 .container > .item .label {
-  padding: 10rpx;
+  padding: 5rpx;
   width: 150rpx;
   text-align:center;
 }
@@ -169,10 +175,27 @@ export default class Register extends wepy.page {
     formError: null,
     formErrorKey: null,
     showOpenId: '',
-    userData: {}
+    userData: {},
+    codeButton: '获取验证码',
+    disabled: false
   }
 
   methods = {
+    getCode(e) {
+      this.codeButton = '60'
+      this.disabled = true
+      let that = this
+      let time = setInterval(function () {
+        if (parseInt(that.codeButton)) {
+          that.codeButton = parseInt(that.codeButton) - 1
+        } else {
+          that.codeButton = '发送验证码'
+          that.disabled = false
+          clearInterval(time)
+        }
+        that.$apply()
+      }, 1000)
+    },
     bindFocus(e) {
       this.formError = null
       this.formErrorKey = null

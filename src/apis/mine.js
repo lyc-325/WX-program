@@ -23,6 +23,16 @@ export const modifyUserInfo = function(id, token) {
   })
 }
 
+export const changeYXName = function(id, name) {
+  return jf.request({
+    api: `accounts/update_info_netease/${id}/`,
+    data: {
+      name: name
+    },
+    method: 'POST'
+  })
+}
+
 export const getMsgList = function(id) {
   return jf.request({
     api: `article/get_article_by_user_id/`,

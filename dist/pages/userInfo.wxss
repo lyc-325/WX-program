@@ -96,12 +96,13 @@
   .list>.item .info .content._4073524 {
     font-size: 26rpx;
     line-height: 30rpx;
-    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden;
     color: dimgray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .list>.item .info .footer._4073524 {

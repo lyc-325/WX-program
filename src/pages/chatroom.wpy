@@ -9,24 +9,35 @@
   <view wx:if="{{currentNav === 0}}" class="bodyBlock">
     <scroll-view scroll-y scroll-into-view="item{{intoView}}" class="{{ view }}" id="list">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
-        <view class="avatar" @tap="handleName({{item}})">
-          <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
-          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: center; overflow: hidden;">{{item.fromNick}}</view>
-        </view>
-        <view class="content">
-          <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
-                 style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
-          <view wx:elif="{{item.emji[0].type === 'text'}}">
-            <text selectable="true" >{{item.text}}</text>
+
+        <view wx:if="{{item.type === 'notification'}}" class="notifiView">
+          <view class="notifiView" >
+            <text class="notifiText">{{item.text}}</text>
           </view>
-          <view wx:elif="{{item.type === 'notification'}}">
-            <text>{{item.text}}</text>
+          <view class="notifiView" >
+            <text class="notifiText">当前在线人数{{nowPeoples}}</text>
           </view>
-          <image wx:elif="{{item.type === 'image' }}"  src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
+          <view class="notifiView">
+            <text class="notifiText">{{nowTime}}</text>
+          </view>
         </view>
-      </view>
+          <view wx:if="{{item.type !== 'notification'}}" class="avatar" @tap="handleName({{item}})">
+            <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
+          </view>
+          <view wx:if="{{item.type !== 'notification'}}">
+            <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+            <view class="content">
+              <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
+                     style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
+              <view wx:elif="{{item.emji[0].type === 'text'}}">
+                <text selectable="true" >{{item.text}}</text>
+              </view>
+              <image wx:elif="{{item.type === 'image' }}"  src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
+            </view>
+          </view>
+        </view>
     </scroll-view>
-    <view class="operation" class="{{ showem }}">
+    <view wx:if="{{!isLIMIT}}" class="operation" class="{{ showem }}">
       <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
       <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
       <view class="button" @tap="openEmoji" mode="scaleToFill">
@@ -39,6 +50,18 @@
         <image  src="../static/icons/send.png" mode="scaleToFill" />
       </view>
     </view>
+    <view wx:if="{{isLIMIT}}" class="operation" class="{{ showem }}">
+    <textarea  value="您已被禁言" auto-height fixed cursor-spacing="40" disabled="true" />
+    <view class="button"  mode="scaleToFill">
+      <image src="../static/icons/emoj.png"/>
+    </view>
+    <view  class="button" >
+      <image  src="../static/icons/image.png" mode="scaleToFill" />
+    </view>
+    <view  class="button"  style="width:15%; ">
+      <image  src="../static/icons/send.png" mode="scaleToFill" />
+    </view>
+  </view>
     <swiper class="emoji_list" class="{{ show }}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"
             interval="{{interval}}" duration="{{duration}}">
       <block>
@@ -98,7 +121,8 @@
         <view class="info">
           <view wx:if="{{!item.is_vip && !item.is_admin}}" class="title">{{item.name}}</view>
           <view wx:if="{{item.is_vip || item.is_admin}}" class="title" style="color: red;">{{item.name}}</view>
-          <view class="content">{{item.company}}</view>
+          <view wx:if="{{!item.is_vip && !item.is_admin}}" class="content">{{item.company}}</view>
+          <view wx:if="{{item.is_vip || item.is_admin}}" class="content" style="color: red;">{{item.company}}</view>
         </view>
       </view>
     </view>
@@ -161,8 +185,8 @@
 }
 
 .detailBlock {
-  width: 70%;
-  margin: 0 15%;
+  width: 80%;
+  margin: 0 10%;
   position: absolute;
 }
 .detailList {
@@ -174,7 +198,14 @@
   /*justify-content: space-between;*/
   color: #6b6b6b;
 }
-
+.bodyBlock .notifiView{
+  width: 100%;
+  text-align: center;
+}
+.bodyBlock .notifiText{
+  font-size: 12px;
+  color: #545a63;
+}
 .operation textarea {
   border: 1px solid #eee;
   padding: 5px;
@@ -282,7 +313,7 @@ scroll-view {
   display: flex;
 }
 .userList .cover {
-  width: 35%;
+  width: 30%;
   height: 60rpx;
   padding: 10rpx;
 }
@@ -294,7 +325,7 @@ scroll-view {
 }
 
 .userList .info {
-  width: 65%;
+  width: 70%;
   height: 70rpx;
   padding: 5rpx;
   display: flex;
@@ -313,6 +344,8 @@ scroll-view {
 .userList .info .content {
   width: 60%;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .list-item.mine .content {
@@ -424,6 +457,7 @@ export default class Chatroom extends wepy.page {
     navs: ['聊天', '详情'],
     currentNav: 0,
     numList: [],
+    isLIMIT: false,
     chatroom: null,
     roomId: null,
     sended: false,
@@ -438,10 +472,18 @@ export default class Chatroom extends wepy.page {
     show: 'emoji_list',
     showem: 'operation',
     emoji: FaceIM.default.Emoji,
-    emojiObj: FaceIM.default.EmojiObj
+    emojiObj: FaceIM.default.EmojiObj,
+    nowTime: '',
+    nowPeoples: 0
   }
 
   methods = {
+    async getCountsNum(id, jfToken) {
+      this.nowTime = new Date(Date.parse(new Date()) + 28800000).toISOString().split('T')[0] + ' ' + new Date().toTimeString().substr(0, 8)
+      const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
+      this.nowPeoples = onlineusercount
+      this.$apply()
+    },
     async handleName (item) {
       const itemAccid = item.from
       const {id} = await chatroomApi.getItemId(itemAccid)
@@ -520,8 +562,8 @@ export default class Chatroom extends wepy.page {
       }
     },
     changeNav (e) {
-      console.log(e)
       this.currentNav = e.currentTarget.dataset.index
+      this.sended = false
       this.$apply()
     },
     async chooseImage() {
@@ -603,7 +645,11 @@ export default class Chatroom extends wepy.page {
         }
       })
 //      console.log(this.roomId)
-      const roomId = msgs[0].chatroomId || this.roomId
+      let roomId = this.roomId
+      console.log(roomId)
+      if (msgs.length > 0) {
+        roomId = msgs[0].chatroomId
+      }
       const merged = [...this.msgs, ...msgs]
       refreshMsgs(roomId, merged)
       this.sended = true
@@ -613,24 +659,34 @@ export default class Chatroom extends wepy.page {
       this.sended = false
     }
   }
-
   async onLoad(options) {
     const { id } = options
     const {roomid} = options
     const {creator} = options
     this.roomId = roomid
     const pushMsg = this.methods.pushMsg.bind(this)
+    const getCountsNum = this.methods.getCountsNum.bind(this)
     const apply = this.$apply.bind(this)
     const hasMsgs = this.msgs.length > 0
     try {
       const { nimToken, accid, avatarUrl, jfToken } = this.user
-      if (creator !== accid) {
-        await chatroomApi.addToRoom(roomid, creator, accid)
-      }
+//      if (creator !== accid) {
+//        await chatroomApi.addToRoom(roomid, creator, accid)
+//      }
       await chatroomApi.addToRoom(roomid, creator, accid)
       const roomInfo = await chatroomApi.getOneById(id, jfToken)
       const data = await chatroomApi.getUserList(roomid, jfToken)
-      this.numList = data
+      const islimit = data => data.type === 'LIMITED'
+      const isUser = data => data.name && data.name !== null
+      this.numList = R.filter(isUser)(data)
+      const userLimitArr = R.filter(islimit)(this.numList)
+      console.log('禁言列表', userLimitArr)
+      if (userLimitArr.length > 0) {
+        if (userLimitArr[0].accid === accid) {
+          this.isLIMIT = true
+          console.log('被禁言')
+        }
+      }
       this.roomData = roomInfo
       const roomId = this.roomId
       const address = await NIM.getChatroomAddresses(accid, roomId)
@@ -649,6 +705,7 @@ export default class Chatroom extends wepy.page {
 //          console.log('收到聊天室信息', msgs)
           pushMsg(msgs.map(msg => {
             if (msg.type === 'notification') {
+              getCountsNum(id, jfToken)
               // 进入聊天室信息
               const tip = R.cond([
                 [R.equals('memberEnter'), R.always('加入聊天室')],
@@ -680,7 +737,6 @@ export default class Chatroom extends wepy.page {
             })
             const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
             console.log('history messages', msgs)
-
             // 刷新消息
             pushMsg(msgs || [])
             apply()
@@ -699,7 +755,9 @@ export default class Chatroom extends wepy.page {
   }
 
   async onShow() {
-
+    this.isLIMIT = false
+    this.sended = false
+    this.currentNav = 0
   }
 }
 </script>

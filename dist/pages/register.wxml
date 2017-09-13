@@ -42,7 +42,13 @@
         <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" bindfocus="bindFocus"/>
       </view>
     </view>
-
+    <view class="item">
+      <view class="label">验证码</view>
+      <view class="input" style="display: flex;">
+        <input type="text" style="width: 180rpx;" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" bindfocus="bindFocus"/>
+        <button type="primary" size="small" disabled="{{disabled}}" style="margin-left: 5rpx;width: 190rpx; font-size: 12px;" bindtap="getCode">{{codeButton}}</button>
+      </view>
+    </view>
     <view class="item">
       <button class="register_btn" form-type="submit" loading="{{requesting}}">提交</button>
     </view>

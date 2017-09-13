@@ -25,14 +25,14 @@
 }
 
 .container > .item {
-  padding: 30rpx;
+  padding: 20rpx;
   display: flex;
   align-items: center;
-  margin-top: 10rpx;
+  margin-top: 5rpx;
 }
 
 .container > .item .label {
-  padding: 10rpx;
+  padding: 5rpx;
   width: 150rpx;
   text-align:center;
 }
