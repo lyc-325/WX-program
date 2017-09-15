@@ -13,12 +13,8 @@
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
           <view class="notifiView">
             <text class="notifiText">{{item.text}}</text>
-          </view>
-          <view class="notifiView">
-            <text class="notifiText">当前在线人数{{nowPeoples}}</text>
-          </view>
-          <view class="notifiView">
-            <text class="notifiText">{{nowTime}}</text>
+            <text class="notifiText">{{item.nowTime}}</text>
+            <text class="notifiText">在线人数{{nowPeoples}}</text>
           </view>
         </view>
           <view wx:if="{{item.type !== 'notification'}}" class="avatar" bindtap="handleName" data-wepy-params-a="{{item}}">

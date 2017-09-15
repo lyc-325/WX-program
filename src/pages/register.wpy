@@ -11,7 +11,7 @@
     <view class="item">
       <view class="label">姓名</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'name'? 'error' : ''}}" name="name" @focus="bindFocus" />
+        <input type="text" class="{{formErrorKey === 'name'? 'error' : ''}}" name="name" value="{{newName}}" bindinput="nameKeyInput" @focus="bindFocus" />
       </view>
     </view>
 
@@ -39,14 +39,14 @@
     <view class="item">
       <view class="label">联系方式</view>
       <view class="input">
-        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" @focus="bindFocus" />
+        <input type="text" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" value="{{newMobile}}" bindinput="mobileKeyInput" @focus="bindFocus" />
       </view>
     </view>
     <view class="item">
       <view class="label">验证码</view>
       <view class="input" style="display: flex;">
-        <input type="text" style="width: 180rpx;" class="{{formErrorKey === 'phone' ? 'error' : ''}}" name="mobile" @focus="bindFocus" />
-        <button type="primary"  size="small" disabled="{{disabled}}" style="margin-left: 5rpx;width: 190rpx; font-size: 12px;" @tap="getCode">{{codeButton}}</button>
+        <input type="text" style="width: 180rpx;" class="{{formErrorKey === 'captcha' ? 'error' : ''}}" name="captcha" @focus="bindFocus" />
+        <button type="primary"  size="small" disabled="{{disabled}}" style="margin-left: 5rpx;width: 200rpx; padding: 0; font-size: 12px;" @tap="getCode">{{codeButton}}</button>
       </view>
     </view>
     <view class="item">
@@ -153,6 +153,10 @@ const rules = {
   ex: {
     prompt: '主要经营在1-20字以内',
     validate: validateLength(1, 20)
+  },
+  captcha: {
+    prompt: '请填写验证码',
+    validate: validateLength(1, 8)
   }
 }
 
@@ -177,11 +181,33 @@ export default class Register extends wepy.page {
     showOpenId: '',
     userData: {},
     codeButton: '获取验证码',
-    disabled: false
+    disabled: false,
+    newMobile: '',
+    newName: ''
   }
 
   methods = {
-    getCode(e) {
+    nameKeyInput(e) {
+      this.setData({
+        [`newName`]: e.detail.value
+      })
+      this.newName = e.detail.value
+      this.$apply()
+    },
+    mobileKeyInput(e) {
+      this.setData({
+        [`newMobile`]: e.detail.value
+      })
+      this.newMobile = e.detail.value
+      this.$apply()
+    },
+    async getCode(e) {
+      let name = this.newName
+      let mobile = this.newMobile
+      if (!name || !mobile) {
+        return
+      }
+      await api.getCodeNum(name, mobile)
       this.codeButton = '60'
       this.disabled = true
       let that = this
@@ -227,7 +253,7 @@ export default class Register extends wepy.page {
     async submit(e) {
       const errorKey = validate(e.detail.value)
       console.log(e.detail.value)
-      const { name, company, token, ex, mobile } = e.detail.value
+      const { name, company, token, ex, mobile, captcha } = e.detail.value
       const { setUser } = this.methods
       if (!errorKey) {
         this.requesting = true
@@ -239,24 +265,24 @@ export default class Register extends wepy.page {
           company,
           token,
           mobile,
-          ex
+          ex,
+          captcha
         }
-        let token
+//        let token
         try {
-          const resp = await NIM.create(
+            await NIM.create(
             accid,
             name,
             avatarUrl,
             infos
           )
-          token = resp.token
+//          token = resp.token
         } catch (e) {
           if (e.code === 414) {
-            const resp = await NIM.login(accid)
-            token = resp.token
+            await NIM.login(accid)
+//            token = resp.token
           }
         }
-
         try {
           const password = R.takeLast(5)(accid)
           const user = await api.createUser(accid, password, {
@@ -270,7 +296,9 @@ export default class Register extends wepy.page {
             ...user,
             jfToken: Token
           })
-
+          wepy.reLaunch({
+            url: '/pages/chatrooms'
+          })
 //          setNim({
 //            token
 //          })
@@ -284,9 +312,6 @@ export default class Register extends wepy.page {
 //          if (backAccid.data !== '123') {
 //            await api.checkOpenGid(Token, backAccid.data)
 //          }
-          wepy.reLaunch({
-            url: '/pages/chatrooms'
-          })
         } catch (e) {
           console.error('create user', e)
         }

@@ -82,3 +82,13 @@ export const search = function (nickname) {
     method: 'POST'
   })
 }
+
+export const getCodeNum = function (name, mobile) {
+  return jf.request({
+    api: 'accounts/get_captcha/',
+    data: {
+      name: `${name}`,
+      mobile: `${mobile}`
+    },
+    method: 'POST'
+  }).then((res) => res)}

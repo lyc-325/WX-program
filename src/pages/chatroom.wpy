@@ -13,12 +13,8 @@
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
           <view class="notifiView" >
             <text class="notifiText">{{item.text}}</text>
-          </view>
-          <view class="notifiView" >
-            <text class="notifiText">当前在线人数{{nowPeoples}}</text>
-          </view>
-          <view class="notifiView">
-            <text class="notifiText">{{nowTime}}</text>
+            <text class="notifiText">{{item.nowTime}}</text>
+            <text class="notifiText">在线人数{{nowPeoples}}</text>
           </view>
         </view>
           <view wx:if="{{item.type !== 'notification'}}" class="avatar" @tap="handleName({{item}})">
@@ -205,6 +201,7 @@
 .bodyBlock .notifiText{
   font-size: 12px;
   color: #545a63;
+  padding-right: 10rpx;
 }
 .operation textarea {
   border: 1px solid #eee;
@@ -266,17 +263,17 @@ scroll-view {
 }
 
 .list-item:last-child {
-  margin-bottom: 180rpx;
+  padding-bottom:60rpx;
 }
 
 .list-item {
   display: flex;
   align-items: flex-start;
-  padding: 7px 0;
+  padding: 3px 0;
 }
 
 .list-item .avatar {
-  padding: 5px;
+  padding: 1px;
   margin: 0 10px;
 }
 
@@ -291,7 +288,7 @@ scroll-view {
   position: relative;
   border-radius: 5px;
   font-size: 30rpx;
-  margin-top: 10px;
+  margin-top: 5px;
   max-width: 350rpx;
   display: flex;
   word-wrap:break-word;
@@ -479,7 +476,6 @@ export default class Chatroom extends wepy.page {
 
   methods = {
     async getCountsNum(id, jfToken) {
-      this.nowTime = new Date(Date.parse(new Date()) + 28800000).toISOString().split('T')[0] + ' ' + new Date().toTimeString().substr(0, 8)
       const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
       this.nowPeoples = onlineusercount
       this.$apply()
@@ -593,7 +589,7 @@ export default class Chatroom extends wepy.page {
     },
     async send() {
       // ? why bind
-      const pushMsg = this.methods.pushMsg.bind(this)
+      const pushMsgText = this.methods.pushMsgText.bind(this)
       const text = R.trim(this.text)
       this.text = ''
       if (text.length) {
@@ -602,7 +598,7 @@ export default class Chatroom extends wepy.page {
             text
           })
           this.text = ''
-          pushMsg(msg)
+          pushMsgText(msg)
         } catch (e) {
           log.error({
             page: 'chatroom',
@@ -616,6 +612,46 @@ export default class Chatroom extends wepy.page {
       this.text = e.detail.value
     },
     pushMsg: function (msgs) {
+      const { refreshMsgs } = this.methods
+      if (!Array.isArray(msgs)) {
+        msgs = [msgs]
+      }
+      console.log('就是这个图', msgs)
+      msgs = msgs.map(msg => {
+        if (msg.type === 'text') {
+          return {
+            emji: FaceIM.default.parseEmoji(msg.text.replace(/\n/mg, '')),
+            chatroomId: msg.chatroomId,
+            flow: msg.flow,
+            from: msg.from,
+            fromAvatar: msg.fromAvatar,
+            fromClientType: msg.fromClientType,
+            fromCustom: msg.fromCustom,
+            fromNick: msg.fromNick,
+            idClient: msg.idClient,
+            resend: msg.resend,
+            status: msg.status,
+            text: msg.text,
+            time: msg.time,
+            type: msg.type,
+            userUpdateTime: msg.userUpdateTime
+          }
+        } else {
+          return msg
+        }
+      })
+//      console.log(this.roomId)
+      let roomId = this.roomId
+      console.log(roomId)
+      if (msgs.length > 0) {
+        roomId = msgs[0].chatroomId
+      }
+      const merged = [...this.msgs, ...msgs]
+      refreshMsgs(roomId, merged)
+//      this.sended = true
+      this.$apply()
+    },
+    pushMsgText: function (msgs) {
       const { refreshMsgs } = this.methods
       if (!Array.isArray(msgs)) {
         msgs = [msgs]
@@ -716,7 +752,8 @@ export default class Chatroom extends wepy.page {
                 ...msg,
                 type: 'notification',
                 text: tipMsg,
-                fromAvatar: avatarUrl
+                fromAvatar: avatarUrl,
+                nowTime: new Date(Date.parse(new Date()) + 28800000).toISOString().split('T')[0] + ' ' + new Date().toTimeString().substr(0, 8)
               }
             } else {
               return msg

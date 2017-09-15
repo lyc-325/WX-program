@@ -16,7 +16,7 @@
 
       <view class="item _4073524">
         <view class="label _4073524">联系方式</view>
-        <view class="value _4073524">{{userData.phone}}</view>
+        <view class="value _4073524">{{userData.mobile}}</view>
       </view>
 
       <view class="item _4073524">
