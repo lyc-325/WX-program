@@ -1,5 +1,5 @@
 
-<view class="root _7d321b0">
+<view class="root _97910d6">
   <!--<view class="base">-->
     <!--<view>-->
       <!--<view class="avatar">-->
@@ -9,67 +9,67 @@
     <!--</view>-->
     <!--<view class="membership">{{membership}}</view>-->
   <!--</view>-->
-  <view class="userinfo _7d321b0" bindtap="handleViewTap">
-    <view  wx:if="{{isEdit === true}}" class="closeEdit _7d321b0" bindtap="closeUserInfoTap">取 消</view>
-    <image class="userinfo-avatar _7d321b0" src="{{userData.icon}}" background-size="cover"/>
+  <view class="userinfo _97910d6" bindtap="handleViewTap">
+    <view  wx:if="{{isEdit === true}}" class="closeEdit _97910d6" bindtap="closeUserInfoTap">取 消</view>
+    <image class="userinfo-avatar _97910d6" src="{{userData.icon}}" background-size="cover"/>
     <!--<view class="userinfo-nickname">{{userData.name}}</view>-->
-    <view  wx:if="{{isEdit === false}}" class="infoEdit _7d321b0" bindtap="editUserInfoTap">编 辑</view>
-    <view  wx:elif="{{isEdit === true}}" class="infoEdit _7d321b0" bindtap="saveUserInfoTap">保 存</view>
+    <view  wx:if="{{isEdit === false}}" class="infoEdit _97910d6" bindtap="editUserInfoTap">编 辑</view>
+    <view  wx:elif="{{isEdit === true}}" class="infoEdit _97910d6" bindtap="saveUserInfoTap">保 存</view>
   </view>
-  <view class="details _7d321b0">
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">姓名</view>
-      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.name}}</view>
-      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.name}}" bindinput="nameKeyInput" placeholder="姓名" class="_7d321b0"/>
+  <view class="details _97910d6">
+    <view class="item _97910d6">
+      <view class="label _97910d6">姓名</view>
+      <view wx:if="{{isEdit === false}}" class="value _97910d6">{{userData.name}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.name}}" bindinput="nameKeyInput" placeholder="姓名" class="_97910d6"/>
     </view>
 
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">公司</view>
-      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.company}}</view>
-      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.company}}" bindinput="companyKeyInput" placeholder="公司" class="_7d321b0"/>
+    <view class="item _97910d6">
+      <view class="label _97910d6">公司</view>
+      <view wx:if="{{isEdit === false}}" class="value _97910d6">{{userData.company}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.company}}" bindinput="companyKeyInput" placeholder="公司" class="_97910d6"/>
     </view>
 
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">联系方式</view>
-      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.mobile}}</view>
-      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.mobile}}" bindinput="phoneKeyInput" placeholder="联系方式" class="_7d321b0"/>
+    <view class="item _97910d6">
+      <view class="label _97910d6">联系方式</view>
+      <view wx:if="{{isEdit === false}}" class="value _97910d6">{{userData.mobile}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.mobile}}" bindinput="phoneKeyInput" placeholder="联系方式" class="_97910d6"/>
     </view>
 
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">主要经营</view>
-      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.ex}}</view>
-      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.ex}}" bindinput="exKeyInput" placeholder="主要经营" class="_7d321b0"/>
+    <view class="item _97910d6">
+      <view class="label _97910d6">主要经营</view>
+      <view wx:if="{{isEdit === false}}" class="value _97910d6">{{userData.ex}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.ex}}" bindinput="exKeyInput" placeholder="主要经营" class="_97910d6"/>
     </view>
 
-    <view class="item _7d321b0">
-      <view class="label _7d321b0">职位</view>
-      <view wx:if="{{isEdit === false}}" class="value _7d321b0">{{userData.token}}</view>
-      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.token}}" bindinput="tokenKeyInput" placeholder="职位" class="_7d321b0"/>
+    <view class="item _97910d6">
+      <view class="label _97910d6">职位</view>
+      <view wx:if="{{isEdit === false}}" class="value _97910d6">{{userData.token}}</view>
+      <input wx:elif="{{isEdit === true}}" style="border-bottom: 1px solid #eee" value="{{userData.token}}" bindinput="tokenKeyInput" placeholder="职位" class="_97910d6"/>
     </view>
 
     </view>
   </view>
 
-  <view class="list _7d321b0">
-    <view style="color:#6b6b6b; padding:10px;" class="_7d321b0">发布列表</view>
-    <view  wx:for="{{list}}" wx:key="index" data-index="{{index}}" class="item _7d321b0">
-      <view class="cover _7d321b0" bindtap="handleItemTap" data-wepy-params-a="{{item.id}}">
-        <image mode="scaleToFill" src="{{item.cover}}" class="_7d321b0"/>
+  <view class="list _97910d6">
+    <view style="color:#6b6b6b; padding:10px;" class="_97910d6">发布列表</view>
+    <view  wx:for="{{list}}" wx:key="index" data-index="{{index}}" class="item _97910d6">
+      <view class="cover _97910d6" bindtap="handleItemTap" data-wepy-params-a="{{item.id}}">
+        <image mode="scaleToFill" src="{{item.cover}}" class="_97910d6"/>
       </view>
-      <view class="info _7d321b0">
-        <view class="title _7d321b0">
-          <view class="_7d321b0">{{item.title}}</view>
-          <view bindtap="deleteItem" class="_7d321b0" data-wepy-params-a="{{item}}" data-wepy-params-b="{{index}}">删除</view>
+      <view class="info _97910d6">
+        <view class="title _97910d6">
+          <view class="_97910d6">{{item.title}}</view>
+          <view bindtap="deleteItem" class="_97910d6" data-wepy-params-a="{{item}}" data-wepy-params-b="{{index}}">删除</view>
         </view>
-        <view class="content _7d321b0" bindtap="handleItemTap" data-wepy-params-a="{{item.id}}">{{item.content}}</view>
-        <view class="footer _7d321b0">
-          <view class="createdBy _7d321b0">{{item.createdBy}}</view>
-          <view class="createdAt _7d321b0">{{item.createdAt}}</view>
-          <view class="read _7d321b0">
+        <view class="content _97910d6" bindtap="handleItemTap" data-wepy-params-a="{{item.id}}">{{item.content}}</view>
+        <view class="footer _97910d6">
+          <view class="createdBy _97910d6">{{item.createdBy}}</view>
+          <view class="createdAt _97910d6">{{item.createdAt}}</view>
+          <view class="read _97910d6">
             {{item.read}} 阅读
           </view>
         </view>
       </view>
     </view>
   </view>
-  <view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _7d321b0">发布</view>
+  <view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _97910d6">发布</view>

@@ -1,34 +1,34 @@
 
-<form bindsubmit="bindFormSubmit" class="_66f09fe">
-  <view class="controlBlock _66f09fe">
-    <button bindtap="goBack" class="publish _66f09fe">取消</button>
-    <button form-type="submit" class="publish _66f09fe">发布</button>
+<form bindsubmit="bindFormSubmit" class="_7f68e71">
+  <view class="controlBlock _7f68e71">
+    <button bindtap="goBack" class="publish _7f68e71">取消</button>
+    <button form-type="submit" class="publish _7f68e71">发布</button>
   </view>
-  <view class="containerP _66f09fe">
-    <view class="itemBlock _66f09fe">
-      <span class="_66f09fe">标题：</span>
-      <view class="item _66f09fe">
-        <input name="title" placeholder="标题" class="_66f09fe"/>
+  <view class="containerP _7f68e71">
+    <view class="itemBlock _7f68e71">
+      <span class="_7f68e71">标题：</span>
+      <view class="item _7f68e71">
+        <input name="title" placeholder="标题" class="_7f68e71"/>
       </view>
     </view>
-    <view class="itemBlock _66f09fe">
-      <span class="_66f09fe">分类：</span>
-      <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_66f09fe">
-        <view class="picker _66f09fe">
-          <view class="slider _66f09fe">{{categories[index].name}}</view>
+    <view class="itemBlock _7f68e71">
+      <span class="_7f68e71">分类：</span>
+      <picker bindchange="bindPickerChange" name="category" value="{{index}}" range-key="{{'name'}}" range="{{categories}}" class="_7f68e71">
+        <view class="picker _7f68e71">
+          <view class="slider _7f68e71">{{categories[index].name}}</view>
         </view>
       </picker>
     </view>
-    <view class="itemBlock _66f09fe">
-      <span class="_66f09fe">内容：</span>
-      <textarea style="width: 70%;" auto-height name="content" placeholder="内容" class="_66f09fe"/>
+    <view class="itemBlock _7f68e71">
+      <span class="_7f68e71">内容：</span>
+      <textarea style="width: 70%;" auto-height name="content" placeholder="内容" class="_7f68e71"/>
     </view>
-    <view class="itemBlockImage _66f09fe">
-      <view style="" class="_66f09fe"><span class="_66f09fe">图片：</span><buttom bindtap="handleUpload" class="upload _66f09fe">选择图片</buttom></view>
-      <view class="imgBar _66f09fe">
-        <view class="image _66f09fe"  wx:for="{{imgs}}" wx:key="{{index}}">
-          <image mode="scaleToFill" src="{{item}}" class="_66f09fe">
-            <view class="cancel _66f09fe" data-index="{{index}}" bindtap="handleCancel">X</view>
+    <view class="itemBlockImage _7f68e71">
+      <view style="" class="_7f68e71"><span class="_7f68e71">图片：</span><buttom bindtap="handleUpload" class="upload _7f68e71">选择图片</buttom></view>
+      <view class="imgBar _7f68e71">
+        <view class="image _7f68e71"  wx:for="{{imgs}}" wx:key="{{index}}">
+          <image mode="scaleToFill" src="{{item}}" class="_7f68e71">
+            <view class="cancel _7f68e71" data-index="{{index}}" bindtap="handleCancel">X</view>
           </image>
         </view>
       </view>

@@ -1,8 +1,8 @@
 module.exports = {
   // 微信配置
   wx: {
-    appId: 'wx62846f9ed494159c',
-    appSecrete: 'b6c479d96023c923047c014460b65e14'
+    appId: 'wxe1574f2aa70de0ac',
+    appSecrete: '16ba378366072b0635f1a424a960b60a'
   },
   // 网易云信配置
   nim: {

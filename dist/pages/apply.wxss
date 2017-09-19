@@ -1,9 +1,9 @@
 
-.container._468ac1d {
+.container._2dcb150 {
   padding-top: 20rpx;
 }
 
-.friend._468ac1d {
+.friend._2dcb150 {
   display: flex;
   width: 96%;
   height: 200rpx;
@@ -11,30 +11,30 @@
   justify-content: space-around;
 }
 
-.avatar image._468ac1d {
+.avatar image._2dcb150 {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
 }
-.info._468ac1d {
+.info._2dcb150 {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
-.info > .item._468ac1d {
+.info > .item._2dcb150 {
   margin-top: 10rpx;
   width: 260rpx;
   display: flex;
   justify-content: space-between;
 }
 
-.area._468ac1d {
+.area._2dcb150 {
   padding: 20rpx;
   border: 1rpx #eee solid;
   margin-bottom: 20rpx;
 }
 
-.send._468ac1d {
+.send._2dcb150 {
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 5px;

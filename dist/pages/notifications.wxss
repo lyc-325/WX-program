@@ -1,9 +1,9 @@
 
-.list._3a54397 {
+.list._433346c {
   display: flex;
 }
 
-.list > .item._3a54397 {
+.list > .item._433346c {
   display: flex;
   border-bottom: 1px solid #eee;
   width: 100%;
@@ -12,17 +12,17 @@
   padding: 10rpx;
 }
 
-.list .item._3a54397:first-child {
+.list .item._433346c:first-child {
   border-top: 1px solid #eee;
 }
 
-.list > .item .avatar._3a54397 {
+.list > .item .avatar._433346c {
   flex: 1;
   padding: 10rpx;
   text-align: center;
 }
 
-.list > .item .avatar image._3a54397{
+.list > .item .avatar image._433346c{
   flex: 1;
   width: 130rpx;
   height: 130rpx;
@@ -30,7 +30,7 @@
 }
 
 
-.list > .item .info._3a54397 {
+.list > .item .info._433346c {
   flex: 2;
   padding: 10rpx;
   display: flex;
@@ -39,7 +39,7 @@
   font-size: 35rpx;
 }
 
-.list > .item .operation._3a54397 {
+.list > .item .operation._433346c {
   padding: 10rpx;
   flex: 1;
   display: flex;
@@ -47,7 +47,7 @@
   justify-content: space-around;
 }
 
-.list > .item .operation > view._3a54397 {
+.list > .item .operation > view._433346c {
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
@@ -56,7 +56,7 @@
   border-radius: 5px;
 }
 
-.list > .item .operation .accept._3a54397 {
+.list > .item .operation .accept._433346c {
   background-color: red;
   color: white;
   margin-bottom: 10rpx;

@@ -131,6 +131,12 @@ var _class = function () {
             var inRepeat = false,
                 repeatKey = void 0;
 
+            if (this.$initData === undefined) {
+                this.$initData = _util2.default.$copy(this.data, true);
+            } else {
+                this.data = _util2.default.$copy(this.$initData, true);
+            }
+
             if (this.$props) {
                 for (key in this.$props) {
                     for (binded in this.$props[key]) {

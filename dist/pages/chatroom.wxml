@@ -17,47 +17,49 @@
             <text class="notifiText">在线人数{{nowPeoples}}</text>
           </view>
         </view>
-          <view wx:if="{{item.type !== 'notification'}}" class="avatar" bindtap="handleName" data-wepy-params-a="{{item}}">
-            <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
-          </view>
-          <view wx:if="{{item.type !== 'notification'}}">
-            <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
-            <view class="content">
-              <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
-              <view wx:elif="{{item.emji[0].type === 'text'}}">
-                <text selectable="true">{{item.text}}</text>
-              </view>
-              <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" bindtap="imgPreview" data-wepy-params-a="{{item.file.url}}" data-wepy-params-b="{{msgs}}"/>
+        <view wx:if="{{item.type !== 'notification'}}" class="avatar" bindtap="handleName" data-wepy-params-a="{{item}}">
+          <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
+        </view>
+        <view wx:if="{{item.type !== 'notification'}}">
+          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view class="content">
+            <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
+            <view wx:elif="{{item.emji[0].type === 'text'}}">
+              <text selectable="true">{{item.text}}</text>
             </view>
+            <image wx:elif="{{item.type === 'image' }}" src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" bindtap="imgPreview" data-wepy-params-a="{{item.file.url}}" data-wepy-params-b="{{msgs}}"/>
           </view>
         </view>
+      </view>
     </scroll-view>
     <view wx:if="{{!isLIMIT}}" class="{{ showem }}">
-      <textarea wx:if="{{sended}}" value="" auto-height fixed="fixed" cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
-      <textarea wx:else auto-height auto-focus fixed="fixed" cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
-      <view class="button" bindtap="openEmoji" mode="scaleToFill">
-        <image src="../static/icons/emoj.png"/>
+      <!-- <input wx:if="{{sended}}" value="" auto-height  fixed cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
+        <input wx:else auto-height focus fixed bindfocus="handleFocus" cursor-spacing="40" bindinput="setText"/> -->
+
+        <textarea auto-height auto-focus="true" bindfocus="handleFocus" cursor-spacing="40" bindinput="setText" value="{{searchinput}}"/>
+        <view class="button" bindtap="openEmoji" mode="scaleToFill">
+          <image src="../static/icons/emoj.png"/>
+        </view>
+        <view class="button" bindtap="chooseImage">
+          <image src="../static/icons/image.png" mode="scaleToFill"/>
+        </view>
+        <view class="button" bindtap="send" style="width:15%; ">
+          <image src="../static/icons/send.png" mode="scaleToFill"/>
+        </view>
       </view>
-      <view class="button" bindtap="chooseImage">
-        <image src="../static/icons/image.png" mode="scaleToFill"/>
+      <view wx:if="{{isLIMIT}}" class="{{ showem }}">
+        <input value="您已被禁言" auto-height fixed="fixed" cursor-spacing="40" disabled="true"/>
+        <view class="button" mode="scaleToFill">
+          <image src="../static/icons/emoj.png"/>
+        </view>
+        <view class="button">
+          <image src="../static/icons/image.png" mode="scaleToFill"/>
+        </view>
+        <view class="button" style="width:15%; ">
+          <image src="../static/icons/send.png" mode="scaleToFill"/>
+        </view>
       </view>
-      <view class="button" bindtap="send" style="width:15%; ">
-        <image src="../static/icons/send.png" mode="scaleToFill"/>
-      </view>
-    </view>
-    <view wx:if="{{isLIMIT}}" class="{{ showem }}">
-    <textarea value="您已被禁言" auto-height fixed="fixed" cursor-spacing="40" disabled="true"/>
-    <view class="button" mode="scaleToFill">
-      <image src="../static/icons/emoj.png"/>
-    </view>
-    <view class="button">
-      <image src="../static/icons/image.png" mode="scaleToFill"/>
-    </view>
-    <view class="button" style="width:15%; ">
-      <image src="../static/icons/send.png" mode="scaleToFill"/>
-    </view>
-  </view>
-    <swiper class="{{ show }}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <swiper class="{{ show }}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block>
         <swiper-item>
           <view class="emoji_item">
@@ -69,9 +71,8 @@
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map3 }}" src="{{ emojiObj.path + item }}" wx:key="" bindtap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
+
         </swiper-item>
-      </block>
-      <block class="second">
         <swiper-item>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map4 }}" src="{{ emojiObj.path + item }}" wx:key="" bindtap="sendEmoji" data-emoji="{{ index }}"/>
@@ -84,6 +85,7 @@
           </view>
         </swiper-item>
       </block>
+
     </swiper>
   </view>
 

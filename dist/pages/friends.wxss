@@ -1,17 +1,17 @@
 
-.root > view._247f8f8 {
+.root > view._f38f012 {
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
 
-.search input._247f8f8{
+.search input._f38f012{
   text-align: center;
   background: white;
   font-size: 30rpx;
   border: 1px solid #eee;
 }
 
-.notification._247f8f8 {
+.notification._f38f012 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +19,7 @@
   background-color: #eee;
 }
 
-.notification .badge._247f8f8 {
+.notification .badge._f38f012 {
   border-radius: 50%;
   width: 50rpx;
   height: 50rpx;
@@ -30,22 +30,22 @@
   background-color: red;
 }
 
-.friend._247f8f8 {
+.friend._f38f012 {
   display: flex;
   align-items: center;
   font-size: 32rpx;
 }
 
-.friend .avatar._247f8f8 {
+.friend .avatar._f38f012 {
   margin-right: 10rpx;
 }
 
-.friend .avatar image._247f8f8 {
+.friend .avatar image._f38f012 {
   width: 80rpx;
   height: 80rpx;
 }
 
-.plus._247f8f8 {
+.plus._f38f012 {
   position: fixed;
   bottom: 10rpx;
   right: 10rpx;

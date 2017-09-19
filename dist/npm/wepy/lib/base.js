@@ -8,13 +8,17 @@ var _event = require('./event.js');
 
 var _event2 = _interopRequireDefault(_event);
 
+var _util = require('./util.js');
+
+var _util2 = _interopRequireDefault(_util);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PAGE_EVENT = ['onLoad', 'onReady', 'onShow', 'onHide', 'onUnload', 'onPullDownRefresh', 'onReachBottom', 'onShareAppMessage'];
 var APP_EVENT = ['onLaunch', 'onShow', 'onHide', 'onError'];
 
 var $bindEvt = function $bindEvt(config, com, prefix) {
-    com.$prefix = prefix;
+    com.$prefix = _util2.default.camelize(prefix || '');
     Object.getOwnPropertyNames(com.components || {}).forEach(function (name) {
         var cClass = com.components[name];
         var child = new cClass();
@@ -96,12 +100,12 @@ var $bindEvt = function $bindEvt(config, com, prefix) {
 };
 
 exports.default = {
-    $createApp: function $createApp(appClass) {
+    $createApp: function $createApp(appClass, appConfig) {
         var config = {};
         var app = new appClass();
 
         if (!this.$instance) {
-            app.$init(this);
+            app.$init(this, appConfig);
             this.$instance = app;
         }
 

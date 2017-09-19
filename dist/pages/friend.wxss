@@ -1,34 +1,34 @@
 
-.container._d43a333 {
+.container._55f7740 {
   padding: 100rpx 200rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.container .avatar._d43a333 {
+.container .avatar._55f7740 {
   padding: 50rpx;
   text-align: center;
 }
 
-.container .avatar image._d43a333 {
+.container .avatar image._55f7740 {
   width: 200rpx;
   height: 200rpx;
 }
 
-.container .info._d43a333 {
+.container .info._55f7740 {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.container .info > .item._d43a333 {
+.container .info > .item._55f7740 {
   display: flex;
   justify-content: space-between;
   padding: 20rpx 0;
 }
 
-.container .add._d43a333 {
+.container .add._55f7740 {
   margin-top: 50rpx;
   background: red;
   color: white;

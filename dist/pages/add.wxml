@@ -1,19 +1,19 @@
 
-<view class="root _9bcb9e0">
-  <view class="_9bcb9e0">
-    <form class="_9bcb9e0">
-      <view class="search _9bcb9e0">
-        <input name="name" type="text" placeholder="昵称" maxlength="20" confirm-type="search" bindconfirm="search" class="_9bcb9e0"/>
+<view class="root _d2b5903">
+  <view class="_d2b5903">
+    <form class="_d2b5903">
+      <view class="search _d2b5903">
+        <input name="name" type="text" placeholder="昵称" maxlength="20" confirm-type="search" bindconfirm="search" class="_d2b5903"/>
       </view>
     </form>
   </view>
-  <view class="friend _9bcb9e0"  wx:for="{{friends}}" wx:key="accid" bindtap="toApply" data-wepy-params-a="{{index}}">
-      <view class="avatar _9bcb9e0">
-        <image src="{{item.avatar}}" mode="scaleToFill" class="_9bcb9e0"/>
+  <view class="friend _d2b5903"  wx:for="{{friends}}" wx:key="accid" bindtap="toApply" data-wepy-params-a="{{index}}">
+      <view class="avatar _d2b5903">
+        <image src="{{item.avatar}}" mode="scaleToFill" class="_d2b5903"/>
       </view>
-      <view class="info _9bcb9e0">
-        <view class="item _9bcb9e0">
-          <view class="value _9bcb9e0">{{ item.nickname }}</view>
+      <view class="info _d2b5903">
+        <view class="item _d2b5903">
+          <view class="value _d2b5903">{{ item.nickname }}</view>
         </view>
       </view>
   </view>

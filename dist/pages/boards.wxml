@@ -1,34 +1,34 @@
 
-  <view class="section _089d13c" style=" display: flex;justify-content: flex-end; padding: 5px 10px;">
-    <input class="searchInput _089d13c" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
-    <button bindtap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;" class="_089d13c">搜索</button>
+  <view class="section _0708ee2" style=" display: flex;justify-content: flex-end; padding: 5px 10px;">
+    <input class="searchInput _0708ee2" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
+    <button bindtap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;" class="_0708ee2">搜索</button>
   </view>
-   <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar _089d13c">
-   <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;" class="_089d13c">
-   <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _089d13c">
+   <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar _0708ee2">
+   <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;" class="_0708ee2">
+   <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _0708ee2">
     {{item}}
    </view>
    </view>
    </view>
-  <view class="list _089d13c" style="margin-top: 10rpx;">
-  <view  wx:if="{{list.length > 0}}" wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _089d13c">
-    <view class="cover _089d13c">
-      <image mode="scaleToFill" src="{{item.cover}}" class="_089d13c"/>
+  <view class="list _0708ee2" style="margin-top: 10rpx;">
+  <view  wx:if="{{list.length > 0}}" wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _0708ee2">
+    <view class="cover _0708ee2">
+      <image mode="scaleToFill" src="{{item.cover}}" class="_0708ee2"/>
     </view>
-    <view class="info _089d13c">
-      <view class="title _089d13c">{{item.title}}</view>
-      <view class="content _089d13c">{{item.content}}</view>
-      <view class="footer _089d13c">
-        <view class="createdBy _089d13c">{{item.createdBy}}</view>
-        <view class="createdAt _089d13c">{{item.createdAt}}</view>
-        <view class="read _089d13c">
+    <view class="info _0708ee2">
+      <view class="title _0708ee2">{{item.title}}</view>
+      <view class="content _0708ee2">{{item.content}}</view>
+      <view class="footer _0708ee2">
+        <view class="createdBy _0708ee2">{{item.createdBy}}</view>
+        <view class="createdAt _0708ee2">{{item.createdAt}}</view>
+        <view class="read _0708ee2">
           {{item.read}} 阅读
         </view>
       </view>
     </view>
   </view>
-    <view  wx:if="{{list.length === 0}}" class="item _089d13c">
-      <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_089d13c">当前分类没有信息</view>
+    <view  wx:if="{{list.length === 0}}" class="item _0708ee2">
+      <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_0708ee2">当前分类没有信息</view>
     </view>
 </view>
-<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _089d13c">发布</view>
+<view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _0708ee2">发布</view>

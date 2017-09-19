@@ -17,81 +17,84 @@
             <text class="notifiText">在线人数{{nowPeoples}}</text>
           </view>
         </view>
-          <view wx:if="{{item.type !== 'notification'}}" class="avatar" @tap="handleName({{item}})">
-            <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
-          </view>
-          <view wx:if="{{item.type !== 'notification'}}">
-            <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
-            <view class="content">
-              <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
-                     style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
-              <view wx:elif="{{item.emji[0].type === 'text'}}">
-                <text selectable="true" >{{item.text}}</text>
-              </view>
-              <image wx:elif="{{item.type === 'image' }}"  src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
+        <view wx:if="{{item.type !== 'notification'}}" class="avatar" @tap="handleName({{item}})">
+          <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
+        </view>
+        <view wx:if="{{item.type !== 'notification'}}">
+          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view class="content">
+            <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
+            style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
+            <view wx:elif="{{item.emji[0].type === 'text'}}">
+              <text selectable="true" >{{item.text}}</text>
             </view>
+            <image wx:elif="{{item.type === 'image' }}"  src="{{item.file.url}}" style="width: 300rpx; height: {{item.file.h/item.file.w*300}}rpx;" mode="aspectFit" @tap="imgPreview({{item.file.url}}, {{msgs}})"></image>
           </view>
         </view>
+      </view>
     </scroll-view>
     <view wx:if="{{!isLIMIT}}" class="operation" class="{{ showem }}">
-      <textarea wx:if="{{sended}}" value="" auto-height fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
-      <textarea wx:else auto-height auto-focus fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
-      <view class="button" @tap="openEmoji" mode="scaleToFill">
-        <image src="../static/icons/emoj.png"/>
+      <!-- <input wx:if="{{sended}}" value="" auto-height  fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
+        <input wx:else auto-height focus fixed @focus="handleFocus" cursor-spacing="40"  @input="setText"/> -->
+
+        <textarea  auto-height auto-focus="true" @focus="handleFocus" cursor-spacing="40"  @input="setText"
+        value="{{searchinput}}"></textarea>
+        <view class="button" @tap="openEmoji" mode="scaleToFill">
+          <image src="../static/icons/emoj.png"/>
+        </view>
+        <view  class="button" @tap="chooseImage">
+          <image  src="../static/icons/image.png" mode="scaleToFill" />
+        </view>
+        <view  class="button" @tap="send" style="width:15%; ">
+          <image  src="../static/icons/send.png" mode="scaleToFill" />
+        </view>
       </view>
-      <view  class="button" @tap="chooseImage">
-        <image  src="../static/icons/image.png" mode="scaleToFill" />
+      <view wx:if="{{isLIMIT}}" class="operation" class="{{ showem }}">
+        <input  value="您已被禁言" auto-height fixed cursor-spacing="40" disabled="true" />
+        <view class="button"  mode="scaleToFill">
+          <image src="../static/icons/emoj.png"/>
+        </view>
+        <view  class="button" >
+          <image  src="../static/icons/image.png" mode="scaleToFill" />
+        </view>
+        <view  class="button"  style="width:15%; ">
+          <image  src="../static/icons/send.png" mode="scaleToFill" />
+        </view>
       </view>
-      <view  class="button" @tap="send" style="width:15%; ">
-        <image  src="../static/icons/send.png" mode="scaleToFill" />
-      </view>
-    </view>
-    <view wx:if="{{isLIMIT}}" class="operation" class="{{ showem }}">
-    <textarea  value="您已被禁言" auto-height fixed cursor-spacing="40" disabled="true" />
-    <view class="button"  mode="scaleToFill">
-      <image src="../static/icons/emoj.png"/>
-    </view>
-    <view  class="button" >
-      <image  src="../static/icons/image.png" mode="scaleToFill" />
-    </view>
-    <view  class="button"  style="width:15%; ">
-      <image  src="../static/icons/send.png" mode="scaleToFill" />
-    </view>
-  </view>
-    <swiper class="emoji_list" class="{{ show }}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"
-            interval="{{interval}}" duration="{{duration}}">
+      <swiper class="emoji_list" class="{{ show }}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}"
+      interval="{{interval}}" duration="{{duration}}">
       <block>
         <swiper-item>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map1 }}" src="{{ emojiObj.path + item }}" wx:key=""
-                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+            @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map2 }}" src="{{ emojiObj.path + item }}" wx:key=""
-                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+            @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map3 }}" src="{{ emojiObj.path + item }}" wx:key=""
-                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+            @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
+
         </swiper-item>
-      </block>
-      <block class="second">
         <swiper-item>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map4 }}" src="{{ emojiObj.path + item }}" wx:key=""
-                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+            @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map5 }}" src="{{ emojiObj.path + item }}" wx:key=""
-                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+            @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map6 }}" src="{{ emojiObj.path + item }}" wx:key=""
-                   @tap="sendEmoji" data-emoji="{{ index }}"/>
+            @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
         </swiper-item>
       </block>
+
     </swiper>
   </view>
 
@@ -149,420 +152,421 @@
   border-top: 1px solid #eee;
   z-index: 5;
   background-color: white;}
-.operation>view {
-  padding: 10rpx;
-}
-.showEmojiOperation>view {
-  padding: 10rpx;
-}
-.avatar {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 0 10px 0 0;
-  padding-top: 3px;
-  border-radius: 3px;
-  float: left;
-}
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 240rpx;
-  height: 240rpx;
-  border-radius: 10%;
-}
-
-.userinfo>.userinfo-nickname {
-  color: #aaa;
-  margin-top: 20rpx;
-}
-
-.detailBlock {
-  width: 80%;
-  margin: 0 10%;
-  position: absolute;
-}
-.detailList {
-  margin-top: 80rpx;
-}
-.detailList>.item {
-  display: flex;
-  padding: 20rpx 0;
-  /*justify-content: space-between;*/
-  color: #6b6b6b;
-}
-.bodyBlock .notifiView{
-  width: 100%;
-  text-align: center;
-}
-.bodyBlock .notifiText{
-  font-size: 12px;
-  color: #545a63;
-  padding-right: 10rpx;
-}
-.operation textarea {
-  border: 1px solid #eee;
-  padding: 5px;
-  font-size: 35rpx;
-  width: 60%;
-}
-.showEmojiOperation textarea {
-  border: 1px solid #eee;
-  padding: 5px;
-  font-size: 35rpx;
-  width: 60%;
-}
-
-.operation .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.showEmojiOperation .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.operation>.button {
-  flex-grow: 1;
-  padding: 0;
-  text-align: center;
-  line-height: 50rpx;
-  height: 50rpx;
-  margin-bottom: 10rpx;
-  margin-top: 12rpx;
-}
-.showEmojiOperation>.button {
-  flex-grow: 1;
-  padding: 0;
-  text-align: center;
-  line-height: 50rpx;
-  height: 50rpx;
-  margin-bottom: 10rpx;
-  margin-top: 12rpx;
-}
-.operation>.button image {
-  width: 50rpx;
-  height: 50rpx;
-}
-.showEmojiOperation>.button image {
-  width: 50rpx;
-  height: 50rpx;
-}
-
-scroll-view {
-  top: 80rpx;
-  left: 0;
-  position: absolute;
-  z-index: 0;
-  bottom: 100rpx;
-}
-
-.list-item:last-child {
-  padding-bottom:60rpx;
-}
-
-.list-item {
-  display: flex;
-  align-items: flex-start;
-  padding: 3px 0;
-}
-
-.list-item .avatar {
-  padding: 1px;
-  margin: 0 10px;
-}
-
-.list-item .avatar image {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-}
-
-.list-item .content {
-  padding: 20rpx;
-  position: relative;
-  border-radius: 5px;
-  font-size: 30rpx;
-  margin-top: 5px;
-  max-width: 350rpx;
-  display: flex;
-  word-wrap:break-word;
-  word-break:normal;
-}
-
-.list-item .content view text {
-  word-wrap:break-word;
-  word-break:normal;
-}
-
-.list-item.mine {
-  flex-direction: row-reverse;
-}
-.userList{
-  position: relative;
-  /*border-top: 2rpx solid #eee;*/
-  height: 80rpx;
-  display: flex;
-}
-.userList .cover {
-  width: 30%;
-  height: 60rpx;
-  padding: 10rpx;
-}
-
-.userList .cover image {
-  width: 70rpx;
-  height: 70rpx;
-  border-radius: 50%;
-}
-
-.userList .info {
-  width: 70%;
-  height: 70rpx;
-  padding: 5rpx;
-  display: flex;
-  line-height: 70rpx;
-  /*flex-direction: column;*/
-  justify-content: space-around;
-  font-size: 32rpx;
-  color: dimgray;
-}
-
-.userList .info .title {
-  width: 40%;
-  overflow: hidden;
-}
-
-.userList .info .content {
-  width: 60%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.list-item.mine .content {
-  background-color: #51C332;
-}
-
-.list-item.mine .content::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  right: -10px;
-  border-top: 5px solid transparent;
-  border-left: 10px solid #51C332;
-  border-bottom: 5px solid transparent;
-}
-
-.list-item.opposite .content {
-  background-color: antiquewhite;
-}
-
-.list-item.opposite .content::before {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: -10px;
-  border-top: 5px solid transparent;
-  border-right: 10px solid antiquewhite;
-  border-bottom: 5px solid transparent;
-}
-.emoji_list {
-  display: none;
-}
-
-.showEmoji {
-  width: 100%;
-  height: 145px;
-  background-color: #dddddd;
-  padding-top: 10px;
-  padding-left: 3%;
-  display: block;
-  position: fixed;
-  bottom: 0;
-}
-
-.emoji_list image, .showEmoji image {
-  width: 26px;
-  height: 26px;
-  margin: 5px 2%;
-}
-
-.emoji {
-  width: 26px;
-  height: 26px;
-  margin: 0 0;
-}
-
-.emoji_item {
-  display: flex;
-  justify-content: space-around;
-  margin-right: 20px;
-}
-.open_emoji, .send_image, .open_camera, .v-record {
-  width: 40px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
-
-<script>
-import wepy from 'wepy'
-import R from '../libs/ramda'
-import ChatroomSDK from '../utils/chatroom'
-import NIM from '../utils/nim'
-import FaceIM from '../utils/WebIM'
-import * as log from '../utils/log'
-import {
-  refreshMsgs
-} from '../actions/chatroom'
-import * as chatroomApi from '../apis/chatroom'
-
-import {
-  connect
-} from 'wepy-redux'
-
-@connect({
-  user: state => state.common.user,
-  nim: state => state.common.nim,
-  msgs: function (state) {
-    return state.chatroom.msgs[this.roomId] || []
-  },
-  intoView: function(state) {
-    const msgs = state.chatroom.msgs[this.roomId] || []
-    const last = R.last(msgs)
-    return last ? last.idClient : ''
+  .operation>view {
+    padding: 10rpx;
   }
-}, {
-  refreshMsgs
-})
-export default class Chatroom extends wepy.page {
-  config = {
-    navigationBarTitleText: '聊天室'
+  .showEmojiOperation>view {
+    padding: 10rpx;
+  }
+  .avatar {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 0 10px 0 0;
+    padding-top: 3px;
+    border-radius: 3px;
+    float: left;
+  }
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  data = {
-    navs: ['聊天', '详情'],
-    currentNav: 0,
-    numList: [],
-    isLIMIT: false,
-    chatroom: null,
-    roomId: null,
-    sended: false,
-    text: '',
-    roomData: {
-      name: '加载中...'
-    },
-    indicatorDots: true,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
-    show: 'emoji_list',
-    showem: 'operation',
-    emoji: FaceIM.default.Emoji,
-    emojiObj: FaceIM.default.EmojiObj,
-    nowTime: '',
-    nowPeoples: 0
+  .userinfo-avatar {
+    width: 240rpx;
+    height: 240rpx;
+    border-radius: 10%;
   }
 
-  methods = {
-    async getCountsNum(id, jfToken) {
-      const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
-      this.nowPeoples = onlineusercount
-      this.$apply()
+  .userinfo>.userinfo-nickname {
+    color: #aaa;
+    margin-top: 20rpx;
+  }
+
+  .detailBlock {
+    width: 80%;
+    margin: 0 10%;
+    position: absolute;
+  }
+  .detailList {
+    margin-top: 80rpx;
+  }
+  .detailList>.item {
+    display: flex;
+    padding: 20rpx 0;
+    /*justify-content: space-between;*/
+    color: #6b6b6b;
+  }
+  .bodyBlock .notifiView{
+    width: 100%;
+    text-align: center;
+  }
+  .bodyBlock .notifiText{
+    font-size: 12px;
+    color: #545a63;
+    padding-right: 10rpx;
+  }
+  .operation textarea {
+    border: 1px solid #eee;
+    padding: 5px;
+    font-size: 35rpx;
+    width: 60%;
+  }
+  .showEmojiOperation textarea {
+    border: 1px solid #eee;
+    padding: 5px;
+    font-size: 35rpx;
+    width: 60%;
+  }
+
+  .operation .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .showEmojiOperation .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .operation>.button {
+    flex-grow: 1;
+    padding: 0;
+    text-align: center;
+    line-height: 50rpx;
+    height: 50rpx;
+    margin-bottom: 10rpx;
+    margin-top: 12rpx;
+  }
+  .showEmojiOperation>.button {
+    flex-grow: 1;
+    padding: 0;
+    text-align: center;
+    line-height: 50rpx;
+    height: 50rpx;
+    margin-bottom: 10rpx;
+    margin-top: 12rpx;
+  }
+  .operation>.button image {
+    width: 50rpx;
+    height: 50rpx;
+  }
+  .showEmojiOperation>.button image {
+    width: 50rpx;
+    height: 50rpx;
+  }
+
+  scroll-view {
+    top: 80rpx;
+    left: 0;
+    position: absolute;
+    z-index: 0;
+    bottom: 100rpx;
+  }
+
+  .list-item:last-child {
+    padding-bottom:60rpx;
+  }
+
+  .list-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 3px 0;
+  }
+
+  .list-item .avatar {
+    padding: 1px;
+    margin: 0 10px;
+  }
+
+  .list-item .avatar image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+  }
+
+  .list-item .content {
+    padding: 20rpx;
+    position: relative;
+    border-radius: 5px;
+    font-size: 30rpx;
+    margin-top: 5px;
+    max-width: 350rpx;
+    display: flex;
+    word-wrap:break-word;
+    word-break:normal;
+  }
+
+  .list-item .content view text {
+    word-wrap:break-word;
+    word-break:normal;
+  }
+
+  .list-item.mine {
+    flex-direction: row-reverse;
+  }
+  .userList{
+    position: relative;
+    /*border-top: 2rpx solid #eee;*/
+    height: 80rpx;
+    display: flex;
+  }
+  .userList .cover {
+    width: 30%;
+    height: 60rpx;
+    padding: 10rpx;
+  }
+
+  .userList .cover image {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+  }
+
+  .userList .info {
+    width: 70%;
+    height: 70rpx;
+    padding: 5rpx;
+    display: flex;
+    line-height: 70rpx;
+    /*flex-direction: column;*/
+    justify-content: space-around;
+    font-size: 32rpx;
+    color: dimgray;
+  }
+
+  .userList .info .title {
+    width: 40%;
+    overflow: hidden;
+  }
+
+  .userList .info .content {
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .list-item.mine .content {
+    background-color: #51C332;
+  }
+
+  .list-item.mine .content::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: -10px;
+    border-top: 5px solid transparent;
+    border-left: 10px solid #51C332;
+    border-bottom: 5px solid transparent;
+  }
+
+  .list-item.opposite .content {
+    background-color: antiquewhite;
+  }
+
+  .list-item.opposite .content::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -10px;
+    border-top: 5px solid transparent;
+    border-right: 10px solid antiquewhite;
+    border-bottom: 5px solid transparent;
+  }
+  .emoji_list {
+    display: none;
+  }
+
+  .showEmoji {
+    width: 100%;
+    height: 145px;
+    background-color: #dddddd;
+    padding-top: 10px;
+    padding-left: 3%;
+    display: block;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .emoji_list image, .showEmoji image {
+    width: 26px;
+    height: 26px;
+    margin: 5px 2%;
+  }
+
+  .emoji {
+    width: 26px;
+    height: 26px;
+    margin: 0 0;
+  }
+
+  .emoji_item {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 20px;
+  }
+  .open_emoji, .send_image, .open_camera, .v-record {
+    width: 40px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  </style>
+
+  <script>
+  import wepy from 'wepy'
+  import R from '../libs/ramda'
+  import ChatroomSDK from '../utils/chatroom'
+  import NIM from '../utils/nim'
+  import FaceIM from '../utils/WebIM'
+  import * as log from '../utils/log'
+  import {
+    refreshMsgs
+  } from '../actions/chatroom'
+  import * as chatroomApi from '../apis/chatroom'
+
+  import {
+    connect
+  } from 'wepy-redux'
+
+  @connect({
+    user: state => state.common.user,
+    nim: state => state.common.nim,
+    msgs: function (state) {
+      return state.chatroom.msgs[this.roomId] || []
     },
-    async handleName (item) {
-      const itemAccid = item.from
-      const {id} = await chatroomApi.getItemId(itemAccid)
-      wepy.navigateTo({
-        url: `userInfo?id=${id}`
-      })
-    },
-    handleNameId (item) {
-      const itemid = item.id
-      wepy.navigateTo({
-        url: `userInfo?id=${itemid}`
-      })
-    },
-    openEmoji (e) {
-      if (this.show === 'showEmoji') {
-        this.show = 'emoji_list'
-        this.showem = 'operation'
-      } else {
-        this.show = 'showEmoji'
-        this.showem = 'showEmojiOperation'
-      }
-      this.$apply()
-    },
-    imgPreview (items, msgs) {
-      const imgUrl = items
-      const isImg = msg => msg.type === 'image'
-      const imgArr = R.filter(isImg)(msgs)
-      const imgUrlArr = imgArr.map(msg => {
-        return msg.file.url
-      })
-      wepy.previewImage({
-        current: imgUrl,
-        urls: imgUrlArr,
-        success: function (res) {
-          console.log(res)
-        }
-      })
-    },
-    async sendEmoji (event) {
-      var that = this
-      var emoji = event.target.dataset.emoji
-      var msglen = that.data.text.length - 1
-      if (emoji && emoji !== '[del]') {
-        var str = that.data.text + emoji
-      } else if (emoji === '[del]') {
-        var start = that.data.text.lastIndexOf('[')
-        var end = that.data.text.lastIndexOf(']')
-        var len = end - start
-        if (end !== -1 && end === msglen && len >= 3 && len <= 4) {
-          str = that.data.text.slice(0, start)
-        } else {
-          str = that.data.text.slice(0, msglen)
-        }
-      }
-      this.text = str
-      const pushMsg = this.methods.pushMsg.bind(this)
-      var text = R.trim(this.text)
-      this.text = ''
-      if (text.length) {
-        try {
-          const msg = await this.chatroom.sendText({
-            text
-          })
-          this.text = ''
-          pushMsg(msg)
+    intoView: function(state) {
+      const msgs = state.chatroom.msgs[this.roomId] || []
+      const last = R.last(msgs)
+      return last ? last.idClient : ''
+    }
+  }, {
+    refreshMsgs
+  })
+  export default class Chatroom extends wepy.page {
+    config = {
+      navigationBarTitleText: '聊天室'
+    }
+
+    data = {
+      navs: ['聊天', '详情'],
+      currentNav: 0,
+      numList: [],
+      isLIMIT: false,
+      chatroom: null,
+      roomId: null,
+      sended: false,
+      text: '',
+      roomData: {
+        name: '加载中...'
+      },
+      indicatorDots: true,
+      autoplay: false,
+      interval: 5000,
+      duration: 1000,
+      show: 'emoji_list',
+      showem: 'operation',
+      emoji: FaceIM.default.Emoji,
+      emojiObj: FaceIM.default.EmojiObj,
+      nowTime: '',
+      nowPeoples: 0,
+      searchinput:'',
+    }
+
+    methods = {
+      async getCountsNum(id, jfToken) {
+        const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
+        this.nowPeoples = onlineusercount
+        this.$apply()
+      },
+      async handleName (item) {
+        const itemAccid = item.from
+        const {id} = await chatroomApi.getItemId(itemAccid)
+        wepy.navigateTo({
+          url: `userInfo?id=${id}`
+        })
+      },
+      handleNameId (item) {
+        const itemid = item.id
+        wepy.navigateTo({
+          url: `userInfo?id=${itemid}`
+        })
+      },
+      openEmoji (e) {
+        if (this.show === 'showEmoji') {
           this.show = 'emoji_list'
           this.showem = 'operation'
-          this.$apply()
-        } catch (e) {
-          log.error({
-            page: 'chatroom',
-            opr: 'sendText',
-            info: e
-          })
+        } else {
+          this.show = 'showEmoji'
+          this.showem = 'showEmojiOperation'
         }
-      }
-    },
-    changeNav (e) {
-      this.currentNav = e.currentTarget.dataset.index
-      this.sended = false
-      this.$apply()
-    },
-    async chooseImage() {
+        this.$apply()
+      },
+      imgPreview (items, msgs) {
+        const imgUrl = items
+        const isImg = msg => msg.type === 'image'
+        const imgArr = R.filter(isImg)(msgs)
+        const imgUrlArr = imgArr.map(msg => {
+          return msg.file.url
+        })
+        wepy.previewImage({
+          current: imgUrl,
+          urls: imgUrlArr,
+          success: function (res) {
+            console.log(res)
+          }
+        })
+      },
+      async sendEmoji (event) {
+        var that = this
+        var emoji = event.target.dataset.emoji
+        var msglen = that.data.text.length - 1
+        if (emoji && emoji !== '[del]') {
+          var str = that.data.text + emoji
+        } else if (emoji === '[del]') {
+          var start = that.data.text.lastIndexOf('[')
+          var end = that.data.text.lastIndexOf(']')
+          var len = end - start
+          if (end !== -1 && end === msglen && len >= 3 && len <= 4) {
+            str = that.data.text.slice(0, start)
+          } else {
+            str = that.data.text.slice(0, msglen)
+          }
+        }
+        this.text = str
+        const pushMsg = this.methods.pushMsg.bind(this)
+        var text = R.trim(this.text)
+        this.text = ''
+        if (text.length) {
+          try {
+            const msg = await this.chatroom.sendText({
+              text
+            })
+            this.text = ''
+            pushMsg(msg)
+            this.show = 'emoji_list'
+            this.showem = 'operation'
+            this.$apply()
+          } catch (e) {
+            log.error({
+              page: 'chatroom',
+              opr: 'sendText',
+              info: e
+            })
+          }
+        }
+      },
+      changeNav (e) {
+        this.currentNav = e.currentTarget.dataset.index
+        this.sended = false
+        this.$apply()
+      },
+      async chooseImage() {
       // 进行图片选择并上传
       const pushMsg = this.methods.pushMsg.bind(this)
       const res = await wepy.chooseImage({
@@ -589,6 +593,9 @@ export default class Chatroom extends wepy.page {
     },
     async send() {
       // ? why bind
+      this.setData({  
+        searchinput: '',  
+      })  
       const pushMsgText = this.methods.pushMsgText.bind(this)
       const text = R.trim(this.text)
       this.text = ''
@@ -641,133 +648,133 @@ export default class Chatroom extends wepy.page {
         }
       })
 //      console.log(this.roomId)
-      let roomId = this.roomId
-      console.log(roomId)
-      if (msgs.length > 0) {
-        roomId = msgs[0].chatroomId
-      }
-      const merged = [...this.msgs, ...msgs]
-      refreshMsgs(roomId, merged)
-//      this.sended = true
-      this.$apply()
-    },
-    pushMsgText: function (msgs) {
-      const { refreshMsgs } = this.methods
-      if (!Array.isArray(msgs)) {
-        msgs = [msgs]
-      }
-      console.log('就是这个图', msgs)
-      msgs = msgs.map(msg => {
-        if (msg.type === 'text') {
-          return {
-            emji: FaceIM.default.parseEmoji(msg.text.replace(/\n/mg, '')),
-            chatroomId: msg.chatroomId,
-            flow: msg.flow,
-            from: msg.from,
-            fromAvatar: msg.fromAvatar,
-            fromClientType: msg.fromClientType,
-            fromCustom: msg.fromCustom,
-            fromNick: msg.fromNick,
-            idClient: msg.idClient,
-            resend: msg.resend,
-            status: msg.status,
-            text: msg.text,
-            time: msg.time,
-            type: msg.type,
-            userUpdateTime: msg.userUpdateTime
-          }
-        } else {
-          return msg
-        }
-      })
-//      console.log(this.roomId)
-      let roomId = this.roomId
-      console.log(roomId)
-      if (msgs.length > 0) {
-        roomId = msgs[0].chatroomId
-      }
-      const merged = [...this.msgs, ...msgs]
-      refreshMsgs(roomId, merged)
-      this.sended = true
-      this.$apply()
-    },
-    handleFocus() {
-      this.sended = false
-    }
+let roomId = this.roomId
+console.log(roomId)
+if (msgs.length > 0) {
+  roomId = msgs[0].chatroomId
+}
+const merged = [...this.msgs, ...msgs]
+refreshMsgs(roomId, merged)
+this.sended = true
+this.$apply()
+},
+pushMsgText: function (msgs) {
+  const { refreshMsgs } = this.methods
+  if (!Array.isArray(msgs)) {
+    msgs = [msgs]
   }
-  async onLoad(options) {
-    const { id } = options
-    const {roomid} = options
-    const {creator} = options
-    this.roomId = roomid
-    const pushMsg = this.methods.pushMsg.bind(this)
-    const getCountsNum = this.methods.getCountsNum.bind(this)
-    const apply = this.$apply.bind(this)
-    const hasMsgs = this.msgs.length > 0
-    try {
-      const { nimToken, accid, avatarUrl, jfToken } = this.user
+  console.log('就是这个图', msgs)
+  msgs = msgs.map(msg => {
+    if (msg.type === 'text') {
+      return {
+        emji: FaceIM.default.parseEmoji(msg.text.replace(/\n/mg, '')),
+        chatroomId: msg.chatroomId,
+        flow: msg.flow,
+        from: msg.from,
+        fromAvatar: msg.fromAvatar,
+        fromClientType: msg.fromClientType,
+        fromCustom: msg.fromCustom,
+        fromNick: msg.fromNick,
+        idClient: msg.idClient,
+        resend: msg.resend,
+        status: msg.status,
+        text: msg.text,
+        time: msg.time,
+        type: msg.type,
+        userUpdateTime: msg.userUpdateTime
+      }
+    } else {
+      return msg
+    }
+  })
+//      console.log(this.roomId)
+let roomId = this.roomId
+console.log(roomId)
+if (msgs.length > 0) {
+  roomId = msgs[0].chatroomId
+}
+const merged = [...this.msgs, ...msgs]
+refreshMsgs(roomId, merged)
+this.sended = true
+this.$apply()
+},
+handleFocus() {
+  this.sended = false
+}
+}
+async onLoad(options) {
+  const { id } = options
+  const {roomid} = options
+  const {creator} = options
+  this.roomId = roomid
+  const pushMsg = this.methods.pushMsg.bind(this)
+  const getCountsNum = this.methods.getCountsNum.bind(this)
+  const apply = this.$apply.bind(this)
+  const hasMsgs = this.msgs.length > 0
+  try {
+    const { nimToken, accid, avatarUrl, jfToken } = this.user
 //      if (creator !== accid) {
 //        await chatroomApi.addToRoom(roomid, creator, accid)
 //      }
-      await chatroomApi.addToRoom(roomid, creator, accid)
-      const roomInfo = await chatroomApi.getOneById(id, jfToken)
-      const data = await chatroomApi.getUserList(roomid, jfToken)
-      const islimit = data => data.type === 'LIMITED'
-      const isUser = data => data.name && data.name !== null
-      this.numList = R.filter(isUser)(data)
-      const userLimitArr = R.filter(islimit)(this.numList)
-      console.log('禁言列表', userLimitArr)
-      if (userLimitArr.length > 0) {
-        if (userLimitArr[0].accid === accid) {
-          this.isLIMIT = true
-          console.log('被禁言')
-        }
-      }
-      this.roomData = roomInfo
-      const roomId = this.roomId
-      const address = await NIM.getChatroomAddresses(accid, roomId)
-      const chatroom = ChatroomSDK.getInstance({
+await chatroomApi.addToRoom(roomid, creator, accid)
+const roomInfo = await chatroomApi.getOneById(id, jfToken)
+const data = await chatroomApi.getUserList(roomid, jfToken)
+const islimit = data => data.type === 'LIMITED'
+const isUser = data => data.name && data.name !== null
+this.numList = R.filter(isUser)(data)
+const userLimitArr = R.filter(islimit)(this.numList)
+console.log('禁言列表', userLimitArr)
+if (userLimitArr.length > 0) {
+  if (userLimitArr[0].accid === accid) {
+    this.isLIMIT = true
+    console.log('被禁言')
+  }
+}
+this.roomData = roomInfo
+const roomId = this.roomId
+const address = await NIM.getChatroomAddresses(accid, roomId)
+const chatroom = ChatroomSDK.getInstance({
 //        debug: true,
-        account: accid,
-        token: nimToken,
-        chatroomId: roomId,
-        chatroomAddresses: address,
-        onmsgs: function(msgs) {
-          log.info({
-            page: 'chatroom',
-            opr: 'initialize sdk instance',
-            info: msgs
-          })
+account: accid,
+token: nimToken,
+chatroomId: roomId,
+chatroomAddresses: address,
+onmsgs: function(msgs) {
+  log.info({
+    page: 'chatroom',
+    opr: 'initialize sdk instance',
+    info: msgs
+  })
 //          console.log('收到聊天室信息', msgs)
-          pushMsg(msgs.map(msg => {
-            if (msg.type === 'notification') {
-              getCountsNum(id, jfToken)
+pushMsg(msgs.map(msg => {
+  if (msg.type === 'notification') {
+    getCountsNum(id, jfToken)
               // 进入聊天室信息
               const tip = R.cond([
                 [R.equals('memberEnter'), R.always('加入聊天室')],
                 [R.equals('memberExit'), R.always('退出聊天室')]
-              ])(msg.attach.type)
-              const tipMsg = `${msg.attach.fromNick} ${tip}`
-              return {
-                ...msg,
-                type: 'notification',
-                text: tipMsg,
-                fromAvatar: avatarUrl,
-                nowTime: new Date(Date.parse(new Date()) + 28800000).toISOString().split('T')[0] + ' ' + new Date().toTimeString().substr(0, 8)
+                ])(msg.attach.type)
+                const tipMsg = `${msg.attach.fromNick} ${tip}`
+                return {
+                  ...msg,
+                  type: 'notification',
+                  text: tipMsg,
+                  fromAvatar: avatarUrl,
+                  nowTime: new Date(Date.parse(new Date()) + 28800000).toISOString().split('T')[0] + ' ' + new Date().toTimeString().substr(0, 8)
+                }
+              } else {
+                return msg
               }
-            } else {
-              return msg
-            }
-          }))
-        },
-        async onconnect() {
-          log.info({
-            page: 'chatroom',
-            opr: 'initialize sdk instance',
-            info: '[NIM CHATROOM] connected'
-          })
-          if (!hasMsgs) {
-            wepy.showLoading()
+            }))
+},
+async onconnect() {
+  log.info({
+    page: 'chatroom',
+    opr: 'initialize sdk instance',
+    info: '[NIM CHATROOM] connected'
+  })
+  if (!hasMsgs) {
+    wepy.showLoading()
             // 拉取最近 100 条信息
             const res = await chatroom.getHistoryMsgs({
               limit: 100
@@ -781,20 +788,20 @@ export default class Chatroom extends wepy.page {
           }
         }
       })
-      this.chatroom = chatroom
-    } catch (e) {
-      log.error({
-        page: 'chatroom',
-        opr: 'getInstance',
-        info: e
-      })
-    }
-  }
+this.chatroom = chatroom
+} catch (e) {
+  log.error({
+    page: 'chatroom',
+    opr: 'getInstance',
+    info: e
+  })
+}
+}
 
-  async onShow() {
-    this.isLIMIT = false
-    this.sended = false
-    this.currentNav = 0
-  }
+async onShow() {
+  this.isLIMIT = false
+  this.sended = false
+  this.currentNav = 0
+}
 }
 </script>

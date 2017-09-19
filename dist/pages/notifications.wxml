@@ -1,20 +1,20 @@
 
-<view class="list _3a54397">
-  <view class="item _3a54397"  wx:for="{{notifications}}" wx:key="id">
-    <view class="avatar _3a54397">
-      <image mode="aspectFit" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_3a54397"/>
+<view class="list _433346c">
+  <view class="item _433346c"  wx:for="{{notifications}}" wx:key="id">
+    <view class="avatar _433346c">
+      <image mode="aspectFit" src="https://avatars1.githubusercontent.com/u/8338436?v=3&u=6da5bc8d0fea875312c88b9e979726bdeafcd41a&s=400" class="_433346c"/>
     </view>
-    <view class="info _3a54397">
-      <view class="_3a54397">老张 请求加你为好友</view>
-      <view class="_3a54397">验证 我是老张</view>
+    <view class="info _433346c">
+      <view class="_433346c">老张 请求加你为好友</view>
+      <view class="_433346c">验证 我是老张</view>
     </view>
 
-    <view wx:if="{{item.completed}}" class="operation _3a54397">
-      <view class="accept _3a54397" bindtap="feedback" data-wepy-params-a="{{index}}" data-wepy-params-b="accept">同意</view>
-      <view class="reject _3a54397" bindtap="feedback" data-wepy-params-a="{{index}}" data-wepy-params-b="reject">拒绝</view>
+    <view wx:if="{{item.completed}}" class="operation _433346c">
+      <view class="accept _433346c" bindtap="feedback" data-wepy-params-a="{{index}}" data-wepy-params-b="accept">同意</view>
+      <view class="reject _433346c" bindtap="feedback" data-wepy-params-a="{{index}}" data-wepy-params-b="reject">拒绝</view>
     </view>
-    <view wx:else class="operation _3a54397">
-      <view class="status _3a54397">已完成</view>
+    <view wx:else class="operation _433346c">
+      <view class="status _433346c">已完成</view>
     </view>
   </view>
 </view>
