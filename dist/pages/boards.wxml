@@ -3,14 +3,14 @@
     <input class="searchInput _0708ee2" value="{{searchValue}}" bindinput="searchKeyInput" placeholder="搜索标题"/>
     <button bindtap="searchTap" style="margin: 0; line-height:80rpx;  width: 160rpx; height: 80rpx;" class="_0708ee2">搜索</button>
   </view>
-   <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar _0708ee2">
+  <view scroll-x="true" style="width:100%;background:#f5f5f5;" class="navbar _0708ee2">
    <view style="display:flex; padding:10rpx 0; background:#f5f5f5; border-bottom: 2rpx solid #eee;" class="_0708ee2">
-   <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _0708ee2">
-    {{item}}
-   </view>
-   </view>
-   </view>
-  <view class="list _0708ee2" style="margin-top: 10rpx;">
+     <view bindtap="changeNav"  wx:for-items="{{navs}}" wx:key="index" data-index="{{index}}" class="item {{currentNav == index ? 'active' : ''}} _0708ee2">
+      {{item}}
+    </view>
+  </view>
+</view>
+<view class="list _0708ee2" style="margin-top: 10rpx;">
   <view  wx:if="{{list.length > 0}}" wx:for="{{list}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _0708ee2">
     <view class="cover _0708ee2">
       <image mode="scaleToFill" src="{{item.cover}}" class="_0708ee2"/>
@@ -27,8 +27,8 @@
       </view>
     </view>
   </view>
-    <view  wx:if="{{list.length === 0}}" class="item _0708ee2">
-      <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_0708ee2">当前分类没有信息</view>
-    </view>
+  <view  wx:if="{{list.length === 0}}" class="item _0708ee2">
+    <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_0708ee2">当前分类没有信息</view>
+  </view>
 </view>
 <view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _0708ee2">发布</view>

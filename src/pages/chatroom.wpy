@@ -7,7 +7,7 @@
     </view>
   </view>
   <view wx:if="{{currentNav === 0}}" class="bodyBlock">
-    <scroll-view scroll-y scroll-into-view="item{{intoView}}" class="{{ view }}" id="list">
+    <scroll-view scroll-y scroll-into-view="item{{intoView}}" bindscroll="scroll" class="{{ view }}" id="list" @tap="getFocus">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
 
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
@@ -37,7 +37,7 @@
       <!-- <input wx:if="{{sended}}" value="" auto-height  fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
         <input wx:else auto-height focus fixed @focus="handleFocus" cursor-spacing="40"  @input="setText"/> -->
 
-        <textarea  auto-height auto-focus="true" @focus="handleFocus" cursor-spacing="40"  @input="setText"
+        <textarea  auto-height fixed cursor-spacing="20"  @input="setText"  focus="{{sendFocus}}"
         value="{{searchinput}}"></textarea>
         <view class="button" @tap="openEmoji" mode="scaleToFill">
           <image src="../static/icons/emoj.png"/>
@@ -385,6 +385,7 @@
     width: 100%;
     height: 145px;
     background-color: #dddddd;
+    padding-bottom: 70px;
     padding-top: 10px;
     padding-left: 3%;
     display: block;
@@ -443,6 +444,9 @@
     intoView: function(state) {
       const msgs = state.chatroom.msgs[this.roomId] || []
       const last = R.last(msgs)
+      if (this.scrolltoper) {
+        return ''
+      }
       return last ? last.idClient : ''
     }
   }, {
@@ -476,9 +480,23 @@
       nowTime: '',
       nowPeoples: 0,
       searchinput:'',
+      sendFocus: false,
     }
 
     methods = {
+      async scroll (e) {
+        // console.log(e.detail.scrollHeight)判断是否在查看历史记录不滚动
+        if (e.detail.scrollTop < e.detail.scrollHeight*0.5 || e.detail.scrollTop < 100) {
+          // console.log(e.detail.deltaX)
+          this.scrolltoper = 1
+        }else {
+          this.scrolltoper = 0
+        }
+        if(e.detail.scrollTop < 10 && this.msgs.length < 150) {
+
+        }
+      },
+
       async getCountsNum(id, jfToken) {
         const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
         this.nowPeoples = onlineusercount
@@ -486,6 +504,7 @@
       },
       async handleName (item) {
         const itemAccid = item.from
+        console.log(itemAccid)
         const {id} = await chatroomApi.getItemId(itemAccid)
         wepy.navigateTo({
           url: `userInfo?id=${id}`
@@ -497,13 +516,18 @@
           url: `userInfo?id=${itemid}`
         })
       },
+      getFocus () {
+        this.setData({
+          sendFocus : false
+        })
+      },
       openEmoji (e) {
         if (this.show === 'showEmoji') {
           this.show = 'emoji_list'
           this.showem = 'operation'
         } else {
           this.show = 'showEmoji'
-          this.showem = 'showEmojiOperation'
+          
         }
         this.$apply()
       },
@@ -550,7 +574,10 @@
             this.text = ''
             pushMsg(msg)
             this.show = 'emoji_list'
-            this.showem = 'operation'
+            this.setData({  
+              searchinput: '',  
+            })  
+
             this.$apply()
           } catch (e) {
             log.error({
@@ -591,11 +618,14 @@
         })
       }
     },
-    async send() {
-      // ? why bind
+    async send(e) {
+      //? why bind
+
       this.setData({  
-        searchinput: '',  
-      })  
+          searchinput: '',  
+          sendFocus: true,
+      }) 
+      this.scrolltoper = 0
       const pushMsgText = this.methods.pushMsgText.bind(this)
       const text = R.trim(this.text)
       this.text = ''
@@ -698,9 +728,6 @@ refreshMsgs(roomId, merged)
 this.sended = true
 this.$apply()
 },
-handleFocus() {
-  this.sended = false
-}
 }
 async onLoad(options) {
   const { id } = options

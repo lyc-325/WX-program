@@ -5,12 +5,12 @@
   color: transparent;
 }
 .navbar._0708ee2{
-   /*position: fixed;*/
-   z-index: 101;
-   font-size: 35rpx;
- }
+ /*position: fixed;*/
+ z-index: 101;
+ font-size: 35rpx;
+}
 .navbar .item._0708ee2{
-   padding: 10rpx 30rpx;
+ padding: 10rpx 30rpx;
 }
 .list._0708ee2{
   padding-left: 20rpx;

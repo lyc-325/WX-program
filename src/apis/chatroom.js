@@ -1,4 +1,4 @@
-import jf from '../utils/jf'
+fimport jf from '../utils/jf'
 
 export const getList = function() {
   return jf.request({

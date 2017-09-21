@@ -7,7 +7,7 @@
     </view>
   </view>
   <view  wx:if="{{currentNav === 0}}" class="bodyBlock">
-    <scroll-view scroll-y scroll-into-view="item{{intoView}}" class="{{ view }}" id="list">
+    <scroll-view scroll-y scroll-into-view="item{{intoView}}" bindscroll="scroll" class="{{ view }}" id="list" bindtap="getFocus">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
 
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
@@ -36,7 +36,7 @@
       <!-- <input wx:if="{{sended}}" value="" auto-height  fixed cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
         <input wx:else auto-height focus fixed bindfocus="handleFocus" cursor-spacing="40" bindinput="setText"/> -->
 
-        <textarea auto-height auto-focus="true" bindfocus="handleFocus" cursor-spacing="40" bindinput="setText" value="{{searchinput}}"/>
+        <textarea auto-height fixed="fixed" cursor-spacing="20" bindinput="setText" focus="{{sendFocus}}" value="{{searchinput}}"/>
         <view class="button" bindtap="openEmoji" mode="scaleToFill">
           <image src="../static/icons/emoj.png"/>
         </view>

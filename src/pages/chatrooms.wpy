@@ -12,6 +12,7 @@
         </view>
       </view>
     </block>
+   
   </view>
 </template>
 
@@ -101,6 +102,21 @@
     font-size:32rpx;
     padding:10rpx 0;
   }
+  .create {
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+  width: 180rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 36rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
 </style>
 
 <script>
@@ -166,7 +182,7 @@
     }
 
     data = {
-      rooms: []
+      rooms: [],
     }
 
     methods = {
