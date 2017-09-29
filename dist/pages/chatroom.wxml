@@ -9,7 +9,6 @@
   <view  wx:if="{{currentNav === 0}}" class="bodyBlock">
     <scroll-view scroll-y scroll-into-view="item{{intoView}}" bindscroll="scroll" class="{{ view }}" id="list" bindtap="getFocus">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
-
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
           <view class="notifiView">
             <text class="notifiText">{{item.text}}</text>
@@ -35,7 +34,6 @@
     <view wx:if="{{!isLIMIT}}" class="{{ showem }}">
       <!-- <input wx:if="{{sended}}" value="" auto-height  fixed cursor-spacing="40" bindfocus="handleFocus" bindinput="setText"/>
         <input wx:else auto-height focus fixed bindfocus="handleFocus" cursor-spacing="40" bindinput="setText"/> -->
-
         <textarea auto-height fixed="fixed" cursor-spacing="20" bindinput="setText" focus="{{sendFocus}}" value="{{searchinput}}"/>
         <view class="button" bindtap="openEmoji" mode="scaleToFill">
           <image src="../static/icons/emoj.png"/>
@@ -71,7 +69,6 @@
           <view class="emoji_item">
             <image wx:for="{{ emojiObj.map3 }}" src="{{ emojiObj.path + item }}" wx:key="" bindtap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
-
         </swiper-item>
         <swiper-item>
           <view class="emoji_item">
@@ -85,10 +82,8 @@
           </view>
         </swiper-item>
       </block>
-
     </swiper>
   </view>
-
   <view  wx:if="{{currentNav === 1}}" class="detailBlock">
     <view class="detailList">
       <view class="userinfo" bindtap="handleViewTap">

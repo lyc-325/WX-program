@@ -1,33 +1,37 @@
 
-<view class="root _ed7a0c8">
-  <view class="container _ed7a0c8">
-    <view class="head _ed7a0c8">
-      <view class="value _ed7a0c8">{{title}}</view>
-    </view>
+  <view class="root _ed7a0c8">
+    <view class="container _ed7a0c8">
+      <view class="head _ed7a0c8">
+        <view class="value _ed7a0c8">{{title}}</view>
+      </view>
 
-    <view class="item _ed7a0c8" bindtap="handleName">
-      <view class="label _ed7a0c8">发布人:</view>
-      <view class="value _ed7a0c8">{{createdBy}} <span style="color: #545a63" class="_ed7a0c8">(查看详情)</span></view>
-    </view>
+      <view class="item _ed7a0c8" bindtap="handleName">
+        <view class="label _ed7a0c8">发布人:</view>
+        <view class="value _ed7a0c8">{{createdBy}} <span style="color: #545a63" class="_ed7a0c8">(查看详情)</span></view>
+      </view>
 
-    <view class="item _ed7a0c8">
-      <view class="label _ed7a0c8">发布时间:</view>
-      <view class="value _ed7a0c8">{{createdAt}}</view>
-    </view>
+      <view class="item _ed7a0c8">
+        <view class="label _ed7a0c8">发布时间:</view>
+        <view class="value _ed7a0c8">{{createdAt}}</view>
+      </view>
 
-    <view class="item _ed7a0c8" style="border-bottom: 2rpx solid #eee;">
-      <view class="label _ed7a0c8">浏览量:</view>
-      <view class="value _ed7a0c8">{{read}}</view>
-    </view>
+      <view class="item _ed7a0c8" style="border-bottom: 2rpx solid #eee;">
+        <view class="label _ed7a0c8">浏览量:</view>
+        <view class="value _ed7a0c8">{{read}}</view>
+      </view>
 
-    <view class="imgBar _ed7a0c8"  wx:if="{{imgs.length !== 0 }}">
-      <view class="image _ed7a0c8" wx:for="{{imgs}}" wx:key="{{index}}" bindtap="imgPreview" data-wepy-params-a="{{imgs}}" data-wepy-params-b="{{index}}">
-        <image mode="aspectFit" src="{{item}}" class="_ed7a0c8"/>
+      <view class="imgBar _ed7a0c8"  wx:if="{{imgs.length !== 0 }}">
+        <view class="image _ed7a0c8" wx:for="{{imgs}}" wx:key="{{index}}" bindtap="imgPreview" data-wepy-params-a="{{imgs}}" data-wepy-params-b="{{index}}">
+          <image mode="aspectFit" src="{{item}}" class="_ed7a0c8"/>
+        </view>
+      </view>
+      <view class="area _ed7a0c8">
+        <view class="label _ed7a0c8" style="border-bottom: 2rpx solid #eee;">内容</view>
+        <view class="value _ed7a0c8">{{content}}</view>
+      </view>
+      <view class="_ed7a0c8">
+        <button  wx:if="{{isStar === false}}" id="btn" bindtap="handeCollection" class="_ed7a0c8">点击收藏</button>
+        <button  wx:if="{{isStar === true}}" id="btn" bindtap="DelCollection" class="_ed7a0c8">取消收藏</button>
       </view>
     </view>
-    <view class="area _ed7a0c8">
-      <view class="label _ed7a0c8" style="border-bottom: 2rpx solid #eee;">内容</view>
-      <view class="value _ed7a0c8">{{content}}</view>
-    </view>
   </view>
-</view>

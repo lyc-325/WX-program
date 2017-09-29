@@ -295,12 +295,13 @@ async onShow(option) {
     //     }
     //   })
     // }
+
     const res = await api.boardList(results[this.currentNav].id)
     this.list = res.map(item => ({
       id: item.id,
       title: item.title,
       content: item.text,
-      createdBy: item.author.name,
+      createdBy: item.author,
       createdAt: item.dateline,
       cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
       read: item.click_num

@@ -219,7 +219,6 @@ export default class Publish extends wepy.page {
     async bindFormSubmit (e) {
       console.log('点击了发布')
       const { jfToken, nickName } = this.user
-      console.log(this.user)
       const data = await api.uploadImages(this.imgs, jfToken)
       console.log(data)
 

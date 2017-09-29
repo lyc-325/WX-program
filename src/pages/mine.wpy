@@ -336,11 +336,9 @@ export default class Mine extends wepy.page {
       })
     }
   }
-  onShareAppMessage = async function (res) {
-    console.log('执行了分享')
+  onShareAppMessage =  function (res) {
     return {
-      title: '江峰小程序',
-      path: `/pages/boards`
+      title: this.userData.name+'的个人名片',
     }
   }
   async onShow() {
@@ -348,7 +346,7 @@ export default class Mine extends wepy.page {
       withShareTicket: true
     })
     if (this.user.userData) {
-      console.log('this.user', this.user)
+      // console.log('this.user', this.user)
       this.userData = this.user.userData
       const res = await api.getMsgList(this.user.userData.id)
       this.list = res.map(item => ({

@@ -6,7 +6,6 @@
           <image mode="scaleToFill" src="{{item.cover}}"></image>
         </view>
         <view class="info">
-          <!--<view>123</view>-->
           <view class="title">{{item.name}}</view>
           <view class="members">{{item.announcement}}</view>
         </view>
@@ -213,12 +212,14 @@
       const { setUser } = this.methods
       // const pushMsg = this.methods.pushMsg.bind(this)
       wepy.showLoading()
-      console.log('this is chartRoom')
       const { code } = await wepy.login()
-      const { data } = await wepy.request({
-        url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
-      })
-      const { openid } = data
+      // // const { data } = await wepy.request({
+      // //   url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
+      // // })
+      const data = await api.getSession(code,config.appId,config.appSecrete)
+
+      const { openid } = data 
+
       const { userInfo } = await wepy.getUserInfo()
 
       const password = R.takeLast(5)(openid)
@@ -281,6 +282,7 @@
 
         // 拉取聊天室列表
         const rooms = await chatroomApi.getList()
+
         const ids = rooms.map(R.prop('roomid'))
         const chatrooms = await NIM.getChatrooms(ids)
         const members = chatrooms.map(R.prop('onlineusercount'))
@@ -295,7 +297,6 @@
           memebers: members[index],
           announcement: room.announcement
         }))
-        console.log(this.rooms)
         this.$apply()
         wepy.hideLoading()
       } catch (e) {

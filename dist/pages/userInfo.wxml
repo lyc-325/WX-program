@@ -2,6 +2,8 @@
   <view class="root _535214a">
     <view class="userinfo _535214a" bindtap="handleViewTap">
       <image class="userinfo-avatar _535214a" src="{{userData.icon}}" background-size="cover"/>
+      <view  wx:if="{{isStar === false}}" class="infoEdit _535214a" bindtap="collectUserTap">关 注</view>
+      <view  wx:if="{{isStar === true}}" class="infoEdit _535214a" bindtap="DelCollectUserTap">已关注</view>
     </view>
     <view class="details _535214a">
       <view class="item _535214a">

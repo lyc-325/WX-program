@@ -1,0 +1,38 @@
+
+	<view class="mainTitle _6f2f060">收藏名片</view>
+	<view class="list _6f2f060" style="margin-top: 10rpx;">
+		<view  wx:if="{{list1.length > 0}}" wx:for="{{list1}}" class="item _6f2f060" bindtap="handleNameId" data-wepy-params-a="{{item}}">
+			<view class="cover _6f2f060">
+				<image mode="scaleToFill" src="{{item.cover}}" class="_6f2f060"/>
+			</view>
+			<view style="padding-top: 26rpx" class="_6f2f060">
+				<view class="title _6f2f060">{{item.name}}</view>
+				<view class="content _6f2f060">{{item.company}}</view>
+			</view>
+		</view>
+		<view  wx:if="{{list1.length === 0}}" class="item _6f2f060">
+			<view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_6f2f060">当前没有关注人员</view>
+		</view>
+	</view>
+	<view class="mainTitle _6f2f060">收藏文章</view>
+	<view class="list _6f2f060" style="margin-top: 10rpx;">
+		<view  wx:if="{{list2.length > 0}}" wx:for="{{list2}}" bindtap="handleItemTap" wx:key="index" data-index="{{index}}" class="item _6f2f060">
+			<view class="cover _6f2f060">
+				<image mode="scaleToFill" src="{{item.cover}}" class="_6f2f060"/>
+			</view>
+			<view class="info _6f2f060">
+				<view class="title _6f2f060">{{item.title}}</view>
+				<view class="content _6f2f060">{{item.content}}</view>
+				<view class="footer _6f2f060">
+					<view class="createdBy _6f2f060">{{item.createdBy}}</view>
+					<view class="createdAt _6f2f060">{{item.createdAt}}</view>
+					<view class="read _6f2f060">
+						{{item.read}} 阅读
+					</view>
+				</view>
+			</view>
+		</view>
+		<view  wx:if="{{list2.length === 0}}" class="item _6f2f060">
+			<view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_6f2f060">当前没有收藏信息</view>
+		</view>
+	</view>

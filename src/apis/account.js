@@ -92,3 +92,81 @@ export const getCodeNum = function (name, mobile) {
     },
     method: 'POST'
   }).then((res) => res)}
+
+export const getSession = function(code, appID,appSecrete) {
+  return jf.request({
+    api: 'accounts/get_session_key/',
+    data: {
+      appid: appID,
+      app_secrete: appSecrete,
+      code: code, 
+    },
+    method: 'POST'
+  }).then((res) => JSON.parse(res))}
+
+export const articleStar = function(source,target) {
+  return jf.request({
+    api: 'accounts/article_star/star/',
+    data: {
+      source: source,
+      target: target,
+    },
+    method: 'POST'
+  })
+}
+
+export const articleUnstar = function(source,target) {
+  return jf.request({
+    api: 'accounts/article_star/unstar/',
+    data: {
+      source: source,
+      target: target,
+    },
+    method: 'POST'
+  })
+}
+
+
+export const userUnstar = function(source,target) {
+  return jf.request({
+    api: 'accounts/user_star/unstar/',
+    data: {
+      source: source,
+      target: target,
+    },
+    method: 'POST'
+  })
+}
+
+export const userStar = function(source,target) {
+  return jf.request({
+    api: 'accounts/user_star/star/',
+    data: {
+      source: source,
+      target: target,
+    },
+    method: 'POST'
+  })
+}
+
+
+export const getStarUserList = function(source) {
+  return jf.request({
+    api: 'accounts/user_star/list_stars/',
+    data: {
+      source: source,
+    },
+    method: 'POST'
+  }).then((res) => res)
+}
+export const getStarArticleList = function(source) {
+  return jf.request({
+    api: 'accounts/article_star/list_stars/',
+    data: {
+      source: source,
+    },
+    method: 'POST'
+  }).then((res) => res)
+}
+
+

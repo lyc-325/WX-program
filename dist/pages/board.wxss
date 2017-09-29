@@ -57,3 +57,6 @@ image._ed7a0c8 {
   color: #545a63;
   text-indent:2em;
 }
+#btn._ed7a0c8{
+  color: red;
+}

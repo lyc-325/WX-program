@@ -9,7 +9,6 @@
   <view wx:if="{{currentNav === 0}}" class="bodyBlock">
     <scroll-view scroll-y scroll-into-view="item{{intoView}}" bindscroll="scroll" class="{{ view }}" id="list" @tap="getFocus">
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
-
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
           <view class="notifiView" >
             <text class="notifiText">{{item.text}}</text>
@@ -36,7 +35,6 @@
     <view wx:if="{{!isLIMIT}}" class="operation" class="{{ showem }}">
       <!-- <input wx:if="{{sended}}" value="" auto-height  fixed cursor-spacing="40" @focus="handleFocus" @input="setText"/>
         <input wx:else auto-height focus fixed @focus="handleFocus" cursor-spacing="40"  @input="setText"/> -->
-
         <textarea  auto-height fixed cursor-spacing="20"  @input="setText"  focus="{{sendFocus}}"
         value="{{searchinput}}"></textarea>
         <view class="button" @tap="openEmoji" mode="scaleToFill">
@@ -77,7 +75,6 @@
             <image wx:for="{{ emojiObj.map3 }}" src="{{ emojiObj.path + item }}" wx:key=""
             @tap="sendEmoji" data-emoji="{{ index }}"/>
           </view>
-
         </swiper-item>
         <swiper-item>
           <view class="emoji_item">
@@ -94,10 +91,8 @@
           </view>
         </swiper-item>
       </block>
-
     </swiper>
   </view>
-
   <view wx:if="{{currentNav === 1}}" class="detailBlock">
     <view class="detailList">
       <view class="userinfo" @tap="handleViewTap">
@@ -127,7 +122,6 @@
     </view>
   </view>
 </template>
-
 <style>
 .operation {
   position: fixed;
@@ -171,18 +165,15 @@
     flex-direction: column;
     align-items: center;
   }
-
   .userinfo-avatar {
     width: 240rpx;
     height: 240rpx;
     border-radius: 10%;
   }
-
   .userinfo>.userinfo-nickname {
     color: #aaa;
     margin-top: 20rpx;
   }
-
   .detailBlock {
     width: 80%;
     margin: 0 10%;
@@ -218,13 +209,11 @@
     font-size: 35rpx;
     width: 60%;
   }
-
   .operation .buttons {
     display: flex;
     align-items: center;
     justify-content: space-around;
   }
-
   .showEmojiOperation .buttons {
     display: flex;
     align-items: center;
@@ -256,7 +245,6 @@
     width: 50rpx;
     height: 50rpx;
   }
-
   scroll-view {
     top: 80rpx;
     left: 0;
@@ -264,28 +252,23 @@
     z-index: 0;
     bottom: 100rpx;
   }
-
   .list-item:last-child {
     padding-bottom:60rpx;
   }
-
   .list-item {
     display: flex;
     align-items: flex-start;
     padding: 3px 0;
   }
-
   .list-item .avatar {
     padding: 1px;
     margin: 0 10px;
   }
-
   .list-item .avatar image {
     width: 100rpx;
     height: 100rpx;
     border-radius: 50%;
   }
-
   .list-item .content {
     padding: 20rpx;
     position: relative;
@@ -297,12 +280,10 @@
     word-wrap:break-word;
     word-break:normal;
   }
-
   .list-item .content view text {
     word-wrap:break-word;
     word-break:normal;
   }
-
   .list-item.mine {
     flex-direction: row-reverse;
   }
@@ -317,13 +298,11 @@
     height: 60rpx;
     padding: 10rpx;
   }
-
   .userList .cover image {
     width: 70rpx;
     height: 70rpx;
     border-radius: 50%;
   }
-
   .userList .info {
     width: 70%;
     height: 70rpx;
@@ -335,23 +314,19 @@
     font-size: 32rpx;
     color: dimgray;
   }
-
   .userList .info .title {
     width: 40%;
     overflow: hidden;
   }
-
   .userList .info .content {
     width: 60%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-
   .list-item.mine .content {
     background-color: #51C332;
   }
-
   .list-item.mine .content::after {
     content: '';
     position: absolute;
@@ -362,11 +337,9 @@
     border-left: 10px solid #51C332;
     border-bottom: 5px solid transparent;
   }
-
   .list-item.opposite .content {
     background-color: antiquewhite;
   }
-
   .list-item.opposite .content::before {
     content: '';
     position: absolute;
@@ -380,7 +353,6 @@
   .emoji_list {
     display: none;
   }
-
   .showEmoji {
     width: 100%;
     height: 145px;
@@ -392,19 +364,16 @@
     position: fixed;
     bottom: 0;
   }
-
   .emoji_list image, .showEmoji image {
     width: 26px;
     height: 26px;
     margin: 5px 2%;
   }
-
   .emoji {
     width: 26px;
     height: 26px;
     margin: 0 0;
   }
-
   .emoji_item {
     display: flex;
     justify-content: space-around;
@@ -418,7 +387,6 @@
     justify-content: center;
   }
   </style>
-
   <script>
   import wepy from 'wepy'
   import R from '../libs/ramda'
@@ -430,11 +398,9 @@
     refreshMsgs
   } from '../actions/chatroom'
   import * as chatroomApi from '../apis/chatroom'
-
   import {
     connect
   } from 'wepy-redux'
-
   @connect({
     user: state => state.common.user,
     nim: state => state.common.nim,
@@ -456,7 +422,6 @@
     config = {
       navigationBarTitleText: '聊天室'
     }
-
     data = {
       navs: ['聊天', '详情'],
       currentNav: 0,
@@ -482,7 +447,6 @@
       searchinput:'',
       sendFocus: false,
     }
-
     methods = {
       async scroll (e) {
         // console.log(e.detail.scrollHeight)判断是否在查看历史记录不滚动
@@ -493,10 +457,8 @@
           this.scrolltoper = 0
         }
         if(e.detail.scrollTop < 10 && this.msgs.length < 150) {
-
         }
       },
-
       async getCountsNum(id, jfToken) {
         const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
         this.nowPeoples = onlineusercount
@@ -577,7 +539,6 @@
             this.setData({  
               searchinput: '',  
             })  
-
             this.$apply()
           } catch (e) {
             log.error({
@@ -599,7 +560,6 @@
       const res = await wepy.chooseImage({
         count: 1
       })
-
       try {
         const file = await this.chatroom.previewFile({
           type: 'image',
@@ -620,7 +580,6 @@
     },
     async send(e) {
       //? why bind
-
       this.setData({  
           searchinput: '',  
           sendFocus: true,
@@ -746,6 +705,7 @@ async onLoad(options) {
 await chatroomApi.addToRoom(roomid, creator, accid)
 const roomInfo = await chatroomApi.getOneById(id, jfToken)
 const data = await chatroomApi.getUserList(roomid, jfToken)
+
 const islimit = data => data.type === 'LIMITED'
 const isUser = data => data.name && data.name !== null
 this.numList = R.filter(isUser)(data)
@@ -824,7 +784,11 @@ this.chatroom = chatroom
   })
 }
 }
-
+  onShareAppMessage = function (res) {
+    return {
+      title: this.roomData.name
+    }
+  }
 async onShow() {
   this.isLIMIT = false
   this.sended = false

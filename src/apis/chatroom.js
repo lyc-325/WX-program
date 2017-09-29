@@ -1,4 +1,5 @@
-fimport jf from '../utils/jf'
+import jf from '../utils/jf'
+import wepy from 'wepy'
 
 export const getList = function() {
   return jf.request({

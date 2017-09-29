@@ -2,6 +2,8 @@
   <view class="root">
     <view class="userinfo" @tap="handleViewTap">
       <image class="userinfo-avatar" src="{{userData.icon}}" background-size="cover"/>
+      <view wx:if="{{isStar === false}}" class="infoEdit" @tap="collectUserTap">关 注</view>
+      <view wx:if="{{isStar === true}}" class="infoEdit" @tap="DelCollectUserTap">已关注</view>
     </view>
     <view class="details">
       <view class="item">
@@ -54,192 +56,241 @@
 </template>
 
 <style scoped>
-  .userinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.infoEdit{
+  position:absolute;
+  right:10%;
+  padding:5px 10px;
+  border:1px solid #eee;
+  border-radius:10%;
+  top:2%;
+  color: red;
+}
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  display: inline-block;
+  border-radius: 50%;
+}
 
-  .userinfo-avatar {
-    width: 120rpx;
-    height: 120rpx;
-    border-radius: 50%;
-  }
+.userinfo-nickname {
+  color: #aaa;
+}
+.root {
+  width: 90%;
+  margin: 0 5%;
+}
+.root>view {
+  padding: 20rpx;
+  border-bottom: 1px solid #eee;
+}
 
-  .userinfo-nickname {
-    color: #aaa;
-  }
-  .root {
-    width: 90%;
-    margin: 0 5%;
-  }
-  .root>view {
-    padding: 20rpx;
-    border-bottom: 1px solid #eee;
-  }
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .base {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.base>view:first-child {
+  display: flex;
+  align-items: center;
+}
 
-  .base>view:first-child {
-    display: flex;
-    align-items: center;
-  }
+.base .avatar {
+  margin-right: 10rpx;
+}
 
-  .base .avatar {
-    margin-right: 10rpx;
-  }
+.base .avatar image {
+  width: 100rpx;
+  height: 100rpx;
+}
 
-  .base .avatar image {
-    width: 100rpx;
-    height: 100rpx;
-  }
+.details>.item {
+  display: flex;
+  padding: 10rpx 0;
+  justify-content: space-between;
+  color: #6b6b6b;
+}
+.list{
+  padding:0 5%;
+  background-color: #fff;
+}
+.list>.item {
+  position: relative;
+  border-top: 2rpx solid #eee;
+  height: 200rpx;
+  display: flex;
+}
 
-  .details>.item {
-    display: flex;
-    padding: 10rpx 0;
-    justify-content: space-between;
-    color: #6b6b6b;
-  }
-  .list{
-    padding:0 5%;
-    background-color: #fff;
-  }
-  .list>.item {
-    position: relative;
-    border-top: 2rpx solid #eee;
-    height: 200rpx;
-    display: flex;
-  }
+.list>.item:first-child {
+  border-top: none;
+}
 
-  .list>.item:first-child {
-    border-top: none;
-  }
+.list>.item:last-child {
+  border-bottom: 2rpx solid #eee;
+}
 
-  .list>.item:last-child {
-    border-bottom: 2rpx solid #eee;
-  }
+.list>.item .cover {
+  width: 150rpx;
+  height: 150rpx;
+  padding: 30rpx;
+}
 
-  .list>.item .cover {
-    width: 150rpx;
-    height: 150rpx;
-    padding: 30rpx;
-  }
+.list>.item .cover image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10rpx;
+}
 
-  .list>.item .cover image {
-    width: 150rpx;
-    height: 150rpx;
-    border-radius: 10rpx;
-  }
+.list>.item .info {
+  width: 500rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
-  .list>.item .info {
-    width: 500rpx;
-    padding: 20rpx;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
+.list>.item .info .title {
+  width: 100%;
+  font-size: 32rpx;
+}
 
-  .list>.item .info .title {
-    width: 100%;
-    font-size: 32rpx;
-  }
+.list>.item .info .content {
+  font-size: 26rpx;
+  line-height: 30rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: dimgray;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
-  .list>.item .info .content {
-    font-size: 26rpx;
-    line-height: 30rpx;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    color: dimgray;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+.list>.item .info .footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25rpx;
+  color: darkgray;
+}
 
-  .list>.item .info .footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 25rpx;
-    color: darkgray;
-  }
+.list>.item .info .footer {
+  display: flex;
+}
 
-  .list>.item .info .footer {
-    display: flex;
-  }
-
-  .publish {
-    position: fixed;
-    bottom: 20rpx;
-    right: 20rpx;
-    width: 180rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    border-radius: 20rpx;
-    text-align: center;
-    background-color: #1eb571;
-    color: white;
-    font-size: 36rpx;
-    font-weight: 700;
-    box-shadow: 1px 1px 5px #ccc;
-  }
+.publish {
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+  width: 180rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: #1eb571;
+  color: white;
+  font-size: 36rpx;
+  font-weight: 700;
+  box-shadow: 1px 1px 5px #ccc;
+}
 </style>
 
 <script>
-  import wepy from 'wepy'
-  import * as api from '../apis/userInfo'
-  import { jf } from '../config'
-  import { connect } from 'wepy-redux'
+import wepy from 'wepy'
+import * as api from '../apis/userInfo'
+import * as accountApi from '../apis/account'
+import { jf } from '../config'
+import { connect } from 'wepy-redux'
 
-  @connect({
-    user(state) {
-      return state.common.user
-    }
-  })
-  export default class UserInfo extends wepy.page {
-    config = {
-      navigationBarTitleText: '用户详情'
-    }
+@connect({
+  user(state) {
+    return state.common.user
+  }
+})
+export default class UserInfo extends wepy.page {
+  config = {
+    navigationBarTitleText: '用户详情'
+  }
 
-    data = {
-      list: [],
-      userData: {
-        name: '加载中...'
-      },
-      levelData: ''
-    }
+  data = {
+    list: [],
+    userData: {
+      name: '加载中...'
+    },
+    levelData: '',
+    userId: '',
+    isStar: null,
+  }
 
-    methods = {
-      handlePublishTap(e) {
-        wepy.navigateTo({
-          url: 'publish'
+  methods = {
+    handlePublishTap(e) {
+      wepy.navigateTo({
+        url: 'publish'
+      })
+    },
+    handleItemTap(e) {
+      const id = this.list[e.currentTarget.dataset.index].id
+      wepy.navigateTo({
+        url: `board?id=${id}`
+      })
+    },
+    async collectUserTap(options){
+      let userId = +this.userId
+      let {id} = this.user.userData
+      if (id === userId) {
+        wx.showToast({
+          title: '您不能关注自己',
+          icon: 'loading',
+          duration: 2000
         })
-      },
-      handleItemTap(e) {
-        const id = this.list[e.currentTarget.dataset.index].id
-        wepy.navigateTo({
-          url: `board?id=${id}`
+      }else{
+        await accountApi.userStar(id,userId)
+        this.isStar = true
+        wx.showToast({
+          title: '已关注',
+          icon: 'success',
+          duration: 2000
         })
+        this.$apply()
       }
-    }
-    async onLoad(options) {
-      let self = this
-      var resData = await api.getOtherUserInfo(options.id)
-      self.userData = resData
-      const res = await api.getMsgList(options.id)
-      this.list = res.map(item => ({
-        id: item.id,
-        title: item.title,
-        content: item.text,
-        createdBy: item.author.name,
-        createdAt: item.dateline,
-        cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
-        read: item.click_num
-      }))
-      self.$apply()
+    },
+    async DelCollectUserTap(options){
+      let userId = +this.userId
+      let {id} = this.user.userData
+      await accountApi.userUnstar(id,userId)
+      this.isStar = false
+      wx.showToast({
+        title: '已取消关注',
+        icon: 'success',
+        duration: 2000
+      })
+      this.$apply()
     }
   }
+  async onLoad(options) {
+    this.userId = options.id
+    const { jfToken } = this.user
+    let self = this
+    var resData = await api.getOtherUserInfo(options.id,jfToken)
+    const {is_stared} = resData
+
+    this.isStar = is_stared
+    self.userData = resData
+    const res = await api.getMsgList(options.id)
+    this.list = res.map(item => ({
+      id: item.id,
+      title: item.title,
+      content: item.text,
+      createdBy: item.author.name,
+      createdAt: item.dateline,
+      cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+      read: item.click_num
+    }))
+    self.$apply()
+  }
+}
 </script>

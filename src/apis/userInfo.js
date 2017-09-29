@@ -3,9 +3,9 @@
  */
 import jf from '../utils/jf'
 
-export const getOtherUserInfo = function (id) {
+export const getOtherUserInfo = function (id,token) {
   return jf.request({
-    api: `accounts/detail/${id}/`,
+    api: `accounts/detail/${id}/?token=${token}`,
     method: 'GET'
   })
 }
@@ -19,3 +19,4 @@ export const getMsgList = function(id) {
     method: 'POST'
   })
 }
+

@@ -1,8 +1,8 @@
 module.exports = {
   // 微信配置
   wx: {
-    appId: 'wxe1574f2aa70de0ac',
-    appSecrete: '16ba378366072b0635f1a424a960b60a'
+    appId: 'wxc7fd029bee462de3',
+    appSecrete: '45d60b1340c220cb760f158dafb4785d'
   },
   // 网易云信配置
   nim: {
@@ -12,7 +12,7 @@ module.exports = {
   },
   // 江风后台配置
   jf: {
-    server: 'http://39.108.188.32:8000/api',
-    baseServer: 'http://39.108.188.32:8000'
+    server: 'https://service.523dianji.com/api',
+    baseServer: 'https://service.523dianji.com'
   }
 }
