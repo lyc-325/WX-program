@@ -23,11 +23,9 @@
   height: 200rpx;
   display: flex;
 }
-
 .list>.item._0708ee2:first-child {
   border-top: none;
 }
-
 .searchInput._0708ee2{
   display:block;
   height: 2rem;
@@ -37,24 +35,20 @@
   font-family:UICTFontTextStyleBody;
   min-height: 2rem;
   border-bottom:1px solid #eee;
-
 }
 .list>.item._0708ee2:last-child {
   border-bottom: 2rpx solid #eee;
 }
-
 .list>.item .cover._0708ee2 {
   width: 150rpx;
   height: 150rpx;
   padding: 30rpx;
 }
-
 .list>.item .cover image._0708ee2 {
   width: 150rpx;
   height: 150rpx;
   border-radius: 10rpx;
 }
-
 .list>.item .info._0708ee2 {
   width: 500rpx;
   padding: 20rpx;
@@ -62,12 +56,10 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
 .list>.item .info .title._0708ee2 {
   width: 100%;
   font-size: 32rpx;
 }
-
 .list>.item .info .content._0708ee2 {
   font-size: 26rpx;
   line-height: 30rpx;
@@ -79,18 +71,15 @@
   -webkit-box-orient: vertical;
   color: dimgray;
 }
-
 .list>.item .info .footer._0708ee2 {
   display: flex;
   justify-content: space-between;
   font-size: 25rpx;
   color: darkgray;
 }
-
 .list>.item .info .footer._0708ee2 {
   display: flex;
 }
-
 .publish._0708ee2 {
   position: fixed;
   bottom: 20rpx;

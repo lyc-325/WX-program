@@ -48,3 +48,28 @@ export const getUserList = function(roomid, token) {
     method: 'POST'
   })
 }
+
+export const BanSomeone = function(roomid, operator,target,token) {
+  return jf.request({
+    api: `chat_room/ban_someone/`,
+    data: {
+      roomid: roomid,
+      operator: operator,
+      target: target,
+      token: token
+    },
+    method: 'POST'
+  })
+}
+export const changeRole = function(roomid, operator,target,opt) {
+  return jf.request({
+    api: `chat_room/change_role/`,
+    data: {
+      roomid: roomid,
+      operator: operator,
+      target: target,
+      opt: opt,
+    },
+    method: 'POST'
+  })
+}

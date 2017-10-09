@@ -1,9 +1,13 @@
 <template>
   <view class="root">
-    <view class="userinfo" @tap="handleViewTap">
+    <view class="userinfo">
       <image class="userinfo-avatar" src="{{userData.icon}}" background-size="cover"/>
       <view wx:if="{{isStar === false}}" class="infoEdit" @tap="collectUserTap">关 注</view>
       <view wx:if="{{isStar === true}}" class="infoEdit" @tap="DelCollectUserTap">已关注</view>
+      <view wx:if="{{type}}">
+        <view wx:if="{{isBan === false}}" class="banSomeone" @tap="banSomeoneTap">禁言</view>
+        <view wx:if="{{isBan === true}}" class="banSomeone" @tap="delBanSomeoneTap">恢复</view>
+      </view>
     </view>
     <view class="details">
       <view class="item">
@@ -64,6 +68,15 @@
 .infoEdit{
   position:absolute;
   right:10%;
+  padding:5px 10px;
+  border:1px solid #eee;
+  border-radius:10%;
+  top:2%;
+  color: red;
+}
+.banSomeone{
+  position:absolute;
+  left:10%;
   padding:5px 10px;
   border:1px solid #eee;
   border-radius:10%;
@@ -203,6 +216,7 @@
 import wepy from 'wepy'
 import * as api from '../apis/userInfo'
 import * as accountApi from '../apis/account'
+import * as chatroomApi from '../apis/chatroom'
 import { jf } from '../config'
 import { connect } from 'wepy-redux'
 
@@ -224,6 +238,9 @@ export default class UserInfo extends wepy.page {
     levelData: '',
     userId: '',
     isStar: null,
+    isAdmin: null,
+    isBan: null,
+    type: '',
   }
 
   methods = {
@@ -238,7 +255,7 @@ export default class UserInfo extends wepy.page {
         url: `board?id=${id}`
       })
     },
-    async collectUserTap(options){
+    async collectUserTap(){
       let userId = +this.userId
       let {id} = this.user.userData
       if (id === userId) {
@@ -258,7 +275,7 @@ export default class UserInfo extends wepy.page {
         this.$apply()
       }
     },
-    async DelCollectUserTap(options){
+    async DelCollectUserTap(){
       let userId = +this.userId
       let {id} = this.user.userData
       await accountApi.userUnstar(id,userId)
@@ -269,15 +286,53 @@ export default class UserInfo extends wepy.page {
         duration: 2000
       })
       this.$apply()
+    },
+    async banSomeoneTap(){
+      let {accid} = this.user.userData
+      let otherAccid = this.otherAccid
+      let roomId = this.roomId
+      const {jfToken} = this.user
+      await chatroomApi.BanSomeone(roomId,accid,otherAccid,jfToken)
+      wx.showToast({
+        title: '已禁言',
+        icon: 'success',
+        duration: 2000
+      })
+      this.isBan = true
+      this.$apply()
+    },
+    async delBanSomeoneTap(){
+      let {accid} = this.user.userData
+      let roomId = this.roomId
+      let otherAccid = this.otherAccid
+      await chatroomApi.changeRole(roomId,accid,otherAccid,2)
+      wx.showToast({
+        title: '已恢复',
+        icon: 'success',
+        duration: 2000
+      })
+      this.isBan = false
+      this.$apply()
+    },
+  }
+  onShareAppMessage = function (res) {
+    return {
+      title: this.userData.name+'的个人名片'
     }
   }
   async onLoad(options) {
+    this.roomId = options.roomId
     this.userId = options.id
     const { jfToken } = this.user
+    if (options.type === "MANAGER"||options.type === "CREATOR") {
+      this.type = true
+    }
     let self = this
-    var resData = await api.getOtherUserInfo(options.id,jfToken)
+    let resData = await api.getOtherUserInfo(options.id,jfToken)
     const {is_stared} = resData
-
+    let {accid} = resData
+    this.otherAccid = accid
+    this.isAdmin = this.user.userData.is_admin 
     this.isStar = is_stared
     self.userData = resData
     const res = await api.getMsgList(options.id)
@@ -290,6 +345,14 @@ export default class UserInfo extends wepy.page {
       cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
       read: item.click_num
     }))
+        //判断用户有没有被禁言
+    let userId = this.userId
+    let banId = options.banId
+    if (banId.indexOf(userId) === -1) {
+      this.isBan = false
+    }else{
+      this.isBan = true
+    }
     self.$apply()
   }
 }

@@ -33,7 +33,6 @@
 </view>
 <view @tap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish">发布</view>
 </template>
-
 <style scoped>
 ::-webkit-scrollbar {
   width: 0;
@@ -59,11 +58,9 @@
   height: 200rpx;
   display: flex;
 }
-
 .list>.item:first-child {
   border-top: none;
 }
-
 .searchInput{
   display:block;
   height: 2rem;
@@ -73,24 +70,20 @@
   font-family:UICTFontTextStyleBody;
   min-height: 2rem;
   border-bottom:1px solid #eee;
-
 }
 .list>.item:last-child {
   border-bottom: 2rpx solid #eee;
 }
-
 .list>.item .cover {
   width: 150rpx;
   height: 150rpx;
   padding: 30rpx;
 }
-
 .list>.item .cover image {
   width: 150rpx;
   height: 150rpx;
   border-radius: 10rpx;
 }
-
 .list>.item .info {
   width: 500rpx;
   padding: 20rpx;
@@ -98,12 +91,10 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
 .list>.item .info .title {
   width: 100%;
   font-size: 32rpx;
 }
-
 .list>.item .info .content {
   font-size: 26rpx;
   line-height: 30rpx;
@@ -115,18 +106,15 @@
   -webkit-box-orient: vertical;
   color: dimgray;
 }
-
 .list>.item .info .footer {
   display: flex;
   justify-content: space-between;
   font-size: 25rpx;
   color: darkgray;
 }
-
 .list>.item .info .footer {
   display: flex;
 }
-
 .publish {
   position: fixed;
   bottom: 20rpx;
@@ -155,22 +143,18 @@ import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import * as api from '../apis/board'
 import { jf } from '../config'
-
 import {
   setUser
 } from '../actions/common'
-
 @connect({
   user: state => state.common.user
 }, {
   setUser
 })
-
 export default class Boards extends wepy.page {
   config = {
     navigationBarTitleText: '商友圈'
   }
-
   data = {
     list: [],
     navs: [],
@@ -178,7 +162,6 @@ export default class Boards extends wepy.page {
     categories: [],
     searchValue: ''
   }
-
   methods = {
     changeNav (e) {
 //      const { jfToken } = this.user
@@ -233,7 +216,6 @@ wepy.navigateTo({
 })
 }
 }
-
 //  async onLoad(options) {
 //    const { setUser } = this.methods
 //
@@ -279,7 +261,6 @@ wepy.navigateTo({
 //      })
 //    }
 //  }
-
 async onShow(option) {
 //    const { jfToken } = this.user
     // const token = await getToken()
@@ -295,7 +276,6 @@ async onShow(option) {
     //     }
     //   })
     // }
-
     const res = await api.boardList(results[this.currentNav].id)
     this.list = res.map(item => ({
       id: item.id,

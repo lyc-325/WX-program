@@ -20,7 +20,8 @@
           <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
         </view>
         <view wx:if="{{item.type !== 'notification'}}">
-          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view wx:if="{{!item.is_vip}}" style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view wx:if="{{item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
           <view class="content">
             <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
             style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
@@ -446,6 +447,8 @@
       nowPeoples: 0,
       searchinput:'',
       sendFocus: false,
+      userLimitArr:[],
+      vipUserList:[],
     }
     methods = {
       async scroll (e) {
@@ -465,17 +468,22 @@
         this.$apply()
       },
       async handleName (item) {
+        const type = this.type
+        const banId = this.userLimitArr.map((item)=>item.id)
+        let roomId = this.roomId
         const itemAccid = item.from
-        console.log(itemAccid)
         const {id} = await chatroomApi.getItemId(itemAccid)
         wepy.navigateTo({
-          url: `userInfo?id=${id}`
+          url: `userInfo?id=${id}&roomId=${roomId}&banId=${banId}&type=${type}`
         })
       },
       handleNameId (item) {
+        const type = this.type
+        const banId = this.userLimitArr.map((item)=>item.id)
         const itemid = item.id
+        let roomId = this.roomId
         wepy.navigateTo({
-          url: `userInfo?id=${itemid}`
+          url: `userInfo?id=${itemid}&roomId=${roomId}&banId=${banId}&type=${type}`
         })
       },
       getFocus () {
@@ -581,8 +589,8 @@
     async send(e) {
       //? why bind
       this.setData({  
-          searchinput: '',  
-          sendFocus: true,
+        searchinput: '',  
+        sendFocus: true,
       }) 
       this.scrolltoper = 0
       const pushMsgText = this.methods.pushMsgText.bind(this)
@@ -612,7 +620,15 @@
       if (!Array.isArray(msgs)) {
         msgs = [msgs]
       }
-      console.log('就是这个图', msgs)
+      const vipNick = this.vipUserList.map((item) => item.nick)
+      const isVip = function(msg){
+        for (var i = vipNick.length - 1; i >= 0; i--) {
+          if (vipNick[i] === msg.fromNick) {
+            return msg.fromNick
+          }
+        }
+      }
+      R.filter(isVip)(msgs).map(item => item.is_vip = true)
       msgs = msgs.map(msg => {
         if (msg.type === 'text') {
           return {
@@ -630,91 +646,111 @@
             text: msg.text,
             time: msg.time,
             type: msg.type,
-            userUpdateTime: msg.userUpdateTime
+            userUpdateTime: msg.userUpdateTime,
+            is_vip: msg.is_vip
           }
         } else {
           return msg
         }
       })
-//      console.log(this.roomId)
-let roomId = this.roomId
-console.log(roomId)
-if (msgs.length > 0) {
-  roomId = msgs[0].chatroomId
-}
-const merged = [...this.msgs, ...msgs]
-refreshMsgs(roomId, merged)
-this.sended = true
-this.$apply()
-},
-pushMsgText: function (msgs) {
-  const { refreshMsgs } = this.methods
-  if (!Array.isArray(msgs)) {
-    msgs = [msgs]
-  }
-  console.log('就是这个图', msgs)
-  msgs = msgs.map(msg => {
-    if (msg.type === 'text') {
-      return {
-        emji: FaceIM.default.parseEmoji(msg.text.replace(/\n/mg, '')),
-        chatroomId: msg.chatroomId,
-        flow: msg.flow,
-        from: msg.from,
-        fromAvatar: msg.fromAvatar,
-        fromClientType: msg.fromClientType,
-        fromCustom: msg.fromCustom,
-        fromNick: msg.fromNick,
-        idClient: msg.idClient,
-        resend: msg.resend,
-        status: msg.status,
-        text: msg.text,
-        time: msg.time,
-        type: msg.type,
-        userUpdateTime: msg.userUpdateTime
+
+      let roomId = this.roomId
+      if (msgs.length > 0) {
+        roomId = msgs[0].chatroomId
       }
-    } else {
-      return msg
-    }
-  })
-//      console.log(this.roomId)
-let roomId = this.roomId
-console.log(roomId)
-if (msgs.length > 0) {
-  roomId = msgs[0].chatroomId
-}
-const merged = [...this.msgs, ...msgs]
-refreshMsgs(roomId, merged)
-this.sended = true
-this.$apply()
-},
-}
-async onLoad(options) {
-  const { id } = options
-  const {roomid} = options
-  const {creator} = options
-  this.roomId = roomid
-  const pushMsg = this.methods.pushMsg.bind(this)
-  const getCountsNum = this.methods.getCountsNum.bind(this)
-  const apply = this.$apply.bind(this)
-  const hasMsgs = this.msgs.length > 0
-  try {
-    const { nimToken, accid, avatarUrl, jfToken } = this.user
+      const merged = [...this.msgs, ...msgs]
+      refreshMsgs(roomId, merged)
+      this.sended = true
+      this.$apply()
+    },
+    pushMsgText: function (msgs) {
+      const { refreshMsgs } = this.methods
+      if (!Array.isArray(msgs)) {
+        msgs = [msgs]
+      }
+      const vipNick = this.vipUserList.map((item) => item.nick)
+      const isVip = function(msg){
+        for (var i = vipNick.length - 1; i >= 0; i--) {
+          if (vipNick[i] === msg.fromNick) {
+            return msg.fromNick
+          }
+        }
+      }
+      R.filter(isVip)(msgs).map(item => item.is_vip = true)
+      msgs = msgs.map(msg => {
+        if (msg.type === 'text') {
+          return {
+            emji: FaceIM.default.parseEmoji(msg.text.replace(/\n/mg, '')),
+            chatroomId: msg.chatroomId,
+            flow: msg.flow,
+            from: msg.from,
+            fromAvatar: msg.fromAvatar,
+            fromClientType: msg.fromClientType,
+            fromCustom: msg.fromCustom,
+            fromNick: msg.fromNick,
+            idClient: msg.idClient,
+            resend: msg.resend,
+            status: msg.status,
+            text: msg.text,
+            time: msg.time,
+            type: msg.type,
+            userUpdateTime: msg.userUpdateTime,
+            is_vip: msg.is_vip
+          }
+        } else {
+          return msg
+        }
+      })
+      let roomId = this.roomId
+
+      if (msgs.length > 0) {
+        roomId = msgs[0].chatroomId
+      }
+      const merged = [...this.msgs, ...msgs]
+      refreshMsgs(roomId, merged)
+      this.sended = true
+      this.$apply()
+    },
+  }
+  async onLoad(options) {
+    const { id } = options
+    const {roomid} = options
+    const {creator} = options
+    this.roomId = roomid
+    const pushMsg = this.methods.pushMsg.bind(this)
+    const getCountsNum = this.methods.getCountsNum.bind(this)
+    const apply = this.$apply.bind(this)
+    const hasMsgs = this.msgs.length > 0
+    try {
+      const { nimToken, accid, avatarUrl, jfToken } = this.user
 //      if (creator !== accid) {
 //        await chatroomApi.addToRoom(roomid, creator, accid)
 //      }
 await chatroomApi.addToRoom(roomid, creator, accid)
 const roomInfo = await chatroomApi.getOneById(id, jfToken)
 const data = await chatroomApi.getUserList(roomid, jfToken)
+const accidArr = data.map((item)=>item.accid)
+this.type = data[accidArr.indexOf(accid)].type
+//聊天VIP显示
 
+const isVip = data => data.is_vip === true || data.is_admin === true
+const vipUserList = R.filter(isVip)(data)
+this.vipUserList = vipUserList
+
+//禁言
 const islimit = data => data.type === 'LIMITED'
 const isUser = data => data.name && data.name !== null
 this.numList = R.filter(isUser)(data)
 const userLimitArr = R.filter(islimit)(this.numList)
-console.log('禁言列表', userLimitArr)
+this.userLimitArr = userLimitArr
 if (userLimitArr.length > 0) {
   if (userLimitArr[0].accid === accid) {
     this.isLIMIT = true
-    console.log('被禁言')
+    wx.showToast({
+      title: '被禁言，请联系管理员解除',
+      icon: 'success',
+      duration: 2000
+    })
   }
 }
 this.roomData = roomInfo
@@ -767,7 +803,6 @@ async onconnect() {
               limit: 100
             })
             const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
-            console.log('history messages', msgs)
             // 刷新消息
             pushMsg(msgs || [])
             apply()
@@ -784,11 +819,11 @@ this.chatroom = chatroom
   })
 }
 }
-  onShareAppMessage = function (res) {
-    return {
-      title: this.roomData.name
-    }
+onShareAppMessage = function (res) {
+  return {
+    title: this.roomData.name
   }
+}
 async onShow() {
   this.isLIMIT = false
   this.sended = false

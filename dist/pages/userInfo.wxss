@@ -13,6 +13,15 @@
   top:2%;
   color: red;
 }
+.banSomeone._535214a{
+  position:absolute;
+  left:10%;
+  padding:5px 10px;
+  border:1px solid #eee;
+  border-radius:10%;
+  top:2%;
+  color: red;
+}
 .userinfo-avatar._535214a {
   width: 120rpx;
   height: 120rpx;

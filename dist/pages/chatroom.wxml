@@ -20,7 +20,8 @@
           <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
         </view>
         <view wx:if="{{item.type !== 'notification'}}">
-          <view style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view wx:if="{{!item.is_vip}}" style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view wx:if="{{item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
           <view class="content">
             <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
             <view wx:elif="{{item.emji[0].type === 'text'}}">
