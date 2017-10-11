@@ -182,7 +182,6 @@ export default class Board extends wepy.page {
       const { jfToken } = this.user
       await api.addReadNum(id, jfToken)
       const res = await api.boardDetail(id, jfToken)
-      this.isStar = res.is_stared
       this.title = res.title
       this.content = res.text
       this.boardId = res.id
@@ -191,6 +190,7 @@ export default class Board extends wepy.page {
       this.read = res.click_num
       this.author_id = res.author_id
       this.category = res.category
+      this.isStar = res.is_stared
       this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`)
       this.$apply()
     } else {

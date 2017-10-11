@@ -14,27 +14,22 @@
         <view class="label">姓名</view>
         <view  class="value">{{userData.name}}</view>
       </view>
-
       <view class="item">
         <view class="label">公司</view>
         <view  class="value">{{userData.company}}</view>
       </view>
-
       <view class="item">
         <view class="label">联系方式</view>
         <view  class="value">{{userData.mobile}}</view>
       </view>
-
       <view class="item">
         <view class="label">主要经营</view>
         <view  class="value">{{userData.ex}}</view>
       </view>
-
       <view class="item">
         <view class="label">职位</view>
         <view  class="value">{{userData.token}}</view>
       </view>
-
     </view>
   </view>
   <view class="list">
@@ -58,7 +53,6 @@
   </view>
   <view @tap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish">发布</view>
 </template>
-
 <style scoped>
 .userinfo {
   display: flex;
@@ -89,7 +83,6 @@
   display: inline-block;
   border-radius: 50%;
 }
-
 .userinfo-nickname {
   color: #aaa;
 }
@@ -101,27 +94,22 @@
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
-
 .base {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .base>view:first-child {
   display: flex;
   align-items: center;
 }
-
 .base .avatar {
   margin-right: 10rpx;
 }
-
 .base .avatar image {
   width: 100rpx;
   height: 100rpx;
 }
-
 .details>.item {
   display: flex;
   padding: 10rpx 0;
@@ -138,27 +126,22 @@
   height: 200rpx;
   display: flex;
 }
-
 .list>.item:first-child {
   border-top: none;
 }
-
 .list>.item:last-child {
   border-bottom: 2rpx solid #eee;
 }
-
 .list>.item .cover {
   width: 150rpx;
   height: 150rpx;
   padding: 30rpx;
 }
-
 .list>.item .cover image {
   width: 150rpx;
   height: 150rpx;
   border-radius: 10rpx;
 }
-
 .list>.item .info {
   width: 500rpx;
   padding: 20rpx;
@@ -166,12 +149,10 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
 .list>.item .info .title {
   width: 100%;
   font-size: 32rpx;
 }
-
 .list>.item .info .content {
   font-size: 26rpx;
   line-height: 30rpx;
@@ -183,18 +164,15 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .list>.item .info .footer {
   display: flex;
   justify-content: space-between;
   font-size: 25rpx;
   color: darkgray;
 }
-
 .list>.item .info .footer {
   display: flex;
 }
-
 .publish {
   position: fixed;
   bottom: 20rpx;
@@ -211,7 +189,6 @@
   box-shadow: 1px 1px 5px #ccc;
 }
 </style>
-
 <script>
 import wepy from 'wepy'
 import * as api from '../apis/userInfo'
@@ -219,7 +196,6 @@ import * as accountApi from '../apis/account'
 import * as chatroomApi from '../apis/chatroom'
 import { jf } from '../config'
 import { connect } from 'wepy-redux'
-
 @connect({
   user(state) {
     return state.common.user
@@ -229,7 +205,6 @@ export default class UserInfo extends wepy.page {
   config = {
     navigationBarTitleText: '用户详情'
   }
-
   data = {
     list: [],
     userData: {
@@ -240,9 +215,8 @@ export default class UserInfo extends wepy.page {
     isStar: null,
     isAdmin: null,
     isBan: null,
-    type: '',
+    type: null,
   }
-
   methods = {
     handlePublishTap(e) {
       wepy.navigateTo({
@@ -345,15 +319,19 @@ export default class UserInfo extends wepy.page {
       cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
       read: item.click_num
     }))
-        //判断用户有没有被禁言
+    this.$apply()
+    //判断用户有没有被禁言
     let userId = this.userId
     let banId = options.banId
-    if (banId.indexOf(userId) === -1) {
-      this.isBan = false
+    if (banId == null) {
+      return false
     }else{
-      this.isBan = true
+      if (banId.indexOf(userId) === -1) {
+        this.isBan = false
+      }else{
+        this.isBan = true
+      }
     }
-    self.$apply()
   }
 }
 </script>

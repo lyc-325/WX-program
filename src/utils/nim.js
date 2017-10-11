@@ -21,7 +21,6 @@ function createHeader() {
     CheckSum: checkSum
   }
 }
-
 /**
  * 执行 NIM 相关请求
  */

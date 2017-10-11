@@ -14,27 +14,22 @@
         <view class="label _535214a">姓名</view>
         <view class="value _535214a">{{userData.name}}</view>
       </view>
-
       <view class="item _535214a">
         <view class="label _535214a">公司</view>
         <view class="value _535214a">{{userData.company}}</view>
       </view>
-
       <view class="item _535214a">
         <view class="label _535214a">联系方式</view>
         <view class="value _535214a">{{userData.mobile}}</view>
       </view>
-
       <view class="item _535214a">
         <view class="label _535214a">主要经营</view>
         <view class="value _535214a">{{userData.ex}}</view>
       </view>
-
       <view class="item _535214a">
         <view class="label _535214a">职位</view>
         <view class="value _535214a">{{userData.token}}</view>
       </view>
-
     </view>
   </view>
   <view class="list _535214a">

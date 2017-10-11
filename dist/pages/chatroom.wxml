@@ -20,8 +20,10 @@
           <image mode="scaleToFill" src="{{item.fromAvatar}}"/>
         </view>
         <view wx:if="{{item.type !== 'notification'}}">
-          <view wx:if="{{!item.is_vip}}" style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
-          <view wx:if="{{item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view wx:if="{{!item.is_vip && !item.is_admin}}" style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
+          <view wx:if="{{item.is_vip && !item.is_admin}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[VIP]{{item.fromNick}}</view>
+          <view wx:if="{{item.is_admin && !item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[管理员]{{item.fromNick}}</view>
+           <view wx:if="{{item.is_admin && item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[VIP][管理员]{{item.fromNick}}</view>
           <view class="content">
             <image wx:if="{{item.emji[0].type === 'emoji'}}" class="avatar" src="{{'../static/faces/' + item.emji[0].data }}" style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
             <view wx:elif="{{item.emji[0].type === 'text'}}">
@@ -101,14 +103,14 @@
       <view wx:if="{{numList.length > 0}}" wx:for="{{numList}}" wx:key="index" class="userList" bindtap="handleNameId" data-wepy-params-a="{{item}}">
         <view class="cover">
           <image mode="scaleToFill" src="{{item.avator}}"/>
-          <image wx:if="{{item.is_admin}}" src="../static/icons/guan.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;"/>
+          <image wx:if="{{item.type === 'MANAGER'}}" src="../static/icons/guan.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;"/>
           <image wx:if="{{item.is_vip}}" src="../static/icons/V.png" mode="aspectFit" style="width: 50rpx; height: 50rpx; line-height: 80rpx;"/>
         </view>
         <view class="info">
-          <view wx:if="{{!item.is_vip && !item.is_admin}}" class="title">{{item.name}}</view>
-          <view wx:if="{{item.is_vip || item.is_admin}}" class="title" style="color: red;">{{item.name}}</view>
-          <view wx:if="{{!item.is_vip && !item.is_admin}}" class="content">{{item.company}}</view>
-          <view wx:if="{{item.is_vip || item.is_admin}}" class="content" style="color: red;">{{item.company}}</view>
+          <view wx:if="{{!item.is_vip && item.type !== 'MANAGER'}}" class="title">{{item.name}}</view>
+          <view wx:if="{{item.is_vip || item.type === 'MANAGER'}}" class="title" style="color: red;">{{item.name}}</view>
+          <view wx:if="{{!item.is_vip && item.type !== 'MANAGER'}}" class="content">{{item.company}}</view>
+          <view wx:if="{{item.is_vip || item.type === 'MANAGER'}}" class="content" style="color: red;">{{item.company}}</view>
         </view>
       </view>
     </view>

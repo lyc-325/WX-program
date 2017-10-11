@@ -28,7 +28,6 @@
   display: inline-block;
   border-radius: 50%;
 }
-
 .userinfo-nickname._535214a {
   color: #aaa;
 }
@@ -40,27 +39,22 @@
   padding: 20rpx;
   border-bottom: 1px solid #eee;
 }
-
 .base._535214a {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .base>view._535214a:first-child {
   display: flex;
   align-items: center;
 }
-
 .base .avatar._535214a {
   margin-right: 10rpx;
 }
-
 .base .avatar image._535214a {
   width: 100rpx;
   height: 100rpx;
 }
-
 .details>.item._535214a {
   display: flex;
   padding: 10rpx 0;
@@ -77,27 +71,22 @@
   height: 200rpx;
   display: flex;
 }
-
 .list>.item._535214a:first-child {
   border-top: none;
 }
-
 .list>.item._535214a:last-child {
   border-bottom: 2rpx solid #eee;
 }
-
 .list>.item .cover._535214a {
   width: 150rpx;
   height: 150rpx;
   padding: 30rpx;
 }
-
 .list>.item .cover image._535214a {
   width: 150rpx;
   height: 150rpx;
   border-radius: 10rpx;
 }
-
 .list>.item .info._535214a {
   width: 500rpx;
   padding: 20rpx;
@@ -105,12 +94,10 @@
   flex-direction: column;
   justify-content: space-around;
 }
-
 .list>.item .info .title._535214a {
   width: 100%;
   font-size: 32rpx;
 }
-
 .list>.item .info .content._535214a {
   font-size: 26rpx;
   line-height: 30rpx;
@@ -122,18 +109,15 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 .list>.item .info .footer._535214a {
   display: flex;
   justify-content: space-between;
   font-size: 25rpx;
   color: darkgray;
 }
-
 .list>.item .info .footer._535214a {
   display: flex;
 }
-
 .publish._535214a {
   position: fixed;
   bottom: 20rpx;
