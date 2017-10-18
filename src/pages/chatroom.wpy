@@ -23,7 +23,7 @@
           <view wx:if="{{!item.is_vip && !item.is_admin}}" style="font-size: 10px; color: #545a63; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{item.fromNick}}</view>
           <view wx:if="{{item.is_vip && !item.is_admin}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[VIP]{{item.fromNick}}</view>
           <view wx:if="{{item.is_admin && !item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[管理员]{{item.fromNick}}</view>
-           <view wx:if="{{item.is_admin && item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[VIP][管理员]{{item.fromNick}}</view>
+          <view wx:if="{{item.is_admin && item.is_vip}}" style="font-size: 10px; color:red; width: 100%; text-align: left; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">[VIP][管理员]{{item.fromNick}}</view>
           <view class="content">
             <image wx:if="{{item.emji[0].type === 'emoji'}}"   class="avatar" src="{{'../static/faces/' + item.emji[0].data }}"
             style="width: 25px;height: 25px;margin: 0 0 2px 0;float: left;" mode="scaleToFill"/>
@@ -752,8 +752,9 @@
 //      }
 await chatroomApi.addToRoom(roomid, creator, accid)
 const roomInfo = await chatroomApi.getOneById(id, jfToken)
+
+//获取当前用户type 传入之后页面判断权限
 const data = await chatroomApi.getUserList(roomid, jfToken)
-console.log(data,54637675467)
 const accidArr = data.map((item)=>item.accid)
 this.type = data[accidArr.indexOf(accid)].type
 //聊天VIP显示
@@ -785,22 +786,34 @@ if (userLimitArr.length > 0) {
 this.roomData = roomInfo
 const roomId = this.roomId
 const address = await NIM.getChatroomAddresses(accid, roomId)
-const chatroom = ChatroomSDK.getInstance({
-//        debug: true,
-account: accid,
-token: nimToken,
-chatroomId: roomId,
-chatroomAddresses: address,
-onmsgs: function(msgs) {
-  log.info({
-    page: 'chatroom',
-    opr: 'initialize sdk instance',
-    info: msgs
-  })
-//          console.log('收到聊天室信息', msgs)
-pushMsg(msgs.map(msg => {
-  if (msg.type === 'notification') {
-    getCountsNum(id, jfToken)
+
+
+
+
+
+
+
+
+
+
+
+
+const [chatroom0,chatroom1] = ChatroomSDK.getInstance({
+  account: accid,
+  token: nimToken,
+  chatroomId: roomId,
+  chatroomAddresses: address,
+
+  onmsgs: function(msgs) {
+    log.info({
+      page: 'chatroom',
+      opr: 'initialize sdk instance',
+      info: msgs
+    })
+
+    pushMsg(msgs.map(msg => {
+      if (msg.type === 'notification') {
+        getCountsNum(id, jfToken)
               // 进入聊天室信息
               const tip = R.cond([
                 [R.equals('memberEnter'), R.always('加入聊天室')],
@@ -818,17 +831,17 @@ pushMsg(msgs.map(msg => {
                 return msg
               }
             }))
-},
-async onconnect() {
-  log.info({
-    page: 'chatroom',
-    opr: 'initialize sdk instance',
-    info: '[NIM CHATROOM] connected'
-  })
-  if (!hasMsgs) {
-    wepy.showLoading()
+  },
+  async onconnect() {
+    log.info({
+      page: 'chatroom',
+      opr: 'initialize sdk instance',
+      info: '[NIM CHATROOM] connected'
+    })
+    if (!hasMsgs) {
+      wepy.showLoading()
             // 拉取最近 100 条信息
-            const res = await chatroom.getHistoryMsgs({
+            const res = await chatroom1.getHistoryMsgs({
               limit: 100
             })
             const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
@@ -839,10 +852,12 @@ async onconnect() {
           }
         }
       })
-this.chatroom = chatroom
+ 
+  this.chatroom = chatroom1
+  this.chatroom0 = chatroom0
 } catch (e) {
   log.error({
-    page: 'chatroom',
+    page: 'chatroomPromised',
     opr: 'getInstance',
     info: e
   })
@@ -857,6 +872,9 @@ async onShow() {
   this.isLIMIT = false
   this.sended = false
   this.currentNav = 0
+}
+async onUnload() {
+  this.chatroom0.disconnect()
 }
 }
 </script>

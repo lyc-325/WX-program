@@ -14,28 +14,24 @@
         <input type="text" class="{{formErrorKey === 'name'? 'error' : ''}}" name="name" value="{{newName}}" bindinput="nameKeyInput" @focus="bindFocus" />
       </view>
     </view>
-
     <view class="item">
       <view class="label">公司</view>
       <view class="input">
         <input type="text" class="{{formErrorKey === 'company' ? 'error' : ''}}" name="company" @focus="bindFocus" />
       </view>
     </view>
-
     <view class="item">
       <view class="label">职位</view>
       <view class="input">
         <input type="text" class="{{formErrorKey === 'token'? 'error' : ''}}" name="token" @focus="bindFocus" />
       </view>
     </view>
-
     <view class="item">
       <view class="label">主要经营</view>
       <view class="input">
         <input type="text" class="{{formErrorKey === 'ex'? 'error' : ''}}" name="ex" @focus="bindFocus" />
       </view>
     </view>
-
     <view class="item">
       <view class="label">联系方式</view>
       <view class="input">
@@ -55,13 +51,11 @@
   </view>
 </form>
 </template>
-
 <style>
 .container {
   display: flex;
   flex-direction: column;
 }
-
 .container .title {
   text-align: center;
   font-size: 20px;
@@ -76,25 +70,21 @@
   height: 120rpx;
   border-radius: 50%;
 }
-
 .userinfo-nickname {
   margin-top: 20rpx;
   color: #aaa;
 }
-
 .container > .item {
   padding: 20rpx;
   display: flex;
   align-items: center;
   margin-top: 5rpx;
 }
-
 .container > .item .label {
   padding: 5rpx;
   width: 150rpx;
   text-align:center;
 }
-
 .container > .item input {
   border: 1px solid #eee;
   display:block;
@@ -115,23 +105,18 @@
   line-height:55px;
   color:rgb(255,255,255);
   background-color: #1eb571;
-
 }
 </style>
-
 <script>
 import wepy from 'wepy'
 import { connect } from 'wepy-redux'
 import R from '../libs/ramda'
 import NIM from '../utils/nim'
 import * as api from '../apis/account'
-
 import {
   setUser
 } from '../actions/common'
-
 import { validator, validateLength, validatePhone } from '../utils/validator'
-
 // 校验规则配置
 const rules = {
   company: {
@@ -159,9 +144,7 @@ const rules = {
     validate: validateLength(1, 8)
   }
 }
-
 const validate = validator(rules)
-
 @connect({
   user(state) {
     return state.common.user
@@ -173,7 +156,6 @@ export default class Register extends wepy.page {
   config = {
     navigationBarTitleText: '注册'
   }
-
   data = {
     requesting: false,
     formError: null,
@@ -185,7 +167,6 @@ export default class Register extends wepy.page {
     newMobile: '',
     newName: ''
   }
-
   methods = {
     nameKeyInput(e) {
       this.setData({
@@ -257,9 +238,7 @@ export default class Register extends wepy.page {
       const { setUser } = this.methods
       if (!errorKey) {
         this.requesting = true
-
         const { accid, avatarUrl } = this.user
-
         const infos = {
           name,
           company,
@@ -290,7 +269,6 @@ export default class Register extends wepy.page {
             icon: avatarUrl
           })
           const { Token } = user
-
           setUser({
             ...this.user,
             ...user,

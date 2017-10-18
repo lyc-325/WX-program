@@ -7,7 +7,6 @@ import R from '../libs/ramda'
  * getInstance
  */
 function getInstance(options) {
-  console.log(options)
   const chatroom = Chatroom.getInstance({
     appKey: config.appKey,
     account: options.account,
@@ -21,7 +20,7 @@ function getInstance(options) {
       console.error('[NIM Chatroom] error', error)
     },
     ondisconnect() {
-      console.log('[NIM Chatroom] disconnect')
+      console.log('聊天室断开')
     },
     onwillreconnect(obj) {
       console.log('[NIM Chatroom] will reconnect')
@@ -40,7 +39,7 @@ function getInstance(options) {
   R.forEach((key) => {
     chatroomPromised[key] = chatroom[key].bind(chatroom)
   }, needFunctions)
-  return chatroomPromised
+  return [chatroom,chatroomPromised]
 }
 
 const needFunctions = [

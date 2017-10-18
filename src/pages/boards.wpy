@@ -308,5 +308,6 @@ async onShow(option) {
     // const tempFiles = reses.map(({tempFilePath}) => tempFilePath)
     // this.list = boards.map(board => ({title, text, creator, author, cover_img}) => ({ title, content: text, createdBy: creator, author: read, cover: cover_img }))
   }
+
 }
 </script>
