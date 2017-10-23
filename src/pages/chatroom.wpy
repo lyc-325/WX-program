@@ -13,7 +13,7 @@
           <view class="notifiView" >
             <text class="notifiText">{{item.text}}</text>
             <text class="notifiText">{{item.nowTime}}</text>
-            <text class="notifiText">在线人数{{nowPeoples}}</text>
+            <text class="notifiText">聊天室人数{{nowPeoples}}</text>
           </view>
         </view>
         <view wx:if="{{item.type !== 'notification'}}" class="avatar" @tap="handleName({{item}})">
@@ -466,8 +466,8 @@
         }
       },
       async getCountsNum(id, jfToken) {
-        const {onlineusercount} = await chatroomApi.getOneById(id, jfToken)
-        this.nowPeoples = onlineusercount
+        const { total_members_count } = await chatroomApi.getOneById(id, jfToken)
+        this.nowPeoples = total_members_count-1
         this.$apply()
       },
       async handleName (item) {
@@ -870,7 +870,6 @@ onShareAppMessage = function (res) {
 }
 async onShow() {
   this.isLIMIT = false
-  this.sended = false
   this.currentNav = 0
 }
 async onUnload() {

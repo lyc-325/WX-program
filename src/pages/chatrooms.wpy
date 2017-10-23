@@ -246,39 +246,6 @@
           userData: userId
         })
 
-        // 初始化 nim 对象
-        // const nim = NIM.getInstance({
-        //   account: this.user.accid,
-        //   token: token,
-        //   debug: true,
-        //   onusers: friends => {
-        //     refreshFriends(friends.map(getFriend))
-        //     this.$apply()
-        //   },
-        //   onsessions: sessions => {
-        //     const merged = nim.mergeSessions(this.sessions, sessions)
-        //     refreshSessions(merged)
-        //     this.$apply()
-        //   },
-        //   onupdatesession: session => {
-        //     const merged = nim.mergeSessions(this.sessions, session)
-        //     refreshSessions(merged)
-        //     this.$apply()
-        //   },
-        //   onmsg: msg => {
-        //     pushMsg(msg)
-        //     this.$apply()
-        //   },
-        //   onroamingmsgs: obj => {
-        //     pushMsg(obj.msgs)
-        //   },
-        //   onofflinemsgs: obj => {
-        //     pushMsg(obj.msgs)
-        //   }
-        // })
-        //
-        // setNim(nim)
-
         // 拉取聊天室列表
         const rooms = await chatroomApi.getList()
 

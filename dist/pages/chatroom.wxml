@@ -13,7 +13,7 @@
           <view class="notifiView">
             <text class="notifiText">{{item.text}}</text>
             <text class="notifiText">{{item.nowTime}}</text>
-            <text class="notifiText">在线人数{{nowPeoples}}</text>
+            <text class="notifiText">聊天室人数{{nowPeoples}}</text>
           </view>
         </view>
         <view wx:if="{{item.type !== 'notification'}}" class="avatar" bindtap="handleName" data-wepy-params-a="{{item}}">

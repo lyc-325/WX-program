@@ -101,9 +101,21 @@ import { connect } from 'wepy-redux'
 import * as api from '../apis/board'
 import * as accountApi from '../apis/account'
 import { jf } from '../config'
+import R from '../libs/ramda'
+import * as log from '../utils/log'
+import NIM from '../utils/nim'
+import { setUser } from '../actions/common'
+import {
+    wx as config
+  } from '../config'
 @connect({
-  user: state => state.common.user
-})
+    user: state => state.common.user,
+    nim: state => state.common.nim,
+    friends: state => state.friends.friends,
+    msgs: state => state.chat.msgs
+  }, {
+    setUser
+  })
 export default class Board extends wepy.page {
   config = {
     navigationBarTitleText: '商友圈'
@@ -160,28 +172,52 @@ export default class Board extends wepy.page {
       })
     },
   }
-          onHide() {
-  console.log(2131231231)
-}
+
   onShareAppMessage = function (res) {
     return {
       title: this.category[0]
     }
   }
   async onLoad(option) {
-    try {
-      const { id } = option
-    }catch (e) {
-      log.error({
-        page: 'boards',
-        opr: 'init',
-        info: e
-      })
-      wepy.navigateTo({
-        url: '/pages/register'
-      })
+    const { setUser } = this.methods
+      // const pushMsg = this.methods.pushMsg.bind(this)
+      wepy.showLoading()
+      const { code } = await wepy.login()
+      // // const { data } = await wepy.request({
+      // //   url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
+      // // })
+      const data = await accountApi.getSession(code,config.appId,config.appSecrete)
+      const { openid } = data 
 
-      if (this.user.userData) {
+      const { userInfo } = await wepy.getUserInfo()
+
+      const password = R.takeLast(5)(openid)
+
+      const user = {
+        ...userInfo,
+        accid: openid.toLowerCase()
+      }
+
+      setUser(user)
+      // 如果用户尚未在 网易云注册 则先注册
+      try {
+        const token = await NIM.login(openid)
+        const userId = await accountApi.getToken(openid, password.toLowerCase())
+        const {Token} = userId
+
+        if (!Token) {
+          throw new Error('user not exist')
+        }
+
+        setUser({
+          ...this.user,
+          jfToken: Token,
+          nimToken: token,
+          userData: userId
+        })
+
+        // 获取文章信息
+        const { id } = option
         const { jfToken } = this.user
         await api.addReadNum(id, jfToken)
         const res = await api.boardDetail(id, jfToken)
@@ -196,8 +232,14 @@ export default class Board extends wepy.page {
         this.isStar = res.is_stared
         this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`)
         this.$apply()
-      } else {
-        wepy.reLaunch({
+        wepy.hideLoading()
+      } catch (e) {
+        log.error({
+          page: 'chatrooms',
+          opr: 'init',
+          info: e
+        })
+        wepy.navigateTo({
           url: '/pages/register'
         })
       }
