@@ -40,10 +40,10 @@ export const categoryList = function() {
     method: 'GET'
   })
 }
-export const boardList = function(category) {
+export const boardList = function(category,page = 1) {
   // if (token) {
     return jf.request({
-      api: `article/screen_article/${category}/`,
+      api: `article/screen_article/${category}/?page=${page}`,
       method: 'GET'
     })
   // } else {

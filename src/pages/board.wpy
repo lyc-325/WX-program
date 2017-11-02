@@ -106,16 +106,16 @@ import * as log from '../utils/log'
 import NIM from '../utils/nim'
 import { setUser } from '../actions/common'
 import {
-    wx as config
-  } from '../config'
+  wx as config
+} from '../config'
 @connect({
-    user: state => state.common.user,
-    nim: state => state.common.nim,
-    friends: state => state.friends.friends,
-    msgs: state => state.chat.msgs
-  }, {
-    setUser
-  })
+  user: state => state.common.user,
+  nim: state => state.common.nim,
+  friends: state => state.friends.friends,
+  msgs: state => state.chat.msgs
+}, {
+  setUser
+})
 export default class Board extends wepy.page {
   config = {
     navigationBarTitleText: '商友圈'
@@ -161,11 +161,13 @@ export default class Board extends wepy.page {
       this.$apply()
     },
     imgPreview (items, index) {
-      const imgArr = items
-      const num = index
+      //replace(/_thumbnail\./,'.')
+      // const nImgArr = items.map((item) => item.replace(/_thumbnail\./,'.'))
+      // console.log(items)
+      // console.log(nImgArr,2)
       wepy.previewImage({
-        current: imgArr[num],
-        urls: imgArr,
+        urls: items,
+        current: items[index],
         success: function (res) {
           console.log(res)
         }
@@ -180,25 +182,18 @@ export default class Board extends wepy.page {
   }
   async onLoad(option) {
     const { setUser } = this.methods
-      // const pushMsg = this.methods.pushMsg.bind(this)
-      wepy.showLoading()
-      const { code } = await wepy.login()
-      // // const { data } = await wepy.request({
-      // //   url: `https://api.weixin.qq.com/sns/jscode2session?appid=${config.appId}&secret=${config.appSecrete}&js_code=${code}&grant_type=authorization_code`
-      // // })
-      const data = await accountApi.getSession(code,config.appId,config.appSecrete)
-      const { openid } = data 
+    wepy.showLoading()
+    const { code } = await wepy.login()
+    const data = await accountApi.getSession(code,config.appId,config.appSecrete)
+    const { openid } = data 
+    const { userInfo } = await wepy.getUserInfo()
+    const password = R.takeLast(5)(openid)
+    const user = {
+      ...userInfo,
+      accid: openid.toLowerCase()
+    }
 
-      const { userInfo } = await wepy.getUserInfo()
-
-      const password = R.takeLast(5)(openid)
-
-      const user = {
-        ...userInfo,
-        accid: openid.toLowerCase()
-      }
-
-      setUser(user)
+    setUser(user)
       // 如果用户尚未在 网易云注册 则先注册
       try {
         const token = await NIM.login(openid)
@@ -230,12 +225,12 @@ export default class Board extends wepy.page {
         this.author_id = res.author_id
         this.category = res.category
         this.isStar = res.is_stared
-        this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`)
+        this.imgs = res.pic_urls.map(url => `${jf.baseServer}${url}`.replace(/\.[^\.]+$/,'_thumbnail.jpg'))
         this.$apply()
         wepy.hideLoading()
       } catch (e) {
         log.error({
-          page: 'chatrooms',
+          page: 'chatroom',
           opr: 'init',
           info: e
         })

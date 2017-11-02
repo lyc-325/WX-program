@@ -169,4 +169,13 @@ export const getStarArticleList = function(source) {
   }).then((res) => res)
 }
 
-
+export const getUserInfo = function(roomid,accid) {
+  return jf.request({
+    api: 'accounts/get_info_netease/',
+    data: {
+      roomid: roomid,
+      accid: accid,
+    },
+    method: 'POST'
+  })
+}

@@ -7,7 +7,7 @@
     </view>
   </view>
   <view wx:if="{{currentNav === 0}}" class="bodyBlock">
-    <scroll-view scroll-y scroll-into-view="item{{intoView}}" bindscroll="scroll" class="{{ view }}" id="list" @tap="getFocus">
+    <scroll-view scroll-y scroll-into-view="item{{intoView}}" bindscroll="scroll" class="{{ view }}" id="list" @tap="getFocus" >
       <view wx:for="{{msgs}}" wx:key="idClient" id="item{{item.idClient}}" class="list-item {{ user.accid === item.from ? 'mine':'opposite' }}">
         <view wx:if="{{item.type === 'notification'}}" class="notifiView">
           <view class="notifiView" >
@@ -401,6 +401,7 @@
     refreshMsgs
   } from '../actions/chatroom'
   import * as chatroomApi from '../apis/chatroom'
+  import * as accountApi from '../apis/account'
   import {
     connect
   } from 'wepy-redux'
@@ -618,6 +619,19 @@
     setText(e) {
       this.text = e.detail.value
     },
+    async getMsgs() {
+      wepy.showLoading()
+      const pushMsg = this.methods.pushMsg.bind(this)
+      const chatroom1 = this.chatroom
+      const res = await chatroom1.getHistoryMsgs({
+        limit: 50
+      })
+      const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
+
+      pushMsg(msgs || [])
+      this.$apply()
+      wepy.hideLoading()
+    },
     pushMsg: function (msgs) {
       const { refreshMsgs } = this.methods
       if (!Array.isArray(msgs)) {
@@ -667,7 +681,6 @@
           return msg
         }
       })
-
       let roomId = this.roomId
       if (msgs.length > 0) {
         roomId = msgs[0].chatroomId
@@ -726,7 +739,6 @@
         }
       })
       let roomId = this.roomId
-
       if (msgs.length > 0) {
         roomId = msgs[0].chatroomId
       }
@@ -736,84 +748,52 @@
       this.$apply()
     },
   }
+
+
   async onLoad(options) {
     const { id } = options
     const {roomid} = options
     const {creator} = options
     this.roomId = roomid
+    const { refreshMsgs } = this.methods
+    refreshMsgs(roomid,[])
     const pushMsg = this.methods.pushMsg.bind(this)
     const getCountsNum = this.methods.getCountsNum.bind(this)
     const apply = this.$apply.bind(this)
     const hasMsgs = this.msgs.length > 0
-    try {
-      const { nimToken, accid, avatarUrl, jfToken } = this.user
-//      if (creator !== accid) {
-//        await chatroomApi.addToRoom(roomid, creator, accid)
-//      }
-await chatroomApi.addToRoom(roomid, creator, accid)
-const roomInfo = await chatroomApi.getOneById(id, jfToken)
-
-//获取当前用户type 传入之后页面判断权限
-const data = await chatroomApi.getUserList(roomid, jfToken)
-const accidArr = data.map((item)=>item.accid)
-this.type = data[accidArr.indexOf(accid)].type
-//聊天VIP显示
-
-const isVip = data => data.is_vip === true
-const vipUserList = R.filter(isVip)(data)
-this.vipUserList = vipUserList
-
-const isAdmin = data => data.type === 'MANAGER'
-const adminUserList = R.filter(isAdmin)(data)
-this.adminUserList = adminUserList
-
-//禁言
-const islimit = data => data.type === 'LIMITED'
-const isUser = data => data.name && data.name !== null
-this.numList = R.filter(isUser)(data)
-const userLimitArr = R.filter(islimit)(this.numList)
-this.userLimitArr = userLimitArr
-if (userLimitArr.length > 0) {
-  if (userLimitArr[0].accid === accid) {
-    this.isLIMIT = true
-    wx.showToast({
-      title: '被禁言，请联系管理员解除',
-      icon: 'success',
-      duration: 2000
-    })
-  }
-}
-this.roomData = roomInfo
-const roomId = this.roomId
-const address = await NIM.getChatroomAddresses(accid, roomId)
-
-
-
-
-
-
-
-
-
-
-
-
-const [chatroom0,chatroom1] = ChatroomSDK.getInstance({
-  account: accid,
-  token: nimToken,
-  chatroomId: roomId,
-  chatroomAddresses: address,
-
-  onmsgs: function(msgs) {
-    log.info({
-      page: 'chatroom',
-      opr: 'initialize sdk instance',
-      info: msgs
-    })
-
-    pushMsg(msgs.map(msg => {
-      if (msg.type === 'notification') {
-        getCountsNum(id, jfToken)
+    
+    wepy.showLoading()
+    const { nimToken, accid, avatarUrl, jfToken } = this.user
+    await chatroomApi.addToRoom(roomid, creator, accid)
+    const roomInfo = await chatroomApi.getOneById(id, jfToken)
+    //获取当前用户type 传入之后页面判断权限
+    const [object] = await accountApi.getUserInfo(roomid,accid)
+    this.type = object.type
+    if (this.type === 'LIMITED') {
+      this.isLIMIT = true
+      wx.showToast({
+        title: '被禁言，请联系管理员解除',
+        icon: 'success',
+        duration: 2000
+      })
+    }
+    this.roomData = roomInfo
+    const roomId = this.roomId
+    const address = await NIM.getChatroomAddresses(accid, roomId)
+    const [chatroom0,chatroom1] = ChatroomSDK.getInstance({
+      account: accid,
+      token: nimToken,
+      chatroomId: roomId,
+      chatroomAddresses: address,
+      onmsgs: function(msgs) {
+        log.info({
+          page: 'chatroom',
+          opr: 'initialize sdk instance',
+          info: msgs
+        })
+        pushMsg(msgs.map(msg => {
+          if (msg.type === 'notification') {
+            getCountsNum(id, jfToken)
               // 进入聊天室信息
               const tip = R.cond([
                 [R.equals('memberEnter'), R.always('加入聊天室')],
@@ -831,49 +811,83 @@ const [chatroom0,chatroom1] = ChatroomSDK.getInstance({
                 return msg
               }
             }))
-  },
-  async onconnect() {
-    log.info({
-      page: 'chatroom',
-      opr: 'initialize sdk instance',
-      info: '[NIM CHATROOM] connected'
-    })
-    if (!hasMsgs) {
-      wepy.showLoading()
-            // 拉取最近 100 条信息
-            const res = await chatroom1.getHistoryMsgs({
-              limit: 100
-            })
-            const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
-            // 刷新消息
-            pushMsg(msgs || [])
-            apply()
-            wepy.hideLoading()
-          }
+      },
+      async onconnect() {
+        log.info({
+          page: 'chatroom',
+          opr: 'initialize sdk instance',
+          info: '[NIM CHATROOM] connected'
+        })
+        wepy.hideLoading()
+        if (!hasMsgs) {
+
+          const res = await chatroom1.getHistoryMsgs({
+            limit: 100
+          })
+          const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
+
+          pushMsg(msgs || [])
+          apply() 
         }
-      })
- 
-  this.chatroom = chatroom1
-  this.chatroom0 = chatroom0
-} catch (e) {
-  log.error({
-    page: 'chatroomPromised',
-    opr: 'getInstance',
-    info: e
+      }
+    })
+    this.chatroom = chatroom1
+    this.chatroom0 = chatroom0
+
+  //循环加载分页人员
+  const Takemin = (Arr) => Math.min.apply( Math, Arr)
+  let data = []
+  while(true){
+    let data1 = await chatroomApi.getUserList(roomid, jfToken,minTime)
+    if (data1.length == 0) {
+      break
+    }
+    let timeArr = data1.map((item) => item.enterTime)
+    let minTime = Takemin(timeArr)
+    data = data.concat(data1)
+  }
+
+  //管理员，vip排上面
+  data.sort((o,p) => {
+    let c = o.is_vip
+    let d = p.is_vip
+    if (c === d) {
+      return 0
+    }
+    if (c === true && d === false) {
+      return -1
+    }
   })
-}
+  // const accidArr = data.map((item)=>item.accid)
+  // this.type = data[accidArr.indexOf(accid)].type
+  //聊天VIP显示
+  const isVip = data => data.is_vip === true
+  const vipUserList = R.filter(isVip)(data)
+  this.vipUserList = vipUserList
+
+  const isAdmin = data => data.type === 'MANAGER'
+  const adminUserList = R.filter(isAdmin)(data)
+  this.adminUserList = adminUserList
+
+  const isUser = data => data.name && data.name !== null
+  this.numList = R.filter(isUser)(data)
+  this.$apply()
+
 }
 onShareAppMessage = function (res) {
   return {
     title: this.roomData.name
   }
 }
-async onShow() {
+onShow() {
   this.isLIMIT = false
   this.currentNav = 0
 }
-async onUnload() {
+onUnload() {
   this.chatroom0.disconnect()
 }
 }
 </script>
+
+
+

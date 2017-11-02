@@ -128,9 +128,8 @@
   // }
 
   import wepy from 'wepy'
-  import R from '../libs/ramda'
   import * as log from '../utils/log'
-
+  import R from '../libs/ramda'
   import {
     wx as config
   } from '../config'

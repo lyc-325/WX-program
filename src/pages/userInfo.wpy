@@ -194,12 +194,21 @@ import wepy from 'wepy'
 import * as api from '../apis/userInfo'
 import * as accountApi from '../apis/account'
 import * as chatroomApi from '../apis/chatroom'
+import R from '../libs/ramda'
+import * as log from '../utils/log'
+import NIM from '../utils/nim'
 import { jf } from '../config'
 import { connect } from 'wepy-redux'
+import { setUser } from '../actions/common'
+import {
+  wx as config
+} from '../config'
 @connect({
   user(state) {
     return state.common.user
   }
+}, {
+  setUser
 })
 export default class UserInfo extends wepy.page {
   config = {
@@ -295,6 +304,45 @@ export default class UserInfo extends wepy.page {
     }
   }
   async onLoad(options) {
+    const { setUser } = this.methods
+    const { code } = await wepy.login()
+    const data = await accountApi.getSession(code,config.appId,config.appSecrete)
+    const { openid } = data 
+    const { userInfo } = await wepy.getUserInfo()
+    const password = R.takeLast(5)(openid)
+    const user = {
+      ...userInfo,
+      accid: openid.toLowerCase()
+    }
+
+    setUser(user)
+      // 如果用户尚未在 网易云注册 则先注册
+      try {
+        const token = await NIM.login(openid)
+        const userId = await accountApi.getToken(openid, password.toLowerCase())
+        const {Token} = userId
+
+        if (!Token) {
+          throw new Error('user not exist')
+        }
+
+        setUser({
+          ...this.user,
+          jfToken: Token,
+          nimToken: token,
+          userData: userId
+        })
+      }catch (e) {
+        log.error({
+          page: 'chatroom',
+          opr: 'init',
+          info: e
+        })
+        wepy.navigateTo({
+          url: '/pages/register'
+        })
+      }
+
     this.roomId = options.roomId
     this.userId = options.id
     const { jfToken } = this.user

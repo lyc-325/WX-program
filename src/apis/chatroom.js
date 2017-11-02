@@ -37,13 +37,14 @@ export const addToRoom = function(id, creator, num) {
   })
 }
 
-export const getUserList = function(roomid, token) {
+export const getUserList = function(roomid, token,enterTime) {
   return jf.request({
     api: `chat_room/member_list/`,
     data: {
       roomid: roomid,
-      limit: 50,
-      token: token
+      limit: 100,
+      token: token,
+      endtime: enterTime,
     },
     method: 'POST'
   })
@@ -73,3 +74,4 @@ export const changeRole = function(roomid, operator,target,opt) {
     method: 'POST'
   })
 }
+

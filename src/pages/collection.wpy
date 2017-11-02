@@ -173,7 +173,6 @@ export default class collection extends wepy.page {
 			let {id} = this.user.userData
 			const userRes = await api.getStarUserList(id)
 			const boardRes = await api.getStarArticleList(id)
-			console.log(userRes)
 			this.list1 = userRes.map(item => ({
 				id: item.followed.id,
 				cover: item.followed.icon,

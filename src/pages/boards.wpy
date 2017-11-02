@@ -31,6 +31,7 @@
     <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;">当前分类没有信息</view>
   </view>
 </view>
+<button style="text-align: center; margin-top: 80rpx; color: #545a63; width: 60%; font-weight: 700; margin-bottom:50rpx" @tap="getMoreList">加载更多</button>
 <view @tap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish">发布</view>
 </template>
 <style scoped>
@@ -160,53 +161,84 @@ export default class Boards extends wepy.page {
     navs: [],
     currentNav: 0,
     categories: [],
-    searchValue: ''
+    searchValue: '',
+    page:2,
   }
   methods = {
     changeNav (e) {
-//      const { jfToken } = this.user
-this.currentNav = e.currentTarget.dataset.index
-this.searchValue = ''
-api.boardList(this.categories[this.currentNav].id).then(res => {
-  this.list = res.map(item => ({
-    id: item.id,
-    title: item.title,
-    content: item.text,
-    createdBy: item.author.name,
-    createdAt: item.dateline,
-    cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
-    read: item.click_num
-  }))
-  this.$apply()
-})
-},
-searchKeyInput(e) {
-  this.setData({
-    [`searchValue`]: e.detail.value
-  })
-  this.searchValue = e.detail.value
-  this.$apply()
-},
-searchTap(e) {
-  api.searchList(this.categories[this.currentNav].id, this.searchValue).then(res => {
-    this.list = res.map(item => ({
-      id: item.id,
-      title: item.title,
-      content: item.text,
-      createdBy: item.author.name,
-      createdAt: item.dateline,
-      cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
-      read: item.click_num
-    }))
-    this.$apply()
-  })
-},
-handlePublishTap(e) {
-  wepy.navigateTo({
-    url: 'publish'
-  })
-},
-handleItemTap(e) {
+
+      this.page = 2
+      this.currentNav = e.currentTarget.dataset.index
+      this.searchValue = ''
+      api.boardList(this.categories[this.currentNav].id).then(res => {
+        this.list = res.map(item => ({
+          id: item.id,
+          title: item.title,
+          content: item.text,
+          createdBy: item.author,
+          createdAt: item.dateline,
+          cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}`.replace(/\.[^\.]+$/,'_thumbnail.jpg') : '',
+          read: item.click_num
+        }))
+        this.$apply()
+      })
+    },
+    searchKeyInput(e) {
+      this.setData({
+        [`searchValue`]: e.detail.value
+      })
+      this.searchValue = e.detail.value
+      this.$apply()
+    },
+    searchTap(e) {
+      api.searchList(this.categories[this.currentNav].id, this.searchValue).then(res => {
+        this.list = res.map(item => ({
+          id: item.id,
+          title: item.title,
+          content: item.text,
+          createdBy: item.author.name,
+          createdAt: item.dateline,
+          cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}`.replace(/\.[^\.]+$/,'_thumbnail.jpg') : '',
+          read: item.click_num
+        }))
+        this.$apply()
+      })
+    },
+    handlePublishTap(e) {
+      wepy.navigateTo({
+        url: 'publish'
+      })
+    },
+    async getMoreList() {
+      const results =  this.categories
+      await api.boardList(results[this.currentNav].id,this.page)
+      .then((response) => {
+        if (response != null) {
+          const res = response
+          this.page++
+          const newList = res.map(item => ({
+            id: item.id,
+            title: item.title,
+            content: item.text,
+            createdBy: item.author,
+            createdAt: item.dateline,
+            cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}`.replace(/\.[^\.]+$/,'_thumbnail.jpg') : '',
+            read: item.click_num
+          }))
+          this.list = this.list.concat(newList)
+          this.$apply()
+        }else{
+          wx.showToast({
+            title: '没有更多文章了',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      })
+
+      
+    },
+    handleItemTap(e) {
 //      console.log('item', this.list[e.currentTarget.dataset.index])
 const id = this.list[e.currentTarget.dataset.index].id
 //      console.log('id', id)
@@ -261,7 +293,7 @@ wepy.navigateTo({
 //      })
 //    }
 //  }
-async onShow(option) {
+async onLoad(option) {
 //    const { jfToken } = this.user
     // const token = await getToken()
     // console.log(api)
@@ -283,7 +315,7 @@ async onShow(option) {
       content: item.text,
       createdBy: item.author,
       createdAt: item.dateline,
-      cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+      cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}`.replace(/\.[^\.]+$/,'_thumbnail.jpg') : '',
       read: item.click_num
     }))
     // console.log('board', res)

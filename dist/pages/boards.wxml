@@ -31,4 +31,5 @@
     <view style="text-align: center; margin-top: 80rpx; color: #545a63; width: 100%;" class="_0708ee2">当前分类没有信息</view>
   </view>
 </view>
+<button style="text-align: center; margin-top: 80rpx; color: #545a63; width: 60%; font-weight: 700; margin-bottom:50rpx" bindtap="getMoreList" class="_0708ee2">加载更多</button>
 <view bindtap="handlePublishTap" loading="{{loading}}" disabled="{{disabled}}" class="publish _0708ee2">发布</view>
