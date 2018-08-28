@@ -162,12 +162,12 @@ export default class Board extends wepy.page {
     },
     imgPreview (items, index) {
       //replace(/_thumbnail\./,'.')
-      // const nImgArr = items.map((item) => item.replace(/_thumbnail\./,'.'))
+      const nImgArr = items.map((item) => item.replace(/_thumbnail\./,'.'))
       // console.log(items)
       // console.log(nImgArr,2)
       wepy.previewImage({
-        urls: items,
-        current: items[index],
+        urls: nImgArr,
+        current: nImgArr[index],
         success: function (res) {
           console.log(res)
         }

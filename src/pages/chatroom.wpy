@@ -627,7 +627,6 @@
         limit: 50
       })
       const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
-
       pushMsg(msgs || [])
       this.$apply()
       wepy.hideLoading()
@@ -748,15 +747,12 @@
       this.$apply()
     },
   }
-
-
   async onLoad(options) {
     const { id } = options
     const {roomid} = options
     const {creator} = options
     this.roomId = roomid
     const { refreshMsgs } = this.methods
-    refreshMsgs(roomid,[])
     const pushMsg = this.methods.pushMsg.bind(this)
     const getCountsNum = this.methods.getCountsNum.bind(this)
     const apply = this.$apply.bind(this)
@@ -818,22 +814,21 @@
           opr: 'initialize sdk instance',
           info: '[NIM CHATROOM] connected'
         })
+        refreshMsgs(roomid,[])
         wepy.hideLoading()
         if (!hasMsgs) {
-
           const res = await chatroom1.getHistoryMsgs({
             limit: 100
           })
           const msgs = res.msgs.filter(msg => msg.type !== 'notification' && msg.type !== 'tip').reverse()
-
           pushMsg(msgs || [])
+          refreshMsgs(roomid,[])
           apply() 
         }
       }
     })
     this.chatroom = chatroom1
     this.chatroom0 = chatroom0
-
   //循环加载分页人员
   const Takemin = (Arr) => Math.min.apply( Math, Arr)
   let data = []
@@ -846,7 +841,6 @@
     let minTime = Takemin(timeArr)
     data = data.concat(data1)
   }
-
   //管理员，vip排上面
   data.sort((o,p) => {
     let c = o.is_vip
@@ -864,15 +858,12 @@
   const isVip = data => data.is_vip === true
   const vipUserList = R.filter(isVip)(data)
   this.vipUserList = vipUserList
-
   const isAdmin = data => data.type === 'MANAGER'
   const adminUserList = R.filter(isAdmin)(data)
   this.adminUserList = adminUserList
-
   const isUser = data => data.name && data.name !== null
   this.numList = R.filter(isUser)(data)
   this.$apply()
-
 }
 onShareAppMessage = function (res) {
   return {
@@ -888,6 +879,3 @@ onUnload() {
 }
 }
 </script>
-
-
-

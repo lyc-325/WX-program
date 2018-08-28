@@ -332,6 +332,44 @@ export default class UserInfo extends wepy.page {
           nimToken: token,
           userData: userId
         })
+
+        this.roomId = options.roomId
+        this.userId = options.id
+        const { jfToken } = this.user
+        if (options.type === "MANAGER"||options.type === "CREATOR") {
+          this.type = true
+        }
+        let self = this
+        let resData = await api.getOtherUserInfo(options.id,jfToken)
+        const {is_stared} = resData
+        let {accid} = resData
+        this.otherAccid = accid
+        this.isAdmin = this.user.userData.is_admin 
+        this.isStar = is_stared
+        self.userData = resData
+        const res = await api.getMsgList(options.id)
+        this.list = res.map(item => ({
+          id: item.id,
+          title: item.title,
+          content: item.text,
+          createdBy: item.author.name,
+          createdAt: item.dateline,
+          cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
+          read: item.click_num
+        }))
+        this.$apply()
+        //判断用户是否被禁言
+
+        let banId = options.banId
+        if (banId == null) {
+          return false
+        }else{
+          if (banId.indexOf(this.userId) === -1) {
+            this.isBan = false
+          }else{
+            this.isBan = true
+          }
+        }
       }catch (e) {
         log.error({
           page: 'chatroom',
@@ -343,43 +381,6 @@ export default class UserInfo extends wepy.page {
         })
       }
 
-    this.roomId = options.roomId
-    this.userId = options.id
-    const { jfToken } = this.user
-    if (options.type === "MANAGER"||options.type === "CREATOR") {
-      this.type = true
-    }
-    let self = this
-    let resData = await api.getOtherUserInfo(options.id,jfToken)
-    const {is_stared} = resData
-    let {accid} = resData
-    this.otherAccid = accid
-    this.isAdmin = this.user.userData.is_admin 
-    this.isStar = is_stared
-    self.userData = resData
-    const res = await api.getMsgList(options.id)
-    this.list = res.map(item => ({
-      id: item.id,
-      title: item.title,
-      content: item.text,
-      createdBy: item.author.name,
-      createdAt: item.dateline,
-      cover: item.pic_urls[0] ? `${jf.baseServer}${item.pic_urls[0]}` : '',
-      read: item.click_num
-    }))
-    this.$apply()
-    //判断用户有没有被禁言
-    let userId = this.userId
-    let banId = options.banId
-    if (banId == null) {
-      return false
-    }else{
-      if (banId.indexOf(userId) === -1) {
-        this.isBan = false
-      }else{
-        this.isBan = true
-      }
     }
   }
-}
-</script>
+  </script>
