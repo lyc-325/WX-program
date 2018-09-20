@@ -1,0 +1,178 @@
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.container .title {
+  text-align: center;
+  font-size: 20px;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  margin-top: 20rpx;
+  color: #aaa;
+}
+.container > .item {
+  padding: 20rpx;
+  width: 80%;
+  align-items: center;
+  margin-top: 5rpx;
+}
+.container > .item .label {
+  padding: 5rpx;
+  width: 150rpx;
+  margin-bottom: 15rpx;
+  font-size: 30rpx;
+  color: #999;
+}
+.container > .item input {
+  border: 1px solid #eee;
+  display: block;
+  height:3rem;
+  padding-left: 15rpx;
+  text-overflow:clip;
+  overflow:hidden;
+  white-space:nowrap;
+  font-family:UICTFontTextStyleBody;
+  border-radius:5%;
+}
+.container > .login-title {
+  margin-top: 80rpx;
+  font-size: 50rpx;
+  font-weight: 500;
+  height: 150rpx;
+  text-align: center;
+  line-height: 150rpx;
+}
+.register_btn {
+  width:100%;
+  height:55px;
+  position:fixed;
+  bottom:0;
+  right:0;
+  border-radius:0;
+  line-height:55px;
+  color:rgb(255,255,255);
+  background-color: #459ce4;
+}
+</style>
+<template>
+  <form @submit="submit">
+  <view class="container">
+    <view class="login-title">
+      <span style="color: #459ce4;">登录</span>
+      /Sign in
+    </view>
+    <view class="item">
+      <view class="label">账号</view>
+      <view class="input">
+        <input type="text" value="{{userNameOrEmailAddress}}" name="userNameOrEmailAddress"/>
+      </view>
+    </view>
+    <view class="item">
+      <view class="label">密码</view>
+      <view class="input">
+        <input type="password" value="{{password}}"  name="password"/>
+      </view>
+    </view>
+    <view class="item">
+      <button class="register_btn" form-type="submit" loading="{{requesting}}">登录</button>
+    </view>
+  </view>
+</form>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { ht } from '../config'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '容和通企业管理系统'
+    }
+    components = {
+    }
+
+
+    data = {
+      requesting: false,
+      userData: {},
+      formError: null,
+      formErrorKey: null,
+    }
+
+    computed = {
+    }
+
+    methods = {
+      submit(e) {
+        this.requesting = true
+        const data = e.detail.value
+        wepy.request({
+          url: `${ht.server}/api/TokenAuth/Authenticate`,
+          header: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          data,
+          method: 'POST'
+        }).then(res => {
+          if (res.data.success) {
+            wepy.request({
+            url: `${ht.server}/AbpUserConfiguration/GetAll`,
+            header: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+              Authorization: `Bearer ${res.data.result.accessToken}`,
+            },
+            method: 'GET'
+          }).then(data1 => {
+            let abpConfig = data1.data.result.auth.grantedPermissions
+            if (abpConfig['Train.CheckSign']) {
+                wx.setStorage({
+                  key:"token",
+                  data: res.data.result.accessToken
+                })
+                this.requesting = false
+                this.$apply()
+                wepy.navigateTo({
+                  url: '/pages/index'
+                })
+            }else {
+              this.requesting = false 
+              wx.showToast({
+                title: '很抱歉，你不能进行培训签到操作',
+                icon: 'none',
+                duration: 2000
+              })
+              this.$apply()
+            }
+          })
+        }else {
+              this.requesting = false
+              wx.showToast({
+                title: res.data.error.message,
+                icon: 'none',
+                duration: 2000
+              })
+              this.$apply()
+          }
+        })
+      }
+    }
+
+    events = {
+    }
+
+    onLoad() {
+    }
+  }
+</script>

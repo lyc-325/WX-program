@@ -1,20 +1,66 @@
 <style>
   .btn {
-    width: 250rpx;
-    height: 250rpx;
-    line-height: 250rpx;
+    text-align: center;
+    margin-bottom: 200rpx;
+  }
+  .info {
+    width: 80%;
+    font-size: 30rpx;
+    margin: 0 auto;
+    padding: 30rpx;
+    border-bottom: 1px solid rgb(232, 234, 236);
+  }
+  .info .title {
+    display: inline-block;
+    min-width: 170rpx;
+    width: 15%;
+    color: rgb(204, 204, 204);
+  }
+  .info .detail {
+    display: inline-block;
+    width: 70%;
+    float: right;
+    word-wrap: break-word;
+    word-break: normal;
+  }
+  .bottomBtn {
     position: absolute;
-    top: 45%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    color:rgb(255,255,255);
-    background-color: #459ce4;
-    border-radius: 50%;
+    font-size: 30rpx;
+    background-color: #fff;
+    border:1px solid #1AAD19;
+    color: #1AAD19;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 100rpx;
   }
 </style>
 <template>
   <view class="container">
-    <button @tap="choseImg" class="btn">点我签到</button>
+    <view class="btn">
+      <icon type="success" size="60" style="padding-top:30rpx;"/>
+      <view style="font-size:60rpx;">{{userInfo.signState == 1?'签退':'签到'}}成功</view>
+    </view>
+    <view class="info">
+      <span class="title">姓　　名</span>
+      <span class="detail">
+        {{userInfo.user}}
+      </span>
+    </view>
+    <view class="info">
+      <span class="title">培训名称</span>
+      <span class="detail">
+        {{userInfo.trainTitle}}
+      </span>
+    </view>
+    <view class="info">
+      <span class="title">{{userInfo.signState == 1?'签退':'签到'}}时间</span>
+      <span class="detail">
+        {{userInfo.signDate}}
+      </span>
+    </view>
+    <view>
+      <button @tap="choseImg" class="bottomBtn">点我继续</button>
+    </view>
   </view>
 </template>
 
@@ -23,20 +69,21 @@
   import { ht } from '../config'
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '扫码签到'
+      navigationBarTitleText: ''
     }
     components = {
     }
 
 
     data = {
+      userInfo:{},
     }
 
     computed = {
     }
 
     methods = {
-        choseImg() {
+      choseImg() {
             wx.showLoading({
               title: '',
             })
@@ -96,17 +143,9 @@
     events = {
     }
 
-    onLoad() {
-      wx.getStorage({
-        key: 'token',
-        success: function(res) {
-        },
-        fail: function(res) {
-          wepy.navigateTo({
-              url: '/pages/index'
-          })
-        }
-      })
+    onLoad(options) {
+      this.userInfo = options
+      this.$apply()
     }
   }
 </script>

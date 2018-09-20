@@ -1,0 +1,57 @@
+<style>
+</style>
+<template>
+  <view class="container">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'loading...'
+    }
+    components = {
+    }
+
+
+    data = {
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onLoad() {
+      wx.showLoading({
+        title: '',
+      })
+      //request
+      wx.getStorage({
+        key: 'token',
+        success: function(res) {
+          if (true) {
+            wepy.navigateTo({
+              url: '/pages/success'
+            })
+          }else {
+            wepy.navigateTo({
+              url: '/pages/fail'
+            })
+          }
+        },
+        fail: function(res) {
+          wepy.navigateTo({
+              url: '/pages/index'
+          })
+        }
+      })
+    }
+  }
+</script>

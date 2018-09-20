@@ -65,95 +65,14 @@
   import wepy from 'wepy'
   import 'wepy-async-function'
 
-  import {
-    setStore
-  } from 'wepy-redux'
-
-  import configureStore from './configureStore'
-  const store = configureStore()
-
-  setStore(store)
-
   export default class extends wepy.app {
     config = {
       pages: [
-        // 聊天室
-        'pages/chatrooms',
-        // 留言板
-        'pages/boards',
-        // 消息
-        'pages/userInfo',
-        // 消息
-//        'pages/sessions',
-        // 好犹豫
-//        'pages/friends',
-        // 我的
-        'pages/mine',
-        // // 聊天
-//        'pages/chat',
-        // 好友
-//        'pages/friend',
-        // 好用申请消息
-//        'pages/notifications',
-        // 留言板详情
-        'pages/board',
-        // 发布留言
-        'pages/publish',
-        // 添加好友
-//        'pages/add',
-        // 申请
-//        'pages/apply',
-        // 聊天室
-        'pages/chatroom',
-        // 注册
-        'pages/register',
-        'pages/collection',
+        'pages/login',
+        'pages/success',
+        'pages/index',
+        'pages/fail',
       ],
-      tabBar: {
-        color: '#707070',
-        selectedColor: '#1EB571',
-        borderStyle: '#ccc',
-        backgroundColor: '#fff',
-        list: [
-          {
-            pagePath: 'pages/chatrooms',
-            iconPath: 'static/icons/chatroom.png',
-            selectedIconPath: 'static/icons/chatroom_selected.png',
-            text: '聊天室'
-          },
-          {
-            pagePath: 'pages/boards',
-            iconPath: 'static/icons/board.png',
-            selectedIconPath: 'static/icons/board_selected.png',
-            text: '商友圈'
-          },
-          // {
-          //   pagePath: 'pages/sessions',
-          //   iconPath: 'static/icons/message.png',
-          //   selectedIconPath: 'static/icons/message_selected.png',
-          //   text: '消息'
-          // },
-          // {
-          //   pagePath: 'pages/friends',
-          //   iconPath: 'static/icons/friends.png',
-          //   selectedIconPath: 'static/icons/friends_selected.png',
-          //   text: '好友'
-          // },
-          {
-            pagePath: 'pages/collection',
-            iconPath: 'static/icons/message.png',
-            selectedIconPath: 'static/icons/message.png',
-            text: '我的收藏'
-          },
-          {
-            pagePath: 'pages/mine',
-            iconPath: 'static/icons/mine.png',
-            selectedIconPath: 'static/icons/mine_selected.png',
-            text: '个人中心'
-          },
-
-        ]
-      },
       window: {
         backgroundTextStyle: 'light',
         navigationBarBackgroundColor: '#fff',
@@ -167,21 +86,5 @@
       this.use('requestfix')
       this.use('promisify')
     }
-
-//    async onLaunch (options) {
-//      console.log(options)
-//      if (options.shareTicket) {
-//        const shareInfo = await wepy.getShareInfo({
-//          shareTicket: options.shareTicket,
-//          success: function (res) {
-//            return res
-//          }
-//        })
-//        wepy.setStorage({
-//          key: 'jfShareInfo',
-//          data: shareInfo
-//        })
-//      }
-//    }
   }
 </script>
